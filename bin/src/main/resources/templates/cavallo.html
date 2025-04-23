@@ -10,23 +10,16 @@
 <body>
 	<div th:if="${cavallo}">
 		<h1 class="uno">Dati cavallo</h1>
-		<a class="box">
 		<p class="definizione">Id cavallo</p>
 		<p class="nome" th:text="${cavallo.id}"></p>
-		</a>
-		<a class="box">
 		<p class="definizione">Nome cavallo</p>
 		<p class="nome" th:text="${cavallo.nome}">
 		</p>
-		</a>
-		<a class="box">
 		<p class="definizione">Razza cavallo</p>
 		<p class="nome" th:text="${cavallo.razza}"></p>
-		</a>		
-		<a class="box">
 		<p class="definizione">Foto cavallo:</p>
 		<div><img width="30%" th:src="${cavallo.urlImmagine}" /></div>
-		</a>
+
 	</div>
 	<div th:unless="${cavallo}">
 		<p>cavallo non trovato</p>

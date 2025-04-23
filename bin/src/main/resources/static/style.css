@@ -61,41 +61,23 @@ img.cavallo {
 }
 
 p.nome {
-	size: 40px 40px;
-	font-size: 20px;
+	size: 40px 30px;
+	font-size: 30px;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	border: #ccc groove;
-	color: black;
+	border: #ccc dotted;
+	color: #b22222;
 	text-align: center;
 	box-align: center;
-	display: block;
-	margin: 0;
 }
-
-
 
 p.definizione {
-	size: 40px 40px;
-	height: 60px;
+	size: 40px 30px;
 	font-size: 30px;
-	background-color: black;
+	margin-top: 20px;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	border: #ccc groove;
-	color: rgb(128, 255, 255);
+	border: #ccc dotted;
+	color: #b22222;
 	text-align: center;
 	box-align: center;
 	padding: 20px;
-	display: block;
-	margin: 0;
-}
-
-.box{
-	background-color: #b22222;
-	padding: 20px;
-	height: 100px;
-	margin: 70px ;
-	display: -webkit-box;
-	border: 10px solid black;
-	border-color:black;
-	
 }

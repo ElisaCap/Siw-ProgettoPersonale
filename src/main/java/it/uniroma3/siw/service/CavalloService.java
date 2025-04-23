@@ -27,5 +27,26 @@ public class CavalloService {
 public void save(Cavallo cavallo) {
 	this.cavalloRepository.save(cavallo);
 }
+public void saveall(Iterable<Cavallo> cavalli) {
+	for(Cavallo c:cavalli) {
+		
+	
+	this.cavalloRepository.save(c);
+}}
+
+public void nuovoCavallo(String nome,String Razza,String Url) {
+	Cavallo cavallo=new Cavallo();
+	cavallo.setNome(nome);
+	cavallo.setRazza(Razza);
+		cavallo.setUrlImmagine(Url);
+		this.cavalloRepository.save(cavallo);
+}
+
+public void inizializza() {
+	
+	this.nuovoCavallo("Tabavvp", "Purosangue", "/tabacco.jpg");
+	this.nuovoCavallo("Tabavvp2", "Purosangue2", "/tabacco.jpg");
+}
+
 
 }

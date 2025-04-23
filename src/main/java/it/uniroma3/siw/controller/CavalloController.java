@@ -20,9 +20,14 @@ private CavalloService cavalloService;
 	@GetMapping("/")
 	public String home(Model model) {
 	    
-	    Cavallo cavallo= this.cavalloService.getCavalloById((long) 1);
-	    this.cavalloService.save(cavallo);
-	    model.addAttribute("cavallo", cavallo);
+	   Iterable<Cavallo> cavalli= this.cavalloService.getAll();
+	   this.cavalloService.saveall(cavalli);
+	   for(Cavallo c:cavalli) {
+		   model.addAttribute("cavallo", c);
+		   
+	   }
+	   cavalloService.inizializza();
+	   // model.addAttribute("cavallo", cavalli);
 	    return "trovacavallo.html";
 	}
 	
