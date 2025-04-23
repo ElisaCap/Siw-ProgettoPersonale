@@ -12,8 +12,9 @@ h1.uno {
 	background-color: #ffe4f0;
 	border: 3px dotted #ba55d3;
 	padding: 20px;
+	border-radius: 50px;
 	margin-bottom: 30px;
-	border-radius: 15px;
+	
 	box-shadow: 2px 2px 10px #d8bfd8;
 }
 
@@ -62,10 +63,11 @@ img.cavallo {
 
 p.nome {
 	size: 40px 40px;
-	font-size: 20px;
+	font-size: 40px;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	border: #ccc groove;
 	color: black;
+	background-color: #fff0f5;
 	text-align: center;
 	box-align: center;
 	display: block;
@@ -76,7 +78,7 @@ p.nome {
 
 p.definizione {
 	size: 40px 40px;
-	height: 60px;
+	height: auto;
 	font-size: 30px;
 	background-color: black;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -90,13 +92,17 @@ p.definizione {
 }
 
 .box{
-	background-color: #b22222;
-	padding: 20px;
-	height: 100px;
-	margin: 70px ;
+	background-color: rgb(242, 230, 179);
+	padding: 20px  ;
+	margin-bottom: 30px;
+	height: auto;
+	margin: auto;
 	display: table;
-	border: 10px solid black;
+	transition: transform 0.2s ease;
+	  display: block;
+	border: 5px solid black;
 	border-color:black;
+	 border-radius: 20px;
 	
 }
 table.elenco {
@@ -116,7 +122,7 @@ table.elenco {
 .elenco td {
   padding: 1rem;
   text-align: center;
-  border: 3px groove blueviolet;
+  border: 3px solid black;
   background-color: rgba(255, 255, 255, 0.3); /* sfondo semi-trasparente per le celle */
 }
 

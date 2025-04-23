@@ -54,6 +54,7 @@ public void setUrlImmagine(String urlImmagine) {
 public int hashCode() {
 	return Objects.hash(descrizione, id, nome, urlImmagine);
 }
+
 @Override
 public boolean equals(Object obj) {
 	if (this == obj)

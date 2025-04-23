@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.model.Cavallo;
 
 import it.uniroma3.siw.service.CavalloService;
+import it.uniroma3.siw.service.ContradaService;
 
 @Controller
 public class CavalloController {
@@ -25,6 +26,7 @@ private CavalloService cavalloService;
 	    
 	   Iterable<Cavallo> cavalli= this.cavalloService.getAll();
 	   this.cavalloService.saveall(cavalli);
+	   
 	   for(Cavallo c:cavalli) {
 		   model.addAttribute("cavallo", c);
 		   
@@ -49,7 +51,7 @@ private CavalloService cavalloService;
 	 
 	 
 	  @GetMapping("/cavalli/{id}")
-	    public String cercaPerId(@ModelAttribute("cavallo") @RequestParam Long id, Model model) {
+	    public String cercaPerId(@RequestParam Long id, Model model) {
 	        Cavallo cavallo = this.cavalloService.getCavalloById(id);
 	        model.addAttribute("cavallo", cavallo);
 	        return "cavallo.html";

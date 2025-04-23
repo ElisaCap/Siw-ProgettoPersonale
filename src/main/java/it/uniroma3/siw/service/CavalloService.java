@@ -45,8 +45,8 @@ public void nuovoCavallo(String nome,String Razza,String Url) {
 
 public void inizializza() {
 	
-	this.nuovoCavallo("Tabavvp", "Purosangue", "/tabacco.jpg");
-	this.nuovoCavallo("Tabavvp2", "Purosangue2", "/tabacco.jpg");
+	this.nuovoCavallo("Tabacco", "Purosangue", "/tabacco.jpg");
+	this.nuovoCavallo("Tabacco", "mezzosangue", "/tabacco.jpg");
 }
 
 
