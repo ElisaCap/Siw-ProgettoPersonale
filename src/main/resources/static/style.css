@@ -156,3 +156,93 @@ h1.titolo{
  background: linear-gradient(to left, rgb(128, 255, 255),rgb(0, 128, 255)  );
 }
 
+#riga-contrada-1 { /* Aquila */
+  background: linear-gradient(to right, #FFD700, #000000, #40E0D0);
+  color: white;
+}
+
+#riga-contrada-2 { /* Bruco */
+  background: linear-gradient(to right, #FFFF00, #008000, #40E0D0);
+  color: black;
+}
+
+#riga-contrada-3 { /* Chiocciola */
+  background: linear-gradient(to right, #FFD700, #FF0000, #40E0D0);
+  color: white;
+}
+
+#riga-contrada-4 { /* Civetta */
+  background: linear-gradient(to right, #FF0000, #000000, #FFFFFF);
+  color: white;
+}
+
+#riga-contrada-5 { /* Drago */
+  background: linear-gradient(to right, #D8BFD8, #008000, #FFFF00);
+  color: black;
+}
+
+#riga-contrada-6 { /* Giraffa */
+  background: linear-gradient(to right, #FFFFFF, #FF0000);
+  color: black;
+}
+
+#riga-contrada-7 { /* Istrice */
+  background: linear-gradient(to right, #FFFFFF, #FF0000, #000000, #0000FF);
+  color: white;
+}
+
+#riga-contrada-8 { /* Leocorno */
+  background: linear-gradient(to right, #FFFFFF, #FFA500, #0000FF);
+  color: black;
+}
+
+#riga-contrada-9 { /* Lupa */
+  background: linear-gradient(to right, #FFFFFF, #000000, #FFA500);
+  color: white;
+}
+
+#riga-contrada-10 { /* Nicchio */
+  background: linear-gradient(to right, #0000FF, #FF0000, #FFFF00);
+  color: white;
+}
+
+#riga-contrada-11 { /* Oca */
+  background: linear-gradient(to right, #FFFFFF, #008000);
+  color: black;
+}
+
+#riga-contrada-12 { /* Onda */
+  background: linear-gradient(to right, #0000FF, #FFFFFF);
+  color: black;
+}
+
+#riga-contrada-13 { /* Pantera */
+  background: linear-gradient(to right, #FF0000, #0000FF, #FFFFFF);
+  color: white;
+}
+
+#riga-contrada-14 { /* Selva */
+  background: linear-gradient(to right, #008000, #FF0000, #FFFFFF);
+  color: white;
+}
+
+#riga-contrada-15 { /* Tartuca */
+  background: linear-gradient(to right, #FFFF00, #000000);
+  color: black;
+}
+
+#riga-contrada-16 { /* Torre */
+  background: linear-gradient(to right, #DC143C, #FFFFFF, #0000FF);
+  color: white;
+}
+
+#riga-contrada-17 { /* Valdimontone */
+  background: linear-gradient(to right, #FFFFFF, #FF0000, #000000);
+  color: white;
+}
+
+
+
+
+
+

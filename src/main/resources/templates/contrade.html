@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<link rel="stylesheet" href="/style.css">
@@ -8,51 +7,35 @@
 </head>
 
 <body>
-	<h1 class="titolo">Ecco tutti i cavalli registrati</h1>
-	<table class="elenco" >
-					
-					 <!-- Inizia la tabella -->
-					<tr> <!-- Inizia la prima riga -->
-					<td>Id</td>
-					 <!-- Prima colonna -->
-					<td>Nome</td>
-					<td>Razza</td>
-					<td>Foto</td> <!-- Seconda colonna -->
-					<td>Info</td>
-	</tr>
-	
-	
-	
-	  <a th:each="contrada: ${contrade}">
-	    
-			
-			
-			
-			
-			
-				
-			
-				
-				 <!-- Fine della prima riga -->
-				<tr> <!-- Inizia la seconda riga -->
-					<td th:text="${contrada.id}"></td>
-					<td th:text="${contrada.nome}"></td> 
-				<td th:text="${contrada.descrizione}"></td> <!-- Terza colonna -->
-				<td ><img width="30%" th:src="${contrada.urlImmagine}" /></td> <!-- Terza colonna -->
-				<td>
-					<!--<form  th:action="@{/cavalli/{id}}" method="get">
-										<input type="hidden" name="id" th:value="${cavallo.id}" />
-									<button type="submit">vedi info</td> <!-- Seconda colonna -->
-								<!--	</button></form>-->
-					
-					
-									
-				</td>
-			</tr> <!-- Fine della seconda riga -->
-				</table> <!-- Fine della tabella -->
-			
-			
-			
+	<h1 class="titolo">Ecco tutte le contrade registrate</h1> 
+
+	<table class="elenco">
+		<tr>
+			<th>Id</th>
+			<th>Nome</th>
+			<th>Descrizione</th>
+			<th>Logo</th>
+			<th>Azioni</th>
+		</tr>
+
+		<tr th:each="contrada, iterStat : ${contrade}" th:id="'riga-contrada-' + ${contrada.id}">
+			<td th:text="${contrada.id}" th:id="'id-' + ${contrada.id}"></td>
+			<td th:text="${contrada.nome}" th:id="'nome-' + ${contrada.id}"></td>
+			<td th:text="${contrada.descrizione}" th:id="'descrizione-' + ${contrada.id}"></td>
+			<td th:id="'immagine-' + ${contrada.id}">
+				<img width="30%" th:src="${contrada.urlImmagine}" />
+			</td>
+			<td>
+				<form th:action="@{/cavalli/{id}(id=${contrada.id})}" method="get">
+					<button type="submit">Vedi info</button>
+				</form>
+			</td>
+		</tr>
+	</table>
+
+</body>
+</html>
+
 			
 		
 	  </a>
