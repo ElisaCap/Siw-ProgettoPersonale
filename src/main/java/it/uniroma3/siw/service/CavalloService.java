@@ -24,6 +24,7 @@ public class CavalloService {
 	public Iterable<Cavallo>getAll(){
 		return this.cavalloRepository.findAll();
 	}
+	
 public void save(Cavallo cavallo) {
 	this.cavalloRepository.save(cavallo);
 }

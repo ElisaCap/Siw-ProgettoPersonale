@@ -1,5 +1,8 @@
 package it.uniroma3.siw.controller;
 
+import java.io.CharArrayReader;
+import java.util.Iterator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,23 +48,22 @@ private CavalloService cavalloService;
 	    }
 	 
 	 
-	  @PostMapping("/cavalli/cerca")
+	  @GetMapping("/cavalli/{id}")
 	    public String cercaPerId(@ModelAttribute("cavallo") @RequestParam Long id, Model model) {
 	        Cavallo cavallo = this.cavalloService.getCavalloById(id);
 	        model.addAttribute("cavallo", cavallo);
 	        return "cavallo.html";
 	    }
-	  @PostMapping("/cavalli/cercatutti")
-	    public String cercatutti(Model model) {
-	        model.addAttribute("cavallo", this.cavalloService.getAll());
+	  
+	  
+	  @GetMapping("/cavalli/cercatutti")
+	    public String cercatutti( Model model) {
+		    Iterable<Cavallo> cavalli=this.cavalloService.getAll();
+	        model.addAttribute("cavalli", cavalli);
 	        return "cavalli.html";
 	    }
 	  
-	  @GetMapping("/cavalli/cercatutti")
-	  public String getMethodName(Model model) {
-		  model.addAttribute("cavallo", this.cavalloService.getAll());
-	  	return "cavalli.html";
-	  }
+
 	  
 	  
 	

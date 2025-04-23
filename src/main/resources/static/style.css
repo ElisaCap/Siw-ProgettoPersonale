@@ -1,5 +1,5 @@
 body {
-	background: linear-gradient(to right, #ffe4e1, #fff0f5);
+	background-image: url("/cavbn.jpg");
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	margin: 0;
 	padding: 40px;
@@ -94,8 +94,59 @@ p.definizione {
 	padding: 20px;
 	height: 100px;
 	margin: 70px ;
-	display: -webkit-box;
+	display: table;
 	border: 10px solid black;
 	border-color:black;
 	
 }
+table.elenco {
+  border-collapse: separate;              /* Permette border-radius */
+  border-spacing: 0;                      /* Nessuno spazio tra celle */
+  width: 80%;
+  margin: 2rem auto;
+  background: linear-gradient(to right, #ff8080, #ffff80);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Effetto ombra */
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+.elenco th,
+.elenco td {
+  padding: 1rem;
+  text-align: center;
+  border: 3px groove blueviolet;
+  background-color: rgba(255, 255, 255, 0.3); /* sfondo semi-trasparente per le celle */
+}
+
+/* Intestazioni in grassetto */
+.elenco th {
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Arrotonda solo gli angoli esterni */
+.elenco tr:first-child td:first-child {
+  border-top-left-radius: 20px;
+}
+.elenco tr:first-child td:last-child {
+  border-top-right-radius: 20px;
+}
+.elenco tr:last-child td:first-child {
+  border-bottom-left-radius: 20px;
+}
+.elenco tr:last-child td:last-child {
+  border-bottom-right-radius: 20px;
+}
+
+
+h1.titolo{
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: #b22222;
+	border: blueviolet ,inset;
+ border-radius: 25px;
+ padding: 25px;
+ background: linear-gradient(to left, rgb(128, 255, 255),rgb(0, 128, 255)  );
+}
+

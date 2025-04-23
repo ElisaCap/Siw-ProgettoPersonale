@@ -8,12 +8,12 @@
 
 <body>
 	<h1 class="uno">Trova Cavallo per ID</h1>
-	<form th:action="@{/cavalli/cerca}" method="post">
+	<form th:action="@{/cavalli/{id}}" method="get">
 		<label for="id">ID Cavallo:</label>
 		<input type="number" name="id" required>
 		<button type="submit">Cerca</button>
 	</form>
-	<form th:action="@{/cavalli/cercatutti}" method="post">
+	<form th:action="@{/cavalli/cercatutti}" method="get">
 		<button type="submit">mostra tutti</button>
 	</form>
 </body>

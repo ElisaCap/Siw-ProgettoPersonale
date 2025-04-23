@@ -8,7 +8,56 @@
 </head>
 
 <body>
-	<h1>C</h1>
+	<h1 class="titolo">Ecco tutti i cavalli registrati</h1>
+	<table class="elenco" >
+					
+					 <!-- Inizia la tabella -->
+					<tr> <!-- Inizia la prima riga -->
+					<td>Id</td>
+					 <!-- Prima colonna -->
+					<td>Nome</td>
+					<td>Razza</td>
+					<td>Foto</td> <!-- Seconda colonna -->
+					<td>Info</td>
+	</tr>
+	
+	
+	
+	  <a th:each="cavallo : ${cavalli}">
+	    
+			
+			
+			
+			
+			
+				
+			
+				
+				 <!-- Fine della prima riga -->
+				<tr> <!-- Inizia la seconda riga -->
+					<td th:text="${cavallo.id}"></td>
+					<td th:text="${cavallo.nome}"></td> 
+				<td th:text="${cavallo.razza}"></td> <!-- Terza colonna -->
+				<td ><img width="30%" th:src="${cavallo.urlImmagine}" /></td> <!-- Terza colonna -->
+				<td>
+					<form  th:action="@{/cavalli/{id}}" method="get">
+										<input type="hidden" name="id" th:value="${cavallo.id}" />
+									<button type="submit">vedi info</td> <!-- Seconda colonna -->
+									</button></form>
+					
+					
+									
+				</td>
+			</tr> <!-- Fine della seconda riga -->
+				</table> <!-- Fine della tabella -->
+			
+			
+			
+			
+		
+	  </a>
+	
+
 </body>
 
 </html>
