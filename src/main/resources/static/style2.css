@@ -1,5 +1,5 @@
 body {
-	background-image: url("/cavbn.jpg");
+	background-image: url("/cavn.jpg");
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	margin: 0;
 	padding: 40px;
@@ -18,7 +18,7 @@ h1.uno {
 	box-shadow: 2px 2px 10px #d8bfd8;
 }
 
-form {
+form {background-image: url("/cavbn.jpg");
 	background-color: #fff0f5;
 	padding: 25px;
 	border-radius: 12px;
@@ -240,7 +240,6 @@ h1.titolo{
   background: linear-gradient(to right, #FFFFFF, #FF0000, #000000);
   color: white;
 }
-
 
 
 
