@@ -1,5 +1,5 @@
 body {
-	background-image: url("/cavn.jpg");
+	background-image: url("/cavbn2.jpg");
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	margin: 0;
 	padding: 40px;
@@ -18,7 +18,7 @@ h1.uno {
 	box-shadow: 2px 2px 10px #d8bfd8;
 }
 
-form {background-image: url("/cavbn.jpg");
+form {
 	background-color: #fff0f5;
 	padding: 25px;
 	border-radius: 12px;
@@ -243,5 +243,15 @@ h1.titolo{
 
 
 
+
+p#id-1.contrada{
+	color: #40E0D0;
+	font-style: italic;
+	font-color:green
+}
+
+div#id-1.contrada{
+	color: #40E0D0;
+}
 
 

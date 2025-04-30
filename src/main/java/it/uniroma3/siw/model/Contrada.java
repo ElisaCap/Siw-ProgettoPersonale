@@ -3,6 +3,7 @@ package it.uniroma3.siw.model;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,8 @@ public class Contrada {
 private Long id;
 private String nome;
 private String descrizione;
+@Column(length=3000)
+private String descrizioneLunga; 
 private String urlImmagine;
 @OneToMany(mappedBy = "contrada")
 private List<Partecipazione>partecipazioni;
@@ -66,6 +69,12 @@ public boolean equals(Object obj) {
 	Contrada other = (Contrada) obj;
 	return Objects.equals(descrizione, other.descrizione) && Objects.equals(id, other.id)
 			&& Objects.equals(nome, other.nome) && Objects.equals(urlImmagine, other.urlImmagine);
+}
+public String getDescrizioneLunga() {
+	return descrizioneLunga;
+}
+public void setDescrizioneLunga(String descrizioneLunga) {
+	this.descrizioneLunga = descrizioneLunga;
 }
 
 

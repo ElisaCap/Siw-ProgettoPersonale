@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+	<head>
+		<link rel="stylesheet" href="/style2.css" />
+		<title>Contrada</title>
+	</head>
+	<body >
+		<div th:if="${contrada}" >
+		<p class="contrada" id="'id-'+${contrada.id}" th:text="${contrada.nome}">	</p>
+		<p class="contrada" id="'id-'+${contrada.id}" th:text="${contrada.descrizioneLunga}"></p> 
+		<div class="contrada" id="'id-'+${contrada.id}" > <img width="30%" th:src="${contrada.urlImmagine}" /></div>
+		</div>
+		<div class="contrada" th:unless="${contrada}">
+			<a>Contrada non trovata</a>
+			
+		</div>
+		<form th:action="@{/contrade}">
+			<button type = "submit">
+			Vedi tutte
+			</button>
+		</form>
+	</body>
+</html>
+
+			
+	

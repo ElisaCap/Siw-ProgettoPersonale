@@ -5,6 +5,8 @@
 	<link rel="stylesheet" href="/style2.css">
 	<title>Cavallo</title>
 </head>
+
+
 	<h1 class="titolo">Ecco tutte le contrade registrate</h1> 
 
 	<table class="elenco">
@@ -27,13 +29,10 @@
 				<form th:action="@{/contrade/{id}}" method="get">
 					<input type="hidden" th:name="id" th:value="${contrada.id}" />
 
-					<button type="submit">Vedi info</button>
+					<button type="submit">Vedi tutte</button>
 				</form>
 			</td>
 		</tr>
 	</table>
 </body>
 </html>
-
-			
-	
