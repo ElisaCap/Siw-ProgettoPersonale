@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import it.uniroma3.siw.model.Cavallo;
 @Repository
 public interface CavalloRepository extends CrudRepository<Cavallo, Long> {
-
+public Cavallo findByNome(String nome);
 }

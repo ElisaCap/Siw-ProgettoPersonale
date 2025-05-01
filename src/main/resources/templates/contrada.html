@@ -3,19 +3,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html>
 	<head>
-		<link rel="stylesheet" href="/style2.css" />
+		<link rel="stylesheet" href="/contrade.css" />
 		<title>Contrada</title>
 	</head>
-	<body >
+	<div class="contenitore">
+	<body th:id="'id-'+ ${contrada.id}" >
+		<a th:id="'id-'+ ${contrada.id}"  > <img width=100% th:src="${contrada.urlImmagine}"/> </a>
 		<div th:if="${contrada}" >
-		<p class="contrada" id="'id-'+${contrada.id}" th:text="${contrada.nome}">	</p>
-		<p class="contrada" id="'id-'+${contrada.id}" th:text="${contrada.descrizioneLunga}"></p> 
-		<div class="contrada" id="'id-'+${contrada.id}" > <img width="30%" th:src="${contrada.urlImmagine}" /></div>
+		<p class="contrada" th:id="'id-'+ ${contrada.id}" th:text="${contrada.nome}">	</p>
+		<p class="contrada" th:id="'id-'+ ${contrada.id}" th:text="${contrada.descrizioneLunga}"></p> 
 		</div>
-		<div class="contrada" th:unless="${contrada}">
-			<a>Contrada non trovata</a>
+	</div>
+		<div class="contrada" th:unless="${contrada}"><a>Contrada non trovata</a>
+		</div>
 			
-		</div>
+			
+		
 		<form th:action="@{/contrade}">
 			<button type = "submit">
 			Vedi tutte

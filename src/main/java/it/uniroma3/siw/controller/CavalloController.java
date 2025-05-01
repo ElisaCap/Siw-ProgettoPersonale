@@ -20,21 +20,30 @@ import it.uniroma3.siw.service.ContradaService;
 public class CavalloController {
 	@Autowired
 private CavalloService cavalloService;
+	private boolean generati=false; 
 	
-	@GetMapping("/")
+	
+	/*@GetMapping("/")
 	public String home(Model model) {
-	    
+		 if(this.generati==false) {
+		
+		   cavalloService.inizializza(); 
+
 	   Iterable<Cavallo> cavalli= this.cavalloService.getAll();
-	   this.cavalloService.saveall(cavalli);
+	  
 	   
 	   for(Cavallo c:cavalli) {
 		   model.addAttribute("cavallo", c);
-		   
+		   this.generati=true;
 	   }
-	   cavalloService.inizializza();
-	   // model.addAttribute("cavallo", cavalli);
+	   
+	
+	 
+	    }
+	   
+	  
 	    return "trovacavallo.html";
-	}
+	}*/
 	
 	@PostMapping("/movie")
 	public String newMovie(@ModelAttribute("cavallo") Cavallo cavallo, Model model) {

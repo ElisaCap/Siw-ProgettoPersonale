@@ -1,6 +1,7 @@
 package it.uniroma3.siw.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,7 +19,7 @@ private Long id;
 private String nome;
 private String cognome;
 private String urlImmagine;
-private Date dataNascita;
+private LocalDate dataNascita;
 @OneToMany(mappedBy = "fantino")
 private List<Partecipazione>partecipazioni;
 
@@ -53,10 +54,10 @@ public String getUrlImmagine() {
 public void setUrlImmagine(String urlImmagine) {
 	this.urlImmagine = urlImmagine;
 }
-public Date getDataNascita() {
+public LocalDate getDataNascita() {
 	return dataNascita;
 }
-public void setDataNascita(Date dataNascita) {
+public void setDataNascita(LocalDate dataNascita) {
 	this.dataNascita = dataNascita;
 }
 @Override

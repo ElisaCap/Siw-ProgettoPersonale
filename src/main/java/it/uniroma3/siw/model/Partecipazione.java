@@ -14,25 +14,32 @@ public class Partecipazione {
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO )
 private Long id;
-private Date data;
 @ManyToOne
 private Contrada contrada;
 @ManyToOne
 private Fantino fantino;
 @ManyToOne
 private Cavallo cavallo;
+@ManyToOne
+private Edizione edizione;
+
+
+
+
+
+public Edizione getEdizione() {
+	return edizione;
+}
+public void setEdizione(Edizione edizione) {
+	this.edizione = edizione;
+}
 public Long getId() {
 	return id;
 }
 public void setId(Long id) {
 	this.id = id;
 }
-public Date getData() {
-	return data;
-}
-public void setData(Date data) {
-	this.data = data;
-}
+
 public Contrada getContrada() {
 	return contrada;
 }
@@ -53,7 +60,7 @@ public void setCavallo(Cavallo cavallo) {
 }
 @Override
 public int hashCode() {
-	return Objects.hash(cavallo, contrada, data, fantino, id);
+	return Objects.hash(cavallo, contrada, fantino, id);
 }
 @Override
 public boolean equals(Object obj) {
@@ -65,7 +72,7 @@ public boolean equals(Object obj) {
 		return false;
 	Partecipazione other = (Partecipazione) obj;
 	return Objects.equals(cavallo, other.cavallo) && Objects.equals(contrada, other.contrada)
-			&& Objects.equals(data, other.data) && Objects.equals(fantino, other.fantino)
+			 && Objects.equals(fantino, other.fantino)
 			&& Objects.equals(id, other.id);
 }
 

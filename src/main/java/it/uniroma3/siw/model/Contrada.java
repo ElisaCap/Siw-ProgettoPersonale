@@ -73,6 +73,7 @@ public boolean equals(Object obj) {
 public String getDescrizioneLunga() {
 	return descrizioneLunga;
 }
+
 public void setDescrizioneLunga(String descrizioneLunga) {
 	this.descrizioneLunga = descrizioneLunga;
 }
