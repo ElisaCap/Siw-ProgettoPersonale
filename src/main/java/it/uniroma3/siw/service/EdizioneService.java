@@ -1,6 +1,8 @@
 package it.uniroma3.siw.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,4 +46,33 @@ public void inizializza() {
 	this.aggiungiEdizione(LocalDate.of(2023, 7, 2), urlImmagine);
 }
 	
+public Iterable<Edizione>getAll(){
+	return this.edizioneRepository.findAll();
+}
+public Edizione getById(Long id) {
+	return this.edizioneRepository.findById(id).get();
+}
+
+public Iterable<Edizione>getAllById(Long id){
+ List<Edizione> edizioni=new ArrayList<>();
+ for(Edizione edizione:this.edizioneRepository.findAll())
+ {
+	 if(edizione.getId()==id)
+		 edizioni.add(edizione);
+ }
+	return edizioni;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

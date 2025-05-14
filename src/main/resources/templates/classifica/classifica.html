@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/style2.css">
+    <title>elementoClassifica</title>
+</head>
+<body>
+
+    <h1 class="uno">Ecco la classifica dell'edizione</h1>
+
+    <table class="elenco">
+        <tr>
+            <th>Id</th>
+            <th>Data</th>
+            <th>Foto</th>
+        </tr>
+
+        <!-- CORRETTO: iterazione su <tr> -->
+        <tr th:each="elementoClassifica : ${elementiClassifica}">
+            <td th:text="${elementoClassifica.partecipazione.cavallo.id}">ID</td>
+            <td th:text="${elementoClassifica.classifica.edizione.data}">Data</td>
+            <td>
+     
+        </tr>
+    </table>
+
+</body>
+</html>

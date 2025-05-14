@@ -46,6 +46,7 @@ public class HomeController {
 		   this.edizioneService.aggiungiClassifica();
 		   this.partecipazioneService.inizializza();
 		   this.elementoClassificaService.inizializza();
+		   this.classificaService.aggiungiElementi();
 this.generati=true;
 	
 	  

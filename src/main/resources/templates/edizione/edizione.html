@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" href="/style2.css">
+	<title>Edizione</title>
+</head>
+
+<body>
+	<div th:if="${edizione}">
+		<h1 class="uno">Dati edizione</h1>
+		<a class="box">
+		<p class="definizione">Id edizione</p>
+		<p class="nome" th:text="${edizione.id}"></p>
+		</a>
+		<a class="box">
+				<p class="definizione">Data edizione</p>
+				<p class="nome" th:text="${edizione.data}"></p>
+				</a>
+		<a class="box">
+	
+		<p class="definizione">Foto edizione:</p>
+		<div><img width="30%" th:src="${edizione.urlImmagine}" /></div>
+		</a>
+		<form th:action="@{/classifica/{id}}" method="get" >
+			<input type="hidden" name="id" th:value="${edizione.id}"/>
+			<button type="submit">Vedi classifica</button>
+		</form>
+		
+	</div>
+	<div th:unless="${edizione}">
+		<p>edizione non trovata</p>
+	</div>
+</body>
+
+</html>

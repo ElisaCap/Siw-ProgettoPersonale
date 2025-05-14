@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<link rel="stylesheet" href="/style2.css">
+	<title>Edizioni</title>
+</head>
+
+<body>
+	<h1 class="titolo">Ecco tutte le edizioni registrate</h1>
+	<table class="elenco" >
+					
+					 <!-- Inizia la tabella -->
+					<tr> <!-- Inizia la prima riga
+					
+					 -->
+					<td>Id</td>
+					<td>Data </td>
+					<td>Foto</td> <!-- Seconda colonna -->
+	</tr>
+	
+	
+	
+	  <a th:each=" edizione : ${edizioni}">
+	    
+			
+			
+			
+			
+			
+				
+			
+				
+				 <!-- Fine della prima riga -->
+				<tr> <!-- Inizia la seconda riga -->
+					<td th:text="${edizione.id}"></td>
+				         <td th:text="${edizione.data}"></td>
+				
+				<td ><img width="30%" th:src="${edizione.urlImmagine}" /></td> <!-- Terza colonna -->
+				<td>
+					<form  th:action="@{/edizione/{id}}" method="get">
+										<input type="hidden" name="id" th:value="${edizione.id}" />
+									<button type="submit">vedi info</td> <!-- Seconda colonna -->
+									</button></form>
+					
+					
+									
+				</td>
+			</tr> <!-- Fine della seconda riga -->
+				</table> <!-- Fine della tabella -->
+			
+			
+			
+			
+		
+	  </a>
+	
+
+</body>
+
+</html>
