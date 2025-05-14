@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" href="/style2.css">
+	<title>fantino</title>
+</head>
+
+<body>
+	<div th:if="${fantino}">
+		<h1 class="uno">Dati fantino</h1>
+		<a class="box">
+		<p class="definizione">Id fantino</p>
+		<p class="nome" th:text="${fantino.id}"></p>
+		</a>
+		<a class="box">
+		<p class="definizione">Nome fantino</p>
+		<p class="nome" th:text="${fantino.nome}">
+		</p>
+		</a>
+		<a class="box">
+		<p class="definizione">Cognome fantino</p>
+		<p class="nome" th:text="${fantino.cognome}"></p>
+		</a>	
+		<a class="box">
+				<p class="definizione">Data di nascita Fantino</p>
+				<p class="nome" th:text="${fantino.dataNascita}"></p>
+				</a>	
+		<a class="box">
+		<p class="definizione">Foto fantino:</p>
+		<div><img width="30%" th:src="${fantino.urlImmagine}" /></div>
+		</a>
+	</div>
+	<div th:unless="${fantino}">
+		<p>fantino non trovato</p>
+	</div>
+</body>
+
+</html>

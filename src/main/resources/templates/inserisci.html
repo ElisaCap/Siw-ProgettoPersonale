@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" href="style2.css">
+	<title>Homepage Palio di Siena</title>
+</head>
+
+<body>
+	<h1 class="uno">Cosa vuoi inserire?</h1>
+	<box>
+		<form th:action="@{/insCavallo}" method="get">
+		
+			<button type="submit">Inserisci Cavallo</button>
+		
+		</form>
+	
+	</box>
+	<box>
+			<form th:action="@{/insFantino}" method="get">
+			
+				<button type="submit">Inserisci Fantino</button>
+			
+			</form>
+		
+		</box>
+		
+		<box>
+				<form th:action="@{/insEdizione}" method="get">
+				
+					<button type="submit">Inserisci Edizione</button>
+				
+				</form>
+			
+			</box>
+		
+		
+		<box>
+				<form th:action="@{/insPartecipazione}" method="get">
+				
+					<button type="submit">Inserisci Partecipazione</button>
+				
+				</form>
+			
+			</box>
+		
+		
+	
+</body>
+
+</html>

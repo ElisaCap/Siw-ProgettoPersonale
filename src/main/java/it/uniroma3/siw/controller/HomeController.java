@@ -53,7 +53,16 @@ this.generati=true;
 	    }
 	   
 	  
-	    return "trovacavallo.html";
+	    return "homepage.html";
+	}
+	
+	@GetMapping("/visualizza")
+	public String trova(Model model) {
+		return "cavallo/trovacavallo.html";
+	}
+	@GetMapping("/inserisci")
+	public String inserisci(Model model) {
+		return "inserisci.html";
 	}
 
 	

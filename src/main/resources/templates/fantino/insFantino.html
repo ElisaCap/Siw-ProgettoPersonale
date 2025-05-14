@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+			<title>Nuovo Fantino</title>
+			<link rel="stylesheet" href="/stile.css?version=3"/>
+		</head>
+		<body>
+			<div><a href="/"></a></div>
+			<h1>Aggiungi un fantino</h1>
+			<form th:action="@{/insFantino}" method="post" th:object="${fantino}">
+				<div>
+					Nome: <span><input required type="text" th:field="${fantino.nome}"/></span>
+					<span th:text="${msgErrTitle}">Campo Obbligatorio</span>
+				</div>
+				<div>
+					Cognome: <span><input required type="text" th:field="${fantino.cognome}"/></span>
+					<span th:text="${msgErrYear}">Campo Obbligatorio</span>
+				</div>
+				<div>
+									Data di nascita: <span><input required type="date" th:field="${fantino.dataNascita}"/></span>
+									<span th:text="${msgErrYear}">Campo Obbligatorio</span>
+								</div>
+				<div>
+					URL immagine: <span><input type="url" th:field="${fantino.urlImmagine}"/></span>
+				</div>
+				
+				<div>
+					<span><button type="submit">Conferma</button></span>
+				</div>
+			</form>
+		</body>	
+
+
+</html>

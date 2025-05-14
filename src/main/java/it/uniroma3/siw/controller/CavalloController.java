@@ -20,42 +20,27 @@ import it.uniroma3.siw.service.ContradaService;
 public class CavalloController {
 	@Autowired
 private CavalloService cavalloService;
-	private boolean generati=false; 
 	
 	
-	/*@GetMapping("/")
-	public String home(Model model) {
-		 if(this.generati==false) {
-		
-		   cavalloService.inizializza(); 
-
-	   Iterable<Cavallo> cavalli= this.cavalloService.getAll();
-	  
-	   
-	   for(Cavallo c:cavalli) {
-		   model.addAttribute("cavallo", c);
-		   this.generati=true;
-	   }
-	   
-	
-	 
-	    }
-	   
-	  
-	    return "trovacavallo.html";
-	}*/
-	
-	@PostMapping("/movie")
-	public String newMovie(@ModelAttribute("cavallo") Cavallo cavallo, Model model) {
-		this.cavalloService.save(cavallo);
-		model.addAttribute("Cavallo", cavallo);
-		return "movie.html";
+	@GetMapping("/insCavallo")
+	public String insCavallo1(Model model) {
+		model.addAttribute("cavallo", new  Cavallo());
+		return "cavallo/insCavallo.html";
 	}
 	
+
+	@PostMapping("/insCavallo")
+	public String salvaCavallo(@ModelAttribute("cavallo") Cavallo cavallo, Model model) {
+	    model.addAttribute(cavallo);
+	    this.cavalloService.save(cavallo);
+	    return "cavallo/cavallo.html";
+	}
+
 	
-	 @GetMapping("/trova")
+	
+	 @GetMapping("/trovaCavallo")
 	    public String mostraForm() {
-	        return "trovacavallo.html";
+	        return "cavallo/trovacavallo.html";
 	    }
 	 
 	 
@@ -63,7 +48,7 @@ private CavalloService cavalloService;
 	    public String cercaPerId(@RequestParam Long id, Model model) {
 	        Cavallo cavallo = this.cavalloService.getCavalloById(id);
 	        model.addAttribute("cavallo", cavallo);
-	        return "cavallo.html";
+	        return "cavallo/cavallo.html";
 	    }
 	  
 	  
@@ -71,7 +56,7 @@ private CavalloService cavalloService;
 	    public String cercatutti( Model model) {
 		    Iterable<Cavallo> cavalli=this.cavalloService.getAll();
 	        model.addAttribute("cavalli", cavalli);
-	        return "cavalli.html";
+	        return "cavallo/cavalli.html";
 	    }
 	  
 

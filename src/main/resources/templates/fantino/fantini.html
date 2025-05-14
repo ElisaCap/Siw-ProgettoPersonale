@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<link rel="stylesheet" href="/style2.css">
+	<title>Fantini</title>
+</head>
+
+<body>
+	<h1 class="titolo">Ecco tutti i fantino registrati</h1>
+	<table class="elenco" >
+					
+					 <!-- Inizia la tabella -->
+					<tr> <!-- Inizia la prima riga
+					
+					 -->
+					<td>Id</td>
+					 <!-- Prima colonna -->
+					<td>Nome</td>
+					<td>Cognome</td>
+					<td>Data di nascita</td>
+					<td>Foto</td> <!-- Seconda colonna -->
+					<td>Info</td>
+	</tr>
+	
+	
+	
+	  <a th:each="fantino : ${fantini}">
+	    
+			
+			
+			
+			
+			
+				
+			
+				
+				 <!-- Fine della prima riga -->
+				<tr> <!-- Inizia la seconda riga -->
+					<td th:text="${fantino.id}"></td>
+					<td>
+					    <a th:href="@{/fantini/%7Bid%7D?id={id}(id=${fantino.id})}" th:text="${fantino.nome}"></a>
+					    <input type="hidden" name="id" th:value="${fantino.id}" />
+					</td>				<td   th:text="${fantino.cognome}" ></td> <!-- Terza colonna -->
+				         <td th:text="${fantino.dataNascita}"></td>
+				
+				<td ><img width="30%" th:src="${fantino.urlImmagine}" /></td> <!-- Terza colonna -->
+				<td>
+					<form  th:action="@{/fantini/{id}}" method="get">
+										<input type="hidden" name="id" th:value="${fantino.id}" />
+									<button type="submit">vedi info</td> <!-- Seconda colonna -->
+									</button></form>
+					
+					
+									
+				</td>
+			</tr> <!-- Fine della seconda riga -->
+				</table> <!-- Fine della tabella -->
+			
+			
+			
+			
+		
+	  </a>
+	
+
+</body>
+
+</html>

@@ -14,25 +14,18 @@ import it.uniroma3.siw.service.ContradaService;
 public class ContradaController {
 @Autowired
 private ContradaService contradaService;
-private boolean inserite=false;
+
 @GetMapping("/contrade")
 public String mostraTutte(Model model) {
-	if(this.inserite==false){
-	this.contradaService.inizializza();
-	
-	
-	}
 	model.addAttribute("contrade",this.contradaService.getAll());
-	this.inserite=true;
-	return "contrade.html";
+	return "contrade/contrade.html";
 }
 
 @GetMapping("/contrade/{id}")
 public String mostraContrada(@RequestParam Long id, Model model) {
-	//Long id2= id.;
 	Contrada contrada=this.contradaService.getByid(id);
 	model.addAttribute("contrada",contrada);
-			return "contrada.html";
+			return "contrade/contrada.html";
 }
 
 
