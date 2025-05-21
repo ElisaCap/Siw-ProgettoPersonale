@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+			<title>Nuova partecipazione</title>
+			<link rel="stylesheet" href="/stile.css?version=3"/>
+		</head>
+		<body>
+			<div><a href="/"></a></div>
+			<h1>Aggiungi una partcipazione</h1>
+			<form th:action="@{/insPartecipazione}" method="post" th:object="${partecipazione}">
+				<label for="cavallo">Cavallo:</label>
+				  <select th:field="${partecipazione.cavallo}">
+				      <option value="" disabled selected>Scegli un cavallo</option>
+				      <option th:each="ca : ${cavalli}" 
+				              th:value="${ca.id}" 
+				              th:text="${ca.nome}">
+				      </option>
+					  <input type="hidden" th:field="${partecipazione.cavallo}" value="${cavallo}" />
+					  <label for="fantino">Cavallo:</label>
+					  				  <select th:field="${partecipazione.fantino}">
+					  				      <option value="" disabled selected>Scegli un fantino</option>
+					  				      <option th:each="fa : ${fantini}" 
+					  				              th:value="${fa.id}" 
+					  				              th:text="${fa.nome}">
+					  				      </option>
+					  					  <input type="hidden" th:field="${partecipazione.fantino}" value="${fantino}" />
+				  </select>
+				  <label for="edizione">Edizione:</label>
+				  				  <select th:field="${partecipazione.edizione}">
+				  				      <option value="" disabled selected>Scegli un'edizione</option>
+				  				      <option th:each="ed : ${edizioni}" 
+				  				              th:value="${ed.id}" 
+				  				              th:text="${ed.data}">
+				  				      </option>
+				  					  <input type="hidden" th:field="${partecipazione.edizione}" value="${edizione}" />		
+				  
+		
+				<div>
+					<span><button type="submit">Conferma</button></span>
+				</div>
+			</form>
+		</body>	
+
+
+</html>

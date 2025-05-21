@@ -19,14 +19,14 @@ import jakarta.persistence.ManyToOne;
 
 @Service
 public class PartecipazioneService {
-
-    private final EdizioneRepository edizioneRepository;
-
-    private final CavalloRepository cavalloRepository;
-
-    private final FantinoRepository fantinoRepository;
-
-    private final ContradaRepository contradaRepository;
+@Autowired
+    private  EdizioneRepository edizioneRepository;
+@Autowired
+    private  CavalloRepository cavalloRepository;
+@Autowired
+    private  FantinoRepository fantinoRepository;
+@Autowired
+    private  ContradaRepository contradaRepository;
 	@Autowired
 private PartecipazioneRepository partecipazioneRepository;
 
@@ -85,6 +85,8 @@ private PartecipazioneRepository partecipazioneRepository;
 	        );
 	    }
 	}
-
+public void save(Partecipazione partecipazione) {
+	this.partecipazioneRepository.save(partecipazione);
+}
 	
 }

@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,10 +14,10 @@ import it.uniroma3.siw.service.*;
 
 @Controller
 public class HomeController {
-
-    private final ElementoClassificaRepository elementoClassificaRepository;
-
-    private final ContradaService contradaService;
+@Autowired
+    private  ElementoClassificaRepository elementoClassificaRepository;
+ @Autowired
+    private  ContradaService contradaService;
 	@Autowired
 	private CavalloService cavalloService;
 	@Autowired
@@ -31,11 +32,8 @@ public class HomeController {
 	private ElementoClassificaService elementoClassificaService;
 	private boolean generati=false;
 
-    HomeController(ContradaService contradaService, ElementoClassificaRepository elementoClassificaRepository) {
-        this.contradaService = contradaService;
-        this.elementoClassificaRepository = elementoClassificaRepository;
-    } 
-	@GetMapping("/")
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/home")
 	public String home(Model model) {
 		 if(this.generati==false) {
 			 this.contradaService.inizializza();
@@ -56,26 +54,32 @@ this.generati=true;
 	  
 	    return "homepage.html";
 	}
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/visualizza")
 	public String trova(Model model) {
 		return "cavallo/trovacavallo.html";
 	}
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/inserisci")
 	public String inserisci(Model model) {
 		return "inserisci.html";
 	}
+	
+    @GetMapping("/403")
+    public String accessDenied() {
+        return "403.html";
+    }
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+

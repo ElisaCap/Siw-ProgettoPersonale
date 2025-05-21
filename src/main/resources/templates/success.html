@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Success</title>
+    <link rel="stylesheet" href="/css/stile.css"/>
+</head>
+
+<body>
+    <h1>Success</h1>
+	<form th:action="@{/home}" method="get">
+		<button type="submit">Vai al sito</button>
+	</form>
+</body>
+
+</html>

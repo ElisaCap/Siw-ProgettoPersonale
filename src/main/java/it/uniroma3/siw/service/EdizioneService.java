@@ -63,7 +63,9 @@ public Iterable<Edizione>getAllById(Long id){
 	return edizioni;
 }
 
-
+public void save(Edizione edizione) {
+	this.edizioneRepository.save(edizione);
+}
 
 
 

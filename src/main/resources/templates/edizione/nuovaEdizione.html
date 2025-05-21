@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+			<title>Nuova Edizione</title>
+			<link rel="stylesheet" href="/stile.css?version=3"/>
+		</head>
+		<body>
+			<div><a href="/"></a></div>
+			<h1>Aggiungi un'edizione</h1>
+			<form th:action="@{/insEdizione}" method="post" th:object="${edizione}">
+				<div>
+									Data: <span><input required type="date" th:field="${edizione.data}"/></span>
+									<span th:text="${msgErrTitle}">Campo Obbligatorio</span>
+								</div>
+								<button type="submit">Conferma</button>
+			</form>
+		</body>	
+
+
+</html>
