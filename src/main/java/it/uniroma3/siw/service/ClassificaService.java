@@ -60,7 +60,9 @@ public void inserisciClassifica(Edizione ed)	{
 			
 		}
 	}
-
+public void save(Classifica classifica) {
+	this.classificaRepository.save(classifica);
+}
 	
 
 }

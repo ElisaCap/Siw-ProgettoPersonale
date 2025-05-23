@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Scegli Edizione</title>
+</head>
+<body>
+
+<h1>Scegli l'edizione</h1>
+
+<form th:action="@{/saveEdizioneClassifica}" method="post">
+    <label for="edizioneId">Edizione:</label>
+    <select id="edizioneId" name="edizioneId" required>
+        <option value="" disabled selected>Scegli un'edizione</option>
+        <option th:each="e : ${edizioni}" th:value="${e.id}" th:text="${e.id}"></option>
+    </select>
+    <button type="submit">Continua</button>
+</form>
+
+</body>
+</html>

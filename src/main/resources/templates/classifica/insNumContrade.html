@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Numero Contrade</title>
+</head>
+<body>
+
+<h1>Seleziona Numero di Contrade</h1>
+
+<form th:action="@{/saveNumContrade}"  method="post">
+	<input type="hidden" th:field="*{edizione.id}" />
+
+    <label for="num">Numero di contrade:</label>
+    <input type="number" id="num" name="num" min="1" required />
+
+    <!-- Campo nascosto per mantenere il legame con l'edizione -->
+   <input type="hidden" th:field="${classifica.edizione}" th:value="${edizione}" /> 
+   <input type="hidden" th:field="${classifica.edizioneId}" th:value="${edizioneId}" /> 
+
+    <button type="submit">Avanti</button>
+</form>
+
+</body>
+</html>

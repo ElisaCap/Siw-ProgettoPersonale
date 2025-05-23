@@ -22,7 +22,7 @@
 		<p class="definizione">Foto edizione:</p>
 		<div><img width="30%" th:src="${edizione.urlImmagine}" /></div>
 		</a>
-		<form th:action="@{/classifica/{id}}" method="get" >
+		<form th:action="@{/getClassifica/{id}}" method="get" >
 			<input type="hidden" name="id" th:value="${edizione.id}"/>
 			<button type="submit">Vedi classifica</button>
 		</form>

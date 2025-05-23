@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import org.springframework.data.repository.cdi.Eager;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -25,7 +26,8 @@ public class Classifica {
 private Edizione edizione;
 
 
-@OneToMany//(fetch = FetchType.EAGER, mappedBy = "classifica")
+@OneToMany(mappedBy = "classifica", cascade = CascadeType.ALL, orphanRemoval = true)
+
 private List<ElementoClassifica>elementiClassifica;	
 
 

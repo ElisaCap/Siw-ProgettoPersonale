@@ -10,17 +10,33 @@
 
     <table class="elenco">
         <tr>
-            <th>Id</th>
-            <th>Data</th>
+			<th>Piazzamento</th>
+            <th>NomeCavallo</th>
+            <th>Nome Fantino</th>
+			<th>Contrada</th>
             <th>Foto</th>
         </tr>
 
-        <!-- CORRETTO: iterazione su <tr> -->
+        <!-- Visualizza un semplice messaggio se la lista è vuota -->
+        <tr th:if="${#lists.isEmpty(elementiClassifica)}">
+            <td colspan="3">Nessun dato trovato</td>
+        </tr>
+
+        <!-- Iterazione corretta sugli elementi della lista -->
         <tr th:each="elementoClassifica : ${elementiClassifica}">
-            <td th:text="${elementoClassifica.partecipazione.cavallo.id}">ID</td>
+			<td th:text="${elementoClassifica.posizione}">NomeCavallo</td>
+
+            <td th:text="${elementoClassifica.partecipazione.cavallo.nome}">NomeCavallo</td>
+			
+			
+			<td th:text="${elementoClassifica.partecipazione.fantino.nome}+ 
+			${elementoClassifica.partecipazione.fantino.cognome} 
+			">NomeFantino</td>
+			
+			<td th:text="${elementoClassifica.partecipazione.contrada.nome}">Contrada</td>
+
             <td th:text="${elementoClassifica.classifica.edizione.data}">Data</td>
-            <td>
-     
+            <td>Foto (questa colonna può essere aggiunta più tardi)</td>
         </tr>
     </table>
 

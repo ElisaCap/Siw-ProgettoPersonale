@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,9 +23,8 @@ private Long id;
 	private String urlImmagine;
 	@OneToMany(mappedBy = "edizione")
 	private List<Partecipazione>partecipazioni;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Classifica classifica;
-	
 	
 	
 	public Classifica getClassifica() {
