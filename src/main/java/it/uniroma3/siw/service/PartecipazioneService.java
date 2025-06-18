@@ -80,16 +80,44 @@ private PartecipazioneRepository partecipazioneRepository;
 	    };
 
 	    for (int[] p : partecipazioni) {
-	        this.aggiungiPartecizpazione(
-	            contradaRepository.findById((long)p[0]).get(),
-	            fantinoRepository.findById((long)p[1]).get(),
-	            cavalloRepository.findById((long)p[2]).get(),
-	            edizioneRepository.findById((long)p[3]).get()
-	        );
+	        Contrada c = contradaRepository.findById((long) p[0]).orElse(null);
+	        Fantino f = fantinoRepository.findById((long) p[1]).orElse(null);
+	        Cavallo cav = cavalloRepository.findById((long) p[2]).orElse(null);
+	        Edizione e = edizioneRepository.findById((long) p[3]).orElse(null);
+
+	        if (c != null && f != null && cav != null && e != null) {
+	            Partecipazione partecipazione = new Partecipazione();
+	            partecipazione.setContrada(c);
+	            partecipazione.setFantino(f);
+	            partecipazione.setCavallo(cav);
+	            partecipazione.setEdizione(e);
+	            partecipazioneRepository.save(partecipazione);
+	        }
 	    }
 	}
+
 public void save(Partecipazione partecipazione) {
 	this.partecipazioneRepository.save(partecipazione);
 }
 	
+
+
+
+
+
+
+
+
+
+
+
+public void deleteById(Long id) {
+    this.edizioneRepository.deleteById(id);
+}
+
+
+public Iterable<Partecipazione>getAll(){
+	return this.partecipazioneRepository.findAll();
+}
+
 }

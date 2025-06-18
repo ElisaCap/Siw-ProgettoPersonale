@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Partecipazione {
@@ -26,20 +27,19 @@ private Cavallo cavallo;
 @ManyToOne
 private Edizione edizione;
 
-@OneToMany(mappedBy = "partecipazione", cascade = CascadeType.REMOVE, orphanRemoval = true)
-private List<ElementoClassifica> elementiClassifica;
+@OneToOne(mappedBy = "partecipazione", cascade = CascadeType.ALL, orphanRemoval = true)
+private ElementoClassifica elementoClassifica;
 
 
-public List<ElementoClassifica> getElementiClassifica() {
-	return elementiClassifica;
+
+
+
+public ElementoClassifica getElementoClassifica() {
+	return elementoClassifica;
 }
-public void setElementiClassifica(List<ElementoClassifica> elementiClassifica) {
-	this.elementiClassifica = elementiClassifica;
+public void setElementoClassifica(ElementoClassifica elementoClassifica) {
+	this.elementoClassifica = elementoClassifica;
 }
-
-
-
-
 public Edizione getEdizione() {
 	return edizione;
 }

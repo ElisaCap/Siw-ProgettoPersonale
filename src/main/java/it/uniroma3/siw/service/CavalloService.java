@@ -75,4 +75,13 @@ public class CavalloService {
         nuovoCavallo("Abbasantesa", "Mezzosangue", "/immaginiCavalli/abbasantesa.jpg");
         nuovoCavallo("Anda e Bola", "Mezzosangue", "/immaginiCavalli/anda_e_bola.jpg");
     }
+    
+    
+    
+    public void deleteById(Long id) {
+        this.cavalloRepository.deleteById(id);
+    }
+    
+    
+    
 }

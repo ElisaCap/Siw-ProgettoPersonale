@@ -21,7 +21,7 @@ public class Edizione {
 private Long id;
 	private LocalDate data;
 	private String urlImmagine;
-	@OneToMany(mappedBy = "edizione",cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(mappedBy = "edizione",cascade = CascadeType.ALL, orphanRemoval = true )
 	private List<Partecipazione>partecipazioni;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Classifica classifica;

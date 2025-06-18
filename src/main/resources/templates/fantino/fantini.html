@@ -1,42 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-	<link rel="stylesheet" href="/style2.css">
-	<title>Fantini</title>
+    <link rel="stylesheet" href="/style2.css">
+    <title>Fantini</title>
 </head>
 <body>
-	<h1 class="titolo">Ecco tutti i fantini registrati</h1>
+    <h1 class="titolo">Ecco tutti i fantini registrati</h1>
 
-	<table class="elenco">
-		<tr>
-			<td>Id</td>
-			<td>Nome</td>
-			<td>Cognome</td>
-			<td>Data di nascita</td>
-			<td>Foto</td>
-			<td>Info</td>
-		</tr>
+    <table class="elenco">
+        <tr>
+            <td>Id</td>
+            <td>Nome</td>
+            <td>Cognome</td>
+            <td>Data di nascita</td>
+            <td>Foto</td>
+            <td>Azioni</td>
+        </tr>
 
-		<tr th:each="fantino : ${fantini}">
-			<td th:text="${fantino.id}"></td>
-			<td th:text="${fantino.nome}"></td>
-			<td th:text="${fantino.cognome}"></td>
-			<td th:text="${fantino.dataNascita}"></td>
-			<td>
-				<img width="30%" th:src="@{/fantini/{id}/immagine(id=${fantino.id})}" alt="Foto Fantino"/>
-			</td>
-			<td>
-				<form th:action="@{/fantini/{id}(id=${fantino.id})}" method="get">
-					<button type="submit">Vedi info</button>
-				</form>
-				<td>
-				    <form th:action="@{/fantini/delete/{id}(id=${fantino.id})}" method="get" onsubmit="return confirm('Sei sicuro di voler eliminare questo fantino?');">
-				        <button type="submit">Elimina</button>
-				    </form>
-				</td>
+        <tr th:each="fantino : ${fantini}">
+            <td th:text="${fantino.id}"></td>
+            <td th:text="${fantino.nome}"></td>
+            <td th:text="${fantino.cognome}"></td>
+            <td th:text="${fantino.dataNascita}"></td>
+            <td>
+                <img width="30%" th:src="@{/fantini/{id}/immagine(id=${fantino.id})}" alt="Foto Fantino"/>
+            </td>
+            <td>
+                <form th:action="@{/fantini/{id}(id=${fantino.id})}" method="get">
+                    <button type="submit">Vedi info</button>
+                </form>
 
-			</td>
-		</tr>
-	</table>
+                <div sec:authorize="hasRole('ADMIN')">
+					
+                    <form th:action="@{/fantini/delete/{id}(id=${fantino.id})}" method="get"
+                          onsubmit="return confirm('Sei sicuro di voler eliminare questo fantino?');">
+                        <button type="submit">Elimina</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

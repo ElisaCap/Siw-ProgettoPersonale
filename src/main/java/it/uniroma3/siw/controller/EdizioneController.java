@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,8 @@ private EdizioneService edizioneSerivice;
 	private ClassificaService classificaService;
 	@Autowired
 	private ElementoClassificaRepository elementoClassificaRepository;
+	@Autowired
+	private EdizioneService edizioneService;
 	
 	
 @GetMapping("/edizioni")
@@ -78,7 +81,12 @@ public String edizioneCavallo(@PathVariable Long id, Model model) {
     return "edizione/edizioni";
 }
 
-
+@GetMapping("/edizioni/delete/{id}")
+public String eliminaFantino(@PathVariable Long id, Model model) {
+    edizioneService.deleteById(id);
+    model.addAttribute("edizioni", edizioneService.getAll());
+    return "edizione/edizioni.html"; // oppure redirect a cercatutti
+}
 
 
 

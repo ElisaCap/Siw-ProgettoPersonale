@@ -27,7 +27,6 @@ private Edizione edizione;
 
 
 @OneToMany(mappedBy = "classifica", cascade = CascadeType.ALL, orphanRemoval = true)
-
 private List<ElementoClassifica>elementiClassifica;	
 
 

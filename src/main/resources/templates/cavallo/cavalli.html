@@ -33,6 +33,11 @@
 	          <button class="btn-info" type="submit">Vedi info</button>
 	        </form>
 	      </td>
+		  <form th:action="@{/cavalli/delete/{id}(id=${cavallo.id})}" method="get"
+		                         onsubmit="return confirm('Sei sicuro di voler eliminare questo cavallo?');">
+		                       <button type="submit">Elimina</button>
+		                   </form>
+		  
 	    </tr>
 	  </tbody>
 	</table>

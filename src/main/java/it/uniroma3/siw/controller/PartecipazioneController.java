@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.model.Partecipazione;
@@ -43,7 +44,12 @@ public String savePartecipazione(@ModelAttribute("partecipazione") Partecipazion
 	this.partecipazioneService.save(partecipazione);
 	return "homepage.html";
 }
- 
+@GetMapping("/partecipazione/delete/{id}")
+public String eliminaFantino(@PathVariable Long id, Model model) {
+    partecipazioneService.deleteById(id);
+    model.addAttribute("classifiche", partecipazioneService.getAll());
+    return "partecipazione/partecipazioni.html"; // oppure redirect a cercatutti
+}
  
 	
 }

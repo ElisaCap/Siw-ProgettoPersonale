@@ -67,7 +67,13 @@ public void inserisciClassifica(Edizione ed)	{
 public void save(Classifica classifica) {
 	this.classificaRepository.save(classifica);
 }
-	
+
+public void deleteById(Long id) {
+    this.classificaRepository.deleteById(id);
+}
+public Iterable<Classifica>getAll(){
+	return this.classificaRepository.findAll();
+}
 
 }
 

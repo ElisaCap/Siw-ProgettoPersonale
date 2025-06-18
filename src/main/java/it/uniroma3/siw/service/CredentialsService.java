@@ -72,6 +72,9 @@ public class CredentialsService {
         credentials.setRole("ROLE_ADMIN");
         credentialsRepository.save(credentials);
     }
+    
+    
+    
 }
     
     

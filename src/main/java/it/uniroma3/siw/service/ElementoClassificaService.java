@@ -35,71 +35,38 @@ public class ElementoClassificaService {
 	}
 	
 	
-	
-		public void inizializza() {
-		    // Edizione 1: Palio del 2 luglio 2022 (solo 4 contrade arrivate)
-		    // 1° Drago
-			
-		    this.aggiungiElementoClassifica(classificaRepository.findById(1L).get(),1,
-		        partecipazioneRepository.findById(5L).get());
-		    // 2° Torre
-		    this.aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 2,
-		        partecipazioneRepository.findById(16L).get());
-		    // 3° Pantera
-		    this.aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 3,
-		        partecipazioneRepository.findById(13L).get());
-		    // 4° Lupa
-		    this.aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 4,
-		        partecipazioneRepository.findById(9L).get());
+	public void inizializza() {
+	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 1, partecipazioneRepository.findById(5L).get());   // Drago
+	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 2, partecipazioneRepository.findById(16L).get()); // Torre
+	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 3, partecipazioneRepository.findById(13L).get()); // Pantera
 
-		    // Edizione 2: Palio del 16 agosto 2022
-		    this.aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 1,
-		        partecipazioneRepository.findById(9L).get());   // Leocorno
-		    this.aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 2,
-		        partecipazioneRepository.findById(5L).get());   // Selva
-		    this.aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 3,
-		        partecipazioneRepository.findById(1L).get());   // Valdimontone
-		    this.aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 4,
-		        partecipazioneRepository.findById(3L).get());   // Giraffa
-		    this.aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 5,
-		        partecipazioneRepository.findById(2L).get());   // Chiocciola
-		  
-		    this.aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 6,
-		        partecipazioneRepository.findById(6L).get());   // Tartuca
-		    this.aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 7,
-		        partecipazioneRepository.findById(10L).get());  // Nicchio
-		    this.aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 8,
-		        partecipazioneRepository.findById(4L).get());   // Lupa
-		    this.aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 9,
-		        partecipazioneRepository.findById(8L).get());   // Onda
-		    this.aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 10,
-		        partecipazioneRepository.findById(7L).get());   // Civetta
+	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 1, partecipazioneRepository.findById(9L).get());   // Leocorno
 
-		    // Edizione 3: Palio del 2 luglio 2023
-		    this.aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 1,
-		        partecipazioneRepository.findById(34L).get());  // Selva
-		    this.aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 2,
-		        partecipazioneRepository.findById(40L).get());  // Torre
-		    this.aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 3,
-		        partecipazioneRepository.findById(36L).get());  // Giraffa
-		    this.aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 4,
-		        partecipazioneRepository.findById(39L).get());  // Drago
-		    this.aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 5,
-		        partecipazioneRepository.findById(38L).get());  // Onda
-		    this.aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 6,
-		        partecipazioneRepository.findById(41L).get());  // Nicchio
-		    this.aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 7,
-		        partecipazioneRepository.findById(42L).get());  // Aquila
-		    this.aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 8,
-		        partecipazioneRepository.findById(33L).get());  // Tartuca
-		    this.aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 9,
-		        partecipazioneRepository.findById(35L).get());  // Chiocciola
-		    this.aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 10,
-		        partecipazioneRepository.findById(37L).get());  // Istrice
-		}
+	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 3, partecipazioneRepository.findById(1L).get());   // Valdimontone
+	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 4, partecipazioneRepository.findById(3L).get());   // Giraffa
+	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 5, partecipazioneRepository.findById(2L).get());   // Chiocciola
+	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 6, partecipazioneRepository.findById(6L).get());   // Tartuca
+	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 7, partecipazioneRepository.findById(10L).get());  // Nicchio
+	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 8, partecipazioneRepository.findById(4L).get());   // Lupa
+	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 9, partecipazioneRepository.findById(8L).get());   // Onda
+	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 10, partecipazioneRepository.findById(7L).get());  // Civetta
+
+	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 1, partecipazioneRepository.findById(34L).get());  // Selva
+	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 2, partecipazioneRepository.findById(40L).get());  // Torre
+	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 3, partecipazioneRepository.findById(36L).get());  // Giraffa
+	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 4, partecipazioneRepository.findById(39L).get());  // Drago
+	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 5, partecipazioneRepository.findById(38L).get());  // Onda
+	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 6, partecipazioneRepository.findById(41L).get());  // Nicchio
+	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 7, partecipazioneRepository.findById(42L).get());  // Aquila
+	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 8, partecipazioneRepository.findById(33L).get());  // Tartuca
+	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 9, partecipazioneRepository.findById(35L).get());  // Chiocciola
+	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 10, partecipazioneRepository.findById(37L).get()); // Istrice
+	}
 
 	
-	
+	public void deleteById(Long id) {
+	    this.elementoClassificaRepository.deleteById(id);
+	}
 	
 
 }

@@ -129,6 +129,9 @@ public String insClassifica(@RequestParam("edizioneId") Long edizioneId,
 
     Edizione edizione = edizioneRepository.findById(edizioneId).orElse(null);
     if (edizione == null) return "errore";
+    
+    
+    model.addAttribute("partecipazioni", partecipazioneRepository.findByEdizioneId(edizioneId));
 
     // Cerca classifica esistente o crea nuova
     Classifica classifica = classificaRepository.findByEdizione(edizione)
@@ -152,7 +155,7 @@ public String insClassifica(@RequestParam("edizioneId") Long edizioneId,
     }
 
     model.addAttribute("classifica", classifica);
-    model.addAttribute("partecipazioni", partecipazioneRepository.findAll());
+   
 
     return "classifica/insClassifica.html";
 }
@@ -187,6 +190,11 @@ public String saveClassifica(@ModelAttribute("classifica") Classifica classifica
     return "redirect:/classifica/" + edizionePersistita.getId();
 }
 
-
+@GetMapping("/classifiche/delete/{id}")
+public String eliminaFantino(@PathVariable Long id, Model model) {
+    classificaService.deleteById(id);
+    model.addAttribute("classifiche", classificaService.getAll());
+    return "classifica/classifiche.html"; // oppure redirect a cercatutti
+}
 
 }

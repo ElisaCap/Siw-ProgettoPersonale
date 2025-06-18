@@ -75,4 +75,20 @@ public class CavalloController {
 
         return new ResponseEntity<>(cavallo.getImmagine(), headers, HttpStatus.OK);
     }
+    
+    @GetMapping("/cavalli/delete/{id}")
+	  public String eliminaFantino(@PathVariable Long id, Model model) {
+	      cavalloService.deleteById(id);
+	      model.addAttribute("fantini", cavalloService.getAll());
+	      return "cavallo/cavalli.html"; // oppure redirect a cercatutti
+	  }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

@@ -25,7 +25,10 @@
 		<form th:action="@{/classifica/{id}(id=${edizione.id})}" method="get">
 		    <button type="submit">Vedi classifica</button>
 		</form>
-
+		<form th:action="@{/edizioni/delete/{id}(id=${edizione.id})}" method="get"
+		                       onsubmit="return confirm('Sei sicuro di voler eliminare questo fantino?');">
+		                     <button type="submit">Elimina</button>
+		                 </form>
 		
 	</div>
 	<div th:unless="${edizione}">
