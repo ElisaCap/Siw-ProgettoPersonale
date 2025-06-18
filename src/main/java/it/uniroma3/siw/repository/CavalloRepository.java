@@ -4,7 +4,9 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import it.uniroma3.siw.model.Cavallo;
+import jakarta.transaction.Transactional;
 @Repository
 public interface CavalloRepository extends CrudRepository<Cavallo, Long> {
+	@Transactional
 public Cavallo findByNome(String nome);
 }

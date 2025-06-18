@@ -8,7 +8,11 @@
 	</head>
 	<div class="contenitore">
 	<body th:id="'id-'+ ${contrada.id}" >
-		<a th:id="'id-'+ ${contrada.id}"  > <img width=100% th:src="${contrada.urlImmagine}"/> </a>
+		<a th:id="'id-'+ ${contrada.id}"  > 
+
+			<img th:src="@{'/urlImmagine/' + ${contrada.id}}" alt="Contrada"/>
+
+		</a>
 		<div th:if="${contrada}" >
 		<p class="contrada" th:id="'id-'+ ${contrada.id}" th:text="${contrada.nome}">	</p>
 		<p class="contrada" th:id="'id-'+ ${contrada.id}" th:text="${contrada.descrizioneLunga}"></p> 

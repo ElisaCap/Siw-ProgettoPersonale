@@ -1,5 +1,7 @@
 package it.uniroma3.siw;
 
+import java.sql.Connection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -24,7 +26,7 @@ private AuthConfiguration authConfiguration;
 
 	public static void main(String[] args) {
 	
-			
+		
 		SpringApplication.run(ProgettoSiwApplication.class, args);
 	}
 	

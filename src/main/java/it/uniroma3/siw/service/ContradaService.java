@@ -1,20 +1,25 @@
 package it.uniroma3.siw.service;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.model.Contrada;
 import it.uniroma3.siw.repository.ContradaRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ContradaService {
 	@Autowired
 	private ContradaRepository contradaRepository;
-
+@Transactional
 	public Iterable<Contrada> getAll() {
 		return contradaRepository.findAll();
 	}
-
+@Transactional
 	public Contrada getByNome(String nome) {
 		return contradaRepository.findByNome(nome);
 	}
@@ -28,7 +33,16 @@ public class ContradaService {
 		contrada.setNome(nome);
 		contrada.setDescrizione(descrizione);
 		contrada.setDescrizioneLunga(descrizioneLunga);
-		contrada.setUrlImmagine(urlImmagine);
+		try {
+            ClassPathResource imgFile = new ClassPathResource("static" + urlImmagine);
+            try (InputStream in = imgFile.getInputStream()) {
+                contrada.setUrlImmagine(in.readAllBytes());
+            }
+        } catch (IOException e) {
+            // puoi loggare o gestire diversamente
+            contrada.setUrlImmagine(null); // o un'immagine di default
+            System.err.println("Errore nel caricamento immagine per " + nome + ": " + e.getMessage());
+        }
 		this.save(contrada);
 	}
 

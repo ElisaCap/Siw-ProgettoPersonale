@@ -3,61 +3,40 @@
 <html>
 
 <head>
-	<link rel="stylesheet" href="/style2.css">
+	<link rel="stylesheet" href="/css/cavallo.css">
 	<title>Cavallo</title>
 </head>
 
 <body>
-	<h1 class="titolo">Ecco tutti i cavalli registrati</h1>
-	<table class="elenco" >
-					
-					 <!-- Inizia la tabella -->
-					<tr> <!-- Inizia la prima riga -->
-					<td>Id</td>
-					 <!-- Prima colonna -->
-					<td>Nome</td>
-					<td>Razza</td>
-					<td>Foto</td> <!-- Seconda colonna -->
-					<td>Info</td>
-	</tr>
-	
-	
-	
-	  <a th:each="cavallo : ${cavalli}">
-	    
-			
-			
-			
-			
-			
-				
-			
-				
-				 <!-- Fine della prima riga -->
-				<tr> <!-- Inizia la seconda riga -->
-					<td th:text="${cavallo.id}"></td>
-					<td th:text="${cavallo.nome}"></td> 
-				<td th:text="${cavallo.razza}"></td> <!-- Terza colonna -->
-				<td>
-					<img th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" alt="immagine cavallo" width="100" />
-				</td>
-				<td>
-					<form  th:action="@{/cavalli/{id}}" method="get">
-										<input type="hidden" name="id" th:value="${cavallo.id}" />
-									<button type="submit">vedi info</td> <!-- Seconda colonna -->
-									</button></form>
-					
-					
-									
-				</td>
-			</tr> <!-- Fine della seconda riga -->
-				</table> <!-- Fine della tabella -->
-			
-			
-			
-			
-		
-	  </a>
+	<h1 class="titolo" id="titolo-cavalli">Ecco tutti i cavalli registrati</h1>
+
+	<table class="elenco" id="tabella-cavalli">
+	  <thead>
+	    <tr class="riga-intestazione">
+	      <th class="col-id">Id</th>
+	      <th class="col-nome">Nome</th>
+	      <th class="col-razza">Razza</th>
+	      <th class="col-foto">Foto</th>
+	      <th class="col-info">Info</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr class="riga-cavallo" th:each="cavallo : ${cavalli}">
+	      <td class="col-id" th:text="${cavallo.id}"></td>
+	      <td class="col-nome" th:text="${cavallo.nome}"></td>
+	      <td class="col-razza" th:text="${cavallo.razza}"></td>
+	      <td class="col-foto">
+	        <img class="foto-cavallo" th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" alt="immagine cavallo" width="100" />
+	      </td>
+	      <td class="col-info">
+	        <form class="form-info" th:action="@{/cavalli/{id}(id=${cavallo.id})}" method="get">
+	          <button class="btn-info" type="submit">Vedi info</button>
+	        </form>
+	      </td>
+	    </tr>
+	  </tbody>
+	</table>
+
 	
 
 </body>

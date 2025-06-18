@@ -10,17 +10,18 @@ import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.model.Cavallo;
 import it.uniroma3.siw.repository.CavalloRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class CavalloService {
 
     @Autowired
     private CavalloRepository cavalloRepository;
-
+@Transactional
     public Cavallo getCavalloById(Long id) {
         return this.cavalloRepository.findById(id).orElse(null);
     }
-
+@Transactional
     public Iterable<Cavallo> getAll() {
         return this.cavalloRepository.findAll();
     }
@@ -34,6 +35,7 @@ public class CavalloService {
     }
 
     // ✅ Nuovo metodo: carica immagine da path e salva Cavallo
+    
     public void nuovoCavallo(String nome, String razza, String imagePath) {
         Cavallo cavallo = new Cavallo();
         cavallo.setNome(nome);

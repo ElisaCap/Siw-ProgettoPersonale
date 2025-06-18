@@ -2,6 +2,8 @@ package it.uniroma3.siw.model;
 
 import java.util.List;
 import java.util.Objects;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,6 +21,8 @@ public class Cavallo {
     private String nome;
     private String razza;
 
+    
+    @org.springframework.data.annotation.Transient
     @Transient // non salvare nel DB
     private MultipartFile fileImmagine;
 
@@ -35,7 +39,7 @@ public class Cavallo {
     @Lob
     private byte[] immagine; // campo per l’immagine
 
-    @OneToMany(mappedBy = "cavallo")
+    @OneToMany(mappedBy = "cavallo", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Partecipazione> partecipazioni;
 
     // getter e setter

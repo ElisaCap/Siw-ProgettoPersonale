@@ -5,11 +5,16 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Fantino {
@@ -18,11 +23,38 @@ public class Fantino {
 private Long id;
 private String nome;
 private String cognome;
-private String urlImmagine;
+
 private LocalDate dataNascita;
-@OneToMany(mappedBy = "fantino")
+@OneToMany(mappedBy = "fantino" ,cascade = CascadeType.REMOVE, orphanRemoval = true)
 private List<Partecipazione>partecipazioni;
 
+@Transient
+private MultipartFile fileImmagine;
+
+//getter e setter per fileImmagine
+public MultipartFile getFileImmagine() {
+ return fileImmagine;
+}
+
+public void setFileImmagine(MultipartFile fileImmagine) {
+ this.fileImmagine = fileImmagine;
+}
+
+
+@Lob
+private byte[] urlImmagine; // campo per l’immagine
+
+
+
+public void setUrlImmagine(byte[] urlImmagine) {
+	this.urlImmagine = urlImmagine;
+}
+
+
+
+public byte[] getUrlImmagine() {
+	return urlImmagine;
+}
 
 public List<Partecipazione> getPartecipazioni() {
 	return partecipazioni;
@@ -48,12 +80,8 @@ public String getCognome() {
 public void setCognome(String cognome) {
 	this.cognome = cognome;
 }
-public String getUrlImmagine() {
-	return urlImmagine;
-}
-public void setUrlImmagine(String urlImmagine) {
-	this.urlImmagine = urlImmagine;
-}
+
+
 public LocalDate getDataNascita() {
 	return dataNascita;
 }

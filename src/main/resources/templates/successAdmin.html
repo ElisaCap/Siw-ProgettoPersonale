@@ -11,6 +11,10 @@
 </head>
 
 <body class="success">
+	<div sec:authorize="isAuthenticated()">
+	           <span th:text="${#authentication.name}"></span>
+	           <a href="/logout">Logout</a>
+	       </div>
     <main class="container">
         <h1 class="success">Bentornata Elisa!</h1>
         <form th:action="@{/home}" method="get">

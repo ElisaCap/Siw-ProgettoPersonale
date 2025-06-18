@@ -1,7 +1,9 @@
 package it.uniroma3.siw.service;
 import it.uniroma3.siw.repository.EdizioneRepository;
 import it.uniroma3.siw.repository.ElementoClassificaRepository;
+import jakarta.transaction.Transactional;
 
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,10 +46,12 @@ public void inserisciClassifica(Edizione ed)	{
 		}
 	}
 
-	
+	@Transactional
 	public Classifica getById(Long id) {
 		return this.classificaRepository.findById(id).get();
 	}
+	
+	@Transactional
 	public void aggiungiElementi() {
 		for(Classifica classifica : this.classificaRepository.findAll()) {
 			List<ElementoClassifica>elementic=new ArrayList<>();

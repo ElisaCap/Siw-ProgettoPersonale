@@ -1,71 +1,42 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
 	<link rel="stylesheet" href="/style2.css">
 	<title>Fantini</title>
 </head>
-
 <body>
-	<h1 class="titolo">Ecco tutti i fantino registrati</h1>
-	<table class="elenco" >
-					
-					 <!-- Inizia la tabella -->
-					<tr> <!-- Inizia la prima riga
-					
-					 -->
-					<td>Id</td>
-					 <!-- Prima colonna -->
-					<td>Nome</td>
-					<td>Cognome</td>
-					<td>Data di nascita</td>
-					<td>Foto</td> <!-- Seconda colonna -->
-					<td>Info</td>
-	</tr>
-	
-	
-	
-	  <a th:each="fantino : ${fantini}">
-	    
-			
-			
-			
-			
-			
-				
-			
-				
-				 <!-- Fine della prima riga -->
-				<tr> <!-- Inizia la seconda riga -->
-					<td th:text="${fantino.id}"></td>
-					<td>
-						<a th:text="${fantino.nome}"></a>
+	<h1 class="titolo">Ecco tutti i fantini registrati</h1>
 
-					    <input type="hidden" name="id" th:value="${fantino.id}" />
-					</td>				<td   th:text="${fantino.cognome}" ></td> <!-- Terza colonna -->
-				         <td th:text="${fantino.dataNascita}"></td>
-				
-				<td ><img width="30%" th:src="${fantino.urlImmagine}" /></td> <!-- Terza colonna -->
+	<table class="elenco">
+		<tr>
+			<td>Id</td>
+			<td>Nome</td>
+			<td>Cognome</td>
+			<td>Data di nascita</td>
+			<td>Foto</td>
+			<td>Info</td>
+		</tr>
+
+		<tr th:each="fantino : ${fantini}">
+			<td th:text="${fantino.id}"></td>
+			<td th:text="${fantino.nome}"></td>
+			<td th:text="${fantino.cognome}"></td>
+			<td th:text="${fantino.dataNascita}"></td>
+			<td>
+				<img width="30%" th:src="@{/fantini/{id}/immagine(id=${fantino.id})}" alt="Foto Fantino"/>
+			</td>
+			<td>
+				<form th:action="@{/fantini/{id}(id=${fantino.id})}" method="get">
+					<button type="submit">Vedi info</button>
+				</form>
 				<td>
-					<form  th:action="@{/fantini/{id}}" method="get">
-										<input type="hidden" name="id" th:value="${fantino.id}" />
-									<button type="submit">vedi info</td> <!-- Seconda colonna -->
-									</button></form>
-					
-					
-									
+				    <form th:action="@{/fantini/delete/{id}(id=${fantino.id})}" method="get" onsubmit="return confirm('Sei sicuro di voler eliminare questo fantino?');">
+				        <button type="submit">Elimina</button>
+				    </form>
 				</td>
-			</tr> <!-- Fine della seconda riga -->
-				</table> <!-- Fine della tabella -->
-			
-			
-			
-			
-		
-	  </a>
-	
 
+			</td>
+		</tr>
+	</table>
 </body>
-
 </html>

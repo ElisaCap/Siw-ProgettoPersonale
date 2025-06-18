@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CredentialsService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -110,8 +113,11 @@ public class AuthenticationController {
 	}
 	
 	@GetMapping("/logout")
-	public String getMethodName(Model model) {
-		return "logout.html";
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+	    var auth = SecurityContextHolder.getContext().getAuthentication();
+	    if (auth != null){
+	        new SecurityContextLogoutHandler().logout(request, response, auth);
+	    }return "logout.html";
 	}
 	
 	

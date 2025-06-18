@@ -1,5 +1,6 @@
 package it.uniroma3.siw.service;
 
+import java.beans.Transient;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import it.uniroma3.siw.repository.EdizioneRepository;
 import it.uniroma3.siw.repository.FantinoRepository;
 import it.uniroma3.siw.repository.PartecipazioneRepository;
 import jakarta.persistence.ManyToOne;
+import jakarta.transaction.Transactional;
 
 @Service
 public class PartecipazioneService {
@@ -37,6 +39,7 @@ private PartecipazioneRepository partecipazioneRepository;
         this.cavalloRepository = cavalloRepository;
         this.edizioneRepository = edizioneRepository;
     }
+    @Transactional
 	public Partecipazione getById(Long id) {
 		return this.partecipazioneRepository.findById(id).get();
 	}

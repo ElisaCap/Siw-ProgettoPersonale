@@ -1,13 +1,16 @@
 package it.uniroma3.siw.model;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Partecipazione {
@@ -23,6 +26,16 @@ private Cavallo cavallo;
 @ManyToOne
 private Edizione edizione;
 
+@OneToMany(mappedBy = "partecipazione", cascade = CascadeType.REMOVE, orphanRemoval = true)
+private List<ElementoClassifica> elementiClassifica;
+
+
+public List<ElementoClassifica> getElementiClassifica() {
+	return elementiClassifica;
+}
+public void setElementiClassifica(List<ElementoClassifica> elementiClassifica) {
+	this.elementiClassifica = elementiClassifica;
+}
 
 
 

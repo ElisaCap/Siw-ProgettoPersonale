@@ -49,7 +49,7 @@ public class CavalloController {
     }
 
     @GetMapping("/cavalli/{id}")
-    public String cercaPerId(@RequestParam Long id, Model model) {
+    public String cercaPerId(@PathVariable Long id, Model model) {
         Cavallo cavallo = this.cavalloService.getCavalloById(id);
         model.addAttribute("cavallo", cavallo);
         return "cavallo/cavallo.html";

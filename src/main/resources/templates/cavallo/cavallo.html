@@ -24,7 +24,10 @@
 		</a>		
 		<a class="box">
 		<p class="definizione">Foto cavallo:</p>
-		<div><img width="30%" th:src="${cavallo.immagine}" /></div>
+		<div>
+			<img width="30%" th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" />
+		
+		</div>
 		</a>
 		
 		<form th:action="@{/edizioniCavallo/{id}(id=${cavallo.id})}" method="get">

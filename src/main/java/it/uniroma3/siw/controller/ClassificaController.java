@@ -46,17 +46,18 @@ private ClassificaRepository classificaRepository;
         this.elementoClassificaRepository = elementoClassificaRepository;
         this.edizioneRepository = edizioneRepository;
     }
-@GetMapping("/classifica/{id}")
-public String classificaId(@PathVariable("id") Long id,Model model) {
-	Classifica classifica=this.classificaService.getById(id);
-	model.addAttribute("classifica",classifica);
-	model.addAttribute("elementiClassifica",this.elementoClassificaRepository.findAllByClassifica(classifica));
-	 if (id == null) {
-         return "errore"; // Gestisci un eventuale errore
-     }
-	return "classifica/classifica.html";
-	
-}
+    
+    @GetMapping("/classifica/{id}")
+    public String classificaId(@PathVariable("id") Long id, Model model) {
+        if (id == null) return "errore";
+
+        Classifica classifica = this.classificaService.getById(id);
+        model.addAttribute("classifica", classifica);
+        model.addAttribute("elementiClassifica", this.elementoClassificaRepository.findAllByClassifica(classifica));
+
+        return "classifica/classifica"; 
+    }
+
 
 
 

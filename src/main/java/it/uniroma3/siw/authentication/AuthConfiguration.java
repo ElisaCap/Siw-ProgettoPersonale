@@ -84,7 +84,7 @@ private CredentialsRepository credentialsRepository;
             .authorizeHttpRequests(auth -> auth
             		.requestMatchers("/","/paginaIntroduttiva.html",
             			    "/login", "/register", "/logout",
-            			    "/css/**", "/js/**", "/images/**", "/sfondo.jpg", "/webjars/**"
+            			    "/css/**", "/js/**", "/images/**", "/sfondo.jpg", "/webjars/**","/immagginicontrade/**"
             			).permitAll()
                 .anyRequest().authenticated()
             )
