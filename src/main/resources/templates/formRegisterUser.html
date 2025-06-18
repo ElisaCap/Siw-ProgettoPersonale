@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+	
 <head>
     <title>User Registration</title>
+	<link rel="stylesheet" th:href="@{/css/login.css}" />
+
 </head>
 <body>
     <form th:action="@{/register}" th:object="${user}" method="post">

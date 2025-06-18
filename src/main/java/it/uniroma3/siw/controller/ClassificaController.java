@@ -182,7 +182,7 @@ public String saveClassifica(@ModelAttribute("classifica") Classifica classifica
 
     // 🧠 Salva classifica con tutti gli elementi in cascata
     classificaService.save(classifica);
-
+    
     return "redirect:/classifica/" + edizionePersistita.getId();
 }
 

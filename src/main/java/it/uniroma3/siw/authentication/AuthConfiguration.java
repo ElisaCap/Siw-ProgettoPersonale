@@ -77,18 +77,22 @@ private CredentialsRepository credentialsRepository;
     
     
     
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login", "/register", "/css/**", "/images/**").permitAll()
+            		.requestMatchers("/","/paginaIntroduttiva.html",
+            			    "/login", "/register", "/logout",
+            			    "/css/**", "/js/**", "/images/**", "/sfondo.jpg", "/webjars/**"
+            			).permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
-                .loginProcessingUrl("/login") // la POST del form
-                .defaultSuccessUrl("/success", true) // dove andare dopo login
-                .failureUrl("/login?error=true")     // opzionale: per gestire errori
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/success", true)
+                .failureUrl("/login?error=true")
                 .permitAll()
             )
             .logout(logout -> logout
@@ -97,7 +101,7 @@ private CredentialsRepository credentialsRepository;
                 .permitAll()
             )
             .exceptionHandling(ex -> ex
-                .accessDeniedPage("/403") // <-- Qui gestiamo il 403 con pagina custom
+                .accessDeniedPage("/403")
             );
 
         return http.build();

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.model.Classifica;
 import it.uniroma3.siw.model.Edizione;
 import it.uniroma3.siw.model.ElementoClassifica;
+import it.uniroma3.siw.repository.EdizioneRepository;
 import it.uniroma3.siw.repository.ElementoClassificaRepository;
 import it.uniroma3.siw.service.ClassificaService;
 import it.uniroma3.siw.service.EdizioneService;
@@ -20,6 +21,8 @@ import it.uniroma3.siw.service.EdizioneService;
 public class EdizioneController {
 	@Autowired
 private EdizioneService edizioneSerivice;
+	@Autowired
+	private EdizioneRepository edizioneRepository;
 	@Autowired
 	private ClassificaService classificaService;
 	@Autowired
@@ -67,6 +70,16 @@ public String classificaEdId(@RequestParam Long id,Model model) {
 	return "redirect:/classifica/"+ id;
 	
 }
+
+@GetMapping("/edizioniCavallo/{id}")
+public String edizioneCavallo(@PathVariable Long id, Model model) {
+    Iterable<Edizione> edizioni = edizioneRepository.findEdizioniByCavalloId(id);
+    model.addAttribute("edizioni", edizioni);
+    return "edizione/edizioni";
+}
+
+
+
 
 
 

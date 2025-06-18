@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="it">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Success</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+</head>
+
+<body class="success">
+    <main class="container">
+        <h1 class="success">Bentornata Elisa!</h1>
+        <form th:action="@{/home}" method="get">
+            <button type="submit" class="success">Vai al sito</button>
+        </form>
+    </main>
+</body>
+
+</html>

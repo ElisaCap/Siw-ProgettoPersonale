@@ -59,6 +59,8 @@ this.generati=true;
 	public String trova(Model model) {
 		return "cavallo/trovacavallo.html";
 	}
+	
+	
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/inserisci")
 	public String inserisci(Model model) {
@@ -69,7 +71,7 @@ this.generati=true;
     public String accessDenied() {
         return "403.html";
     }
-
+    
 }
 	
 	

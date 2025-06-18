@@ -63,7 +63,7 @@ public class AuthenticationController {
 	public String index(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication instanceof org.springframework.security.authentication.AnonymousAuthenticationToken) {
-	        return "index.html";
+	        return "paginaIntroduttiva.html";
 		}
 		else {		
 			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -72,21 +72,22 @@ public class AuthenticationController {
 				return "admin/indexAdmin.html";
 			}
 		}
-        return "index.html";
+        return "paginaIntroduttiva.html";
 	}
 		
 	@GetMapping("/success")
-	public String defaultAfterLogin(Model model) {
+	public String defaultAfterLogin() {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
 	    if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)) {
-	        UserDetails userDetails = (UserDetails) auth.getPrincipal();
-	        Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-	        if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-	            return "success.html";
+	        if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+	            return "successAdmin.html";
 	        }
 	    }
-	    return "success.html";
+
+	    return "successUser.html";
 	}
+
 
 
 	@PostMapping(value = { "/register" })

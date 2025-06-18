@@ -4,11 +4,11 @@
 
 <head>
     <title>Success</title>
-    <link rel="stylesheet" href="/css/stile.css"/>
+	<link rel="stylesheet" th:href="@{/css/style2.css}" />
 </head>
 
 <body>
-    <h1>Success</h1>
+    <h1>Benvenuto Utente</h1>
 	<form th:action="@{/home}" method="get">
 		<button type="submit">Vai al sito</button>
 	</form>

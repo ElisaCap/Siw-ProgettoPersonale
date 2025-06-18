@@ -38,7 +38,9 @@
 					<td th:text="${cavallo.id}"></td>
 					<td th:text="${cavallo.nome}"></td> 
 				<td th:text="${cavallo.razza}"></td> <!-- Terza colonna -->
-				<td ><img width="30%" th:src="${cavallo.urlImmagine}" /></td> <!-- Terza colonna -->
+				<td>
+					<img th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" alt="immagine cavallo" width="100" />
+				</td>
 				<td>
 					<form  th:action="@{/cavalli/{id}}" method="get">
 										<input type="hidden" name="id" th:value="${cavallo.id}" />

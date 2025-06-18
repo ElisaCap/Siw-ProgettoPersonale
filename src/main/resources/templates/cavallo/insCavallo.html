@@ -1,29 +1,28 @@
 <!DOCTYPE html>
-<html>
-	<head>
-			<title>Nuovo Cavallo</title>
-			<link rel="stylesheet" href="/stile.css?version=3"/>
-		</head>
-		<body>
-			<div><a href="/"></a></div>
-			<h1>Aggiungi un Cavallo</h1>
-			<form th:action="@{/insCavallo}" method="post" th:object="${cavallo}">
-				<div>
-					Nome: <span><input required type="text" th:field="${cavallo.nome}"/></span>
-					<span th:text="${msgErrTitle}">Campo Obbligatorio</span>
-				</div>
-				<div>
-					Razza: <span><input required type="text" th:field="${cavallo.razza}"/></span>
-					<span th:text="${msgErrYear}">Campo Obbligatorio</span>
-				</div>
-				<div>
-					URL immagine: <span><input type="url" th:field="${cavallo.urlImmagine}"/></span>
-				</div>
-				<div>
-					<span><button type="submit">Conferma</button></span>
-				</div>
-			</form>
-		</body>	
-
-
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+    <title>Nuovo Cavallo</title>
+    <link rel="stylesheet" href="/stile.css?version=3" />
+</head>
+<body>
+    <div><a href="/">Home</a></div>
+    <h1>Aggiungi un Cavallo</h1>
+    <form th:action="@{/insCavallo}" method="post" th:object="${cavallo}" enctype="multipart/form-data">
+        <div>
+            Nome: <span><input required type="text" th:field="*{nome}" /></span>
+            <span th:text="${msgErrTitle}">Campo Obbligatorio</span>
+        </div>
+        <div>
+            Razza: <span><input required type="text" th:field="*{razza}" /></span>
+            <span th:text="${msgErrYear}">Campo Obbligatorio</span>
+        </div>
+        <div>
+            Immagine cavallo:
+            <input type="file" th:field="*{fileImmagine}" accept="image/*" />
+        </div>
+        <div>
+            <span><button type="submit">Conferma</button></span>
+        </div>
+    </form>
+</body>
 </html>

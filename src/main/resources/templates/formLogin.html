@@ -2,47 +2,51 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
+<head> 
+    <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/css/stile.css"/>
+    
+	<link rel="stylesheet" th:href="@{/css/login.css}" />
 </head>
 
 <body>
-    <header>
+<main class="login-container">
+    <header class="login-header">
         <div sec:authorize="isAuthenticated()">
             <span th:text="${#authentication.name}"></span>
-            <a href="/logout">Logout</a>
+            <a class="logout-link" href="/logout">Logout</a>
         </div>
         <div sec:authorize="isAnonymous()">
-            <a href="/login">Login</a>
+            <a class="login-link" href="/login">Login</a>
         </div>
     </header>
 
-    <h1>Accedi</h1>
-    <form th:action="@{/login}" method="post">
-        <div>
-            <label for="name">Username:</label>
-            <input type="text" name="username" id="username" />
+    <h1 class="login-title">Accedi</h1>
+
+    <form th:action="@{/login}" method="post" class="login-form">
+        <div class="login-field">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required />
         </div>
-        <div>
+
+        <div class="login-field">
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" />
-        </div>
-        <div>
-            <button type="submit">Login</button>
+            <input type="password" name="password" id="password" required />
         </div>
 
-        <div th:if="${param.error}">
-            <p style="color:red;">Credenziali non valide.</p>
+        <div class="login-buttons">
+            <button class="btn" type="submit">Login</button>
+            <a th:href="@{/register}" class="btn secondary">Registrati</a>
         </div>
 
-        <div th:if="${param.logout}">
-            <p style="color:green;">Logout eseguito con successo.</p>
+        <div th:if="${param.error}" class="login-error">
+            <p>⚠️ Credenziali non valide.</p>
+        </div>
+
+        <div th:if="${param.logout}" class="login-success">
+            <p>✅ Logout eseguito con successo.</p>
         </div>
     </form>
-	<form th:action="@{/register}" method="get">
-		<button type="submit">Registrati</button>
-	</form>
+</main>
 </body>
-
 </html>

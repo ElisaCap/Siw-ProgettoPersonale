@@ -32,7 +32,20 @@
 				  				              th:value="${ed.id}" 
 				  				              th:text="${ed.data}">
 				  				      </option>
-				  					  <input type="hidden" th:field="${partecipazione.edizione}" value="${edizione}" />		
+				  					  <input type="hidden" th:field="${partecipazione.edizione}" value="${edizione}" />	
+									  
+									  
+				
+									  <label for="contrada">Contrada:</label>
+									  				  				  <select th:field="${partecipazione.contrada}">
+									  				  				      <option value="" disabled selected>Scegli una contrada</option>
+									  				  				      <option th:each="con : ${contrade}" 
+									  				  				              th:value="${con.id}" 
+									  				  				              th:text="${con.nome}">
+									  				  				      </option>
+									  				  					  <input type="hidden" th:field="${partecipazione.edizione}" value="${edizione}" />							  					  
+									  
+									  	
 				  
 		
 				<div>
