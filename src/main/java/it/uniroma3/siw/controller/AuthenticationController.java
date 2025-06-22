@@ -64,7 +64,7 @@ public class AuthenticationController {
 	
 	@GetMapping("/") 
 	public String index(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		/*Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication instanceof org.springframework.security.authentication.AnonymousAuthenticationToken) {
 	        return "paginaIntroduttiva.html";
 		}
@@ -74,7 +74,7 @@ public class AuthenticationController {
 			if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
 				return "admin/indexAdmin.html";
 			}
-		}
+		}*/
         return "paginaIntroduttiva.html";
 	}
 		

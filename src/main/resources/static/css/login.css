@@ -90,11 +90,16 @@
     text-decoration: underline;
 }
 
-.container {
-    max-width: 800px;
-    padding: 20px;
-    text-align: center;
-}
+
+
+
+
+
+
+
+
+
+
 
 
 .container {
@@ -104,7 +109,7 @@
 }
 
 .pagIntBox {
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .pagInt {
@@ -120,11 +125,84 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.pagInt:hover {
+#logout:hover {
     background-color: #FF7043;
-    transform: translateY(-2px);
+    transform: translateY(-0.1px);
     cursor: pointer;
 }
+#tastoHome:hover {
+    background-color: #FF7043;
+    transform: translateY(-0,1px);
+    cursor: pointer;
+}
+#tastoLogin:hover {
+    background-color: #FF7043;
+    transform: translateY(-0,1px);
+    cursor: pointer;
+}
+
+.btn{
+	padding: 16px 24px;
+	   font-size: 1.125rem;
+	   border-radius: 8px;
+	   border: 2px solid #D84315;
+	   background-color:  #FFF3E0;
+	   color: #5D2600;
+	   text-decoration: none;
+	   font-weight: 600;
+	   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	   transition: background-color 0.3s ease, transform 0.2s ease;
+	  
+
+   }
+.btn:hover{
+	background-color: #FF7043;
+	   transform: translateY(-0,1px);
+	   cursor: pointer;
+}
+
+/* Barra arancione in alto */
+.top-bar {
+    background: linear-gradient(to right, #ff9900, #ff6600);
+    color: white;
+    height: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+
+/* Contenitore per login/logout/nome */
+.user-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Stile per i bottoni */
+.btn {
+    background-color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Evita che il contenuto venga nascosto dalla barra fissa */
+.container {
+    padding-top: 80px;
+}
+
+
 
 
 
@@ -136,7 +214,6 @@ body {
 	    display: flex;
 	    justify-content: center;
 	    align-items: center;
-	    height: 100vh;
     background-image: url('/sfondo.jpg'); /* ← con lo slash iniziale */
     background-size: cover;
     background-position: center;
@@ -144,6 +221,7 @@ body {
     background-attachment: fixed;
 	
 }
+
 
 
 /* Stile per titolo e bottone con classe success */
@@ -202,6 +280,44 @@ body.success {
     max-width: 800px;
     padding: 20px;
     text-align: center;
+}
+
+
+#tastoHome {
+  position: relative;
+  top: 500px;
+  right: 80px;
+  margin:70px;
+  transform: translate(50%, -900%);
+}
+
+#tastoLogin {
+  position: absolute;
+  top: 20px;
+  right:65px;
+}
+#scrittaInt {
+  position: relative;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 30%); /* centra rispetto al proprio centro */
+  font-size: 32px; /* Usa font-size, non size */
+  text-align: center;
+}
+#tastoLogout{
+	position: absolute;
+	margin-top:10px;
+	top: 20px;
+	  right:65px;
+	height:30px;
+}
+
+#autName{
+	size:20px;
+	position: absolute;
+	top: 0px;
+	right:110px;
+	height:60px;
 }
 
 

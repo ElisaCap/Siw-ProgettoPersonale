@@ -2,11 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<link rel="stylesheet" href="/style2.css">
+	<link rel="stylesheet" href="/css/cavallo.css">
 	<title>Edizione</title>
 </head>
 
 <body>
+	<!-- BARRA SUPERIORE -->
+		<div class="top-bar">
+		  <div class="logo-text">Palio di Siena</div>
+
+		  <div class="user-controls">
+		    <div sec:authorize="isAuthenticated()">
+		      <span class="user-name" th:text="${#authentication.name}">Utente</span>
+		      <form th:action="@{/logout}" method="post" style="display: inline;">
+		        <button type="submit" class="btn">Logout</button>
+		      </form>
+		    </div>
+		    <div sec:authorize="!isAuthenticated()">
+		      <form th:action="@{/login}" method="get" style="display: inline;">
+		        <button type="submit" class="btn">Login</button>
+		      </form>
+		    </div>
+		  </div>
+		</div>
 	<div th:if="${edizione}">
 		<h1 class="uno">Dati edizione</h1>
 		<a class="box">
@@ -29,7 +47,9 @@
 		                       onsubmit="return confirm('Sei sicuro di voler eliminare questo fantino?');">
 		                     <button type="submit">Elimina</button>
 		                 </form>
-		
+		<form th:action="@{/insPartecipazione/{id}(id=${edizione.id})}" method="get">
+			<button type="submit">Ins Partecipazione</button>
+		</form>
 	</div>
 	<div th:unless="${edizione}">
 		<p>edizione non trovata</p>

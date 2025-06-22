@@ -2,26 +2,47 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="it">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" th:href="@{/css/login.css}" />
-    <title>Benvenuto</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Benvenuto</title>
+  <link rel="stylesheet" th:href="@{/css/paginaIntroduttiva.css}" />
 </head>
 
 <body>
-    <main class="container">
-        <h1 class="pagInt">
-            Benvenuto! In questo sito potrai trovare numerose informazioni
-            sulle ultime edizioni del Palio di Siena.<br />
-            Se vuoi continuare, effettua il login.
-        </h1>
 
-        <div class="pagIntBox">
-            <form th:action="@{/login}" method="get">
-                <button type="submit" class="pagInt">Login</button>
-            </form>
-        </div>
-    </main>
+  <!-- Barra superiore -->
+  <header class="top-bar">
+    <div class="logo-text">Palio di Siena</div>
+
+    <div class="user-controls">
+      <div sec:authorize="isAuthenticated()">
+        <span class="user-name" th:text="${#authentication.name}"></span>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+          <button class="btn" type="submit">Logout</button>
+        </form>
+      </div>
+
+      <div sec:authorize="!isAuthenticated()">
+        <form th:action="@{/login}" method="get" style="display: inline;">
+          <button class="btn" type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Contenuto principale -->
+  <main class="container">
+    <h1 id="scrittaInt">
+      Benvenuto! In questo sito potrai trovare numerose informazioni
+      sulle ultime edizioni del Palio di Siena.
+    </h1>
+
+    <form th:action="@{/home}" method="get">
+      <button type="submit" class="btn">Vai alla home</button>
+    </form>
+  </main>
+
 </body>
 
 </html>

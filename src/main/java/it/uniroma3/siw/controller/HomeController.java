@@ -32,7 +32,7 @@ public class HomeController {
 	private ElementoClassificaService elementoClassificaService;
 	private boolean generati=false;
 
-	@PreAuthorize("isAuthenticated()")
+	//@PreAuthorize("isAuthenticated()")
 	@GetMapping("/home")
 	public String home(Model model) {
 		 if(this.generati==false) {
@@ -54,7 +54,7 @@ this.generati=true;
 	  
 	    return "homepage.html";
 	}
-	@PreAuthorize("isAuthenticated()")
+	//@PreAuthorize("isAuthenticated()")
 	@GetMapping("/visualizza")
 	public String trova(Model model) {
 		return "cavallo/trovacavallo.html";

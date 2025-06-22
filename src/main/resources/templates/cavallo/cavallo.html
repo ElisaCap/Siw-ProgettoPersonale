@@ -1,50 +1,69 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="it">
 
 <head>
-	<link rel="stylesheet" href="/style2.css">
-	<title>Cavallo</title>
+  <meta charset="UTF-8" />
+  <title>Dettagli Cavallo</title>
+  <link rel="stylesheet" href="/css/cavallo.css" />
 </head>
 
 <body>
-	<div th:if="${cavallo}">
-		<h1 class="uno">Dati cavallo</h1>
-		<a class="box">
-		<p class="definizione">Id cavallo</p>
-		<p class="nome" th:text="${cavallo.id}"></p>
-		</a>
-		<a class="box">
-		<p class="definizione">Nome cavallo</p>
-		<p class="nome" th:text="${cavallo.nome}">
-		</p>
-		</a>
-		<a class="box">
-		<p class="definizione">Razza cavallo</p>
-		<p class="nome" th:text="${cavallo.razza}"></p>
-		</a>		
-		<a class="box">
-		<p class="definizione">Foto cavallo:</p>
-		<div>
-			<img width="30%" th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" />
-		
-		</div>
-		</a>
-		
-		<form th:action="@{/edizioniCavallo/{id}(id=${cavallo.id})}" method="get">
-		
-			<button type="submit">
-						vedi edizioni
-					</button>
-		</form>
-	
-		
-		
-	</div>
-	<div th:unless="${cavallo}">
-		<p>cavallo non trovato</p>
-	</div>
-	
-	
+  <!-- BARRA SUPERIORE -->
+  <div class="top-bar">
+    <div class="logo-text">Palio di Siena</div>
+    <div class="user-controls">
+      <div sec:authorize="isAuthenticated()">
+        <span class="user-name" th:text="${#authentication.name}">Utente</span>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+          <button type="submit" class="btn">Logout</button>
+        </form>
+      </div>
+      <div sec:authorize="!isAuthenticated()">
+        <form th:action="@{/login}" method="get" style="display: inline;">
+          <button type="submit" class="btn">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENUTO PRINCIPALE -->
+  <div th:if="${cavallo}">
+    <h1 class="uno">Dati Cavallo</h1>
+
+    <a class="box">
+      <p class="definizione">Id Cavallo</p>
+      <p class="nome" th:text="${cavallo.id}"></p>
+    </a>
+
+    <a class="box">
+      <p class="definizione">Nome Cavallo</p>
+      <p class="nome" th:text="${cavallo.nome}"></p>
+    </a>
+
+    <a class="box">
+      <p class="definizione">Razza Cavallo</p>
+      <p class="nome" th:text="${cavallo.razza}"></p>
+    </a>
+
+    <a class="box">
+      <p class="definizione">Foto Cavallo</p>
+      <div>
+        <img th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" alt="Foto cavallo" />
+      </div>
+    </a>
+
+    <form th:action="@{/edizioniCavallo/{id}(id=${cavallo.id})}" method="get">
+      <button type="submit" class="btn">Vedi edizioni</button>
+    </form>
+	<form th:action="@{/partCavallo/{id}(id=${cavallo.id})}" method="get">
+	      <button type="submit" class="btn">Vedi partecipazioni</button>
+	    </form>
+  </div>
+
+  <div th:unless="${cavallo}">
+    <p class="uno">Cavallo non trovato</p>
+  </div>
+
 </body>
 
 </html>

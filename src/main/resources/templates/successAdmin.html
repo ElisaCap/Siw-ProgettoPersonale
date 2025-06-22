@@ -7,18 +7,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Success</title>
-    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <link rel="stylesheet" th:href="@{/css/paginaIntroduttiva.css}" />
 </head>
 
 <body class="success">
-	<div sec:authorize="isAuthenticated()">
-	           <span th:text="${#authentication.name}"></span>
-	           <a href="/logout">Logout</a>
-	       </div>
+	<!-- BARRA SUPERIORE -->
+		<div class="top-bar">
+		  <div class="logo-text">Palio di Siena</div>
+
+		  <div class="user-controls">
+		    <div sec:authorize="isAuthenticated()">
+		      <span class="user-name" th:text="${#authentication.name}">Utente</span>
+		      <form th:action="@{/logout}" method="post" style="display: inline;">
+		        <button type="submit" class="btn">Logout</button>
+		      </form>
+		    </div>
+		    <div sec:authorize="!isAuthenticated()">
+		      <form th:action="@{/login}" method="get" style="display: inline;">
+		        <button type="submit" class="btn">Login</button>
+		      </form>
+		    </div>
+		  </div>
+		</div>
     <main class="container">
         <h1 class="success">Bentornata Elisa!</h1>
         <form th:action="@{/home}" method="get">
-            <button type="submit" class="success">Vai al sito</button>
+            <button type="submit" class="btn">Vai al sito</button>
         </form>
     </main>
 </body>

@@ -25,9 +25,10 @@
 	</div>
 	
     <div><a href="/">Home</a></div>
-    <h1>Aggiungi un Cavallo</h1>
-    <form th:action="@{/insCavallo}" method="post" th:object="${cavallo}" enctype="multipart/form-data">
-        <div>
+    <h1>Modifica Cavallo</h1>
+    <form th:action="@{/saveCavallo}" method="post" th:object="${cavallo}" enctype="multipart/form-data">
+		<input type="hidden" th:field="*{id}" value="${id}" />
+<div>
             Nome: <span><input required type="text" th:field="*{nome}" /></span>
             <span th:text="${msgErrTitle}">Campo Obbligatorio</span>
         </div>

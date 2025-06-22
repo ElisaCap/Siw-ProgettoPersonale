@@ -1,26 +1,66 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="it">
 
 <head>
-	<link rel="stylesheet" href="style2.css">
-	<title>Homepage Palio di Siena</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Homepage Palio di Siena</title>
+  <link rel="stylesheet" href="/css/home.css" />
 </head>
 
 <body>
-	<h1 class="uno">Cosa vuoi fare?</h1>
-	<box>
-		<form th:action="@{/visualizza}" method="get">
-		
-			<button type="submit">Visualizzare Informazioni</button>
-		
-		</form>
-		<form th:action="@{/inserisci}" method="get">
-			
-				<button type="submit">Inserire Informazioni</button>
-			
-			</form>
-	</box>
-	
+
+  <!-- Barra superiore fissa -->
+  <header class="top-bar">
+    <div class="logo-text">Palio di Siena</div>
+
+    <div class="user-controls">
+      <div sec:authorize="isAuthenticated()">
+        <span class="user-name" th:text="${#authentication.name}"></span>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+          <button class="btn" type="submit">Logout</button>
+        </form>
+      </div>
+
+      <div sec:authorize="!isAuthenticated()">
+        <form th:action="@{/login}" method="get" style="display: inline;">
+          <button class="btn" type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenuto principale -->
+  <main class="content">
+
+    <h1 class="uno">Trova Cavallo per ID</h1>
+
+    <form th:action="@{/cavalli/{id}}" method="get" class="form-box">
+      <label for="id">ID Cavallo:</label>
+      <input type="number" name="id" id="id" required />
+      <button type="submit">Cerca</button>
+    </form>
+
+    <form th:action="@{/cavalli/cercatutti}" method="get" class="form-box">
+      <button type="submit">Mostra tutti</button>
+    </form>
+
+    <form th:action="@{/contrade}" method="get" class="form-box">
+      <button type="submit">Mostra tutte</button>
+    </form>
+
+    <form th:action="@{/fantini/cercatutti}" method="get" class="form-box">
+      <button type="submit">Mostra tutti i fantini</button>
+    </form>
+
+    <form th:action="@{/edizioni}" method="get" class="form-box">
+      <button type="submit">Mostra tutte le edizioni</button>
+    </form>
+
+  </main>
+
 </body>
 
 </html>

@@ -1,0 +1,105 @@
+/* Corpo e sfondo */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #FFF3E0 url('/sfondo.jpg') no-repeat center center fixed;
+  background-size: cover;
+  padding-top: 70px; /* spazio per la barra fissa */
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+/* Barra superiore */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(to right, #ff9900, #ff6600);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.user-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-name {
+  font-weight: bold;
+  color: white;
+}
+
+/* Bottoni barra */
+.btn {
+  background-color: white;
+  border: none;
+  height: 35px;
+   color: #5D2600;
+   width: auto;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+   line-height: 1.2;
+}
+
+.btn:hover {
+  background-color: #ffe0b2;
+}
+/* Contenuto principale */
+.container {
+  max-width: 800px;
+  margin: 100px auto 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+  background-color: rgba(255, 243, 224, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.pagInt {
+  padding: 16px 32px;
+  font-size: 1.125rem;
+  border-radius: 8px;
+  border: 2px solid #D84315;
+  background-color: #FFF3E0;
+  color: #5D2600;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 20px;
+}
+
+.pagInt:hover {
+  background-color: #FF7043;
+  transform: translateY(-2px);
+  cursor:none ;
+}
+
+#scrittaInt {
+  font-size: 2rem;
+  color: #4E342E;
+  margin-bottom: 30px;
+}
+
+/* Responsive fix per dispositivi stretti */
+
+

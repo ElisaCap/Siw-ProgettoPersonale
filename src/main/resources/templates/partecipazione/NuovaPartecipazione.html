@@ -26,14 +26,15 @@
 					  					  <input type="hidden" th:field="${partecipazione.fantino}" value="${fantino}" />
 				  </select>
 				  <label for="edizione">Edizione:</label>
-				  				  <select th:field="${partecipazione.edizione}">
+				  <input type="hidden" th:field="${partecipazione.edizione}" th:value="${edizione}">
+			<!-- 				  <select th:field="${partecipazione.edizione}">
 				  				      <option value="" disabled selected>Scegli un'edizione</option>
 				  				      <option th:each="ed : ${edizioni}" 
 				  				              th:value="${ed.id}" 
 				  				              th:text="${ed.data}">
 				  				      </option>
 				  					  <input type="hidden" th:field="${partecipazione.edizione}" value="${edizione}" />	
-									  
+									  -->	 	  
 									  
 				
 									  <label for="contrada">Contrada:</label>

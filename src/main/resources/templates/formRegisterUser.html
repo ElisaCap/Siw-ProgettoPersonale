@@ -9,8 +9,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 
 </head>
 <body>
+	<main class="login-container">
+
     <form th:action="@{/register}" th:object="${user}" method="post">
-        <label for="name">Username:</label>
+        <label  for="name">Username:</label>
         <input type="text" id="name" th:field="*{name}" /><br />
 
         <label for="email">Email:</label>
@@ -23,6 +25,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
         <input type="password" id="password" th:field="*{password}" /><br />
 
         <button type="submit">Register</button>
+		</form>
+	</main>
     </form>
 </body>
 </html>

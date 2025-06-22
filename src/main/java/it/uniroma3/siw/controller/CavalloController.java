@@ -1,6 +1,9 @@
 package it.uniroma3.siw.controller;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -13,13 +16,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Cavallo;
+import it.uniroma3.siw.repository.CavalloRepository;
 import it.uniroma3.siw.service.CavalloService;
 
 @Controller
 public class CavalloController {
 
+    private final CavalloRepository cavalloRepository;
+
     @Autowired
     private CavalloService cavalloService;
+
+    CavalloController(CavalloRepository cavalloRepository) {
+        this.cavalloRepository = cavalloRepository;
+    }
 
     @GetMapping("/insCavallo")
     public String insCavallo1(Model model) {
@@ -77,12 +87,27 @@ public class CavalloController {
     }
     
     @GetMapping("/cavalli/delete/{id}")
-	  public String eliminaFantino(@PathVariable Long id, Model model) {
+	  public String eliminaCavallo(@PathVariable Long id, Model model) {
 	      cavalloService.deleteById(id);
-	      model.addAttribute("fantini", cavalloService.getAll());
+	      model.addAttribute("cavalli", cavalloService.getAll());
 	      return "cavallo/cavalli.html"; // oppure redirect a cercatutti
 	  }
     
+    @GetMapping("/cavalli/modifica/{id}")
+    public String modifica(@PathVariable Long id,Model model) {
+    	Cavallo cavallo=this.cavalloService.getCavalloById(id);
+    	model.addAttribute("cavallo",cavallo);
+    	model.addAttribute("id",id);
+    	return "cavallo/modificaCavallo.html";
+    }
+    @PostMapping("/saveCavallo")
+    public String modificaCavallo(@ModelAttribute("cavallo")Cavallo cavallo,Model model) {
+    	this.cavalloService.save(cavallo);
+    	List<Cavallo>cavalli=(List)this.cavalloService.getAll();
+        cavalli.sort(Comparator.comparing(Cavallo::getNome));
+    	model.addAttribute("cavalli",cavalli);
+    	return "cavallo/cavalli.html";
+    }
     
     
     

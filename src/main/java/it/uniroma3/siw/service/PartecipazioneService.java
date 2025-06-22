@@ -107,7 +107,9 @@ public void save(Partecipazione partecipazione) {
 
 
 
-
+public Iterable<Partecipazione>getByCavallo(Cavallo cavallo){
+	return this.partecipazioneRepository.findByCavallo(cavallo);
+}
 
 
 

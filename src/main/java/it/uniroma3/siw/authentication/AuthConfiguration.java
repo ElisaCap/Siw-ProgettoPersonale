@@ -83,7 +83,10 @@ private CredentialsRepository credentialsRepository;
         http
             .authorizeHttpRequests(auth -> auth
             		.requestMatchers("/","/paginaIntroduttiva.html",
-            			    "/login", "/register", "/logout",
+            			    "/login", "/register","/insCavallo", "/logout",
+            			    "/cavallo/**","/edizione/**", "/classifica/**","/contrade/**",
+            			    "/home","/homepage.html","/visualizza",
+            			    "/cavallo/trovacavallo.html","/cavalli/cercatutti",
             			    "/css/**", "/js/**", "/images/**", "/sfondo.jpg", "/webjars/**","/immagginicontrade/**"
             			).permitAll()
                 .anyRequest().authenticated()

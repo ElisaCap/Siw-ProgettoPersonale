@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import it.uniroma3.siw.model.Cavallo;
+import it.uniroma3.siw.model.Edizione;
 import it.uniroma3.siw.model.Partecipazione;
+import it.uniroma3.siw.repository.EdizioneRepository;
 import it.uniroma3.siw.service.CavalloService;
 import it.uniroma3.siw.service.ContradaService;
 import it.uniroma3.siw.service.EdizioneService;
@@ -18,6 +21,8 @@ import it.uniroma3.siw.service.PartecipazioneService;
 
 @Controller
 public class PartecipazioneController {
+
+    private final EdizioneRepository edizioneRepository;
 	@Autowired
 	private CavalloService cavalloService;
 	@Autowired
@@ -28,6 +33,10 @@ public class PartecipazioneController {
 	private PartecipazioneService partecipazioneService;
 	@Autowired
 	private ContradaService contradaService;
+
+    PartecipazioneController(EdizioneRepository edizioneRepository) {
+        this.edizioneRepository = edizioneRepository;
+    }
 	
  @GetMapping("/insPartecipazione")
  public String insPartecipazione(Model model) {
@@ -39,6 +48,9 @@ public class PartecipazioneController {
 
 	 return "partecipazione/NuovaPartecipazione.html";
  }
+ 
+ 
+ 
 @PostMapping("/insPartecipazione")
 public String savePartecipazione(@ModelAttribute("partecipazione") Partecipazione partecipazione, Model model ) {
 	this.partecipazioneService.save(partecipazione);
@@ -50,6 +62,28 @@ public String eliminaFantino(@PathVariable Long id, Model model) {
     model.addAttribute("classifiche", partecipazioneService.getAll());
     return "partecipazione/partecipazioni.html"; // oppure redirect a cercatutti
 }
- 
+
+
+@GetMapping("/insPartecipazione/{id}")
+public String insPartecipazione(@PathVariable Long id,Model model) {
+Edizione edizione=	edizioneRepository.findById(id).get();
+model.addAttribute(edizione);
+model.addAttribute("partecipazione",new Partecipazione());
+model.addAttribute("cavalli",cavalloService.getAll());
+model.addAttribute("fantini", fantinoService.getAll());
+model.addAttribute("contrade", contradaService.getAll());
+return "partecipazione/NuovaPartecipazione.html";
+}
+@GetMapping("/partCavallo/{id}")
+public String partCavallo(@PathVariable Long id,Model model) {
+	Cavallo cavallo=cavalloService.getCavalloById(id);
+	model.addAttribute("partecipazioni",this.partecipazioneService.getByCavallo(cavallo));
+	return "partecipazione/partecipazioni.html";
+}
+
+
+
+
+
 	
 }

@@ -2,10 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <link rel="stylesheet" href="/style2.css">
+    <link rel="stylesheet" href="/css/cavallo.css">
     <title>Fantini</title>
 </head>
 <body>
+	<!-- BARRA SUPERIORE -->
+		<div class="top-bar">
+		  <div class="logo-text">Palio di Siena</div>
+
+		  <div class="user-controls">
+		    <div sec:authorize="isAuthenticated()">
+		      <span class="user-name" th:text="${#authentication.name}">Utente</span>
+		      <form th:action="@{/logout}" method="post" style="display: inline;">
+		        <button type="submit" class="btn">Logout</button>
+		      </form>
+		    </div>
+		    <div sec:authorize="!isAuthenticated()">
+		      <form th:action="@{/login}" method="get" style="display: inline;">
+		        <button type="submit" class="btn">Login</button>
+		      </form>
+		    </div>
+		  </div>
+		</div>
+	
+	
     <h1 class="titolo">Ecco tutti i fantini registrati</h1>
 
     <table class="elenco">
@@ -37,6 +57,9 @@
                           onsubmit="return confirm('Sei sicuro di voler eliminare questo fantino?');">
                         <button type="submit">Elimina</button>
                     </form>
+					<form th:action="@{/fantini/modifica/{id}(id=${fantino.id})}" method="get">
+					             <button type="submit">Modifica</button>
+					</form>
                 </div>
             </td>
         </tr>

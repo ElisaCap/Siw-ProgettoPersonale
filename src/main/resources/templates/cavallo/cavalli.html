@@ -1,49 +1,85 @@
 <!DOCTYPE html>
-
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-	<link rel="stylesheet" href="/css/cavallo.css">
-	<title>Cavallo</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/cavallo.css">
+  <title>Cavalli - Palio di Siena</title>
 </head>
 
 <body>
-	<h1 class="titolo" id="titolo-cavalli">Ecco tutti i cavalli registrati</h1>
 
-	<table class="elenco" id="tabella-cavalli">
-	  <thead>
-	    <tr class="riga-intestazione">
-	      <th class="col-id">Id</th>
-	      <th class="col-nome">Nome</th>
-	      <th class="col-razza">Razza</th>
-	      <th class="col-foto">Foto</th>
-	      <th class="col-info">Info</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <tr class="riga-cavallo" th:each="cavallo : ${cavalli}">
-	      <td class="col-id" th:text="${cavallo.id}"></td>
-	      <td class="col-nome" th:text="${cavallo.nome}"></td>
-	      <td class="col-razza" th:text="${cavallo.razza}"></td>
-	      <td class="col-foto">
-	        <img class="foto-cavallo" th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" alt="immagine cavallo" width="100" />
-	      </td>
-	      <td class="col-info">
-	        <form class="form-info" th:action="@{/cavalli/{id}(id=${cavallo.id})}" method="get">
-	          <button class="btn-info" type="submit">Vedi info</button>
-	        </form>
-	      </td>
-		  <form th:action="@{/cavalli/delete/{id}(id=${cavallo.id})}" method="get"
-		                         onsubmit="return confirm('Sei sicuro di voler eliminare questo cavallo?');">
-		                       <button type="submit">Elimina</button>
-		                   </form>
-		  
-	    </tr>
-	  </tbody>
-	</table>
+  <!-- BARRA SUPERIORE -->
+  <div class="top-bar">
+    <div class="logo-text">Palio di Siena</div>
+	<form th:action="@{/home}" method="get">
+		<button class="btn" type="submit">home</button>
+	</form>
+    <div class="user-controls">
+      <div sec:authorize="isAuthenticated()">
+        <span class="user-name" th:text="${#authentication.name}">Utente</span>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+          <button type="submit" class="btn">Logout</button>
+        </form>
+      </div>
+      <div sec:authorize="!isAuthenticated()">
+        <form th:action="@{/login}" method="get" style="display: inline;">
+          <button type="submit" class="btn">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
-	
+  <!-- TITOLO -->
+  <h1 class="titolo">Ecco tutti i cavalli registrati</h1>
+
+  <!-- TABELLA -->
+  <table class="elenco">
+    <thead>
+      <tr class="riga-intestazione">
+        <th class="col-id">Id</th>
+        <th class="col-nome">Nome</th>
+        <th class="col-razza">Razza</th>
+        <th class="col-foto">Foto</th>
+        <th class="col-info">Info</th>
+        <th sec:authorize="hasRole('ADMIN')">Azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="riga-cavallo" th:each="cavallo : ${cavalli}">
+        <td class="col-id" th:text="${cavallo.id}"></td>
+        <td class="col-nome" th:text="${cavallo.nome}"></td>
+        <td class="col-razza" th:text="${cavallo.razza}"></td>
+        <td class="col-foto">
+          <img class="foto-cavallo" th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" alt="immagine cavallo" />
+        </td>
+        <td class="col-info">
+          <form th:action="@{/cavalli/{id}(id=${cavallo.id})}" method="get">
+            <button class="btn-info" type="submit">Vedi info</button>
+          </form>
+        </td>
+        <td sec:authorize="hasRole('ADMIN')">
+          <form th:action="@{/cavalli/delete/{id}(id=${cavallo.id})}" method="get"
+            onsubmit="return confirm('Sei sicuro di voler eliminare questo cavallo?');">
+            <button type="submit">Elimina</button>
+          </form>
+        </td>
+		<td sec:authorize="hasRole('ADMIN')">
+		          <form th:action="@{/cavalli/modifica/{id}(id=${cavallo.id})}" method="get">
+		            <button type="submit">Modifica</button>
+		          </form>
+		        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- BOTTONE AGGIUNGI -->
+  <div sec:authorize="hasRole('ADMIN')">
+    <form th:action="@{/insCavallo}" method="get">
+      <button type="submit">+</button>
+    </form>
+  </div>
 
 </body>
-
 </html>

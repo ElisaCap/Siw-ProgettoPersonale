@@ -69,6 +69,7 @@ public String insEdizione(Model model) {
       return "classifica/insEdizione.html";
 }
 
+
 @PostMapping("/saveEdizioneClassifica")
 public String saveEdizioneClassifica(@RequestParam("edizioneId") Long edizioneId, Model model) {
     Optional<Edizione> edizioneOpt = edizioneRepository.findById(edizioneId);
@@ -96,15 +97,10 @@ public String saveEdizioneClassifica(@RequestParam("edizioneId") Long edizioneId
 }
 
 
-/*
-@GetMapping("/insNumContrade")
-public String insNumContrade(@RequestParam("edizioneId") Long edizioneId,Model model) {
-	model.addAttribute("classifica",classificaCorrente);
-	return "classifica/insNumContrade.html";
-}*/
 
 @PostMapping("/saveNumContrade")
-public String setNumContrade(@ModelAttribute("classifica") Classifica classifica,
+public String setNumContrade(
+		@RequestParam("edizioneId") Long edizioneId,@ModelAttribute("classifica") Classifica classifica,
                              @RequestParam("num") int num,
                              Model model) {
 
@@ -118,47 +114,13 @@ public String setNumContrade(@ModelAttribute("classifica") Classifica classifica
     classifica.setElementiClassifica(elementi);
 
     model.addAttribute("classifica", classifica);
-    model.addAttribute("partecipazioni", partecipazioneRepository.findAll());
+    		model.addAttribute("partecipazioni", partecipazioneRepository.findByEdizioneId(edizioneId));
     model.addAttribute("num", num);
     return "classifica/insClassifica.html";
 }
-@PostMapping("/insClassifica")
-public String insClassifica(@RequestParam("edizioneId") Long edizioneId,
-                            @RequestParam("numContrade") int numContrade,
-                            Model model) {
 
-    Edizione edizione = edizioneRepository.findById(edizioneId).orElse(null);
-    if (edizione == null) return "errore";
-    
-    
-    model.addAttribute("partecipazioni", partecipazioneRepository.findByEdizioneId(edizioneId));
 
-    // Cerca classifica esistente o crea nuova
-    Classifica classifica = classificaRepository.findByEdizione(edizione)
-        .orElseGet(() -> {
-            Classifica nuova = new Classifica();
-            nuova.setEdizione(edizione);
-            return classificaRepository.save(nuova); // salva subito!
-        });
 
-    // Solo se non già presenti
-    if (classifica.getElementiClassifica() == null || classifica.getElementiClassifica().isEmpty()) {
-        List<ElementoClassifica> elementi = new ArrayList<>();
-        for (int i = 0; i < numContrade; i++) {
-            ElementoClassifica el = new ElementoClassifica();
-            el.setPosizione(i + 1);
-            el.setClassifica(classifica); // relaziona
-            elementi.add(el);
-        }
-        classifica.setElementiClassifica(elementi);
-        classificaRepository.save(classifica); // 🔁 salva Classifica con gli elementi
-    }
-
-    model.addAttribute("classifica", classifica);
-   
-
-    return "classifica/insClassifica.html";
-}
 
 
 @Autowired

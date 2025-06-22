@@ -22,10 +22,11 @@
             <label>Partecipazione:</label>
             <select th:field="*{elementiClassifica[__${iterStat.index}__].partecipazione.id}">
                 <option value="" disabled selected>Scegli una partecipazione</option>
-                <option th:each="ca : ${partecipazioni}" 
-                        th:value="${ca.id}" 
-                        th:text="${ca.edizione.data}">
-                </option>
+				<option th:each="ca : ${partecipazioni}" 
+				        th:value="${ca.id}" 
+				        th:text="${ca.fantino.nome + ' - ' + ca.contrada.nome+' - '+ca.edizione.data }">
+				</option>
+
             </select>
         </fieldset>
 

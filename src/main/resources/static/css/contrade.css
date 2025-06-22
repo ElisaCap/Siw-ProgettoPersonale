@@ -1,0 +1,284 @@
+
+h1.uno {
+	font-family: 'Impact', sans-serif;
+	color: #b22222;
+	background-color: #ffe4f0;
+	border: 3px dotted #ba55d3;
+	padding: 20px;
+	border-radius: 50px;
+	margin-bottom: 30px;
+	
+	box-shadow: 2px 2px 10px #d8bfd8;
+}
+
+form {
+	background-color: #fff0f5;
+	padding: 25px;
+	border-radius: 12px;
+	display: inline-block;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+label,
+input,
+button {
+	display: block;
+	margin: 10px auto;
+	font-size: 16px;
+}
+
+input {
+	padding: 8px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	width: 200px;
+}
+
+button {
+	padding: 10px 20px;
+	background-color: #d87093;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #c71585;
+}
+
+img.cavallo {
+	width: 300px;
+	margin-top: 30px;
+	border-radius: 15px;
+	border: 2px solid #db7093;
+}
+
+p.nome {
+	size: 40px 40px;
+	font-size: 40px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	border: #ccc groove;
+	color: black;
+	background-color: #fff0f5;
+	text-align: center;
+	box-align: center;
+	display: block;
+	margin: 0;
+}
+
+
+
+p.definizione {
+	size: 40px 40px;
+	height: auto;
+	font-size: 30px;
+	background-color: black;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	border: #ccc groove;
+	color: rgb(128, 255, 255);
+	text-align: center;
+	box-align: center;
+	padding: 20px;
+	display: block;
+	margin: 0;
+}
+
+.box{
+	background-color: rgb(242, 230, 179);
+	padding: 20px  ;
+	margin-bottom: 30px;
+	height: auto;
+	margin: auto;
+	display: table;
+	transition: transform 0.2s ease;
+	  display: block;
+	border: 5px solid black;
+	border-color:black;
+	 border-radius: 20px;
+	
+}
+table.elenco {
+  border-collapse: separate;              /* Permette border-radius */
+  border-spacing: 0;                      /* Nessuno spazio tra celle */
+  width: 80%;
+  margin: 2rem auto;
+  background: linear-gradient(to right, #ff8080, #ffff80);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Effetto ombra */
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+.elenco th,
+.elenco td {
+  padding: 1rem;
+  text-align: center;
+  border: 3px solid black;
+  background-color: rgba(255, 255, 255, 0.3); /* sfondo semi-trasparente per le celle */
+}
+
+/* Intestazioni in grassetto */
+.elenco th {
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Arrotonda solo gli angoli esterni */
+.elenco tr:first-child td:first-child {
+  border-top-left-radius: 20px;
+}
+.elenco tr:first-child td:last-child {
+  border-top-right-radius: 20px;
+}
+.elenco tr:last-child td:first-child {
+  border-bottom-left-radius: 20px;
+}
+.elenco tr:last-child td:last-child {
+  border-bottom-right-radius: 20px;
+}
+
+
+h1.titolo{
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: #b22222;
+	border: blueviolet ,inset;
+ border-radius: 25px;
+ padding: 25px;
+ background: linear-gradient(to left, rgb(128, 255, 255),rgb(0, 128, 255)  );
+}
+
+
+
+
+
+
+
+
+
+#riga-contrada-1 { /* Aquila */
+  background: linear-gradient(to right, #FFD700, #000000, #40E0D0);
+  color: white;
+}
+
+#riga-contrada-2 { /* Bruco */
+  background: linear-gradient(to right, #FFFF00, #008000, #40E0D0);
+  color: black;
+}
+
+#riga-contrada-3 { /* Chiocciola */
+  background: linear-gradient(to right, #FFD700, #FF0000, #40E0D0);
+  color: white;
+}
+
+#riga-contrada-4 { /* Civetta */
+  background: linear-gradient(to right, #FF0000, #000000, #FFFFFF);
+  color: white;
+}
+
+#riga-contrada-5 { /* Drago */
+  background: linear-gradient(to right, #D8BFD8, #008000, #FFFF00);
+  color: black;
+}
+
+#riga-contrada-6 { /* Giraffa */
+  background: linear-gradient(to right, #FFFFFF, #FF0000);
+  color: black;
+}
+
+#riga-contrada-7 { /* Istrice */
+  background: linear-gradient(to right, #FFFFFF, #FF0000, #000000, #0000FF);
+  color: white;
+}
+
+#riga-contrada-8 { /* Leocorno */
+  background: linear-gradient(to right, #FFFFFF, #FFA500, #0000FF);
+  color: black;
+}
+
+#riga-contrada-9 { /* Lupa */
+  background: linear-gradient(to right, #FFFFFF, #000000, #FFA500);
+  color: white;
+}
+
+#riga-contrada-10 { /* Nicchio */
+  background: linear-gradient(to right, #0000FF, #FF0000, #FFFF00);
+  color: white;
+}
+
+#riga-contrada-11 { /* Oca */
+  background: linear-gradient(to right, #FFFFFF, #008000);
+  color: black;
+}
+
+#riga-contrada-12 { /* Onda */
+  background: linear-gradient(to right, #0000FF, #FFFFFF);
+  color: black;
+}
+
+#riga-contrada-13 { /* Pantera */
+  background: linear-gradient(to right, #FF0000, #0000FF, #FFFFFF);
+  color: white;
+}
+
+#riga-contrada-14 { /* Selva */
+  background: linear-gradient(to right, #008000, #FF0000, #FFFFFF);
+  color: white;
+}
+
+#riga-contrada-15 { /* Tartuca */
+  background: linear-gradient(to right, #FFFF00, #000000);
+  color: black;
+}
+
+#riga-contrada-16 { /* Torre */
+  background: linear-gradient(to right, #DC143C, #FFFFFF, #0000FF);
+  color: white;
+}
+
+#riga-contrada-17 { /* Valdimontone */
+  background: linear-gradient(to right, #FFFFFF, #FF0000, #000000);
+  color: white;
+}
+
+body#id-1{
+	/*background:linear-gradient(to right, rgb(0, 0, 0), rgb(255, 255, 128), blue); ;*/
+	 background-image: url("/immagginicontrade/aquilacolori.png"); 
+	 background-size: cover; /* per adattare l'immagine a tutto lo schermo */
+	    background-repeat: no-repeat;
+	    background-position:right ;
+}
+
+
+
+.contenitore{
+	display: flex;
+	  align-items: flex-start; /* o center per allineamento verticale centrato */
+	  gap: 20px; /* spazio tra immagine e testo */
+}
+
+
+
+a#id-1{
+	
+		size: 700px;
+		max-width: 100%;
+		  
+}
+
+
+
+
+p.contrada#id-1{
+	margin-top: 10px;
+	margin-left: 20px;
+	max-width: 60ch;
+	font-style: italic;
+	color:black;
+	border: 3px solid rgb(64, 0, 0);
+		padding: 20px;
+		border-radius: 50px;
+		background-color: white;
+display: flex;
+}

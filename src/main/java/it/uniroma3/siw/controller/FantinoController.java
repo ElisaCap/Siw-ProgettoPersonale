@@ -99,7 +99,19 @@ private FantinoService fantinoService;
 	      headers.setContentType(MediaType.IMAGE_JPEG); // oppure rileva il tipo dinamicamente
 	      return new ResponseEntity<>(fantino.getUrlImmagine(), headers, HttpStatus.OK);
 	  }
-
+    @GetMapping("/fantini/modifica/{id}")
+    public String modifica(@PathVariable Long id,Model model) {
+    	model.addAttribute("fantino",this.fantinoService.getByid(id));
+    	model.addAttribute("id",id);
+    	return "fantino/modificaFantino.html";
+    }
+    @PostMapping("/salvaFantino")
+    public String salvaFantino(@ModelAttribute("fantino")Fantino fantino,Model model) {
+    	this.fantinoService.save(fantino);
+    	model.addAttribute("fantini",this.fantinoService.getAll());
+    	return "fantino/fantini.html";
+    	
+    }
 	  
 	  
 	  

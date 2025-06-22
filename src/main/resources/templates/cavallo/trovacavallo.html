@@ -1,33 +1,33 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
-<head>
-	<link rel="stylesheet" href="style2.css">
-	<title>Cerca Cavallo</title>
-</head>
-
-<body>
-	<h1 class="uno">Trova Cavallo per ID</h1>
-	<form th:action="@{/cavalli/{id}}" method="get">
-		<label for="id">ID Cavallo:</label>
-		<input type="number" name="id" required>
-		<button type="submit">Cerca</button>
-	</form>
-	<form th:action="@{/cavalli/cercatutti}" method="get">
-		<button type="submit">mostra tutti</button>
-	</form>
+	<!DOCTYPE html>
+	<html xmlns:th="http://www.thymeleaf.org">
 	
-	<form th:action="@{/contrade}" method="get">
-		<button type="submit">mostra tutte</button>
-	</form>
+	<head>
+		<link rel="stylesheet" href="style2.css">
+		<title>Cerca Cavallo</title>
+	</head>
 	
-	<form th:action="@{/fantini/cercatutti}" method="get">
-			<button type="submit">mostra tutti i fantini</button>
+	<body>
+		<h1 class="uno">Trova Cavallo per ID</h1>
+		<form th:action="@{/cavalli/{id}}" method="get">
+			<label for="id">ID Cavallo:</label>
+			<input type="number" name="id" required>
+			<button type="submit">Cerca</button>
+		</form>
+		<form th:action="@{/cavalli/cercatutti}" method="get">
+			<button type="submit">mostra tutti</button>
+		</form>
+		
+		<form th:action="@{/contrade}" method="get">
+			<button type="submit">mostra tutte</button>
+		</form>
+		
+		<form th:action="@{/fantini/cercatutti}" method="get">
+				<button type="submit">mostra tutti i fantini</button>
 		</form>
 		<form th:action="@{/edizioni}" method="get">
 				<button type="submit">mostra tutte le edizioni</button>
-			</form>
-
-</body>
-
-</html>
+		</form>
+	
+	</body>
+	
+	</html>
