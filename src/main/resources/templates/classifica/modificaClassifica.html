@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Inserisci Classifica</title>
+</head>
+<body>
+<h1>Inserisci Classifica</h1>
+
+<form th:action="@{/saveClassifica}" th:object="${classifica}" method="post">
+	<input type="hidden" th:field="*{edizioneId}" />
+    <!-- Campo hidden per edizioneId, con nome semplice (non th:field) -->
+
+    <div th:each="elemento, iterStat : *{elementiClassifica}">
+        <fieldset>
+            <legend>Posizione <span th:text="${elemento.posizione}"></span></legend>
+
+            <!-- campo hidden posizione -->
+            <input type="hidden" th:field="*{elementiClassifica[__${iterStat.index}__].posizione}" />
+
+            <label>Partecipazione:</label>
+            <select th:field="*{elementiClassifica[__${iterStat.index}__].partecipazione.id}">
+                <option value="" disabled selected>Scegli una partecipazione</option>
+				<option th:each="ca : ${partecipazioni}" 
+				        th:value="${ca.id}" 
+				        th:text="${ca.fantino.nome + ' - ' + ca.contrada.nome+' - '+ca.edizione.data }">
+				</option>
+
+            </select>
+        </fieldset>
+
+    </div>
+
+    <button type="submit">Salva</button>
+</form>
+
+</body>
+</html>

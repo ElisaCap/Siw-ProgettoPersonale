@@ -19,8 +19,8 @@ import it.uniroma3.siw.repository.ClassificaRepository;
 public class ClassificaService {
 
     private final ElementoClassificaService elementoClassificaService;
-
-    private final ElementoClassificaRepository elementoClassificaRepository;
+@Autowired
+    private  ElementoClassificaRepository elementoClassificaRepository;
 
   
 
@@ -64,13 +64,15 @@ public void inserisciClassifica(Edizione ed)	{
 			
 		}
 	}
+	@Transactional
 public void save(Classifica classifica) {
 	this.classificaRepository.save(classifica);
 }
-
+	@Transactional
 public void deleteById(Long id) {
     this.classificaRepository.deleteById(id);
 }
+
 public Iterable<Classifica>getAll(){
 	return this.classificaRepository.findAll();
 }

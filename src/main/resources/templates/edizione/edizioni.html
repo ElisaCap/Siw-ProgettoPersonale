@@ -57,8 +57,7 @@
 				
 				<td ><img width="30%" th:src="${edizione.urlImmagine}" /></td> <!-- Terza colonna -->
 				<td>
-					<form  th:action="@{/edizione/{id}}" method="get">
-										<input type="hidden" name="id" th:value="${edizione.id}" />
+					<form  th:action="@{/edizione/{id}(id=${edizione.id})}" method="get">
 									<button type="submit">vedi info</td> <!-- Seconda colonna -->
 									</button></form>
 					
@@ -73,7 +72,13 @@
 			
 		
 	  </a>
-	
+	  
+	<form th:action="@{/insEdizione}" method="get">
+		<button class="btn" type="submit">+</button>
+	</form>
+	  
+	  
+	  
 
 </body>
 

@@ -121,5 +121,9 @@ public void deleteById(Long id) {
 public Iterable<Partecipazione>getAll(){
 	return this.partecipazioneRepository.findAll();
 }
+public Iterable<Partecipazione> getByFantino(Fantino fantino) {
+	// TODO Auto-generated method stub
+	return partecipazioneRepository.findByFantino(fantino);
+}
 
 }

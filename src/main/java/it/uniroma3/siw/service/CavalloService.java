@@ -1,5 +1,6 @@
 package it.uniroma3.siw.service;
 
+import java.awt.print.Pageable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
@@ -7,7 +8,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 import it.uniroma3.siw.model.Cavallo;
 import it.uniroma3.siw.repository.CavalloRepository;
 import jakarta.transaction.Transactional;
@@ -81,6 +83,7 @@ public class CavalloService {
     public void deleteById(Long id) {
         this.cavalloRepository.deleteById(id);
     }
+ 
     
     
     

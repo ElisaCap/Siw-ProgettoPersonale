@@ -9,4 +9,7 @@ import jakarta.transaction.Transactional;
 public interface FantinoRepository extends CrudRepository<Fantino,Long> {
 	@Transactional
 	public Fantino findByNome(String nome);
+	@Transactional
+	Iterable<Fantino> findAllByOrderByCognomeAsc();
+
 }

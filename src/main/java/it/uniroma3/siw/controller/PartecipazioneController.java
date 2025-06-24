@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.model.Cavallo;
 import it.uniroma3.siw.model.Edizione;
+import it.uniroma3.siw.model.Fantino;
 import it.uniroma3.siw.model.Partecipazione;
 import it.uniroma3.siw.repository.EdizioneRepository;
 import it.uniroma3.siw.service.CavalloService;
@@ -81,6 +82,12 @@ public String partCavallo(@PathVariable Long id,Model model) {
 	return "partecipazione/partecipazioni.html";
 }
 
+@GetMapping("/partFantino/{id}")
+public String partFantino(@PathVariable Long id,Model model) {
+	Fantino fantino=fantinoService.getByid(id);
+	model.addAttribute("partecipazioni",this.partecipazioneService.getByFantino(fantino));
+	return "partecipazione/partecipazioni.html";
+}
 
 
 

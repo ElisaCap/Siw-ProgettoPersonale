@@ -34,52 +34,39 @@
   <!-- TITOLO -->
   <h1 class="titolo">Ecco tutti i cavalli registrati</h1>
 
-  <!-- TABELLA -->
-  <table class="elenco">
-    <thead>
-      <tr class="riga-intestazione">
-        <th class="col-id">Id</th>
-        <th class="col-nome">Nome</th>
-        <th class="col-razza">Razza</th>
-        <th class="col-foto">Foto</th>
-        <th class="col-info">Info</th>
-        <th sec:authorize="hasRole('ADMIN')">Azioni</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="riga-cavallo" th:each="cavallo : ${cavalli}">
-        <td class="col-id" th:text="${cavallo.id}"></td>
-        <td class="col-nome" th:text="${cavallo.nome}"></td>
-        <td class="col-razza" th:text="${cavallo.razza}"></td>
-        <td class="col-foto">
-          <img class="foto-cavallo" th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" alt="immagine cavallo" />
-        </td>
-        <td class="col-info">
-          <form th:action="@{/cavalli/{id}(id=${cavallo.id})}" method="get">
-            <button class="btn-info" type="submit">Vedi info</button>
-          </form>
-        </td>
-        <td sec:authorize="hasRole('ADMIN')">
+  <div class="card-container">
+    <div class="card-cavallo" th:each="cavallo : ${cavalli}">
+      <img class="card-img" th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" alt="Foto cavallo" />
+      
+      <div class="card-info">
+        <h2 th:text="${cavallo.nome}">Nome Cavallo</h2>
+        <p><strong>ID:</strong> <span th:text="${cavallo.id}"></span></p>
+        <p><strong>Razza:</strong> <span th:text="${cavallo.razza}"></span></p>
+      </div>
+      
+      <div class="card-actions">
+        <form th:action="@{/cavalli/{id}(id=${cavallo.id})}" method="get">
+          <button class="btn-card" type="submit">Vedi info</button>
+        </form>
+        
+        <div sec:authorize="hasRole('ADMIN')">
           <form th:action="@{/cavalli/delete/{id}(id=${cavallo.id})}" method="get"
-            onsubmit="return confirm('Sei sicuro di voler eliminare questo cavallo?');">
-            <button type="submit">Elimina</button>
+                onsubmit="return confirm('Sei sicuro di voler eliminare questo cavallo?');">
+            <button class="btn-card danger" type="submit">Elimina</button>
           </form>
-        </td>
-		<td sec:authorize="hasRole('ADMIN')">
-		          <form th:action="@{/cavalli/modifica/{id}(id=${cavallo.id})}" method="get">
-		            <button type="submit">Modifica</button>
-		          </form>
-		        </td>
-      </tr>
-    </tbody>
-  </table>
 
-  <!-- BOTTONE AGGIUNGI -->
-  <div sec:authorize="hasRole('ADMIN')">
-    <form th:action="@{/insCavallo}" method="get">
-      <button type="submit">+</button>
-    </form>
+          <form th:action="@{/cavalli/modifica/{id}(id=${cavallo.id})}" method="get">
+            <button class="btn-card secondary" type="submit">Modifica</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-
+  <!-- BOTTONE AGGIUNGI -->
+   <div sec:authorize="hasRole('ADMIN')">
+     <form th:action="@{/insCavallo}" method="get">
+       <button type="submit">+</button>
+     </form>
+   </div>
 </body>
 </html>

@@ -1,5 +1,9 @@
 package it.uniroma3.siw.service;
 import it.uniroma3.siw.repository.PartecipazioneRepository;
+import jakarta.transaction.Transactional;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,9 +68,21 @@ public class ElementoClassificaService {
 	}
 
 	
+
+	@Transactional
 	public void deleteById(Long id) {
-	    this.elementoClassificaRepository.deleteById(id);
+	    Optional<ElementoClassifica> elemento = elementoClassificaRepository.findById(id);
+	    if (elemento.isPresent()) {
+	        ElementoClassifica e = elemento.get();
+	        // Disassocia da classifica e partecipazione
+	        e.setClassifica(null);
+	        e.setPartecipazione(null);
+	        elementoClassificaRepository.save(e); // salva la disassociazione
+	        elementoClassificaRepository.delete(e); // ora elimina
+	    }
 	}
+
+
 	
 
 }

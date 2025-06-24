@@ -50,7 +50,9 @@
     <tbody>
       <tr class="riga-cavallo" th:each="partecipazione : ${partecipazioni}">
         <td class="col-id" th:text="${partecipazione.cavallo.nome}"></td>
-        <td class="col-nome" th:text="${partecipazione.fantino.nome}"></td>
+        <td class="col-nome" 
+		th:text="|${partecipazione.fantino.nome} ${partecipazione.fantino.cognome}|
+		"></td>
         <td class="col-razza" th:text="${partecipazione.contrada.nome}"></td>
 		<td class="col-razza" th:text="${partecipazione.edizione.data}"></td>
 

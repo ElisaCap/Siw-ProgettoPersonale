@@ -31,6 +31,12 @@
 		<img width="30%" th:src="@{/fantini/{id}/immagine(id=${fantino.id})}" alt="Foto Fantino"/>
 		</a>
 	</div>
+	
+	<form th:action="@{/partFantino/{id}(id=${fantino.id})}" method="get">
+		<button type="submit">vedi partecipazioni</button>
+	</form>
+
+	
 	<div th:unless="${fantino}">
 		<p>fantino non trovato</p>
 	</div>

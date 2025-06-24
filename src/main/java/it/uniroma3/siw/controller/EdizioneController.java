@@ -38,7 +38,7 @@ public String edizioni(Model model) {
 	return "edizione/edizioni.html";
 }
 @GetMapping("/edizione/{id}")
-public String edizione(@RequestParam Long id, Model model) {
+public String edizione(@PathVariable Long id, Model model) {
 	model.addAttribute("edizione",this.edizioneSerivice.getById(id));
 	return "edizione/edizione.html";
 }
@@ -58,7 +58,7 @@ public String saveEdizione(@ModelAttribute("edizione") Edizione edizione) {
     // Salva tutto
     edizioneSerivice.save(edizione); // CascadeType.ALL farà salvare anche la classifica
 
-    return "redirect:/edizione/%7Bid%7D?id=" + edizione.getId();
+    return "redirect:/edizione/" + edizione.getId();
 }
 
 

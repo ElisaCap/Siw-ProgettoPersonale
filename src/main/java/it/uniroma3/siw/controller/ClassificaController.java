@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
@@ -17,17 +18,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.model.Classifica;
 import it.uniroma3.siw.model.Edizione;
 import it.uniroma3.siw.model.ElementoClassifica;
+import it.uniroma3.siw.model.Partecipazione;
 import it.uniroma3.siw.repository.ClassificaRepository;
 import it.uniroma3.siw.repository.EdizioneRepository;
 import it.uniroma3.siw.repository.ElementoClassificaRepository;
 import it.uniroma3.siw.repository.PartecipazioneRepository;
 import it.uniroma3.siw.service.ClassificaService;
+import it.uniroma3.siw.service.ElementoClassificaService;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import jakarta.websocket.server.PathParam;
 
 @Controller
 public class ClassificaController {
+
+    private final ElementoClassificaService elementoClassificaService;
 	
 @Autowired
     private  EdizioneRepository edizioneRepository;
@@ -42,9 +47,10 @@ private PartecipazioneRepository partecipazioneRepository;
 @Autowired
 private ClassificaRepository classificaRepository;
 
-    ClassificaController(ElementoClassificaRepository elementoClassificaRepository, EdizioneRepository edizioneRepository) {
+    ClassificaController(ElementoClassificaRepository elementoClassificaRepository, EdizioneRepository edizioneRepository, ElementoClassificaService elementoClassificaService) {
         this.elementoClassificaRepository = elementoClassificaRepository;
         this.edizioneRepository = edizioneRepository;
+        this.elementoClassificaService = elementoClassificaService;
     }
     
     @GetMapping("/classifica/{id}")
@@ -153,10 +159,82 @@ public String saveClassifica(@ModelAttribute("classifica") Classifica classifica
 }
 
 @GetMapping("/classifiche/delete/{id}")
-public String eliminaFantino(@PathVariable Long id, Model model) {
+public String eliminaClassifica(@PathVariable Long id, Model model) {
     classificaService.deleteById(id);
     model.addAttribute("classifiche", classificaService.getAll());
     return "classifica/classifiche.html"; // oppure redirect a cercatutti
 }
+
+@GetMapping("/modificaClassifica/{id}")
+public String modificaClassifica(@PathVariable Long id, Model model) {
+    Classifica classifica=classificaService.getById(id);
+    model.addAttribute("classifica",classifica);
+    model.addAttribute("id",id);
+    List<Partecipazione> partecipazioni = partecipazioneRepository.findByEdizioneId(id);
+    List<Partecipazione> partecipazioni2=new ArrayList<>();
+    for(Partecipazione p:partecipazioni) {
+    	if(p.getElementoClassifica()==null)
+    	partecipazioni2.add(p);
+    }
+    model.addAttribute("partecipazioni", partecipazioni2);
+    return "classifica/modificaClassifica.html"; // oppure redirect a cercatutti
+}
+
+@PostMapping("/eliminaElementoClassifica/{id}/{idc}")
+public String eliminaElemento(@PathVariable Long id,
+                              @PathVariable Long idc,
+                              Model model) {
+
+    System.out.println(">> Tentativo di eliminazione ElementoClassifica con id = " + id + " e classifica = " + idc);
+
+    elementoClassificaService.deleteById(id);
+
+    model.addAttribute("classifica", classificaService.getById(idc));
+    model.addAttribute("elementiClassifica",
+            elementoClassificaRepository.findAllByClassifica(classificaService.getById(idc)));
+
+    return "classifica/classifica.html";
+}
+
+
+
+@GetMapping("/insElemento/{id}")
+public String insElemento(@RequestParam(name = "posizione", defaultValue = "0") int pos,
+                          @PathVariable Long id,
+                          Model model) {
+    Classifica classifica = classificaService.getById(id);
+
+    model.addAttribute("partecipazioni", partecipazioneRepository.findAll());
+    model.addAttribute("classifica", classifica);
+    model.addAttribute("posizione", pos + 1); // se vuoi aumentarla
+    model.addAttribute("id", id);
+    model.addAttribute("elementoClassifica", new ElementoClassifica());
+
+    return "classifica/insElemento.html";
+}
+
+
+@PostMapping("/salvaElemento/{id}")
+@Transactional
+public String salvaElemento(@RequestParam("partecipazioneId") Long partecipazioneId,
+                            @RequestParam("posizione") int posizione,
+                            @PathVariable Long id) {
+    Classifica classifica = classificaService.getById(id);
+    Partecipazione partecipazione = partecipazioneRepository.findById(partecipazioneId).orElseThrow();
+
+    ElementoClassifica elemento = new ElementoClassifica();
+    elemento.setClassifica(classifica);
+    elemento.setPartecipazione(partecipazione);
+    elemento.setPosizione(posizione + 1);
+
+    elementoClassificaRepository.save(elemento);
+
+    return "redirect:/classifica/" + id;
+}
+
+
+
+
+
 
 }

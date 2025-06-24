@@ -90,7 +90,7 @@ public class CavalloController {
 	  public String eliminaCavallo(@PathVariable Long id, Model model) {
 	      cavalloService.deleteById(id);
 	      model.addAttribute("cavalli", cavalloService.getAll());
-	      return "cavallo/cavalli.html"; // oppure redirect a cercatutti
+	      return "cavallo/cavalli.html"; 
 	  }
     
     @GetMapping("/cavalli/modifica/{id}")
