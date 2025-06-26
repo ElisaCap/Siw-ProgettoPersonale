@@ -43,13 +43,30 @@
 		<form th:action="@{/classifica/{id}(id=${edizione.id})}" method="get">
 		    <button type="submit">Vedi classifica</button>
 		</form>
-		<form th:action="@{/edizioni/delete/{id}(id=${edizione.id})}" method="get"
+		<div sec:authorize="hasRole('admin')">
+		<div th:action="@{/edizioni/delete/{id}(id=${edizione.id})}" method="get"
 		                       onsubmit="return confirm('Sei sicuro di voler eliminare questo fantino?');">
 		                     <button type="submit">Elimina</button>
-		                 </form>
+							 </div>
+		     </div>
+						             </form>
+									 <div sec:authorize="hasRole('admin')">
 		<form th:action="@{/insPartecipazione/{id}(id=${edizione.id})}" method="get">
 			<button type="submit">Ins Partecipazione</button>
+			</div>
 		</form>
+		<div sec:authorize="isAuthenticated()">
+		<form th:action="@{/insCommento/{id}(id=${edizione.id})}">
+			<button type="submit" class="btn">inserisci un commento</button>
+		</form>
+		</div>
+		<div sec:authorize="!isAuthenticated()">
+				
+				</div>
+				<form th:action="@{/commentiEdizione/{id}(id=${edizione.id})}" method="get">
+					<button type="submit" class="btn">Vedi i commenti</button>			
+				</form>
+				
 	</div>
 	<div th:unless="${edizione}">
 		<p>edizione non trovata</p>

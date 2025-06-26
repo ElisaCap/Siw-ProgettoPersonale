@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+    <title>Nuovo Cavallo</title>
+    <link rel="stylesheet" href="/css/cavallo.css" />
+</head>
+<body>
+	<!-- BARRA SUPERIORE -->
+	<div class="top-bar">
+	  <div class="logo-text">Palio di Siena</div>
+
+	  <div class="user-controls">
+	    <div sec:authorize="isAuthenticated()">
+	      <span class="user-name" th:text="${#authentication.name}">Utente</span>
+	      <form th:action="@{/logout}" method="post" style="display: inline;">
+	        <button type="submit" class="btn">Logout</button>
+	      </form>
+	    </div>
+	    <div sec:authorize="!isAuthenticated()">
+	      <form th:action="@{/login}" method="get" style="display: inline;">
+	        <button type="submit" class="btn">Login</button>
+	      </form>
+	    </div>
+	  </div>
+	</div>
+	
+    <div><a href="/">Home</a></div>
+    <h1>Aggiungi un commento</h1>
+	<form th:action="@{/salvaCommento}" method="post"
+	      th:object="${commento}" enctype="multipart/form-data"
+	      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	    <div>
+	      <!-- Campo nascosto per username -->
+		  <input type="hidden" name="utente" th:value="${#authentication.name}" />
+				 <input type="hidden" th:field="*{edizione}"
+				              th:value="${edizione}" />
+	      contenuto:
+	      <span><input required type="text" th:field="*{contenuto}" /></span>
+	      <span th:text="${msgErrTitle}">Campo Obbligatorio</span>
+	    </div>
+	    <span><button type="submit">Conferma</button></span>
+	</form>
+
+</body>
+</html>

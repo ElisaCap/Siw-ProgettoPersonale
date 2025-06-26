@@ -203,8 +203,8 @@ public String insElemento(@RequestParam(name = "posizione", defaultValue = "0") 
                           @PathVariable Long id,
                           Model model) {
     Classifica classifica = classificaService.getById(id);
-
-    model.addAttribute("partecipazioni", partecipazioneRepository.findAll());
+   
+    model.addAttribute("partecipazioni", partecipazioneRepository.findByEdizioneId(classifica.getEdizioneId()));
     model.addAttribute("classifica", classifica);
     model.addAttribute("posizione", pos + 1); // se vuoi aumentarla
     model.addAttribute("id", id);

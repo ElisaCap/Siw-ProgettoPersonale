@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/cavallo.css">
+  <title>Cavalli - Palio di Siena</title>
+</head>
+
+<body>
+
+  <!-- BARRA SUPERIORE -->
+  <div class="top-bar">
+    <div class="logo-text">Palio di Siena</div>
+	<form th:action="@{/home}" method="get">
+		<button class="btn" type="submit">home</button>
+	</form>
+    <div class="user-controls">
+      <div sec:authorize="isAuthenticated()">
+        <span class="user-name" th:text="${#authentication.name}">Utente</span>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+          <button type="submit" class="btn">Logout</button>
+        </form>
+      </div>
+      <div sec:authorize="!isAuthenticated()">
+        <form th:action="@{/login}" method="get" style="display: inline;">
+          <button type="submit" class="btn">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TITOLO -->
+  <h1 class="titolo">Ecco tutti i commenti</h1>
+
+    <div class="card-cavallo" th:each="commento : ${commenti}">
+      
+        <h2 th:text="${commento.utente}"></h2>
+       <span th:text="${commento.contenuto}"></span></p>
+      </div>
+	  <div sec:authorize="isAuthenticated()">
+	  				<form th:action="@{/insCommento/{id}(id=${id})}" method="get">
+	  					<button type="submit" class="btn">Lascia un commento</button>
+	  				</form>
+	  				</div>
+    
+  <!-- BOTTONE AGGIUNGI -->
+ 
+</body>
+</html>

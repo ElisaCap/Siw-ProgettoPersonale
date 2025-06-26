@@ -5,7 +5,6 @@
     <title>elementoClassifica</title>
 </head>
 <body>
-	<!-- BARRA SUPERIORE -->
 		<div class="top-bar">
 		  <div class="logo-text">Palio di Siena</div>
 
@@ -23,6 +22,12 @@
 		    </div>
 		  </div>
 		</div>
+		<form th:action="@{/insElemento/{id}(id=${classifica.edizioneId})}" method="get">
+		    <input type="hidden" name="posizione" 
+		           th:value="${elementoClassifica != null ? elementoClassifica.posizione ?: 0 : 0}" />
+		    <button type="submit">+</button>
+		</form>
+
     <h1 class="uno">Ecco la classifica dell'edizione</h1>
 
     <table class="elenco">

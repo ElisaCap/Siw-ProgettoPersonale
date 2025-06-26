@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import it.uniroma3.siw.model.Cavallo;
+import it.uniroma3.siw.model.Contrada;
 import it.uniroma3.siw.model.Edizione;
 import it.uniroma3.siw.model.Fantino;
 import it.uniroma3.siw.model.Partecipazione;
@@ -20,6 +21,7 @@ public interface PartecipazioneRepository extends CrudRepository<Partecipazione,
 public Iterable<Partecipazione> findByCavallo(Cavallo cavallo);
 @Transactional
 public Iterable<Partecipazione> findByFantino(Fantino fantino);
-
+@Transactional
+public Iterable<Partecipazione> findByContrada(Contrada contrada);
 
 }

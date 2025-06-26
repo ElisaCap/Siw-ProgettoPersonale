@@ -25,7 +25,8 @@ private Long id;
 	private List<Partecipazione>partecipazioni;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Classifica classifica;
-	
+	@OneToMany(mappedBy = "edizione",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Commento>commenti;
 	
 	public Classifica getClassifica() {
 		return classifica;
@@ -73,6 +74,12 @@ private Long id;
 		return Objects.equals(data, other.data) && Objects.equals(id, other.id)
 				&& Objects.equals(partecipazioni, other.partecipazioni)
 				&& Objects.equals(urlImmagine, other.urlImmagine);
+	}
+	public List<Commento> getCommenti() {
+		return commenti;
+	}
+	public void setCommenti(List<Commento> commenti) {
+		this.commenti = commenti;
 	}
 	
 	

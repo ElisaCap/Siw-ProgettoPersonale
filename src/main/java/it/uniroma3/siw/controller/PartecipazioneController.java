@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.model.Cavallo;
+import it.uniroma3.siw.model.Contrada;
 import it.uniroma3.siw.model.Edizione;
 import it.uniroma3.siw.model.Fantino;
 import it.uniroma3.siw.model.Partecipazione;
@@ -86,6 +87,13 @@ public String partCavallo(@PathVariable Long id,Model model) {
 public String partFantino(@PathVariable Long id,Model model) {
 	Fantino fantino=fantinoService.getByid(id);
 	model.addAttribute("partecipazioni",this.partecipazioneService.getByFantino(fantino));
+	return "partecipazione/partecipazioni.html";
+}
+
+@GetMapping("/partContrada/{id}")
+public String partContrada(@PathVariable Long id,Model model) {
+	Contrada contrada=contradaService.getByid(id);
+	model.addAttribute("partecipazioni",this.partecipazioneService.getByContrada(contrada));
 	return "partecipazione/partecipazioni.html";
 }
 

@@ -85,7 +85,7 @@ private CredentialsRepository credentialsRepository;
             		.requestMatchers("/","/paginaIntroduttiva.html",
             			    "/login", "/register","/insCavallo", "/logout",
             			    "/cavallo/**","/edizione/**", "/classifica/**","/contrade/**",
-            			    "/home","/homepage.html","/visualizza",
+            			    "/home","/homepage.html","/edizioni","/edizione/{id}","edizioni.html","edizione.html",   "/visualizza",
             			    "/cavallo/trovacavallo.html","/cavalli/cercatutti",
             			    "/css/**", "/js/**", "/images/**", "/sfondo.jpg", "/webjars/**","/immagginicontrade/**"
             			).permitAll()

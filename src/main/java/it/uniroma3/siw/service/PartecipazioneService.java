@@ -125,5 +125,10 @@ public Iterable<Partecipazione> getByFantino(Fantino fantino) {
 	// TODO Auto-generated method stub
 	return partecipazioneRepository.findByFantino(fantino);
 }
+public Iterable<Partecipazione> getByContrada(Contrada contrada) {
+	// TODO Auto-generated method stub
+	return partecipazioneRepository.findByContrada(contrada);
+}
+
 
 }
