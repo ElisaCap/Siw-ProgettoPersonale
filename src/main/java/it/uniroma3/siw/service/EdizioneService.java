@@ -1,11 +1,14 @@
 package it.uniroma3.siw.service;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.model.Classifica;
@@ -36,12 +39,21 @@ private EdizioneRepository edizioneRepository;
        
         this.elementoClassificaRepository = elementoClassificaRepository;
     }
-	private void aggiungiEdizione(LocalDate data,String urlImmagine) {
+	private void aggiungiEdizione(LocalDate data,String imagePath) {
 		Edizione edizione=new Edizione();
 		edizione.setData(data);
-		edizione.setUrlImmagine(urlImmagine);
-		this.edizioneRepository.save(edizione);
+		 try {
+	            ClassPathResource imgFile = new ClassPathResource("static" + imagePath);
+	            try (InputStream in = imgFile.getInputStream()) {
+	                edizione.setUrlImmagine(in.readAllBytes());
+	            }
+	        } catch (IOException e) {
+	            // puoi loggare o gestire diversamente
+	        	edizione.setUrlImmagine(null); // o un'immagine di default
+	            System.err.println("Errore nel caricamento immagine per " +edizione.getId() + ": " + e.getMessage());
+	        }		this.edizioneRepository.save(edizione);
 	}
+	
 	public void aggiungiClassifica() {
 		for(Edizione ed:this.edizioneRepository.findAll()) {
 			ed.setClassifica(classificaRepository.findById(ed.getId()).get());

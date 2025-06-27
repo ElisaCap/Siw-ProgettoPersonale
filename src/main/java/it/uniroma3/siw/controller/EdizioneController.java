@@ -1,5 +1,7 @@
 package it.uniroma3.siw.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Classifica;
 import it.uniroma3.siw.model.Edizione;
@@ -48,18 +51,31 @@ public String insEdizione(Model model) {
 	model.addAttribute("edizione",edizione);
 	return "edizione/nuovaEdizione.html";
 }
+
+
 @PostMapping("/insEdizione")
-public String saveEdizione(@ModelAttribute("edizione") Edizione edizione) {
-    // Crea la classifica associata
+public String saveEdizione(@ModelAttribute("edizione") Edizione edizione,
+                           @RequestParam("fileImmagine") MultipartFile file) {
+    // Associa classifica
     Classifica classifica = new Classifica();
-    classifica.setEdizione(edizione); // Associazione bidirezionale
+    classifica.setEdizione(edizione);
     edizione.setClassifica(classifica);
 
+    // Gestisci immagine
+    if (file != null && !file.isEmpty()) {
+        try {
+            edizione.setUrlImmagine(file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace(); // Puoi aggiungere logging migliore
+        }
+    }
+
     // Salva tutto
-    edizioneSerivice.save(edizione); // CascadeType.ALL farà salvare anche la classifica
+    edizioneSerivice.save(edizione);
 
     return "redirect:/edizione/" + edizione.getId();
 }
+
 
 
 @GetMapping("/getClassifica/{id}")

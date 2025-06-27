@@ -5,14 +5,18 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Edizione {
@@ -20,7 +24,11 @@ public class Edizione {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 private Long id;
 	private LocalDate data;
-	private String urlImmagine;
+	@Lob
+	private byte[] urlImmagine; // campo per l’immagine
+	@Transient
+	private MultipartFile fileImmagine;
+	
 	@OneToMany(mappedBy = "edizione",cascade = CascadeType.ALL, orphanRemoval = true )
 	private List<Partecipazione>partecipazioni;
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -46,12 +54,7 @@ private Long id;
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
-	public String getUrlImmagine() {
-		return urlImmagine;
-	}
-	public void setUrlImmagine(String urlImmagine) {
-		this.urlImmagine = urlImmagine;
-	}
+
 	public List<Partecipazione> getPartecipazioni() {
 		return partecipazioni;
 	}
@@ -80,6 +83,18 @@ private Long id;
 	}
 	public void setCommenti(List<Commento> commenti) {
 		this.commenti = commenti;
+	}
+	public byte[] getUrlImmagine() {
+		return urlImmagine;
+	}
+	public void setUrlImmagine(byte[] urlImmagine) {
+		this.urlImmagine = urlImmagine;
+	}
+	public MultipartFile getFileImmagine() {
+		return fileImmagine;
+	}
+	public void setFileImmagine(MultipartFile fileImmagine) {
+		this.fileImmagine = fileImmagine;
 	}
 	
 	

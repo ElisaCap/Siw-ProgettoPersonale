@@ -67,15 +67,20 @@ public String eliminaFantino(@PathVariable Long id, Model model) {
 
 
 @GetMapping("/insPartecipazione/{id}")
-public String insPartecipazione(@PathVariable Long id,Model model) {
-Edizione edizione=	edizioneRepository.findById(id).get();
-model.addAttribute(edizione);
-model.addAttribute("partecipazione",new Partecipazione());
-model.addAttribute("cavalli",cavalloService.getAll());
-model.addAttribute("fantini", fantinoService.getAll());
-model.addAttribute("contrade", contradaService.getAll());
-return "partecipazione/NuovaPartecipazione.html";
+public String insPartecipazione(@PathVariable Long id, Model model) {
+    Edizione edizione = edizioneRepository.findById(id).get();
+
+    Partecipazione partecipazione = new Partecipazione();
+    partecipazione.setEdizione(edizione); // o setta direttamente l'oggetto Edizione, dipende dal modello
+
+    model.addAttribute("partecipazione", partecipazione);
+    model.addAttribute("cavalli", cavalloService.getAll());
+    model.addAttribute("fantini", fantinoService.getAll());
+    model.addAttribute("contrade", contradaService.getAll());
+
+    return "partecipazione/NuovaPartecipazione.html";
 }
+
 @GetMapping("/partCavallo/{id}")
 public String partCavallo(@PathVariable Long id,Model model) {
 	Cavallo cavallo=cavalloService.getCavalloById(id);

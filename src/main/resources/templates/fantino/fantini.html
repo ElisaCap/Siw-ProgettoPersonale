@@ -24,8 +24,10 @@
 		    </div>
 		  </div>
 		</div>
-	
-	
+	   <div sec:authorize="hasRole('ADMIN')">
+		<form th:action="@{/insFantino}" method="get">
+         <button type="submit">+</button>
+		 </div>
     <h1 class="titolo">Ecco tutti i fantini registrati</h1>
 
     <table class="elenco">
