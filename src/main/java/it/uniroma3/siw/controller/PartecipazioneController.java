@@ -1,5 +1,8 @@
 package it.uniroma3.siw.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -84,7 +87,9 @@ public String insPartecipazione(@PathVariable Long id, Model model) {
 @GetMapping("/partCavallo/{id}")
 public String partCavallo(@PathVariable Long id,Model model) {
 	Cavallo cavallo=cavalloService.getCavalloById(id);
-	model.addAttribute("partecipazioni",this.partecipazioneService.getByCavallo(cavallo));
+	//List<Partecipazione> partecipazioni=(List)this.partecipazioneService.getByCavallo(cavallo);;
+	List<Partecipazione> partecipazioni=(List)partecipazioneService.findWhereCavalloPrimo(cavallo);
+	model.addAttribute("partecipazioni",partecipazioni);
 	return "partecipazione/partecipazioni.html";
 }
 

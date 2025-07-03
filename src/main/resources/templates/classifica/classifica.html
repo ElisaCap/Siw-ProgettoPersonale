@@ -82,6 +82,43 @@
 		</button>
 		
 	</form>
+	
+	
+	<table class="elenco">
+	    <thead>
+	      <tr class="riga-intestazione">
+	        <th class="col-id">Cavallo</th>
+	        <th class="col-cavallo">Fantino</th>
+	        <th class="col-fantino">Contrada</th>
+			<th class="col-info">Data edizione</th>
+
+	        <th class="col-contrada">Posizionamento</th>
+	        <th sec:authorize="hasRole('ADMIN')">Azioni</th>
+	      </tr>
+		  
+	    </thead>
+	    <tbody>
+	      <tr class="riga-cavallo" th:each="partecipazione : ${partecipazioni}">
+			<div th:unless="${partecipazione.elementoClassifica}">
+
+			<td class="col-id" th:text="${partecipazione.cavallo.nome}"></td>
+	        <td class="col-nome" 
+			th:text="|${partecipazione.fantino.nome} ${partecipazione.fantino.cognome}|
+			"></td>
+	        <td class="col-razza" th:text="${partecipazione.contrada.nome}"></td>
+			<td class="col-razza" th:text="${partecipazione.edizione.data}"></td>
+
+				
+				<div th:unless="${partecipazione.elementoClassifica}">
+								<td class="col-info" th:text="'non ha tagliato il traguardo'">
+									</td>
+								
+			
+	  
+	      </tr>
+	    </tbody>
+		</div>
+	  </table>
 
 </body>
 </html>

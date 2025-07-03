@@ -4,6 +4,10 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +15,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siw.model.Cavallo;
 import it.uniroma3.siw.model.Classifica;
 import it.uniroma3.siw.model.Edizione;
 import it.uniroma3.siw.model.ElementoClassifica;
@@ -54,20 +60,24 @@ public String insEdizione(Model model) {
 
 
 @PostMapping("/insEdizione")
-public String saveEdizione(@ModelAttribute("edizione") Edizione edizione,
-                           @RequestParam("fileImmagine") MultipartFile file) {
+public String saveEdizione(@ModelAttribute("edizione") Edizione edizione
+		
+                           //,@RequestParam("fileImmagine") MultipartFile file)
+		)
+		{
     // Associa classifica
     Classifica classifica = new Classifica();
     classifica.setEdizione(edizione);
     edizione.setClassifica(classifica);
 
-    // Gestisci immagine
+    MultipartFile file = edizione.getFileImmagine();
     if (file != null && !file.isEmpty()) {
         try {
-            edizione.setUrlImmagine(file.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace(); // Puoi aggiungere logging migliore
-        }
+			edizione.setUrlImmagine(file.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     // Salva tutto
@@ -102,6 +112,21 @@ public String eliminaFantino(@PathVariable Long id, Model model) {
     edizioneService.deleteById(id);
     model.addAttribute("edizioni", edizioneService.getAll());
     return "edizione/edizioni.html"; // oppure redirect a cercatutti
+}
+
+
+@GetMapping("/edizione/{id}/immagine")
+@ResponseBody
+public ResponseEntity<byte[]> getImmagine(@PathVariable Long id) {
+    Edizione edizione = edizioneService.getById(id);
+    if (edizione == null || edizione.getUrlImmagine() == null) {
+        return ResponseEntity.notFound().build();
+    }
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.IMAGE_JPEG); // Usa IMAGE_PNG se il file è PNG
+
+    return new ResponseEntity<>(edizione.getUrlImmagine(), headers, HttpStatus.OK);
 }
 
 

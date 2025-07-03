@@ -48,13 +48,13 @@ private CredentialsRepository credentialsRepository;
     
     public void run() throws Exception {
         String defaultUsername = "ElisaCaprio";
-        String defaultPassword = "password"; // NB: criptala prima di salvarla!
+        String defaultPassword = "password"; 
         
         // Se esiste già, non fare nulla
         if (credentialsRepository.findByUsername(defaultUsername).isEmpty()) {
             Credentials admin = new Credentials();
             admin.setUsername(defaultUsername);
-            admin.setPassword(passwordEncoder().encode(defaultPassword)); // Criptare la password!
+            admin.setPassword(passwordEncoder().encode(defaultPassword));
             admin.setRole("ROLE_ADMIN");
             credentialsRepository.save(admin);
             System.out.println("Admin creato con username: " + defaultUsername);
@@ -82,12 +82,12 @@ private CredentialsRepository credentialsRepository;
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-            		.requestMatchers("/","/paginaIntroduttiva.html",
-            			    "/login", "/register","/insCavallo", "/logout",
+            		.requestMatchers("/","/paginaIntroduttiva.html","/insEdizione",
+            			    "/login", "/register","/insCavallo", "/logout","/R.jpg",
             			    "/cavallo/**","/edizione/**", "/classifica/**","/contrade/**",
             			    "/home","/homepage.html","/edizioni","/edizione/{id}","edizioni.html","edizione.html",   "/visualizza",
             			    "/cavallo/trovacavallo.html","/cavalli/cercatutti",
-            			    "/css/**", "/js/**", "/images/**", "/sfondo.jpg", "/webjars/**","/immagginicontrade/**"
+            			    "/css/**", "/js/**", "/images/**", "/sfondo.jpg","/cavn.jpg", "/webjars/**","/immagginicontrade/**"
             			).permitAll()
                 .anyRequest().authenticated()
             )

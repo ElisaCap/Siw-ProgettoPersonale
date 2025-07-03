@@ -33,33 +33,31 @@
   </header>
 
   <!-- Contenuto principale -->
-  <main class="content">
+  <main>
+    <h1 class="uno">Homepage</h1>
 
-    <h1 class="uno">Trova Cavallo per ID</h1>
+	<div class="content">
+	  <form th:action="@{/cavalli/cercatutti}" method="get" class="action-card card-cavalli">
+	    <button type="submit">Mostra tutti i cavalli</button>
+	  </form>
 
-    <form th:action="@{/cavalli/{id}}" method="get" class="form-box">
-      <label for="id">ID Cavallo:</label>
-      <input type="number" name="id" id="id" required />
-      <button type="submit">Cerca</button>
-    </form>
+	  <form th:action="@{/contrade}" method="get" class="action-card card-contrade">
+	    <button type="submit">Mostra tutte le contrade</button>
+	  </form>
 
-    <form th:action="@{/cavalli/cercatutti}" method="get" class="form-box">
-      <button type="submit">Mostra tutti</button>
-    </form>
+	  <form th:action="@{/fantini/cercatutti}" method="get" class="action-card card-fantini">
+	    <button type="submit">Mostra tutti i fantini</button>
+	  </form>
 
-    <form th:action="@{/contrade}" method="get" class="form-box">
-      <button type="submit">Mostra tutte</button>
-    </form>
+	  <form th:action="@{/edizioni}" method="get" class="action-card card-edizioni">
+	    <button type="submit">Mostra tutte le edizioni</button>
+	  </form>
+	</div>
 
-    <form th:action="@{/fantini/cercatutti}" method="get" class="form-box">
-      <button type="submit">Mostra tutti i fantini</button>
-    </form>
-
-    <form th:action="@{/edizioni}" method="get" class="form-box">
-      <button type="submit">Mostra tutte le edizioni</button>
-    </form>
-
+	
   </main>
+
+
 
 </body>
 

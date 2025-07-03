@@ -8,45 +8,53 @@ body {
   box-sizing: border-box;
 }
 
-/* Barra superiore */
+
 .top-bar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 70px;
-  background: linear-gradient(to right, #ff9900, #ff6600);
+  background: linear-gradient(to right, #cc6600, #8b0000);
   color: white;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  padding: 0 30px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 40 0px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
   z-index: 1000;
-  box-sizing: border-box;
 }
 
+
+
+
 .logo-text {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
+  font-family: Georgia, serif;
+  justify-content:left;
+  position: fixed;
+  top:4;
+    left: 0;
+
 }
 
 .user-controls {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .user-name {
   font-weight: bold;
   color: white;
+  font-size: 1.1rem;
 }
 
 /* Pulsanti */
 .btn {
   background-color: white;
   border: none;
-  padding: 8px 14px;
   height: 35px;
   border-radius: 5px;
   cursor: pointer;

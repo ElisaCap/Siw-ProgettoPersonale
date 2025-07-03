@@ -60,7 +60,8 @@ private ClassificaRepository classificaRepository;
         Classifica classifica = this.classificaService.getById(id);
         model.addAttribute("classifica", classifica);
         model.addAttribute("elementiClassifica", this.elementoClassificaRepository.findAllByClassifica(classifica));
-
+        List<Partecipazione>partecipazioni=partecipazioneRepository.findByEdizioneId(id);
+        model.addAttribute("partecipazioni",partecipazioni);
         return "classifica/classifica"; 
     }
 
@@ -225,7 +226,7 @@ public String salvaElemento(@RequestParam("partecipazioneId") Long partecipazion
     ElementoClassifica elemento = new ElementoClassifica();
     elemento.setClassifica(classifica);
     elemento.setPartecipazione(partecipazione);
-    elemento.setPosizione(posizione + 1);
+    elemento.setPosizione(posizione );
 
     elementoClassificaRepository.save(elemento);
 

@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+<h1 th:text="${dim}"></h1>
   <!-- BARRA SUPERIORE -->
   <div class="top-bar">
     <div class="logo-text">Palio di Siena</div>
@@ -30,10 +30,10 @@
       </div>
     </div>
   </div>
+  <a th:text="${num}"></a>
 
   <!-- TITOLO -->
   <h1 class="titolo">Ecco tutti i cavalli registrati</h1>
-
   <div class="card-container">
     <div class="card-cavallo" th:each="cavallo : ${cavalli}">
       <img class="card-img" th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" alt="Foto cavallo" />
@@ -68,5 +68,6 @@
        <button type="submit">+</button>
      </form>
    </div>
+
 </body>
 </html>

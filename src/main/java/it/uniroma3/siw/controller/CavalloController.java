@@ -67,8 +67,9 @@ public class CavalloController {
 
     @GetMapping("/cavalli/cercatutti")
     public String cercatutti(Model model) {
-        Iterable<Cavallo> cavalli = this.cavalloService.getAll();
+        List<Cavallo> cavalli = (List)this.cavalloService.getAll();
         model.addAttribute("cavalli", cavalli);
+        model.addAttribute("dim",cavalli.size());
         return "cavallo/cavalli.html";
     }
 

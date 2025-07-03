@@ -23,5 +23,9 @@ public Iterable<Partecipazione> findByCavallo(Cavallo cavallo);
 public Iterable<Partecipazione> findByFantino(Fantino fantino);
 @Transactional
 public Iterable<Partecipazione> findByContrada(Contrada contrada);
+@Transactional
+@Query("SELECT e.partecipazione FROM ElementoClassifica e " +
+       "WHERE e.partecipazione.cavallo = :cav AND e.posizione = 1")
+Iterable<Partecipazione> findWhereCavalloPrimo(@Param("cav") Cavallo cavallo);
 
 }

@@ -44,4 +44,11 @@ public class ContradaController {
         model.addAttribute("contrada", contrada);
         return "contrade/contrada.html";
     }
+    @GetMapping("/eliminaContrada/{id}")
+    public String eliminaContrada(@PathVariable("id")Long id, Model model) {
+    	contradaService.deleteById(id);
+    	model.addAttribute("contrade", this.contradaService.getAll());
+    	return "contrade/contrade.html";
+    }
+    
 }

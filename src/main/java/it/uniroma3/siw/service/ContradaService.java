@@ -121,5 +121,9 @@ public class ContradaService {
 	public Contrada getByid(Long id) {
 		return this.contradaRepository.findById(id).orElse(null);
 	}
+	
+	public void deleteById(Long id) {
+		this.contradaRepository.deleteById(id);
+	}
 
 }
