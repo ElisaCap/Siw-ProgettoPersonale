@@ -36,10 +36,10 @@
             Razza: <span><input required type="text" th:field="*{razza}" /></span>
             <span th:text="${msgErrYear}">Campo Obbligatorio</span>
         </div>
-        <div>
-            Immagine cavallo:
-            <input type="file" th:field="*{fileImmagine}" accept="image/*" />
-        </div>
+		<div>
+		         Immagine cavallo:
+		        <input type="file" th:field="*{fileImmagine}" accept="image/*" />
+		        </div>
         <div>
             <span><button type="submit">Conferma</button></span>
         </div>

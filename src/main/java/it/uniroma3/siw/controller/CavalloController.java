@@ -101,11 +101,20 @@ public class CavalloController {
     	model.addAttribute("id",id);
     	return "cavallo/modificaCavallo.html";
     }
+    
     @PostMapping("/saveCavallo")
     public String modificaCavallo(@ModelAttribute("cavallo")Cavallo cavallo,Model model) {
+    	 MultipartFile file = cavallo.getFileImmagine();
+         if (file != null && !file.isEmpty()) {
+             try {
+ 				cavallo.setImmagine(file.getBytes());
+ 			} catch (IOException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+         }
     	this.cavalloService.save(cavallo);
     	List<Cavallo>cavalli=(List)this.cavalloService.getAll();
-        cavalli.sort(Comparator.comparing(Cavallo::getNome));
     	model.addAttribute("cavalli",cavalli);
     	return "cavallo/cavalli.html";
     }

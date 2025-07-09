@@ -28,4 +28,5 @@ public Iterable<Partecipazione> findByContrada(Contrada contrada);
        "WHERE e.partecipazione.cavallo = :cav AND e.posizione = 1")
 Iterable<Partecipazione> findWhereCavalloPrimo(@Param("cav") Cavallo cavallo);
 
+
 }

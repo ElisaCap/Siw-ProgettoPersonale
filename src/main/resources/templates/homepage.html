@@ -11,54 +11,47 @@
 </head>
 
 <body>
-
-  <!-- Barra superiore fissa -->
   <header class="top-bar">
-    <div class="logo-text">Palio di Siena</div>
+    <div class="header-content">
+      <div class="logo-text">Palio di Siena</div>
 
-    <div class="user-controls">
-      <div sec:authorize="isAuthenticated()">
-        <span class="user-name" th:text="${#authentication.name}"></span>
-        <form th:action="@{/logout}" method="post" style="display: inline;">
-          <button class="btn" type="submit">Logout</button>
-        </form>
-      </div>
+      <div class="user-controls">
+        <div sec:authorize="isAuthenticated()">
+          <span class="user-name" th:text="${#authentication.name}"></span>
+          <form th:action="@{/logout}" method="post">
+            <button class="btn" type="submit">Logout</button>
+          </form>
+        </div>
 
-      <div sec:authorize="!isAuthenticated()">
-        <form th:action="@{/login}" method="get" style="display: inline;">
-          <button class="btn" type="submit">Login</button>
-        </form>
+        <div sec:authorize="!isAuthenticated()">
+          <form th:action="@{/login}" method="get">
+            <button class="btn" type="submit">Login</button>
+          </form>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- Contenuto principale -->
   <main>
-    <h1 class="uno">Homepage</h1>
+    <h1 class="main-title">Benvenuto al Palio di Siena</h1>
 
-	<div class="content">
-	  <form th:action="@{/cavalli/cercatutti}" method="get" class="action-card card-cavalli">
-	    <button type="submit">Mostra tutti i cavalli</button>
-	  </form>
-
-	  <form th:action="@{/contrade}" method="get" class="action-card card-contrade">
-	    <button type="submit">Mostra tutte le contrade</button>
-	  </form>
-
-	  <form th:action="@{/fantini/cercatutti}" method="get" class="action-card card-fantini">
-	    <button type="submit">Mostra tutti i fantini</button>
-	  </form>
-
-	  <form th:action="@{/edizioni}" method="get" class="action-card card-edizioni">
-	    <button type="submit">Mostra tutte le edizioni</button>
-	  </form>
-	</div>
-
-	
+    <div class="content">
+      <a href="/cavalli/cercatutti" class="action-card card-cavalli">
+        <span class="card-text" >Cavalli
+			</span>
+			
+		
+      </a>
+      <a href="/contrade" class="action-card card-contrade">
+        <span class="card-text">Contrade</span>
+      </a>
+      <a href="/fantini/cercatutti" class="action-card card-fantini">
+        <span class="card-text">Fantini</span>
+      </a>
+      <a href="/edizioni" class="action-card card-edizioni large">
+        <span class="card-text">Edizioni</span>
+      </a>
+    </div>
   </main>
-
-
-
 </body>
-
 </html>

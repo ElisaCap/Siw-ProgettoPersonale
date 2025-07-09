@@ -107,6 +107,15 @@ private FantinoService fantinoService;
     }
     @PostMapping("/salvaFantino")
     public String salvaFantino(@ModelAttribute("fantino")Fantino fantino,Model model) {
+    	  MultipartFile file = fantino.getFileImmagine();
+          if (file != null && !file.isEmpty()) {
+              try {
+  				fantino.setUrlImmagine(file.getBytes());
+  			} catch (IOException e) {
+  				// TODO Auto-generated catch block
+  				e.printStackTrace();
+  			}
+          }
     	this.fantinoService.save(fantino);
     	model.addAttribute("fantini",this.fantinoService.getAll());
     	return "fantino/fantini.html";
