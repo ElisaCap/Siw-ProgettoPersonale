@@ -128,21 +128,28 @@ body {
 /* Larger card for 'Edizioni' */
 .action-card.large {
   grid-column: span 2;
-  height: 360px;
+  height: 700px;
+  width: 1100px;
 }
-
+#ccf{
+	display: inline-block;
+	width: 1400px;
+}
+#ed{
+	display: inline-block;
+}
 /* Specific Card Backgrounds */
 .card-cavalli {
-  background-image: url("/R.jpg");
+  background-image: url("/css/R.jpg");
 }
 .card-contrade {
-  background-image: url("/R (1).jpg");
+  background-image: url("/css/R (1).jpg");
 }
 .card-fantini {
-  background-image: url("/palio_mossa_3-1751544635347.png");
+  background-image: url("/css/palio_mossa_3-1751544635347.png");
 }
 .card-edizioni {
-  background-image: url("/9644b07661934c0db6a7845c4d846ce8.jpg");
+  background-image: url("/css/9644b07661934c0db6a7845c4d846ce8.jpg");
 }
 
 /* Responsive */

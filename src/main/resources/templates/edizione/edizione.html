@@ -1,84 +1,91 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="it">
 
 <head>
-	<link rel="stylesheet" href="/css/cavallo.css">
-	<title>Edizione</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/cavallo.css">
+  <title>Edizione</title>
 </head>
 
 <body>
+  <!-- BARRA SUPERIORE -->
+  <div class="top-bar">
+    <div class="logo-text">Palio di Siena</div>
+    <form th:action="@{/home}" method="get">
+      <button class="btn" type="submit">Home</button>
+    </form>
+    <div class="user-controls">
+      <div sec:authorize="isAuthenticated()">
+        <span class="user-name" th:text="${#authentication.name}">Utente</span>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+          <button type="submit" class="btn">Logout</button>
+        </form>
+      </div>
+      <div sec:authorize="!isAuthenticated()">
+        <form th:action="@{/login}" method="get" style="display: inline;">
+          <button type="submit" class="btn">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
-	<!-- BARRA SUPERIORE -->
-		  <div class="top-bar">
-		    <div class="logo-text">Palio di Siena</div>
-			<form th:action="@{/home}" method="get">
-				<button class="btn" type="submit">home</button>
-			</form>
-		    <div class="user-controls">
-		      <div sec:authorize="isAuthenticated()">
-		        <span class="user-name" th:text="${#authentication.name}">Utente</span>
-		        <form th:action="@{/logout}" method="post" style="display: inline;">
-		          <button type="submit" class="btn">Logout</button>
-		        </form>
-		      </div>
-		      <div sec:authorize="!isAuthenticated()">
-		        <form th:action="@{/login}" method="get" style="display: inline;">
-		          <button type="submit" class="btn">Login</button>
-		        </form>
-		      </div>
-		    </div>
-		  </div>
+  <!-- CONTENUTO -->
+  <div class="contenitore-cavallo" th:if="${edizione}">
+    <h1 class="uno" th:text="|Edizione del ${edizione.data}|"></h1>
 
-		
-		
-	<div th:if="${edizione}">
-		<h1 class="uno">Dati edizione</h1>
-		<a class="box">
-		<p class="definizione">Id edizione</p>
-		<p class="nome" th:text="${edizione.id}"></p>
-		</a>
-		<a class="box">
-				<p class="definizione">Data edizione</p>
-				<p class="nome" th:text="${edizione.data}"></p>
-				</a>
-		<a class="box">
-	
-		<p class="definizione">Foto edizione:</p>
-		
-		<img th:src="@{'/edizione/' + ${edizione.id} + '/immagine'}" alt="Immagine edizione" />
-		
-	</a>
-		<form th:action="@{/classifica/{id}(id=${edizione.id})}" method="get">
-		    <button type="submit">Vedi classifica</button>
-		</form>
-		<div sec:authorize="hasRole('ADMIN')">
-		<form th:action="@{/edizioni/delete/{id}(id=${edizione.id})}" method="get"
-		                       onsubmit="return confirm('Sei sicuro di voler eliminare questa edizione fantino?');">
-		                     <button type="submit">Elimina</button>
-	</form>
-		     </div>
-						             </form>
-		<div sec:authorize="hasRole('ADMIN')">
-		<form th:action="@{/insPartecipazione/{id}(id=${edizione.id})}" method="get">
-			<button type="submit">Ins Partecipazione</button>
-			</form>
-			</div>
-		
-		<div sec:authorize="isAuthenticated()">
-		<form th:action="@{/insCommento/{id}(id=${edizione.id})}">
-			<button type="submit" class="btn">inserisci un commento</button>
-		</form>
-		</div>
-		
-			<form th:action="@{/commentiEdizione/{id}(id=${edizione.id})}" method="get">
-								<button type="submit" class="btn">Vedi i commenti</button>			
-					</form>
-	
-				
-	</div>
-	<div th:unless="${edizione}">
-		<p>edizione non trovata</p>
-	</div>
+    <div class="dati-cavallo-container">
+      <!-- ID -->
+      <div class="box">
+        <p class="definizione">Id Edizione</p>
+        <p class="nome" th:text="${edizione.id}">1</p>
+      </div>
+
+      <!-- Data -->
+      <div class="box">
+        <p class="definizione">Data Edizione</p>
+        <p class="nome" th:text="${edizione.data}">01-07-2025</p>
+      </div>
+
+      <!-- Immagine -->
+      <div class="cavallo-img-box">
+        <img th:src="@{'/edizione/' + ${edizione.id} + '/immagine'}" alt="Immagine Edizione" />
+      </div>
+    </div>
+
+    <!-- Bottoni -->
+    <div class="bottoni-cavallo">
+      <form th:action="@{/classifica/{id}(id=${edizione.id})}" method="get">
+        <button type="submit" class="btn-card secondary">Vedi Classifica</button>
+      </form>
+
+      <div sec:authorize="hasRole('ADMIN')">
+        <form th:action="@{/edizioni/delete/{id}(id=${edizione.id})}" method="get"
+              onsubmit="return confirm('Sei sicuro di voler eliminare questa edizione?');">
+          <button type="submit" class="btn-card danger">Elimina</button>
+        </form>
+      </div>
+
+      <div sec:authorize="hasRole('ADMIN')">
+        <form th:action="@{/insPartecipazione/{id}(id=${edizione.id})}" method="get">
+          <button type="submit" class="btn-card secondary">Ins Partecipazione</button>
+        </form>
+      </div>
+
+      <div sec:authorize="isAuthenticated()">
+        <form th:action="@{/insCommento/{id}(id=${edizione.id})}" method="get">
+          <button type="submit" class="btn-card">Inserisci un commento</button>
+        </form>
+      </div>
+
+      <form th:action="@{/commentiEdizione/{id}(id=${edizione.id})}" method="get">
+        <button type="submit" class="btn-card">Vedi i commenti</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Se non trovata -->
+  <div class="contenitore-cavallo" th:unless="${edizione}">
+    <h1 class="uno">Edizione non trovata</h1>
+  </div>
 </body>
-
 </html>

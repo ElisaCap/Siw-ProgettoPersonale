@@ -1,90 +1,55 @@
 <!DOCTYPE html>
-
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="it">
 <head>
-	<link rel="stylesheet" href="/css/cavallo.css">
-	<title>Edizioni</title>
+  <meta charset="UTF-8">
+  <title>Edizioni</title>
+  <link rel="stylesheet" href="/css/cavallo.css">
 </head>
 
 <body>
-	<!-- BARRA SUPERIORE -->
-		  <div class="top-bar">
-		    <div class="logo-text">Palio di Siena</div>
-			<form th:action="@{/home}" method="get">
-				<button class="btn" type="submit">home</button>
-			</form>
-		    <div class="user-controls">
-		      <div sec:authorize="isAuthenticated()">
-		        <span class="user-name" th:text="${#authentication.name}">Utente</span>
-		        <form th:action="@{/logout}" method="post" style="display: inline;">
-		          <button type="submit" class="btn">Logout</button>
-		        </form>
-		      </div>
-		      <div sec:authorize="!isAuthenticated()">
-		        <form th:action="@{/login}" method="get" style="display: inline;">
-		          <button type="submit" class="btn">Login</button>
-		        </form>
-		      </div>
-		    </div>
-		  </div>
-		  
-		  
-	<h1 class="titolo">Ecco tutte le edizioni registrate</h1>
-	<table class="elenco" >
-					
-					 <!-- Inizia la tabella -->
-					<tr> <!-- Inizia la prima riga
-					
-					 -->
-					<td>Id</td>
-					<td>Data </td>
-					<td>Foto</td> <!-- Seconda colonna -->
-	</tr>
-	
-	
-	
-	  <a th:each=" edizione : ${edizioni}">
-	    
-			
-			
-			
-			
-			
-				
-			
-				
-				 <!-- Fine della prima riga -->
-				<tr> <!-- Inizia la seconda riga -->
-					<td th:text="${edizione.id}"></td>
-				         <td th:text="${edizione.data}"></td>
-				
-				<td >
-					<img th:src="@{'/edizione/' + ${edizione.id} + '/immagine'}" alt="Immagine edizione" />
-				<td>
-					<form  th:action="@{/edizione/{id}(id=${edizione.id})}" method="get">
-									<button type="submit">vedi info</td> <!-- Seconda colonna -->
-									</button></form>
-					
-					
-									
-				</td>
-			</tr> <!-- Fine della seconda riga -->
-				</table> <!-- Fine della tabella -->
-			
-			
-			
-			
-		
-	  </a>
-	  
-	<form th:action="@{/insEdizione}" method="get">
-		<button class="btn" type="submit">+</button>
-	</form>
-	  
-	  
-	  
+  <!-- BARRA SUPERIORE -->
+  <div class="top-bar">
+    <div class="logo-text">Palio di Siena</div>
+    <form th:action="@{/home}" method="get">
+      <button class="btn" type="submit">Home</button>
+    </form>
+    <div class="user-controls">
+      <div sec:authorize="isAuthenticated()">
+        <span class="user-name" th:text="${#authentication.name}">Utente</span>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+          <button type="submit" class="btn">Logout</button>
+        </form>
+      </div>
+      <div sec:authorize="!isAuthenticated()">
+        <form th:action="@{/login}" method="get" style="display: inline;">
+          <button type="submit" class="btn">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
+  <!-- TITOLO -->
+  <h1 class="main-title">Ecco tutte le edizioni registrate</h1>
+
+  <!-- CONTENUTO EDIZIONI -->
+  <div class="card-container">
+    <a th:each="edizione : ${edizioni}" 
+       th:href="@{/edizione/{id}(id=${edizione.id})}" 
+       class="card-cavallo"
+       th:style="'background-image: url(' + @{/edizione/{id}/immagine(id=${edizione.id})} + ')'">
+       
+      <div class="card-overlay">
+        <h2 th:text="'Edizione ' + ${edizione.id}">Edizione</h2>
+        <p><strong>Data:</strong> <span th:text="${edizione.data}"></span></p>
+      </div>
+    </a>
+  </div>
+
+  <!-- BOTTONE AGGIUNTA -->
+  <div class="add-button">
+    <form th:action="@{/insEdizione}" method="get">
+      <button class="btn-add" type="submit">+</button>
+    </form>
+  </div>
 </body>
-
 </html>

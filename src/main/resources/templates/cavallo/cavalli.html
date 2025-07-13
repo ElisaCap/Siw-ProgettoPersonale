@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="/css/cavallo.css">
@@ -9,63 +8,55 @@
 </head>
 
 <body>
-  <!-- BARRA SUPERIORE -->
-  <div class="top-bar">
-    <div class="logo-text">Palio di Siena</div>
-	<form th:action="@{/home}" method="get">
-		<button class="btn" type="submit">home</button>
-	</form>
-    <div class="user-controls">
-      <div sec:authorize="isAuthenticated()">
-        <span class="user-name" th:text="${#authentication.name}">Utente</span>
-        <form th:action="@{/logout}" method="post" style="display: inline;">
-          <button type="submit" class="btn">Logout</button>
-        </form>
-      </div>
-      <div sec:authorize="!isAuthenticated()">
-        <form th:action="@{/login}" method="get" style="display: inline;">
-          <button type="submit" class="btn">Login</button>
-        </form>
-      </div>
-    </div>
-  </div>
+	
+	<header class="top-bar">
+	  <div class="header-content">
+	    <div class="logo-text">Palio di Siena</div>
+
+	    <div class="user-controls">
+	      <!-- Bottone Home -->
+	      <form th:action="@{/home}" method="get" style="display: inline;">
+	        <button class="btn" type="submit">Home</button>
+	      </form>
+
+	      <div sec:authorize="isAuthenticated()" style="display: inline;">
+	        <span class="user-name" th:text="${#authentication.name}"></span>
+	        <form th:action="@{/logout}" method="post" style="display: inline;">
+	          <button class="btn" type="submit">Logout</button>
+	        </form>
+	      </div>
+
+	      <div sec:authorize="!isAuthenticated()" style="display: inline;">
+	        <form th:action="@{/login}" method="get" style="display: inline;">
+	          <button class="btn" type="submit">Login</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</header>
+
 
   <!-- TITOLO -->
-  <h1 class="titolo">Ecco tutti i cavalli registrati</h1>
+  <h1 class="main-title">Ecco tutti i cavalli registrati</h1>
+
+  <!-- CARD CONTAINER -->
   <div class="card-container">
-    <div class="card-cavallo" th:each="cavallo : ${cavalli}">
-      <img class="card-img" th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" alt="Foto cavallo" />
-      
-      <div class="card-info">
+    <a class="card-cavallo" th:each="cavallo : ${cavalli}"
+       th:href="@{/cavalli/{id}(id=${cavallo.id})}"
+       th:style="'background-image: url(/cavalli/' + ${cavallo.id} + '/immagine)'">
+      <div class="card-overlay">
         <h2 th:text="${cavallo.nome}">Nome Cavallo</h2>
-        <p><strong>ID:</strong> <span th:text="${cavallo.id}"></span></p>
-        <p><strong>Razza:</strong> <span th:text="${cavallo.razza}"></span></p>
+        <p><strong>ID:</strong> <span th:text="${cavallo.id}">1</span></p>
+        <p><strong>Razza:</strong> <span th:text="${cavallo.razza}">Sella</span></p>
       </div>
-      
-      <div class="card-actions">
-        <form th:action="@{/cavalli/{id}(id=${cavallo.id})}" method="get">
-          <button class="btn-card" type="submit">Vedi info</button>
-        </form>
-        
-        <div sec:authorize="hasRole('ADMIN')">
-          <form th:action="@{/cavalli/delete/{id}(id=${cavallo.id})}" method="get"
-                onsubmit="return confirm('Sei sicuro di voler eliminare questo cavallo?');">
-            <button class="btn-card danger" type="submit">Elimina</button>
-          </form>
-
-          <form th:action="@{/cavalli/modifica/{id}(id=${cavallo.id})}" method="get">
-            <button class="btn-card secondary" type="submit">Modifica</button>
-          </form>
-        </div>
-      </div>
-    </div>
+    </a>
   </div>
-  <!-- BOTTONE AGGIUNGI -->
-   <div sec:authorize="hasRole('ADMIN')">
-     <form th:action="@{/insCavallo}" method="get">
-       <button type="submit">+</button>
-     </form>
-   </div>
 
+  <!-- BOTTONE AGGIUNGI -->
+  <div class="add-button" sec:authorize="hasRole('ADMIN')">
+    <form th:action="@{/insCavallo}" method="get">
+      <button class="btn-add" type="submit">+</button>
+    </form>
+  </div>
 </body>
 </html>

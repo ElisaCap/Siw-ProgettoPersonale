@@ -23,6 +23,7 @@
           <button type="submit" class="btn">Login</button>
         </form>
       </div>
+	  
     </div>
   </div>
 
@@ -65,6 +66,16 @@
 	    <form th:action="@{/partCavallo/{id}(id=${cavallo.id})}" method="get">
 	      <button type="submit" class="btn">Vedi partecipazioni</button>
 	    </form>
+		<div sec:authorize="hasRole('ADMIN')">
+			           <form th:action="@{/cavalli/delete/{id}(id=${cavallo.id})}" method="get"
+			                 onsubmit="return confirm('Sei sicuro di voler eliminare questo cavallo?');">
+			             <button class="btn-card danger" type="submit">Elimina</button>
+			           </form>
+
+			           <form th:action="@{/cavalli/modifica/{id}(id=${cavallo.id})}" method="get">
+			             <button class="btn-card secondary" type="submit">Modifica</button>
+			           </form>
+			         </div>	
 	  </div>
 	</div>
 

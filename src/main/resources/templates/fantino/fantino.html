@@ -21,11 +21,13 @@
 	          <button type="submit" class="btn">Logout</button>
 	        </form>
 	      </div>
+		  
 	      <div sec:authorize="!isAuthenticated()">
 	        <form th:action="@{/login}" method="get" style="display: inline;">
 	          <button type="submit" class="btn">Login</button>
 	        </form>
 	      </div>
+		
 	    </div>
 	  </div>
 
@@ -62,7 +64,16 @@
 	<form th:action="@{/partFantino/{id}(id=${fantino.id})}" method="get">
 		<button type="submit">vedi partecipazioni</button>
 	</form>
-
+	<div sec:authorize="hasRole('ADMIN')">
+			  	  				
+			  	                    <form th:action="@{/fantini/delete/{id}(id=${fantino.id})}" method="get"
+			  	                          onsubmit="return confirm('Sei sicuro di voler eliminare questo fantino?');">
+			  	                        <button type="submit">Elimina</button>
+			  	                    </form>
+			  	  				<form th:action="@{/fantini/modifica/{id}(id=${fantino.id})}" method="get">
+			  	  				             <button type="submit">Modifica</button>
+			  	  				</form>
+			  	                </div> 
 	
 	<div th:unless="${fantino}">
 		<p>fantino non trovato</p>
