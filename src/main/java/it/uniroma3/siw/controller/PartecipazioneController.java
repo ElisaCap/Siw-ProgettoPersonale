@@ -59,7 +59,7 @@ public class PartecipazioneController {
 @PostMapping("/insPartecipazione")
 public String savePartecipazione(@ModelAttribute("partecipazione") Partecipazione partecipazione, Model model ) {
 	this.partecipazioneService.save(partecipazione);
-	return "homepage.html";
+	return "redirect:/edizione/"+partecipazione.getEdizione().getId();
 }
 @GetMapping("/partecipazione/delete/{id}")
 public String eliminaFantino(@PathVariable Long id, Model model) {

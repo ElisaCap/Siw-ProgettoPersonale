@@ -69,6 +69,9 @@
         <form th:action="@{/insPartecipazione/{id}(id=${edizione.id})}" method="get">
           <button type="submit" class="btn-card secondary">Ins Partecipazione</button>
         </form>
+		<form th:action="@{/modificaEdizione/{id}(id=${edizione.id})}" method="get">
+		         <button type="submit" class="btn-card secondary">Modifica</button>
+		       </form>
       </div>
 
       <div sec:authorize="isAuthenticated()">

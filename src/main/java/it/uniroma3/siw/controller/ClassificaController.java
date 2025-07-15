@@ -24,6 +24,7 @@ import it.uniroma3.siw.repository.EdizioneRepository;
 import it.uniroma3.siw.repository.ElementoClassificaRepository;
 import it.uniroma3.siw.repository.PartecipazioneRepository;
 import it.uniroma3.siw.service.ClassificaService;
+import it.uniroma3.siw.service.EdizioneService;
 import it.uniroma3.siw.service.ElementoClassificaService;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -46,6 +47,8 @@ private ClassificaService classificaService;
 private PartecipazioneRepository partecipazioneRepository;
 @Autowired
 private ClassificaRepository classificaRepository;
+@Autowired
+private EdizioneService edizioneSerivice;
 
     ClassificaController(ElementoClassificaRepository elementoClassificaRepository, EdizioneRepository edizioneRepository, ElementoClassificaService elementoClassificaService) {
         this.elementoClassificaRepository = elementoClassificaRepository;
@@ -54,15 +57,13 @@ private ClassificaRepository classificaRepository;
     }
     
     @GetMapping("/classifica/{id}")
-    public String classificaId(@PathVariable("id") Long id, Model model) {
-        if (id == null) return "errore";
-
-        Classifica classifica = this.classificaService.getById(id);
+    public String classificaId(@PathVariable Long id, Model model) {
+        Edizione edizione = edizioneSerivice.getById(id);
+        Classifica classifica = classificaService.getOrCreateByEdizione(edizione);
+        
         model.addAttribute("classifica", classifica);
-        model.addAttribute("elementiClassifica", this.elementoClassificaRepository.findAllByClassifica(classifica));
-        List<Partecipazione>partecipazioni=partecipazioneRepository.findByEdizioneId(id);
-        model.addAttribute("partecipazioni",partecipazioni);
-        return "classifica/classifica"; 
+        model.addAttribute("elementiClassifica", elementoClassificaRepository.findAllByClassifica(classifica));
+        return "classifica/classifica.html"; // il tuo template HTML
     }
 
 

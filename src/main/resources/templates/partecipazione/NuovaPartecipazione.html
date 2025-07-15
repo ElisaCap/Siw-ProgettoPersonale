@@ -21,7 +21,7 @@
 					  				      <option value="" disabled selected>Scegli un fantino</option>
 					  				      <option th:each="fa : ${fantini}" 
 					  				              th:value="${fa.id}" 
-					  				              th:text="${fa.nome}">
+					  				              th:text="|${fa.nome} ${fa.cognome}|">
 					  				      </option>
 					  					  <input type="hidden" th:field="${partecipazione.fantino}" value="${fantino}" />
 				  </select>

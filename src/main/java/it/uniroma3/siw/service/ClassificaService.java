@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,6 +78,24 @@ public Iterable<Classifica>getAll(){
 	return this.classificaRepository.findAll();
 }
 
+
+public Classifica getOrCreateByEdizione(Edizione edizione) {
+    Optional<Classifica> optional = classificaRepository.findById(edizione.getId());
+
+    if (optional.isPresent()) {
+        return optional.get();
+    } else {
+        // Nuova classifica
+        Classifica nuova = new Classifica();
+        nuova.setEdizione(edizione);
+        // Se vuoi, inizializza lista vuota:
+        nuova.setElementiClassifica(new ArrayList<>());
+
+        return classificaRepository.save(nuova);
+    }
+
+
+}
 }
 
 

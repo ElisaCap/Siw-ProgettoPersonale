@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -129,7 +130,46 @@ public ResponseEntity<byte[]> getImmagine(@PathVariable Long id) {
     return new ResponseEntity<>(edizione.getUrlImmagine(), headers, HttpStatus.OK);
 }
 
+@GetMapping("/modificaEdizione/{id}")
+public String modifica(Model model, @PathVariable Long id) {
+	Edizione edizione=edizioneSerivice.getById(id);
+	model.addAttribute("edizione",edizione);
+	return "edizione/modificaEdizione.html";
+}
 
+
+@PostMapping("/salvaEdizione")
+@Transactional
+public String salvaEdizione(@ModelAttribute("edizione") Edizione edizione) {
+    MultipartFile file = edizione.getFileImmagine();
+
+    if (file != null && !file.isEmpty()) {
+        try {
+            edizione.setUrlImmagine(file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 1️⃣ Estraggo la classifica e la scollego
+    Classifica classifica = edizione.getClassifica();
+    edizione.setClassifica(null); // importante
+
+    // 2️⃣ Salvo Edizione senza Classifica (così ottiene l'ID)
+    edizione = edizioneRepository.save(edizione); // assegna ID
+
+    // 3️⃣ Se la Classifica esiste, la collego e la salvo separatamente
+    if (classifica != null) {
+        classifica.setEdizione(edizione); // imposta Edizione con ID
+        classificaService.save(classifica); // ora può usare il MapsId
+    }
+
+    // 4️⃣ Se vuoi, ricollega la classifica (opzionale)
+    edizione.setClassifica(classifica);
+    edizioneSerivice.save(edizione); // salva nuovamente solo se necessario
+
+    return "redirect:/edizione/" + edizione.getId();
+}
 
 
 }

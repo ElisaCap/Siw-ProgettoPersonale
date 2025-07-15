@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifica Contrada</title>
+    <link rel="stylesheet" href="/stile.css?version=3" />
+</head>
+<body>
+
+    <div><a href="/">Home</a></div>
+    <h1>Modifica Contrada</h1>
+
+    <form th:action="@{/salvaContrada}" method="post" th:object="${contrada}" enctype="multipart/form-data">
+        <!-- ID nascosto -->
+        <input type="hidden" th:field="*{id}" th:value="${id}" />
+
+        <!-- Nome -->
+        <div>
+            <label>Nome:</label>
+            <input type="text" th:field="*{nome}" required />
+            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Errore</span>
+        </div>
+
+        <!-- Descrizione breve -->
+        <div>
+            <label>Descrizione breve:</label>
+            <input type="text" th:field="*{descrizione}" required />
+            <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}">Errore</span>
+        </div>
+
+        <!-- Descrizione lunga -->
+        <div>
+            <label>Descrizione lunga:</label>
+            <textarea th:field="*{descrizioneLunga}" rows="6" cols="60"></textarea>
+            <span th:if="${#fields.hasErrors('descrizioneLunga')}" th:errors="*{descrizioneLunga}">Errore</span>
+        </div>
+
+        <!-- Immagine -->
+        <div>
+            <label>Immagine:</label>
+            <input type="file" name="fileImmagine" accept="image/*" />
+            <div th:if="${contrada.urlImmagine != null}">
+                <p>Immagine attuale:</p>
+                <img th:src="@{'/immagine/contrada/' + ${contrada.id}}" alt="Immagine Contrada" width="200" />
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <div>
+            <button type="submit">Salva modifiche</button>
+        </div>
+    </form>
+
+</body>
+</html>

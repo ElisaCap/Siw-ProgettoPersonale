@@ -50,7 +50,8 @@ public class CavalloController {
 			}
         }
         this.cavalloService.save(cavallo);
-        return "cavallo/cavallo.html";
+        model.addAttribute("cavalli",cavalloService.getAll());
+        return "redirect:/cavalli/cercatutti";
     }
 
     @GetMapping("/trovaCavallo")
@@ -116,7 +117,7 @@ public class CavalloController {
     	this.cavalloService.save(cavallo);
     	List<Cavallo>cavalli=(List)this.cavalloService.getAll();
     	model.addAttribute("cavalli",cavalli);
-    	return "cavallo/cavalli.html";
+    	return "redirect:/cavalli/cercatutti";
     }
     
     

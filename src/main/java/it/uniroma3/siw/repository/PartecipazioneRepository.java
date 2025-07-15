@@ -15,8 +15,9 @@ import jakarta.transaction.Transactional;
 
 public interface PartecipazioneRepository extends CrudRepository<Partecipazione,Long> {
 	@Transactional
-	@Query("SELECT p FROM Partecipazione p WHERE p.edizione.id = :edizioneId")
+	@Query("SELECT p FROM Partecipazione p WHERE p.edizione.id = :edizioneId AND p.elementoClassifica IS NULL")
 	List<Partecipazione> findByEdizioneId(@Param("edizioneId") Long edizioneId);
+
 @Transactional
 public Iterable<Partecipazione> findByCavallo(Cavallo cavallo);
 @Transactional

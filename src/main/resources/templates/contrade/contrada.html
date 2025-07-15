@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html>
 	<head>
-		<link rel="stylesheet" href="/contrade.css" />
+		<link rel="stylesheet" href="css/contrade.css" />
 		<title>Contrada</title>
 	</head>
 	<div class="contenitore">
@@ -37,7 +37,11 @@
 		<form th:action="@{/eliminaContrada/{id}(id=${contrada.id})}" method="get"
 		               onsubmit="return confirm('Sei sicuro di voler eliminare questa contrada?');">
 		           <button type="submit" class="btn-card danger">Elimina</button>
-		         </form>
+		</form>
+				   <form th:action="@{/modificaContrada/{id}(id=${contrada.id})}" method="get"
+				   		               >
+				   		           <button type="submit" class="btn-card danger">Modifica</button>       
+			    </form>
 				 </div>
 	</body>
 </html>

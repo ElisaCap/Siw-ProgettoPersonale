@@ -48,7 +48,7 @@ private FantinoService fantinoService;
         }
 	    
 	    this.fantinoService.save(fantino);
-	    return "fantino/fantino.html";
+	    return "redirect:/fantini/cercatutti";
 	}
 
 	
