@@ -97,7 +97,7 @@ body {
 
 /* Cavallo Card */
 .card-cavallo {
-	border: #b45100,solid,10px;
+	border: #b45100,dashed,3px;
 	background-color: white;
 
   display: flex;

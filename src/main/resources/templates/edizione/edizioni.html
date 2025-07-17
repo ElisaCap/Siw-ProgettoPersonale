@@ -39,7 +39,7 @@
        th:style="'background-image: url(' + @{/edizione/{id}/immagine(id=${edizione.id})} + ')'">
        
       <div class="card-overlay">
-        <h2 th:text="'Edizione ' + ${edizione.id}">Edizione</h2>
+        <h2 th:text="|Edizione del ${edizione.data}|">Edizione</h2>
         <p><strong>Data:</strong> <span th:text="${edizione.data}"></span></p>
       </div>
     </a>

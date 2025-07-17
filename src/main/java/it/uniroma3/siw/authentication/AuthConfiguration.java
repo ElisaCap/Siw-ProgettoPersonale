@@ -82,7 +82,8 @@ private CredentialsRepository credentialsRepository;
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-            		.requestMatchers("/","/paginaIntroduttiva.html","/insEdizione",
+            		.requestMatchers("/","/paginaIntroduttiva.html","/insEdizione","/cavalli/{id}/immagine",
+            				"/fantini/{id}/immagine","/fantini/cercatutti","/cavalli/{id}",
             			    "/login", "/register","/insCavallo", "/logout","/R.jpg",
             			    "/cavallo/**","/edizione/**", "/classifica/**","/contrade/**",
             			    "/home","/homepage.html","/edizioni","/edizione/{id}","edizioni.html","edizione.html",   "/visualizza",

@@ -63,6 +63,7 @@ private EdizioneService edizioneSerivice;
         
         model.addAttribute("classifica", classifica);
         model.addAttribute("elementiClassifica", elementoClassificaRepository.findAllByClassifica(classifica));
+        model.addAttribute("partecipazioni",partecipazioneRepository.findByEdizioneId(id));
         return "classifica/classifica.html"; // il tuo template HTML
     }
 
