@@ -2,12 +2,35 @@
 <html>
 	<head>
 			<title>Nuovo Fantino</title>
-			<link rel="stylesheet" href="/stile.css?version=3"/>
+			<link rel="stylesheet" href="/css/insCavallo.css"/>
 		</head>
 		<body>
+			<!-- BARRA SUPERIORE -->
+				<div class="top-bar">
+				  <div class="header-content">
+				    <div class="logo-text">Palio di Siena</div>
+				    <div class="user-controls">
+						<form th:action="@{/home}" method="get" style="display: inline;">
+									         <button class="btn" type="submit">Home</button>
+									       </form>
+				      <div sec:authorize="isAuthenticated()">
+				        <span class="user-name" th:text="${#authentication.name}">Utente</span>
+				        <form th:action="@{/logout}" method="post" style="display: inline;">
+				          <button type="submit" class="btn">Logout</button>
+				        </form>
+				      </div>
+				      <div sec:authorize="!isAuthenticated()">
+				        <form th:action="@{/login}" method="get" style="display: inline;">
+				          <button type="submit" class="btn">Login</button>
+				        </form>
+				      </div>
+				    </div>
+				  </div>
+				</div> 
 			<div><a href="/"></a></div>
-			<h1>Aggiungi un fantino</h1>
-			<form th:action="@{/insFantino}" method="post" th:object="${fantino}" enctype="multipart/form-data">
+			<h1 class="main-title">Aggiungi un fantino</h1>
+			<form th:action="@{/insFantino}" method="post" th:object="${fantino}"  enctype="multipart/form-data"
+			class="form-cavallo">
 			    <div>
 			        Nome: <span><input required type="text" th:field="${fantino.nome}"/></span>
 			        <span th:text="${msgErrTitle}">Campo Obbligatorio</span>
@@ -26,7 +49,7 @@
 			        </span>
 			    </div>
 			    <div>
-			        <span><button type="submit">Conferma</button></span>
+			        <span><button type="submit" class="btn">Conferma</button></span>
 			    </div>
 			</form>
 		</body>	

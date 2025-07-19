@@ -1,32 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
->
-	
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="it">
 <head>
-    <title>User Registration</title>
-	<link rel="stylesheet" th:href="@{/css/login.css}" />
-
+    <meta charset="UTF-8">
+    <title>Registrazione Utente</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	<main class="login-container">
 
-    <form th:action="@{/register}" th:object="${user}" method="post">
-        <label  for="name">Username:</label>
-        <input type="text" id="name" th:field="*{name}" /><br />
+    <!-- Se hai una top-bar, può essere inserita qui -->
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" th:field="*{email}" /><br />
-		
-		<label for="surname">Surname:</label>
-		        <input type="text" id="surname" th:field="*{surname}" /><br />
+    <main class="login-container">
+        <h1 class="login-title">Crea un nuovo account</h1>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" th:field="*{password}" /><br />
+        <form th:action="@{/register}" th:object="${user}" method="post" class="login-form">
 
-        <button type="submit">Register</button>
-		</form>
-	</main>
-    </form>
+            <div class="login-field">
+                <label for="name">Username:</label>
+                <input type="text" id="name" th:field="*{name}" placeholder="Inserisci il tuo username"/>
+                <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+
+            <div class="login-field">
+                <label for="surname">Cognome:</label>
+                <input type="text" id="surname" th:field="*{surname}" placeholder="Inserisci il tuo cognome"/>
+                <span class="error" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+            </div>
+
+            <div class="login-field">
+                <label for="email">Email:</label>
+                <input type="email" id="email" th:field="*{email}" placeholder="Es: nome@email.com"/>
+                <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+
+            <div class="login-field">
+                <label for="password">Password:</label>
+                <input type="password" id="password" th:field="*{password}" placeholder="Minimo 6 caratteri"/>
+                <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+
+            <div class="login-buttons">
+                <button class="btn" type="submit">Registrati</button>
+                <a th:href="@{/login}" class="btn secondary">Hai già un account?</a>
+            </div>
+
+        </form>
+    </main>
+
 </body>
 </html>

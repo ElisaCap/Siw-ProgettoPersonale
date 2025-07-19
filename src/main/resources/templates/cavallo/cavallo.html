@@ -8,24 +8,35 @@
 </head>
 
 <body>
-  <!-- BARRA SUPERIORE -->
-  <div class="top-bar">
-    <div class="logo-text">Palio di Siena</div>
-    <div class="user-controls">
-      <div sec:authorize="isAuthenticated()">
-        <span class="user-name" th:text="${#authentication.name}">Utente</span>
-        <form th:action="@{/logout}" method="post" style="display: inline;">
-          <button type="submit" class="btn">Logout</button>
-        </form>
-      </div>
-      <div sec:authorize="!isAuthenticated()">
-        <form th:action="@{/login}" method="get" style="display: inline;">
-          <button type="submit" class="btn">Login</button>
-        </form>
-      </div>
-	  
-    </div>
-  </div>
+	<!-- HEADER -->
+						<header class="top-bar">
+						  <div class="header-content">
+						    <div class="logo-text">Palio di Siena</div>
+						    <div class="user-controls">
+
+						      <!-- Home -->
+						      <form th:action="@{/home}" method="get" style="display: inline;">
+						        <button class="btn" type="submit">Home</button>
+						      </form>
+
+						      <!-- Autenticato -->
+						      <div sec:authorize="isAuthenticated()" style="display: inline;">
+						        <span class="user-name" th:text="${#authentication.name}"></span>
+						        <form th:action="@{/logout}" method="post" style="display: inline;">
+						          <button class="btn" type="submit">Logout</button>
+						        </form>
+						      </div>
+
+						      <!-- Non autenticato -->
+						      <div sec:authorize="!isAuthenticated()" style="display: inline;">
+						        <form th:action="@{/login}" method="get" style="display: inline;">
+						          <button class="btn" type="submit">Login</button>
+						        </form>
+						      </div>
+						    </div>
+						  </div>
+						</header>
+
 
   <!-- CONTENUTO PRINCIPALE -->
   <div th:if="${cavallo}" class="dati-cavallo-container">

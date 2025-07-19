@@ -62,7 +62,7 @@ private EdizioneService edizioneSerivice;
         Classifica classifica = classificaService.getOrCreateByEdizione(edizione);
         
         model.addAttribute("classifica", classifica);
-        model.addAttribute("elementiClassifica", elementoClassificaRepository.findAllByClassifica(classifica));
+        model.addAttribute("elementiClassifica", elementoClassificaRepository.findAllByClassificaOrderByPosizione(classifica));
         model.addAttribute("partecipazioni",partecipazioneRepository.findByEdizioneId(id));
         return "classifica/classifica.html"; // il tuo template HTML
     }
@@ -194,7 +194,7 @@ public String eliminaElemento(@PathVariable Long id,
 
     model.addAttribute("classifica", classificaService.getById(idc));
     model.addAttribute("elementiClassifica",
-            elementoClassificaRepository.findAllByClassifica(classificaService.getById(idc)));
+            elementoClassificaRepository.findAllByClassificaOrderByPosizione(classificaService.getById(idc)));
 
     return "classifica/classifica.html";
 }
@@ -229,9 +229,9 @@ public String salvaElemento(@RequestParam("partecipazioneId") Long partecipazion
     elemento.setClassifica(classifica);
     elemento.setPartecipazione(partecipazione);
     elemento.setPosizione(posizione );
+    elementoClassificaRepository.incrementaPosizioniDa(posizione);
 
     elementoClassificaRepository.save(elemento);
-
     return "redirect:/classifica/" + id;
 }
 

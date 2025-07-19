@@ -7,17 +7,13 @@
 <body>
 <h1>Inserisci Classifica</h1>
 <form action="#" th:action="@{/salvaElemento/{id}(id=${id})}" method="post">
-    <input type="number" name="posizione" th:value="${posizione}" />
+    <input type="number" name="posizione" th:value="${posizione}" readonly />
     <select name="partecipazioneId">
-				<option th:each="ca : ${partecipazioni}" 
-				        th:value="${ca.id}" 
-				        th:text="${ca.fantino.nome + ' - ' + ca.contrada.nome + ' - ' + (ca.edizione != null ? ca.edizione.data : 'N.D.')}">
-				</option>
-
-            </select>
-        </fieldset>
-
-    
+        <option th:each="ca : ${partecipazioni}" 
+                th:value="${ca.id}" 
+                th:text="${ca.fantino.nome + ' - ' + ca.contrada.nome + ' - ' + (ca.edizione != null ? ca.edizione.data : 'N.D.')}">
+        </option>
+    </select>
 
     <button type="submit">Salva</button>
 </form>

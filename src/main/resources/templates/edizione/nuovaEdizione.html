@@ -2,13 +2,34 @@
 <html>
 <head>
     <title>Nuova Edizione</title>
-    <link rel="stylesheet" href="/stile.css?version=3"/>
+    <link rel="stylesheet" href="/css/insCavallo.css"/>
 </head>
 <body>
-    <div><a href="/">Home</a></div>
-    <h1>Aggiungi un'edizione</h1>
-
-    <form th:action="@{/insEdizione}" method="post" th:object="${edizione}" enctype="multipart/form-data">
+	<!-- BARRA SUPERIORE -->
+					<div class="top-bar">
+					  <div class="header-content">
+					    <div class="logo-text">Palio di Siena</div>
+					    <div class="user-controls">
+							<form th:action="@{/home}" method="get" style="display: inline;">
+							         <button class="btn" type="submit">Home</button>
+							       </form>
+					      <div sec:authorize="isAuthenticated()">
+					        <span class="user-name" th:text="${#authentication.name}">Utente</span>
+					        <form th:action="@{/logout}" method="post" style="display: inline;">
+					          <button type="submit" class="btn">Logout</button>
+					        </form>
+					      </div>
+					      <div sec:authorize="!isAuthenticated()">
+					        <form th:action="@{/login}" method="get" style="display: inline;">
+					          <button type="submit" class="btn">Login</button>
+					        </form>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+    <h1 class="main-title">Aggiungi un'edizione</h1>
+    
+    <form th:action="@{/insEdizione}" method="post" th:object="${edizione}" enctype="multipart/form-data" class="form-cavallo">
         <div>
             Data:
             <span><input required type="date" th:field="*{data}"/></span>

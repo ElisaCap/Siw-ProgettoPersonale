@@ -1,0 +1,146 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fffaf3 url('/sfondo.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  padding-top: 80px;
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Top Bar */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(to right, #b45100, #6a0e00);
+  color: white;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.header-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 1.8rem;
+  font-family: Georgia, serif;
+  font-weight: bold;
+}
+
+/* User Controls */
+.user-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-name {
+  font-weight: bold;
+}
+
+/* Button style */
+.btn {
+  background-color: white;
+  color: #5D2600;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+  font-size: 1.1rem;
+}
+
+.btn:hover {
+  background-color: #ffe0b2;
+  transform: scale(1.05);
+}
+
+/* Page title */
+.titolo {
+  text-align: center;
+  font-size: 2.4rem;
+  font-family: Georgia, serif;
+  color: #6a0e00;
+  margin: 40px 0 20px;
+  text-shadow: 1px 1px #f1c27d;
+}
+
+/* Comment Card */
+.card-cavallo {
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px 30px;
+  border-left: 5px solid #b45100;
+  transition: transform 0.2s ease;
+}
+
+.card-cavallo:hover {
+  transform: translateY(-5px);
+}
+
+/* Comment Content */
+.card-cavallo h2 {
+  margin-top: 0;
+  color: #6a0e00;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.card-cavallo span {
+  display: block;
+  font-size: 1.1rem;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* Add Comment Button Area */
+form[action*="/insCommento"] {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 10px;
+    height: auto;
+    padding: 10px;
+  }
+
+  .top-bar {
+    height: auto;
+    padding: 10px 0;
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+
+  .card-cavallo {
+    margin: 10px;
+    padding: 15px;
+  }
+}

@@ -1,50 +1,83 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html>
-	<head>
-		<link rel="stylesheet" href="css/contrade.css" />
-		<title>Contrada</title>
-	</head>
-	<div class="contenitore">
-	<body th:id="'id-'+ ${contrada.id}" >
-		<a th:id="'id-'+ ${contrada.id}"  > 
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Contrada</title>
+    <link rel="stylesheet" href="/css/cav.css" />
+</head>
+<body>
+    <!-- BARRA SUPERIORE -->
+    <header class="top-bar">
+        <div class="header-content">
+            <div class="logo-text">Palio di Siena</div>
+            <div class="user-controls">
+                <form th:action="@{/home}" method="get" style="display: inline;">
+                    <button class="btn" type="submit">Home</button>
+                </form>
 
-			<img th:src="@{'/urlImmagine/' + ${contrada.id}}" alt="Contrada"/>
+                <div sec:authorize="isAuthenticated()" style="display: inline;">
+                    <span class="user-name" th:text="${#authentication.name}">Utente</span>
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <button class="btn" type="submit">Logout</button>
+                    </form>
+                </div>
 
-		</a>
-		<div th:if="${contrada}" >
-		<p class="contrada" th:id="'id-'+ ${contrada.id}" th:text="${contrada.nome}">	</p>
-		<p class="contrada" th:id="'id-'+ ${contrada.id}" th:text="${contrada.descrizioneLunga}"></p> 
-		</div>
-	</div>
-		<div class="contrada" th:unless="${contrada}"><a>Contrada non trovata</a>
-		</div>
-			
-			
-		
-		<form th:action="@{/contrade}">
-			<button type = "submit">
-			Vedi tutte
-			</button>
-		</form>
-		<form th:action="@{/partContrada/{id}(id=${contrada.id})}">
-			<button type = "submit">
-						Vedi partecipazioni
-						</button>
-		</form>
-		<div sec:authorize="hasRole('ADMIN')">
-		<form th:action="@{/eliminaContrada/{id}(id=${contrada.id})}" method="get"
-		               onsubmit="return confirm('Sei sicuro di voler eliminare questa contrada?');">
-		           <button type="submit" class="btn-card danger">Elimina</button>
-		</form>
-				   <form th:action="@{/modificaContrada/{id}(id=${contrada.id})}" method="get"
-				   		               >
-				   		           <button type="submit" class="btn-card danger">Modifica</button>       
-			    </form>
-				 </div>
-	</body>
+                <div sec:authorize="!isAuthenticated()" style="display: inline;">
+                    <form th:action="@{/login}" method="get" style="display: inline;">
+                        <button class="btn" type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENUTO CONTRADA -->
+    <div class="uno">Dettagli Contrada</div>
+
+    <div class="dati-cavallo-container" th:if="${contrada}">
+        <!-- Immagine -->
+        <div class="cavallo-img-box">
+            <img th:src="@{'/urlImmagine/' + ${contrada.id}}" alt="Contrada" />
+        </div>
+
+        <!-- Dati -->
+        <div class="cavallo-dati-box">
+            <div class="box">
+                <div class="definizione">Nome</div>
+                <div class="nome" th:text="${contrada.nome}">Nome Contrada</div>
+            </div>
+            <div class="box">
+                <div class="definizione">Descrizione</div>
+                <div th:text="${contrada.descrizioneLunga}">Descrizione lunga della contrada</div>
+            </div>
+
+            <!-- Bottoni -->
+            <div class="bottoni-cavallo">
+                <form th:action="@{/contrade}" method="get">
+                    <button type="submit" class="btn-card secondary">Vedi tutte</button>
+                </form>
+
+                <form th:action="@{/partContrada/{id}(id=${contrada.id})}" method="get">
+                    <button type="submit" class="btn-card secondary">Vedi partecipazioni</button>
+                </form>
+
+                <div sec:authorize="hasRole('ADMIN')">
+                    <form th:action="@{/eliminaContrada/{id}(id=${contrada.id})}" method="get"
+                          onsubmit="return confirm('Sei sicuro di voler eliminare questa contrada?');">
+                        <button type="submit" class="btn-card danger">Elimina</button>
+                    </form>
+
+                    <form th:action="@{/modificaContrada/{id}(id=${contrada.id})}" method="get">
+                        <button type="submit" class="btn-card danger">Modifica</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contrada non trovata -->
+    <div class="uno" th:unless="${contrada}">
+        <p>Contrada non trovata</p>
+    </div>
+</body>
 </html>
-
-			
-	

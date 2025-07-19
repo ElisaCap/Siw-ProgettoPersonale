@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 
 
@@ -16,13 +17,16 @@ public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "campo obbligatorio")
 	private String name;
+    @NotBlank(message = "campo obbligatorio")
 	private String surname;
+    @NotBlank(message = "campo obbligatorio")
 	private String email;
+    @NotBlank(message = "campo obbligatorio")
 	private String password;
 	
 
-	
 	
     public String getPassword() {
 		return password;

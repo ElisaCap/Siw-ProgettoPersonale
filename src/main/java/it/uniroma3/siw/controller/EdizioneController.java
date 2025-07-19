@@ -8,6 +8,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -27,6 +29,8 @@ import it.uniroma3.siw.repository.EdizioneRepository;
 import it.uniroma3.siw.repository.ElementoClassificaRepository;
 import it.uniroma3.siw.service.ClassificaService;
 import it.uniroma3.siw.service.EdizioneService;
+import it.uniroma3.siw.service.UserService;
+import it.uniroma3.siw.model.User;
 
 @Controller
 public class EdizioneController {
@@ -40,7 +44,8 @@ private EdizioneService edizioneSerivice;
 	private ElementoClassificaRepository elementoClassificaRepository;
 	@Autowired
 	private EdizioneService edizioneService;
-	
+	@Autowired
+	private UserService userService;
 	
 @GetMapping("/edizioni")
 public String edizioni(Model model) {
@@ -50,8 +55,21 @@ public String edizioni(Model model) {
 @GetMapping("/edizione/{id}")
 public String edizione(@PathVariable Long id, Model model) {
 	model.addAttribute("edizione",this.edizioneSerivice.getById(id));
+	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getName())) {
+	        String username = auth.getName();
+	        User user = userService.getUserByUsername(username);
+	        model.addAttribute("userLoggato", user);
+	    } else {
+	        model.addAttribute("userLoggato", null);
+	    }
 	return "edizione/edizione.html";
 }
+
+
+
+
+
 @GetMapping("/insEdizione")
 public String insEdizione(Model model) {
 	Edizione edizione=new Edizione();
@@ -93,7 +111,7 @@ public String saveEdizione(@ModelAttribute("edizione") Edizione edizione
 public String classificaEdId(@RequestParam Long id,Model model) {
 	Classifica classifica=this.classificaService.getById(id);
 	model.addAttribute("classifica",classifica);
-	model.addAttribute("elementiClassifica",this.elementoClassificaRepository.findAllByClassifica(classifica));
+	model.addAttribute("elementiClassifica",this.elementoClassificaRepository.findAllByClassificaOrderByPosizione(classifica));
 	 if (id == null) {
          return "errore"; // Gestisci un eventuale errore
      }

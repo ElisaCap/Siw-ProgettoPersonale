@@ -8,39 +8,52 @@
 </head>
 
 <body>
-	
-	<header class="top-bar">
-	  <div class="header-content">
-	    <div class="logo-text">Palio di Siena</div>
 
-	    <div class="user-controls">
-	      <!-- Bottone Home -->
-	      <form th:action="@{/home}" method="get" style="display: inline;">
-	        <button class="btn" type="submit">Home</button>
-	      </form>
+  <!-- HEADER -->
+  <header class="top-bar">
+    <div class="header-content">
+      <div class="logo-text">Palio di Siena</div>
+      <div class="user-controls">
 
-	      <div sec:authorize="isAuthenticated()" style="display: inline;">
-	        <span class="user-name" th:text="${#authentication.name}"></span>
-	        <form th:action="@{/logout}" method="post" style="display: inline;">
-	          <button class="btn" type="submit">Logout</button>
-	        </form>
-	      </div>
+        <!-- Home -->
+        <form th:action="@{/home}" method="get" style="display: inline;">
+          <button class="btn" type="submit">Home</button>
+        </form>
 
-	      <div sec:authorize="!isAuthenticated()" style="display: inline;">
-	        <form th:action="@{/login}" method="get" style="display: inline;">
-	          <button class="btn" type="submit">Login</button>
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	</header>
+        <!-- Autenticato -->
+        <div sec:authorize="isAuthenticated()" style="display: inline;">
+          <span class="user-name" th:text="${#authentication.name}"></span>
+          <form th:action="@{/logout}" method="post" style="display: inline;">
+            <button class="btn" type="submit">Logout</button>
+          </form>
+        </div>
 
+        <!-- Non autenticato -->
+        <div sec:authorize="!isAuthenticated()" style="display: inline;">
+          <form th:action="@{/login}" method="get" style="display: inline;">
+            <button class="btn" type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
 
   <!-- TITOLO -->
   <h1 class="main-title">Ecco tutti i cavalli registrati</h1>
 
-  <!-- CARD CONTAINER -->
+  <!-- CONTENITORE CARDS -->
   <div class="card-container">
+
+    <!-- CARD PER AGGIUNTA -->
+	<!-- CARD PER AGGIUNTA -->
+	<div class="card-cavallo add-card" sec:authorize="hasRole('ADMIN')">
+	  <form th:action="@{/insCavallo}" method="get" class="add-card-form">
+	    <button type="submit" class="plus-sign">+</button>
+	  </form>
+	</div>
+
+
+    <!-- CARD CAVALLI -->
     <a class="card-cavallo" th:each="cavallo : ${cavalli}"
        th:href="@{/cavalli/{id}(id=${cavallo.id})}"
        th:style="'background-image: url(/cavalli/' + ${cavallo.id} + '/immagine)'">
@@ -50,13 +63,7 @@
         <p><strong>Razza:</strong> <span th:text="${cavallo.razza}">Sella</span></p>
       </div>
     </a>
-  </div>
 
-  <!-- BOTTONE AGGIUNGI -->
-  <div class="add-button" sec:authorize="hasRole('ADMIN')">
-    <form th:action="@{/insCavallo}" method="get">
-      <button class="btn-add" type="submit">+</button>
-    </form>
   </div>
 </body>
 </html>

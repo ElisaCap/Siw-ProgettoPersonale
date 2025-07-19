@@ -2,14 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Modifica Contrada</title>
-    <link rel="stylesheet" href="/stile.css?version=3" />
+    <link rel="stylesheet" href="/css/insCavallo.css" />
 </head>
 <body>
+	<!-- BARRA SUPERIORE -->
+		<div class="top-bar">
+		  <div class="header-content">
+		    <div class="logo-text">Palio di Siena</div>
+		    <div class="user-controls">
+				<form th:action="@{/home}" method="get" style="display: inline;">
+				         <button class="btn" type="submit">Home</button>
+				       </form>
+		      <div sec:authorize="isAuthenticated()">
+		        <span class="user-name" th:text="${#authentication.name}">Utente</span>
+		        <form th:action="@{/logout}" method="post" style="display: inline;">
+		          <button type="submit" class="btn">Logout</button>
+		        </form>
+		      </div>
+		      <div sec:authorize="!isAuthenticated()">
+		        <form th:action="@{/login}" method="get" style="display: inline;">
+		          <button type="submit" class="btn">Login</button>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+    <h1 class="main-title">Modifica Contrada</h1>
 
-    <div><a href="/">Home</a></div>
-    <h1>Modifica Contrada</h1>
-
-    <form th:action="@{/salvaContrada}" method="post" th:object="${contrada}" enctype="multipart/form-data">
+    <form th:action="@{/salvaContrada}" method="post" th:object="${contrada}" enctype="multipart/form-data"  class="form-cavallo">
         <!-- ID nascosto -->
         <input type="hidden" th:field="*{id}" th:value="${id}" />
 
@@ -38,10 +58,7 @@
         <div>
             <label>Immagine:</label>
             <input type="file" name="fileImmagine" accept="image/*" />
-            <div th:if="${contrada.urlImmagine != null}">
-                <p>Immagine attuale:</p>
-                <img th:src="@{'/immagine/contrada/' + ${contrada.id}}" alt="Immagine Contrada" width="200" />
-            </div>
+           
         </div>
 
         <!-- Submit -->

@@ -3,39 +3,49 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <title>SiwMovie - Registrazione conclusa</title>
-	<link rel="stylesheet" th:href="@{/css/style2.css}" />
+    <title>Registrazione conclusa - SiwMovie</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
 </head>
 
 <body>
-    <header>
-        <div sec:authorize="isAuthenticated()">
-            <span th:text="${#authentication.name}"></span>
-            <a href="/logout">Logout</a>
+
+    <div class="login-container">
+        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+                <a href="/"><img src="/images/logo-siw.png" style="max-height: 60px;" alt="Logo SIW"/></a>
+            </div>
+            <div>
+                <div sec:authorize="isAuthenticated()">
+                    <span th:text="${#authentication.name}">Utente</span> |
+                    <a href="/logout" class="btn secondary">Logout</a>
+                </div>
+                <div sec:authorize="isAnonymous()">
+                    <a href="/login" class="btn secondary">Login</a>
+                </div>
+            </div>
+        </header>
+
+        <h1 class="login-title">Congratulazioni! Ti sei registrato con successo</h1>
+
+        <div class="login-field">
+            <strong>Nome:</strong>
+            <span th:text="${user.name}">Mario</span>
         </div>
-        <div sec:authorize="isAnonymous()">
-            <a href="/login">Login</a>
+
+        <div class="login-field">
+            <strong>Cognome:</strong>
+            <span th:text="${user.surname}">Rossi</span>
         </div>
-    </header>
 
-    <div>
-        <a href="/"><img src="/images/logo-siw.png" width="50%"/></a>
+        <div class="login-field">
+            <strong>Email:</strong>
+            <span th:text="${user.email}">mario.rossi@example.com</span>
+        </div>
+
+        <div class="login-buttons" style="margin-top: 30px;">
+            <a href="/" class="btn">Torna alla Home</a>
+        </div>
     </div>
 
-    <h1>Congratulazioni ti sei registrato!</h1>
-
-    <div>
-        <span>Nome: </span>
-        <span th:text="${user.name}"></span>
-    </div>
-    <div>
-        <span>Cognome: </span>
-        <span th:text="${user.surname}"></span>
-    </div>
-    <div>
-        <span>Email: </span>
-        <span th:text="${user.email}"></span>
-    </div>
 </body>
-
 </html>

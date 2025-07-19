@@ -1,20 +1,29 @@
-/* LOGIN STYLING */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('/sfondo.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
 .login-container {
-    max-width: 480px;
-    margin: 60px auto;
-    padding: 30px 40px;
-    background: #fffdf9;
-    border: 2px solid #ffb347;
+    background-color: rgba(255, 250, 240, 0.95);
+    padding: 40px 50px;
     border-radius: 12px;
-    box-shadow: 0 12px 20px rgba(255, 140, 0, 0.3);
+    box-shadow: 0 10px 20px rgba(255, 128, 0, 0.3);
+    width: 100%;
+    max-width: 500px;
 }
 
 .login-title {
     text-align: center;
-    font-size: 2.2rem;
-    color: #b34700;
-    margin-bottom: 25px;
-    text-shadow: 1px 1px 2px #ffd6a0;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #bf360c;
 }
 
 .login-form {
@@ -26,298 +35,61 @@
 .login-field {
     display: flex;
     flex-direction: column;
+    gap: 5px;
     font-size: 1rem;
     color: #5a2e00;
 }
 
 .login-field input {
-    padding: 10px 12px;
-    font-size: 1rem;
+    padding: 10px;
     border-radius: 6px;
     border: 1px solid #ffa366;
-    background: #fff6ee;
-    color: #5a2e00;
+    background-color: #fff8f0;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.login-field input:focus {
+    outline: none;
+    border-color: #ff7043;
+    box-shadow: 0 0 0 2px rgba(255, 112, 67, 0.2);
+}
+
+.error {
+    color: #d32f2f;
+    font-size: 0.85rem;
+    margin-top: 3px;
 }
 
 .login-buttons {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
     margin-top: 10px;
 }
 
+.btn {
+    background-color: #ffccbc;
+    color: #5d2600;
+    font-weight: bold;
+    border: 2px solid #ff8a65;
+    border-radius: 6px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #ffab91;
+}
+
 .btn.secondary {
-    background-color: #ffd2b3;
-    color: #7a2e00;
-    box-shadow: 0 4px 10px rgba(255, 183, 94, 0.4);
+    background-color: #ffe0b2;
+    border-color: #ffb74d;
+    color: #6a1b09;
 }
 
 .btn.secondary:hover {
-    background-color: #ffc299;
-    color: #5a2e00;
+    background-color: #ffd54f;
 }
-
-.login-error, .login-success {
-    text-align: center;
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-top: 12px;
-}
-
-.login-error p {
-    color: #d92626;
-}
-
-.login-success p {
-    color: #2e7d32;
-}
-
-.login-header {
-    text-align: right;
-    margin-bottom: 10px;
-}
-
-.logout-link,
-.login-link {
-    font-size: 0.95rem;
-    color: #b34700;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.logout-link:hover,
-.login-link:hover {
-    text-decoration: underline;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-.container {
-    max-width: 800px;
-    padding: 20px;
-    text-align: center;
-}
-
-.pagIntBox {
-    margin-top: 0px;
-}
-
-.pagInt {
-    padding: 16px 24px;
-    font-size: 1.125rem;
-    border-radius: 8px;
-    border: 2px solid #D84315;
-    background-color:  #FFF3E0;
-    color: #5D2600;
-    text-decoration: none;
-    font-weight: 600;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#logout:hover {
-    background-color: #FF7043;
-    transform: translateY(-0.1px);
-    cursor: pointer;
-}
-#tastoHome:hover {
-    background-color: #FF7043;
-    transform: translateY(-0,1px);
-    cursor: pointer;
-}
-#tastoLogin:hover {
-    background-color: #FF7043;
-    transform: translateY(-0,1px);
-    cursor: pointer;
-}
-
-.btn{
-	padding: 16px 24px;
-	   font-size: 1.125rem;
-	   border-radius: 8px;
-	   border: 2px solid #D84315;
-	   background-color:  #FFF3E0;
-	   color: #5D2600;
-	   text-decoration: none;
-	   font-weight: 600;
-	   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	   transition: background-color 0.3s ease, transform 0.2s ease;
-	  
-
-   }
-.btn:hover{
-	background-color: #FF7043;
-	   transform: translateY(-0,1px);
-	   cursor: pointer;
-}
-
-/* Barra arancione in alto */
-.top-bar {
-    background: linear-gradient(to right, #ff9900, #ff6600);
-    color: white;
-    height: 70px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 30px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    font-family: 'Segoe UI', sans-serif;
-}
-
-
-/* Contenitore per login/logout/nome */
-.user-controls {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-/* Stile per i bottoni */
-.btn {
-    background-color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-/* Evita che il contenuto venga nascosto dalla barra fissa */
-.container {
-    padding-top: 80px;
-}
-
-
-
-
-
-
-body {
-	margin: 0;
-	    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	    background-color: #FFF3E0;
-	    display: flex;
-	    justify-content: center;
-	    align-items: center;
-    background-image: url('/sfondo.jpg'); /* ← con lo slash iniziale */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-	
-}
-
-
-
-/* Stile per titolo e bottone con classe success */
-.success {
-    padding: 16px 24px;
-    font-size: 1.25rem; /* titolo più grande */
-    border-radius: 8px;
-    border: 2px solid #D84315;
-    background-color: #FF8A65;
-    color: #5D2600;
-    font-weight: 600;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    text-decoration: none;
-    display: inline-block;
-    margin: 10px auto;
-}
-
-.success:hover {
-    background-color: #FF7043;
-    transform: translateY(-2px);
-    cursor: pointer;
-}
-
-/* Se vuoi differenziare titolo e bottone, puoi fare così: */
-h1.success {
-    font-size: 2.5rem;
-    background-color: #FFF3E0;
-    border:2px,solid,red;
-	
-    color: #BF360C;
-    box-shadow: none;
-    padding: 10px;
-    margin-bottom: 1rem;
-}
-
-form button.success {
-    width: 160px;
-}
-body.success {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #FFF3E0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-	background-image: url('/sfondo.jpg'); /* ← con lo slash iniziale */
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-}
-
-.container {
-    max-width: 800px;
-    padding: 20px;
-    text-align: center;
-}
-
-
-#tastoHome {
-  position: relative;
-  top: 500px;
-  right: 80px;
-  margin:70px;
-  transform: translate(50%, -900%);
-}
-
-#tastoLogin {
-  position: absolute;
-  top: 20px;
-  right:65px;
-}
-#scrittaInt {
-  position: relative;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, 30%); /* centra rispetto al proprio centro */
-  font-size: 32px; /* Usa font-size, non size */
-  text-align: center;
-}
-#tastoLogout{
-	position: absolute;
-	margin-top:10px;
-	top: 20px;
-	  right:65px;
-	height:30px;
-}
-
-#autName{
-	size:20px;
-	position: absolute;
-	top: 0px;
-	right:110px;
-	height:60px;
-}
-
-

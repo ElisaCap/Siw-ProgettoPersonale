@@ -6,42 +6,49 @@
     <title>Fantini</title>
 </head>
 <body>
-  <!-- BARRA SUPERIORE -->
-  <div class="top-bar">
-    <div class="logo-text">Palio di Siena</div>
-    <form th:action="@{/home}" method="get">
-      <button class="btn" type="submit">Home</button>
-    </form>
-    <div class="user-controls">
-      <div sec:authorize="isAuthenticated()">
-        <span class="user-name" th:text="${#authentication.name}">Utente</span>
-        <form th:action="@{/logout}" method="post" style="display: inline;">
-          <button type="submit" class="btn">Logout</button>
-        </form>
-      </div>
-      <div sec:authorize="!isAuthenticated()">
-        <form th:action="@{/login}" method="get" style="display: inline;">
-          <button type="submit" class="btn">Login</button>
-        </form>
-      </div>
-	  <form th:action="@{/home}" method="get" style="display: inline;">
-	            <button type="submit" class="btn">Home</button>
-	          </form>
-    </div>
-  </div>
+	ody>
+			<!-- HEADER -->
+				<header class="top-bar">
+				  <div class="header-content">
+				    <div class="logo-text">Palio di Siena</div>
+				    <div class="user-controls">
 
-  <!-- BOTTONE AGGIUNGI -->
-  <div sec:authorize="hasRole('ADMIN')" style="margin: 1rem;">
-    <form th:action="@{/insFantino}" method="get">
-      <button class="btn-add" type="submit">+</button>
-    </form>
-  </div>
+				      <!-- Home -->
+				      <form th:action="@{/home}" method="get" style="display: inline;">
+				        <button class="btn" type="submit">Home</button>
+				      </form>
+
+				      <!-- Autenticato -->
+				      <div sec:authorize="isAuthenticated()" style="display: inline;">
+				        <span class="user-name" th:text="${#authentication.name}"></span>
+				        <form th:action="@{/logout}" method="post" style="display: inline;">
+				          <button class="btn" type="submit">Logout</button>
+				        </form>
+				      </div>
+
+				      <!-- Non autenticato -->
+				      <div sec:authorize="!isAuthenticated()" style="display: inline;">
+				        <form th:action="@{/login}" method="get" style="display: inline;">
+				          <button class="btn" type="submit">Login</button>
+				        </form>
+				      </div>
+				    </div>
+				  </div>
+				</header>
+
+ 
 
   <!-- TITOLO -->
   <h1 class="main-title">Ecco tutti i fantini registrati</h1>
 
   <!-- CARD CONTAINER -->
   <div class="card-container">
+	<!-- CARD PER AGGIUNTA -->
+		<div class="card-cavallo add-card" sec:authorize="hasRole('ADMIN')">
+		  <form th:action="@{/insFantino}" method="get" class="add-card-form">
+		    <button type="submit" class="plus-sign">+</button>
+		  </form>
+		</div>
     <a class="card-cavallo" th:each="fantino : ${fantini}"
        th:href="@{/fantini/{id}(id=${fantino.id})}"
        th:style="'background-image: url(/fantini/' + ${fantino.id} + '/immagine)'">

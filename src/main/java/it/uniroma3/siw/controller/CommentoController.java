@@ -16,20 +16,26 @@ import it.uniroma3.siw.model.Commento;
 import it.uniroma3.siw.model.Edizione;
 import it.uniroma3.siw.service.CommentoService;
 import it.uniroma3.siw.service.EdizioneService;
+import it.uniroma3.siw.service.UserService;
+import it.uniroma3.siw.model.User;
 
 @Controller
 public class CommentoController {
+	@Autowired
+	private UserService userService;
 
 	@Autowired
     private CommentoService commentoService;
 	@Autowired
 	   private EdizioneService edizioneService;
-	@GetMapping("/insCommento/{id}")
-    public String insCommnento(@PathVariable Long id,Model model) {
-    	Edizione edizione=edizioneService.getById(id);
+	@GetMapping("/insCommento/{id}/{idUser}")
+    public String insCommnento(@PathVariable Long id, @PathVariable Long idUser,Model model) {
+	    User user = userService.findById(idUser);
+		Edizione edizione=edizioneService.getById(id);
         model.addAttribute("edizione",edizione);
         Commento commento=new Commento();
         commento.setEdizione(edizione);
+        commento.setUser(user);
         model.addAttribute("commento", commento);
         model.addAttribute("id",id);
         return "commento/insCommento.html";

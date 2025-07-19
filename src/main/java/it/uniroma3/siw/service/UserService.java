@@ -56,6 +56,14 @@ public class UserService {
             result.add(user);
         return result;
     }
+
+	public User findById(Long idUser) {
+		return this.userRepository.findById(idUser).orElse(null);
+	}
+
+	public User getUserByUsername(String username) {
+		return this.userRepository.findByName(username);
+	}
     
     
     

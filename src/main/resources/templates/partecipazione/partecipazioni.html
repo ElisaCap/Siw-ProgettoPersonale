@@ -1,75 +1,79 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="it" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/css/cavallo.css">
-  <title>Cavalli - Palio di Siena</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partecipazioni - Palio di Siena</title>
+  <link rel="stylesheet" href="/css/partecipazioni.css">
 </head>
 
 <body>
 
-  <!-- BARRA SUPERIORE -->
-  <div class="top-bar">
-    <div class="logo-text">Palio di Siena</div>
-	<form th:action="@{/home}" method="get">
-		<button class="btn" type="submit">home</button>
-	</form>
-    <div class="user-controls">
-      <div sec:authorize="isAuthenticated()">
-        <span class="user-name" th:text="${#authentication.name}">Utente</span>
-        <form th:action="@{/logout}" method="post" style="display: inline;">
-          <button type="submit" class="btn">Logout</button>
+  <!-- HEADER (intatto) -->
+  <header class="top-bar">
+    <div class="header-content">
+      <div class="logo-text">Palio di Siena</div>
+      <div class="user-controls">
+        <form th:action="@{/home}" method="get" style="display: inline;">
+          <button class="btn" type="submit">Home</button>
         </form>
-      </div>
-      <div sec:authorize="!isAuthenticated()">
-        <form th:action="@{/login}" method="get" style="display: inline;">
-          <button type="submit" class="btn">Login</button>
-        </form>
+        <div sec:authorize="isAuthenticated()" style="display: inline;">
+          <span class="user-name" th:text="${#authentication.name}"></span>
+          <form th:action="@{/logout}" method="post" style="display: inline;">
+            <button class="btn" type="submit">Logout</button>
+          </form>
+        </div>
+        <div sec:authorize="!isAuthenticated()" style="display: inline;">
+          <form th:action="@{/login}" method="get" style="display: inline;">
+            <button class="btn" type="submit">Login</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- TITOLO -->
-  <h1 class="titolo">Ecco tuttie le partecipazioni</h1>
+  <!-- MAIN -->
+  <main class="container">
+    <h1 class="titolo">Ecco tutte le partecipazioni</h1>
 
-  <!-- TABELLA -->
-  <table class="elenco">
-    <thead>
-      <tr class="riga-intestazione">
-        <th class="col-id">Cavallo</th>
-        <th class="col-cavallo">Fantino</th>
-        <th class="col-fantino">Contrada</th>
-		<th class="col-info">Data edizione</th>
+    <div class="table-wrapper">
+      <table class="elenco">
+        <thead>
+          <tr>
+            <th>Cavallo</th>
+            <th>Fantino</th>
+            <th>Contrada</th>
+            <th>Data edizione</th>
+            <th>Posizionamento</th>
+            <th sec:authorize="hasRole('ADMIN')">Azioni</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="partecipazione : ${partecipazioni}">
+            <td th:text="${partecipazione.cavallo.nome}">Nome Cavallo</td>
+            <td th:text="|${partecipazione.fantino.nome} ${partecipazione.fantino.cognome}|">Fantino</td>
+            <td th:text="${partecipazione.contrada.nome}">Contrada</td>
+            <td th:text="${partecipazione.edizione.data}">01/07/2025</td>
 
-        <th class="col-contrada">Posizionamento</th>
-        <th sec:authorize="hasRole('ADMIN')">Azioni</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="riga-cavallo" th:each="partecipazione : ${partecipazioni}">
-        <td class="col-id" th:text="${partecipazione.cavallo.nome}"></td>
-        <td class="col-nome" 
-		th:text="|${partecipazione.fantino.nome} ${partecipazione.fantino.cognome}|
-		"></td>
-        <td class="col-razza" th:text="${partecipazione.contrada.nome}"></td>
-		<td class="col-razza" th:text="${partecipazione.edizione.data}"></td>
+            <td th:if="${partecipazione.elementoClassifica != null}"
+                th:text="${partecipazione.elementoClassifica.posizione}">1°</td>
+            <td th:unless="${partecipazione.elementoClassifica != null}">
+              non ha tagliato il traguardo
+            </td>
 
-			<div th:if="${partecipazione.elementoClassifica}">
-				<td class="col-info" th:text="${partecipazione.elementoClassifica.posizione}">
-					</td>
-				</div>
-			<div th:unless="${partecipazione.elementoClassifica}">
-							<td class="col-info" th:text="'non ha tagliato il traguardo'">
-								</td>
-							</div>
-		
-  
-      </tr>
-    </tbody>
-  </table>
-
+            <td sec:authorize="hasRole('ADMIN')">
+              <!-- Azioni admin (es. modifica, elimina) -->
+              <form th:action="@{/eliminaPartecipazione/{id}(id=${partecipazione.id})}" method="post" style="display:inline;">
+                <button class="btn small danger" type="submit">Elimina</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
 
 </body>
 </html>

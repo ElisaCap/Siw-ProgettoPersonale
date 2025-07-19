@@ -2,31 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="it">
 <head>
     <title>Nuovo Cavallo</title>
-    <link rel="stylesheet" href="/css/cavallo.css" />
+    <link rel="stylesheet" href="/css/insCavallo.css" />
 </head>
 <body>
 	<!-- BARRA SUPERIORE -->
 	<div class="top-bar">
-	  <div class="logo-text">Palio di Siena</div>
-
-	  <div class="user-controls">
-	    <div sec:authorize="isAuthenticated()">
-	      <span class="user-name" th:text="${#authentication.name}">Utente</span>
-	      <form th:action="@{/logout}" method="post" style="display: inline;">
-	        <button type="submit" class="btn">Logout</button>
-	      </form>
-	    </div>
-	    <div sec:authorize="!isAuthenticated()">
-	      <form th:action="@{/login}" method="get" style="display: inline;">
-	        <button type="submit" class="btn">Login</button>
-	      </form>
+	  <div class="header-content">
+	    <div class="logo-text">Palio di Siena</div>
+	    <div class="user-controls">
+			<form th:action="@{/home}" method="get" style="display: inline;">
+			         <button class="btn" type="submit">Home</button>
+			       </form>
+	      <div sec:authorize="isAuthenticated()">
+	        <span class="user-name" th:text="${#authentication.name}">Utente</span>
+	        <form th:action="@{/logout}" method="post" style="display: inline;">
+	          <button type="submit" class="btn">Logout</button>
+	        </form>
+	      </div>
+	      <div sec:authorize="!isAuthenticated()">
+	        <form th:action="@{/login}" method="get" style="display: inline;">
+	          <button type="submit" class="btn">Login</button>
+	        </form>
+	      </div>
 	    </div>
 	  </div>
 	</div>
-	
-    <div><a href="/">Home</a></div>
-    <h1>Modifica Cavallo</h1>
-    <form th:action="@{/saveCavallo}" method="post" th:object="${cavallo}" enctype="multipart/form-data">
+
+	    <h1 class="main-title">Modifica Cavallo</h1>
+    <form th:action="@{/saveCavallo}" method="post" th:object="${cavallo}" enctype="multipart/form-data" class="form-cavallo">
 		<input type="hidden" th:field="*{id}" value="${id}" />
 <div>
             Nome: <span><input required type="text" th:field="*{nome}" /></span>
@@ -40,6 +43,7 @@
 		         Immagine cavallo:
 		        <input type="file" th:field="*{fileImmagine}" accept="image/*" />
 		        </div>
+					
         <div>
             <span><button type="submit">Conferma</button></span>
         </div>
