@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="it">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/css/cavallo.css">
   <title>Edizione</title>
+  <link rel="stylesheet" href="/css/cav.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
         </form>
 
         <div sec:authorize="isAuthenticated()" style="display: inline;">
-          <span class="user-name" th:text="${#authentication.name}"></span>
+          <span class="user-name" th:text="${#authentication.name}">Utente</span>
           <form th:action="@{/logout}" method="post" style="display: inline;">
             <button class="btn" type="submit">Logout</button>
           </form>
@@ -33,60 +33,63 @@
   </header>
 
   <!-- CONTENUTO -->
-  <div class="contenitore-cavallo" th:if="${edizione}">
-    <h1 class="uno" th:text="|Edizione del ${edizione.data}|"></h1>
+  <div th:if="${edizione}">
+    <h1 class="uno" th:text="|Edizione del ${edizione.data}|">Edizione</h1>
 
-    <div class="dati-cavallo-container">
-      <div class="box">
-        <p class="definizione">Id Edizione</p>
-        <p class="nome" th:text="${edizione.id}">1</p>
+    <div class="card-cavallo">
+      <!-- Immagine -->
+      <img th:src="@{'/edizione/' + ${edizione.id} + '/immagine'}" alt="Immagine Edizione" />
+
+      <!-- Dati -->
+      <div class="card-dato">
+        <div class="definizione">ID Edizione</div>
+        <div class="nome" th:text="${edizione.id}">1</div>
       </div>
 
-      <div class="box">
-        <p class="definizione">Data Edizione</p>
-        <p class="nome" th:text="${edizione.data}">01-07-2025</p>
+      <div class="card-dato">
+        <div class="definizione">Data Edizione</div>
+        <div class="nome" th:text="${edizione.data}">01-07-2025</div>
       </div>
 
-      <div class="cavallo-img-box">
-        <img th:src="@{'/edizione/' + ${edizione.id} + '/immagine'}" alt="Immagine Edizione" />
+      <!-- Azioni -->
+      <div class="azionibtn">
+        <form th:action="@{/classifica/{id}(id=${edizione.id})}" method="get">
+          <button type="submit" class="btn-card secondary">Vedi Classifica</button>
+        </form>
+
+        <div sec:authorize="hasRole('ADMIN')">
+          <form th:action="@{/edizioni/delete/{id}(id=${edizione.id})}" method="post"
+                onsubmit="return confirm('Sei sicuro di voler eliminare questa edizione?');">
+            <button type="submit" class="btn-card danger">Elimina</button>
+          </form>
+
+          <form th:action="@{/insPartecipazione/{id}(id=${edizione.id})}" method="get">
+            <button type="submit" class="btn-card secondary">Inserisci Partecipazione</button>
+          </form>
+
+          <form th:action="@{/modificaEdizione/{id}(id=${edizione.id})}" method="get">
+            <button type="submit" class="btn-card secondary">Modifica</button>
+          </form>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+          <div sec:authorize="!hasRole('ADMIN')">
+            <form th:action="@{/insCommento/{id}/{idUser}(id=${edizione.id}, idUser=${userLoggato.id})}" method="get">
+              <button type="submit" class="btn-card">Inserisci un commento</button>
+            </form>
+          </div>
+        </div>
+
+        <form th:action="@{/commentiEdizione/{id}(id=${edizione.id})}" method="get">
+          <button type="submit" class="btn-card">Vedi i commenti</button>
+        </form>
       </div>
     </div>
-
-    <section class="azioni-edizione bottoni-cavallo">
-      <form th:action="@{/classifica/{id}(id=${edizione.id})}" method="get">
-        <button type="submit" class="btn-card secondary">Vedi Classifica</button>
-      </form>
-
-      <div sec:authorize="hasRole('ADMIN')">
-        <form th:action="@{/edizioni/delete/{id}(id=${edizione.id})}" method="post"
-              onsubmit="return confirm('Sei sicuro di voler eliminare questa edizione?');">
-          <button type="submit" class="btn-card danger">Elimina</button>
-        </form>
-
-        <form th:action="@{/insPartecipazione/{id}(id=${edizione.id})}" method="get">
-          <button type="submit" class="btn-card secondary">Ins Partecipazione</button>
-        </form>
-
-        <form th:action="@{/modificaEdizione/{id}(id=${edizione.id})}" method="get">
-          <button type="submit" class="btn-card secondary">Modifica</button>
-        </form>
-      </div>
-
-      <div sec:authorize="isAuthenticated()">
-		<div sec:authorize="!hasRole('ADMIN')">
-        <form th:action="@{/insCommento/{id}/{idUser}(id=${edizione.id}, idUser=${userLoggato.id})}" method="get">
-          <button type="submit" class="btn-card">Inserisci un commento</button>
-        </form>
-      </div>
-	  </div>
-      <form th:action="@{/commentiEdizione/{id}(id=${edizione.id})}" method="get">
-        <button type="submit" class="btn-card">Vedi i commenti</button>
-      </form>
-    </section>
   </div>
 
-  <div class="contenitore-cavallo" th:unless="${edizione}">
-    <h1 class="uno">Edizione non trovata</h1>
+  <!-- Caso: Edizione non trovata -->
+  <div th:unless="${edizione}">
+    <h2 class="uno">Edizione non trovata</h2>
   </div>
 </body>
 </html>

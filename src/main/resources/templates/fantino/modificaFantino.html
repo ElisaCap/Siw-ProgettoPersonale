@@ -40,12 +40,12 @@
 			        Cognome: <span><input required type="text" th:field="${fantino.cognome}"/></span>
 			        <span th:text="${msgErrYear}">Campo Obbligatorio</span>
 			    </div>
-			    <div>
-			        Data di nascita: <span>					<input required type="date" 
-					       th:field="*{dataNascita}" 
-					       min="1900-01-01" 
-					       max="2020-12-31" />
-</span>
+				<div>
+							        Data di nascita: 					<span>			<input type="date"
+													       th:field="${fantino.dataNascita}"
+													       th:attr="min=${minDate}, max=${maxDate}"
+													       required /></div>
+							    <div></span>
 			        <span th:text="${msgErrYear}">Campo Obbligatorio</span>
 			    </div>
 			    <div>

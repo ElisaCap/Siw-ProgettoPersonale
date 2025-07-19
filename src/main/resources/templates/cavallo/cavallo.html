@@ -1,97 +1,79 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="it">
-
 <head>
   <meta charset="UTF-8" />
   <title>Dettagli Cavallo</title>
   <link rel="stylesheet" href="/css/cav.css" />
 </head>
-
 <body>
-	<!-- HEADER -->
-						<header class="top-bar">
-						  <div class="header-content">
-						    <div class="logo-text">Palio di Siena</div>
-						    <div class="user-controls">
 
-						      <!-- Home -->
-						      <form th:action="@{/home}" method="get" style="display: inline;">
-						        <button class="btn" type="submit">Home</button>
-						      </form>
+  <!-- HEADER -->
+  <header class="top-bar">
+    <div class="header-content">
+      <div class="logo-text">Palio di Siena</div>
+      <div class="user-controls">
+        <!-- Home -->
+        <form th:action="@{/home}" method="get" style="display: inline;">
+          <button class="btn" type="submit">Home</button>
+        </form>
 
-						      <!-- Autenticato -->
-						      <div sec:authorize="isAuthenticated()" style="display: inline;">
-						        <span class="user-name" th:text="${#authentication.name}"></span>
-						        <form th:action="@{/logout}" method="post" style="display: inline;">
-						          <button class="btn" type="submit">Logout</button>
-						        </form>
-						      </div>
+        <!-- Autenticato -->
+        <div sec:authorize="isAuthenticated()" style="display: inline;">
+          <span class="user-name" th:text="${#authentication.name}"></span>
+          <form th:action="@{/logout}" method="post" style="display: inline;">
+            <button class="btn" type="submit">Logout</button>
+          </form>
+        </div>
 
-						      <!-- Non autenticato -->
-						      <div sec:authorize="!isAuthenticated()" style="display: inline;">
-						        <form th:action="@{/login}" method="get" style="display: inline;">
-						          <button class="btn" type="submit">Login</button>
-						        </form>
-						      </div>
-						    </div>
-						  </div>
-						</header>
+        <!-- Non autenticato -->
+        <div sec:authorize="!isAuthenticated()" style="display: inline;">
+          <form th:action="@{/login}" method="get" style="display: inline;">
+            <button class="btn" type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
 
+  <!-- TITOLO -->
+  <h1 class="uno">Dati Cavallo</h1>
 
   <!-- CONTENUTO PRINCIPALE -->
-  <div th:if="${cavallo}" class="dati-cavallo-container">
-   
-	<div class="contenitore-cavallo" th:if="${cavallo}">
-	  <h1 class="uno">Dati Cavallo</h1>
+  <div th:if="${cavallo}" class="card-cavallo">
+    <img th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" alt="Foto cavallo" />
 
-	  <div class="dati-cavallo-container">
-	    <!-- IMMAGINE -->
-	    <div class="cavallo-img-box">
-	      <img th:src="@{/cavalli/{id}/immagine(id=${cavallo.id})}" alt="Foto cavallo" />
-	    </div>
+    <div class="card-dato">
+      <p class="definizione">Nome Cavallo</p>
+      <p class="nome" th:text="${cavallo.nome}"></p>
+    </div>
 
-	    <!-- DATI -->
-	    <div class="cavallo-dati-box">
-	     
+    <div class="card-dato">
+      <p class="definizione">Razza Cavallo</p>
+      <p class="nome" th:text="${cavallo.razza}"></p>
+    </div>
 
-	      <div class="box">
-	        <p class="definizione">Nome Cavallo</p>
-	        <p class="nome" th:text="${cavallo.nome}"></p>
-	      </div>
+    <div class="azionibtn">
+     
+      <form th:action="@{/partCavallo/{id}(id=${cavallo.id})}" method="get">
+        <button class="btn-card secondary" type="submit">Vedi partecipazioni</button>
+      </form>
 
-	      <div class="box">
-	        <p class="definizione">Razza Cavallo</p>
-	        <p class="nome" th:text="${cavallo.razza}"></p>
-	      </div>
-	    </div>
-	  </div>
+      <div sec:authorize="hasRole('ADMIN')">
+        <form th:action="@{/cavalli/delete/{id}(id=${cavallo.id})}" method="get"
+              onsubmit="return confirm('Sei sicuro di voler eliminare questo cavallo?');">
+          <button class="btn-card danger" type="submit">Elimina</button>
+        </form>
 
-	  <!-- BOTTONI -->
-	  <div class="bottoni-cavallo">
-	    <form th:action="@{/edizioniCavallo/{id}(id=${cavallo.id})}" method="get">
-	      <button type="submit" class="btn">Vedi edizioni</button>
-	    </form>
-	    <form th:action="@{/partCavallo/{id}(id=${cavallo.id})}" method="get">
-	      <button type="submit" class="btn">Vedi partecipazioni</button>
-	    </form>
-		<div sec:authorize="hasRole('ADMIN')">
-			           <form th:action="@{/cavalli/delete/{id}(id=${cavallo.id})}" method="get"
-			                 onsubmit="return confirm('Sei sicuro di voler eliminare questo cavallo?');">
-			             <button class="btn-card danger" type="submit">Elimina</button>
-			           </form>
-
-			           <form th:action="@{/cavalli/modifica/{id}(id=${cavallo.id})}" method="get">
-			             <button class="btn-card secondary" type="submit">Modifica</button>
-			           </form>
-			         </div>	
-	  </div>
-	</div>
-
+        <form th:action="@{/cavalli/modifica/{id}(id=${cavallo.id})}" method="get">
+          <button class="btn-card secondary" type="submit">Modifica</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <div th:unless="${cavallo}">
     <p class="uno">Cavallo non trovato</p>
   </div>
 
 </body>
-
 </html>

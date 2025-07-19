@@ -21,15 +21,13 @@ import it.uniroma3.siw.service.CavalloService;
 
 @Controller
 public class CavalloController {
-
-    private final CavalloRepository cavalloRepository;
+    @Autowired
+    private  CavalloRepository cavalloRepository;
 
     @Autowired
     private CavalloService cavalloService;
 
-    CavalloController(CavalloRepository cavalloRepository) {
-        this.cavalloRepository = cavalloRepository;
-    }
+   
 
     @GetMapping("/insCavallo")
     public String insCavallo1(Model model) {
@@ -54,11 +52,7 @@ public class CavalloController {
         return "redirect:/cavalli/cercatutti";
     }
 
-    @GetMapping("/trovaCavallo")
-    public String mostraForm() {
-        return "cavallo/trovacavallo.html";
-    }
-
+  
     @GetMapping("/cavalli/{id}")
     public String cercaPerId(@PathVariable Long id, Model model) {
         Cavallo cavallo = this.cavalloService.getCavalloById(id);

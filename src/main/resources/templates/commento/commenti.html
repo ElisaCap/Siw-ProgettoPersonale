@@ -35,20 +35,26 @@
 	</header>
 
   <!-- TITOLO -->
-  <h1 class="titolo">Ecco tutti i commenti</h1>
+  <!-- TITOLO E CONTENUTO -->
+  <div class="commenti-container">
 
-    <div class="card-cavallo" th:each="commento : ${commenti}">
-      
-        <h2 th:text="${commento.utente}"></h2>
-       <span th:text="${commento.contenuto}"></span></p>
+    <h1 class="titolo">Ecco tutti i commenti</h1>
+
+    <div class="commenti-lista">
+      <div class="card-cavallo" th:each="commento : ${commenti}">
+          <h2 th:text="${commento.utente}"></h2>
+          <p><span th:text="${commento.contenuto}"></span></p>
       </div>
-	  <div sec:authorize="isAuthenticated()">
-	  				<form th:action="@{/insCommento/{id}(id=${id})}" method="get">
-	  					<button type="submit" class="btn">Lascia un commento</button>
-	  				</form>
-	  				</div>
-    
-  <!-- BOTTONE AGGIUNGI -->
+    </div>
+
+    <div class="form-aggiungi" sec:authorize="isAuthenticated()">
+      <form th:action="@{/insCommento/{id}/{idUser}(id=${id}, idUser=${userLoggato.id})}" method="get">
+          <button type="submit" class="btn-card">Inserisci un commento</button>
+      </form>
+    </div>
+
+  </div>
+
  
 </body>
 </html>

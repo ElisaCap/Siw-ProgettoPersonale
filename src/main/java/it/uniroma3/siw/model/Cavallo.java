@@ -12,13 +12,16 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import org.springframework.web.multipart.MultipartFile;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 @Entity
 public class Cavallo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @NotBlank(message = "campo obbligatorio")
     private String nome;
+    @NotBlank(message = "campo obbligatorio")
     private String razza;
 
     

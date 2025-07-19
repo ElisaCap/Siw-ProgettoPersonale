@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Contrada</title>
     <link rel="stylesheet" href="/css/cav.css" />
 </head>
 <body>
-    <!-- BARRA SUPERIORE -->
+    <!-- HEADER -->
     <header class="top-bar">
         <div class="header-content">
             <div class="logo-text">Palio di Siena</div>
@@ -31,51 +31,50 @@
         </div>
     </header>
 
-    <!-- CONTENUTO CONTRADA -->
-    <div class="uno">Dettagli Contrada</div>
+    <!-- TITOLO -->
+    <h1 class="uno">Dettagli Contrada</h1>
 
-    <div class="dati-cavallo-container" th:if="${contrada}">
+    <!-- CONTENUTO PRINCIPALE -->
+    <div th:if="${contrada}" class="card-cavallo">
         <!-- Immagine -->
-        <div class="cavallo-img-box">
-            <img th:src="@{'/urlImmagine/' + ${contrada.id}}" alt="Contrada" />
+        <img th:src="@{'/urlImmagine/' + ${contrada.id}}" alt="Immagine Contrada" />
+
+        <!-- Nome -->
+        <div class="card-dato">
+            <p class="definizione">Nome</p>
+            <p class="nome" th:text="${contrada.nome}">Nome Contrada</p>
         </div>
 
-        <!-- Dati -->
-        <div class="cavallo-dati-box">
-            <div class="box">
-                <div class="definizione">Nome</div>
-                <div class="nome" th:text="${contrada.nome}">Nome Contrada</div>
-            </div>
-            <div class="box">
-                <div class="definizione">Descrizione</div>
-                <div th:text="${contrada.descrizioneLunga}">Descrizione lunga della contrada</div>
-            </div>
+        <!-- Descrizione -->
+        <div class="card-dato">
+            <p class="definizione">Descrizione</p>
+            <p class="nome" th:text="${contrada.descrizioneLunga}">Descrizione lunga della contrada</p>
+        </div>
 
-            <!-- Bottoni -->
-            <div class="bottoni-cavallo">
-                <form th:action="@{/contrade}" method="get">
-                    <button type="submit" class="btn-card secondary">Vedi tutte</button>
+        <!-- Bottoni -->
+        <div class="azionibtn">
+            <form th:action="@{/contrade}" method="get">
+                <button type="submit" class="btn-card secondary">Vedi tutte</button>
+            </form>
+
+            <form th:action="@{/partContrada/{id}(id=${contrada.id})}" method="get">
+                <button type="submit" class="btn-card secondary">Vedi partecipazioni</button>
+            </form>
+
+            <div sec:authorize="hasRole('ADMIN')">
+                <form th:action="@{/eliminaContrada/{id}(id=${contrada.id})}" method="get"
+                      onsubmit="return confirm('Sei sicuro di voler eliminare questa contrada?');">
+                    <button type="submit" class="btn-card danger">Elimina</button>
                 </form>
 
-                <form th:action="@{/partContrada/{id}(id=${contrada.id})}" method="get">
-                    <button type="submit" class="btn-card secondary">Vedi partecipazioni</button>
+                <form th:action="@{/modificaContrada/{id}(id=${contrada.id})}" method="get">
+                    <button type="submit" class="btn-card danger">Modifica</button>
                 </form>
-
-                <div sec:authorize="hasRole('ADMIN')">
-                    <form th:action="@{/eliminaContrada/{id}(id=${contrada.id})}" method="get"
-                          onsubmit="return confirm('Sei sicuro di voler eliminare questa contrada?');">
-                        <button type="submit" class="btn-card danger">Elimina</button>
-                    </form>
-
-                    <form th:action="@{/modificaContrada/{id}(id=${contrada.id})}" method="get">
-                        <button type="submit" class="btn-card danger">Modifica</button>
-                    </form>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Contrada non trovata -->
+    <!-- Caso: Contrada non trovata -->
     <div class="uno" th:unless="${contrada}">
         <p>Contrada non trovata</p>
     </div>

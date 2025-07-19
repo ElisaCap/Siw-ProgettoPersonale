@@ -17,12 +17,15 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Edizione {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 private Long id;
+	@NotNull(message = "campo obbligatorio")
 	private LocalDate data;
 	@Lob
 	private byte[] urlImmagine; // campo per l’immagine

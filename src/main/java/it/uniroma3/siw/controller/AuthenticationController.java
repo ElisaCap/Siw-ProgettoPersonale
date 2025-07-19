@@ -112,12 +112,12 @@ public class AuthenticationController {
     }
 	}
 	
-	@GetMapping("/logout")
+	@PostMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 	    var auth = SecurityContextHolder.getContext().getAuthentication();
 	    if (auth != null){
 	        new SecurityContextLogoutHandler().logout(request, response, auth);
-	    }return "logout.html";
+	    }return "redirect:/home";
 	}
 	
 	

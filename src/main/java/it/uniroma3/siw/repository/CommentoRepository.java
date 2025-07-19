@@ -14,4 +14,6 @@ import java.util.List;
 public interface CommentoRepository extends CrudRepository<Commento, Long> {
 @Transactional
 public Iterable<Commento> findByEdizione(Edizione edizione);
+@Transactional
+public void deleteById(Long id);
 }

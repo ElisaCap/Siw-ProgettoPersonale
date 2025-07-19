@@ -1,89 +1,77 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Fantino</title>
+  <title>Dettagli Fantino</title>
   <link rel="stylesheet" href="/css/cav.css">
 </head>
 
 <body>
-	<!-- HEADER -->
-					<header class="top-bar">
-					  <div class="header-content">
-					    <div class="logo-text">Palio di Siena</div>
-					    <div class="user-controls">
+  <!-- HEADER -->
+  <header class="top-bar">
+    <div class="header-content">
+      <div class="logo-text">Palio di Siena</div>
+      <div class="user-controls">
+        <!-- Home -->
+        <form th:action="@{/home}" method="get" style="display: inline;">
+          <button class="btn" type="submit">Home</button>
+        </form>
 
-					      <!-- Home -->
-					      <form th:action="@{/home}" method="get" style="display: inline;">
-					        <button class="btn" type="submit">Home</button>
-					      </form>
+        <!-- Autenticato -->
+        <div sec:authorize="isAuthenticated()" style="display: inline;">
+          <span class="user-name" th:text="${#authentication.name}"></span>
+          <form th:action="@{/logout}" method="post" style="display: inline;">
+            <button class="btn" type="submit">Logout</button>
+          </form>
+        </div>
 
-					      <!-- Autenticato -->
-					      <div sec:authorize="isAuthenticated()" style="display: inline;">
-					        <span class="user-name" th:text="${#authentication.name}"></span>
-					        <form th:action="@{/logout}" method="post" style="display: inline;">
-					          <button class="btn" type="submit">Logout</button>
-					        </form>
-					      </div>
+        <!-- Non autenticato -->
+        <div sec:authorize="!isAuthenticated()" style="display: inline;">
+          <form th:action="@{/login}" method="get" style="display: inline;">
+            <button class="btn" type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
 
-					      <!-- Non autenticato -->
-					      <div sec:authorize="!isAuthenticated()" style="display: inline;">
-					        <form th:action="@{/login}" method="get" style="display: inline;">
-					          <button class="btn" type="submit">Login</button>
-					        </form>
-					      </div>
-					    </div>
-					  </div>
-					</header>
-
+  <!-- TITOLO -->
+  <h1 class="uno">Dati Fantino</h1>
 
   <!-- CONTENUTO PRINCIPALE -->
-  <div th:if="${fantino}">
-    <h1 class="uno">Dati Fantino</h1>
+  <div th:if="${fantino}" class="card-cavallo">
+    <img th:src="@{/fantini/{id}/immagine(id=${fantino.id})}" alt="Foto Fantino">
 
-    <div class="dati-cavallo-container">
-      <!-- Immagine -->
-      <div class="cavallo-img-box">
-        <img th:src="@{/fantini/{id}/immagine(id=${fantino.id})}" alt="Foto Fantino">
-      </div>
+    <div class="card-dato">
+      <p class="definizione">Nome</p>
+      <p class="nome" th:text="${fantino.nome}"></p>
+    </div>
 
-      <!-- Dati Fantino + Bottoni -->
-      <div class="cavallo-dati-box">
-       
+    <div class="card-dato">
+      <p class="definizione">Cognome</p>
+      <p class="nome" th:text="${fantino.cognome}"></p>
+    </div>
 
-        <div class="box">
-          <p class="definizione">Nome</p>
-          <p class="nome" th:text="${fantino.nome}"></p>
-        </div>
+    <div class="card-dato">
+      <p class="definizione">Data di Nascita</p>
+      <p class="nome" th:text="${fantino.dataNascita}"></p>
+    </div>
 
-        <div class="box">
-          <p class="definizione">Cognome</p>
-          <p class="nome" th:text="${fantino.cognome}"></p>
-        </div>
+    <!-- Bottoni -->
+    <div class="azionibtn">
+      <form th:action="@{/partFantino/{id}(id=${fantino.id})}" method="get">
+        <button type="submit" class="btn-card secondary">Vedi Partecipazioni</button>
+      </form>
 
-        <div class="box">
-          <p class="definizione">Data di Nascita</p>
-          <p class="nome" th:text="${fantino.dataNascita}"></p>
-        </div>
-
-        <!-- Bottoni -->
-        <div class="bottoni-cavallo">
-          <form th:action="@{/partFantino/{id}(id=${fantino.id})}" method="get">
-            <button type="submit" class="btn-card secondary">Vedi Partecipazioni</button>
-          </form>
-
-          <div sec:authorize="hasRole('ADMIN')">
-            <form th:action="@{/fantini/delete/{id}(id=${fantino.id})}" method="get"
+      <div sec:authorize="hasRole('ADMIN')">
+        <form th:action="@{/fantini/delete/{id}(id=${fantino.id})}" method="get"
               onsubmit="return confirm('Sei sicuro di voler eliminare questo fantino?');">
-              <button type="submit" class="btn-card danger">Elimina</button>
-            </form>
+          <button type="submit" class="btn-card danger">Elimina</button>
+        </form>
 
-            <form th:action="@{/fantini/modifica/{id}(id=${fantino.id})}" method="get">
-              <button type="submit" class="btn-card secondary">Modifica</button>
-            </form>
-          </div>
-        </div>
+        <form th:action="@{/fantini/modifica/{id}(id=${fantino.id})}" method="get">
+          <button type="submit" class="btn-card secondary">Modifica</button>
+        </form>
       </div>
     </div>
   </div>
@@ -93,5 +81,4 @@
     <h2 class="uno">Fantino non trovato</h2>
   </div>
 </body>
-
 </html>

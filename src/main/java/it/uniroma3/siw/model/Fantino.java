@@ -15,15 +15,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Fantino {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 private Long id;
+	@NotBlank(message = "campo obbligatorio")
 private String nome;
+	@NotBlank(message = "campo obbligatorio")
 private String cognome;
-
+	@NotNull(message = "campo obbligatorio")
 private LocalDate dataNascita;
 @OneToMany(mappedBy = "fantino" ,cascade = CascadeType.REMOVE, orphanRemoval = true)
 private List<Partecipazione>partecipazioni;

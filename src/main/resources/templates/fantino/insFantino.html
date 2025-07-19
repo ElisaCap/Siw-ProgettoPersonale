@@ -40,9 +40,10 @@
 			        <span th:text="${msgErrYear}">Campo Obbligatorio</span>
 			    </div>
 			    <div>
-			        Data di nascita: <span><input required type="date" th:field="${fantino.dataNascita}"/></span>
-			        <span th:text="${msgErrYear}">Campo Obbligatorio</span>
-			    </div>
+			        Data di nascita: 					<span>			<input type="date"
+									       th:field="${fantino.dataNascita}"
+									       th:attr="min=${minDate}, max=${maxDate}"
+									       required /></div>
 			    <div>
 			        immagine: <span>
 			            <input type="file" th:field="*{fileImmagine}" accept="image/*" />

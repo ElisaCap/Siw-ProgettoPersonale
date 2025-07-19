@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -73,6 +74,9 @@ public String edizione(@PathVariable Long id, Model model) {
 @GetMapping("/insEdizione")
 public String insEdizione(Model model) {
 	Edizione edizione=new Edizione();
+	model.addAttribute("minDate", LocalDate.of(1900, 7, 1));
+	model.addAttribute("maxDate", LocalDate.now().plusDays(30));
+
 	model.addAttribute("edizione",edizione);
 	return "edizione/nuovaEdizione.html";
 }
@@ -126,7 +130,7 @@ public String edizioneCavallo(@PathVariable Long id, Model model) {
     return "edizione/edizioni";
 }
 
-@GetMapping("/edizioni/delete/{id}")
+@PostMapping("/edizioni/delete/{id}")
 public String eliminaFantino(@PathVariable Long id, Model model) {
     edizioneService.deleteById(id);
     model.addAttribute("edizioni", edizioneService.getAll());
@@ -151,6 +155,8 @@ public ResponseEntity<byte[]> getImmagine(@PathVariable Long id) {
 @GetMapping("/modificaEdizione/{id}")
 public String modifica(Model model, @PathVariable Long id) {
 	Edizione edizione=edizioneSerivice.getById(id);
+	model.addAttribute("minDate", LocalDate.of(1900, 7, 1));
+	model.addAttribute("maxDate", LocalDate.now().plusDays(30));
 	model.addAttribute("edizione",edizione);
 	return "edizione/modificaEdizione.html";
 }

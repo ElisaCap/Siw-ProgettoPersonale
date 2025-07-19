@@ -55,7 +55,10 @@
             <td th:text="${partecipazione.cavallo.nome}">Nome Cavallo</td>
             <td th:text="|${partecipazione.fantino.nome} ${partecipazione.fantino.cognome}|">Fantino</td>
             <td th:text="${partecipazione.contrada.nome}">Contrada</td>
-            <td th:text="${partecipazione.edizione.data}">01/07/2025</td>
+			<td>
+			  <a th:href="@{/edizione/{id}(id=${partecipazione.edizione.id})}" 
+			     th:text="${partecipazione.edizione.data}">01/07/2025</a>
+			</td>
 
             <td th:if="${partecipazione.elementoClassifica != null}"
                 th:text="${partecipazione.elementoClassifica.posizione}">1°</td>

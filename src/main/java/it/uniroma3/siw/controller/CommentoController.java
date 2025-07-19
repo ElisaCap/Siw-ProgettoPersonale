@@ -3,6 +3,8 @@ package it.uniroma3.siw.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +52,14 @@ public class CommentoController {
     @GetMapping("/commentiEdizione/{id}")
     public String mostraCommenti(@PathVariable Long id, Model model) {
     	Edizione edizione=edizioneService.getById(id);
+    	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+  	    if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getName())) {
+  	        String username = auth.getName();
+  	        User user = userService.getUserByUsername(username);
+  	        model.addAttribute("userLoggato", user);
+  	    } else {
+  	        model.addAttribute("userLoggato", null);
+  	    }
         model.addAttribute("commenti",commentoService.getByEdizione(edizione) );
         model.addAttribute("id",id);
         return "commento/commenti.html";

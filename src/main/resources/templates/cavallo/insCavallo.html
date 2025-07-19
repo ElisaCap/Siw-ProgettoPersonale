@@ -37,16 +37,16 @@
     <form th:action="@{/insCavallo}" method="post" th:object="${cavallo}" enctype="multipart/form-data" class="form-cavallo">
         <div>
             Nome: <span><input required type="text" th:field="*{nome}" /></span>
-            <span th:text="${msgErrTitle}">Campo Obbligatorio</span>
         </div>
         <div>
             Razza: <span><input required type="text" th:field="*{razza}" /></span>
-            <span th:text="${msgErrYear}">Campo Obbligatorio</span>
         </div>
         <div>
             Immagine cavallo:
-            <input type="file" th:field="*{fileImmagine}" accept="image/*" />
-        </div>
+			<input type="file" th:field="*{fileImmagine}" accept="image/*" />
+			<div class="error" th:if="${#fields.hasErrors('fileImmagine')}" th:errors="*{fileImmagine}">Errore</div>
+
+			</div>
         <div>
             <span><button type="submit" class="btn">Conferma</button></span>
         </div>

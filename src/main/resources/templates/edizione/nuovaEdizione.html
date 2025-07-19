@@ -32,9 +32,11 @@
     <form th:action="@{/insEdizione}" method="post" th:object="${edizione}" enctype="multipart/form-data" class="form-cavallo">
         <div>
             Data:
-            <span><input required type="date" th:field="*{data}"/></span>
-            <span th:if="${#fields.hasErrors('data')}" th:errors="*{data}">Campo obbligatorio</span>
-        </div>
+            <span>			<input type="date"
+			       th:field="*{data}"
+			       th:attr="min=${minDate}, max=${maxDate}"
+			       required />
+
 
         <div>
             <label>Immagine:</label>

@@ -88,8 +88,8 @@ private CredentialsRepository credentialsRepository;
             			    "/cavallo/**","/edizione/**", "/classifica/**","/contrade/**",
             			    "/home","/homepage.html","/edizioni","/edizione/{id}","edizioni.html","edizione.html",   "/visualizza",
             			    "/cavallo/trovacavallo.html","/cavalli/cercatutti",
-            			    "/css/**", "/js/**", "/images/**", "/sfondo.jpg","/cavn.jpg", "/webjars/**","/immagginicontrade/**",
-            			    "/static/**","/urlImmagine/{id}"
+            			    "/css/**", "/js/**", "/images/**", "/sfondo.jpg","/cavn.jpg", "/webjars/**","/immagginicontrade/**","/commentiEdizione/{id}",
+            			    "/static/**","/urlImmagine/{id}","/fantini/{id}","/edizioniCavallo/{id}","/partCavallo/{id}","/partContrada/{id}"
             			).permitAll()
                 .anyRequest().authenticated()
             )
@@ -102,7 +102,7 @@ private CredentialsRepository credentialsRepository;
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
+                .logoutSuccessUrl("/home")
                 .permitAll()
             )
             .exceptionHandling(ex -> ex

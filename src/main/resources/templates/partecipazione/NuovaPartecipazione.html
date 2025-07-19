@@ -1,60 +1,90 @@
 <!DOCTYPE html>
-<html>
-	<head>
-			<title>Nuova partecipazione</title>
-			<link rel="stylesheet" href="/stile.css?version=3"/>
-		</head>
-		<body>
-			<div><a href="/"></a></div>
-			<h1>Aggiungi una partcipazione</h1>
-			<form th:action="@{/insPartecipazione}" method="post" th:object="${partecipazione}">
-				<label for="cavallo">Cavallo:</label>
-				  <select th:field="${partecipazione.cavallo}">
-				      <option value="" disabled selected>Scegli un cavallo</option>
-				      <option th:each="ca : ${cavalli}" 
-				              th:value="${ca.id}" 
-				              th:text="${ca.nome}">
-				      </option>
-					  <input type="hidden" th:field="${partecipazione.cavallo}" value="${cavallo}" />
-					  <label for="fantino">Cavallo:</label>
-					  				  <select th:field="${partecipazione.fantino}">
-					  				      <option value="" disabled selected>Scegli un fantino</option>
-					  				      <option th:each="fa : ${fantini}" 
-					  				              th:value="${fa.id}" 
-					  				              th:text="|${fa.nome} ${fa.cognome}|">
-					  				      </option>
-					  					  <input type="hidden" th:field="${partecipazione.fantino}" value="${fantino}" />
-				  </select>
-				  <label for="edizione">Edizione:</label>
-				  <input type="hidden" th:field="${partecipazione.edizione}" th:value="${edizione}" />
-				  
-			<!-- 				  <select th:field="${partecipazione.edizione}">
-				  				      <option value="" disabled selected>Scegli un'edizione</option>
-				  				      <option th:each="ed : ${edizioni}" 
-				  				              th:value="${ed.id}" 
-				  				              th:text="${ed.data}">
-				  				      </option>
-				  					  <input type="hidden" th:field="${partecipazione.edizione}" value="${edizione}" />	
-									  -->	 	  
-									  
-				
-									  <label for="contrada">Contrada:</label>
-									  				  				  <select th:field="${partecipazione.contrada}">
-									  				  				      <option value="" disabled selected>Scegli una contrada</option>
-									  				  				      <option th:each="con : ${contrade}" 
-									  				  				              th:value="${con.id}" 
-									  				  				              th:text="${con.nome}">
-									  				  				      </option>
-									  				  					  <input type="hidden" th:field="${partecipazione.edizione}" value="${edizione}" />							  					  
-									  
-									  	
-				  
-		
-				<div>
-					<span><button type="submit">Conferma</button></span>
-				</div>
-			</form>
-		</body>	
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nuova partecipazione</title>
+  <link rel="stylesheet" href="/css/insCavallo.css" />
+</head>
+<body>
 
+  <!-- HEADER -->
+  <header class="top-bar">
+    <div class="header-content">
+      <div class="logo-text">Palio di Siena</div>
+      <div class="user-controls">
 
+        <!-- Home -->
+        <form th:action="@{/home}" method="get" style="display: inline;">
+          <button class="btn" type="submit">Home</button>
+        </form>
+
+        <!-- Autenticato -->
+        <div sec:authorize="isAuthenticated()" style="display: inline;">
+          <span class="user-name" th:text="${#authentication.name}"></span>
+          <form th:action="@{/logout}" method="post" style="display: inline;">
+            <button class="btn" type="submit">Logout</button>
+          </form>
+        </div>
+
+        <!-- Non autenticato -->
+        <div sec:authorize="!isAuthenticated()" style="display: inline;">
+          <form th:action="@{/login}" method="get" style="display: inline;">
+            <button class="btn" type="submit">Login</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <h1 class="main-title">Aggiungi una partecipazione</h1>
+
+  <form class="form-cavallo" th:action="@{/insPartecipazione}" method="post" th:object="${partecipazione}">
+    
+    <!-- Cavallo -->
+    <div>
+      <label for="cavallo">Cavallo:</label>
+      <select id="cavallo" th:field="*{cavallo}">
+        <option value="" disabled selected>Scegli un cavallo</option>
+        <option th:each="ca : ${cavalli}" 
+                th:value="${ca.id}" 
+                th:text="${ca.nome}">
+        </option>
+      </select>
+    </div>
+    
+    <!-- Fantino -->
+    <div>
+      <label for="fantino">Fantino:</label>
+      <select id="fantino" th:field="*{fantino}">
+        <option value="" disabled selected>Scegli un fantino</option>
+        <option th:each="fa : ${fantini}" 
+                th:value="${fa.id}" 
+                th:text="|${fa.nome} ${fa.cognome}|">
+        </option>
+      </select>
+    </div>
+
+    <!-- Edizione (hidden) -->
+    <input type="hidden" th:field="*{edizione}" th:value="${edizione}" />
+
+    <!-- Contrada -->
+    <div>
+      <label for="contrada">Contrada:</label>
+      <select id="contrada" th:field="*{contrada}">
+        <option value="" disabled selected>Scegli una contrada</option>
+        <option th:each="con : ${contrade}" 
+                th:value="${con.id}" 
+                th:text="${con.nome}">
+        </option>
+      </select>
+    </div>
+
+    <!-- Submit -->
+    <div>
+      <button class="btn" type="submit">Conferma</button>
+    </div>
+  </form>
+
+</body>
 </html>

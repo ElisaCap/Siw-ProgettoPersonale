@@ -13,15 +13,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Contrada {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 private Long id;
+	@NotBlank(message = "campo obbligatorio")
 private String nome;
+	@NotBlank(message = "campo obbligatorio")
 private String descrizione;
 @Column(length=3000)
+@NotBlank(message = "campo obbligatorio")
 private String descrizioneLunga; 
 @OneToMany(mappedBy = "contrada")
 private List<Partecipazione>partecipazioni;

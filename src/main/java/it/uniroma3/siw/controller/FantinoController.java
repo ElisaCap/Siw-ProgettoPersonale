@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -30,6 +31,8 @@ private FantinoService fantinoService;
 @GetMapping("/insFantino")
 	public String insfantino(Model model) {
 		model.addAttribute("fantino", new  Fantino());
+		model.addAttribute("minDate", LocalDate.of(1950, 7, 1));
+		model.addAttribute("maxDate", LocalDate.now().minusYears(16));
 		return "fantino/insFantino.html";
 	}
 	
@@ -53,10 +56,7 @@ private FantinoService fantinoService;
 
 	
 	
-	 @GetMapping("/trovaFantino")
-	    public String mostraFantino() {
-	        return "fantino/trovaFantino.html";
-	    }
+	 
 	 
 	 
 	  @GetMapping("/fantini/{id}")
@@ -103,6 +103,8 @@ private FantinoService fantinoService;
     public String modifica(@PathVariable Long id,Model model) {
     	model.addAttribute("fantino",this.fantinoService.getByid(id));
     	model.addAttribute("id",id);
+    	model.addAttribute("minDate", LocalDate.of(1950, 7, 1));
+		model.addAttribute("maxDate", LocalDate.now().minusYears(16));
     	return "fantino/modificaFantino.html";
     }
     @PostMapping("/salvaFantino")
