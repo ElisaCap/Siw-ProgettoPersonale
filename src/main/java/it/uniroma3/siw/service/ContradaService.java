@@ -117,13 +117,36 @@ public class ContradaService {
 		
 
 	}
+	@Transactional
 
 	public Contrada getByid(Long id) {
 		return this.contradaRepository.findById(id).orElse(null);
 	}
-	
+	@Transactional
+
 	public void deleteById(Long id) {
 		this.contradaRepository.deleteById(id);
 	}
+	
+	@Transactional
+	 public void aggiungiRivalita(Long id1, Long id2) {
+	        Contrada c1 = contradaRepository.findById(id1)
+	                .orElseThrow(() -> new RuntimeException("Contrada non trovata: " + id1));
+	        Contrada c2 = contradaRepository.findById(id2)
+	                .orElseThrow(() -> new RuntimeException("Contrada non trovata: " + id2));
 
+	        // Aggiungi la rivalità in entrambe le direzioni
+	        if (!c1.getContradeRivali().contains(c2)) {
+	            c1.getContradeRivali().add(c2);
+	        }
+	        if (!c2.getContradeRivali().contains(c1)) {
+	            c2.getContradeRivali().add(c1);
+	        }
+
+	        contradaRepository.save(c1);
+	        contradaRepository.save(c2); // salva anche la relazione ManyToMany
+	    }
+public void deleterivali(Long id,Long idc) {
+	this.contradaRepository.deleteRivali(id, idc);
+}
 }

@@ -5,12 +5,14 @@ import java.util.Objects;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
@@ -29,7 +31,8 @@ private String descrizione;
 private String descrizioneLunga; 
 @OneToMany(mappedBy = "contrada")
 private List<Partecipazione>partecipazioni;
-
+@ManyToMany(cascade = {CascadeType.ALL})
+private List<Contrada>contradeRivali;
 
 @Lob
 private byte[] urlImmagine; // campo per l’immagine
@@ -109,6 +112,14 @@ public String getDescrizioneLunga() {
 
 public void setDescrizioneLunga(String descrizioneLunga) {
 	this.descrizioneLunga = descrizioneLunga;
+}
+
+public List<Contrada> getContradeRivali() {
+	return contradeRivali;
+}
+
+public void setContradeRivali(List<Contrada> contrade) {
+	this.contradeRivali = contrade;
 }
 
 

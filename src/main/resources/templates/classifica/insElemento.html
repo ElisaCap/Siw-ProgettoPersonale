@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.thymeleaf.org">
+	<link rel="stylesheet" href="/css/classifica.css">
+
 <head>
     <meta charset="UTF-8" />
-    <title>Inserisci Classifica</title>
+    <title>Inserisci nella Classifica</title>
 </head>
 <body>
-<h1>Inserisci Classifica</h1>
+<h1>Inserisci nella Classifica</h1>
 <form action="#" th:action="@{/salvaElemento/{id}(id=${id})}" method="post">
     <input type="number" name="posizione" th:value="${posizione}" readonly />
     <select name="partecipazioneId">

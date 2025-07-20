@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +43,7 @@ public class PartecipazioneController {
     PartecipazioneController(EdizioneRepository edizioneRepository) {
         this.edizioneRepository = edizioneRepository;
     }
-	
+    @PreAuthorize("hasRole('ADMIN')")
  @GetMapping("/insPartecipazione")
  public String insPartecipazione(Model model) {
 	 model.addAttribute("partecipazione",new Partecipazione());
@@ -55,12 +56,13 @@ public class PartecipazioneController {
  }
  
  
- 
+    @PreAuthorize("hasRole('ADMIN')")
 @PostMapping("/insPartecipazione")
 public String savePartecipazione(@ModelAttribute("partecipazione") Partecipazione partecipazione, Model model ) {
 	this.partecipazioneService.save(partecipazione);
 	return "redirect:/edizione/"+partecipazione.getEdizione().getId();
 }
+    @PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/partecipazione/delete/{id}")
 public String eliminaFantino(@PathVariable Long id, Model model) {
     partecipazioneService.deleteById(id);
@@ -68,7 +70,7 @@ public String eliminaFantino(@PathVariable Long id, Model model) {
     return "partecipazione/partecipazioni.html"; // oppure redirect a cercatutti
 }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/insPartecipazione/{id}")
 public String insPartecipazione(@PathVariable Long id, Model model) {
     Edizione edizione = edizioneRepository.findById(id).get();

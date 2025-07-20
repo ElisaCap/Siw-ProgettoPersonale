@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,7 +70,7 @@ private EdizioneService edizioneSerivice;
 
 
 
-
+    @PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/insEdizioneClassifica")
 public String insEdizione(Model model) {
 	//Classifica classifica=new Classifica();
@@ -78,7 +79,7 @@ public String insEdizione(Model model) {
       return "classifica/insEdizione.html";
 }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
 @PostMapping("/saveEdizioneClassifica")
 public String saveEdizioneClassifica(@RequestParam("edizioneId") Long edizioneId, Model model) {
     Optional<Edizione> edizioneOpt = edizioneRepository.findById(edizioneId);
@@ -106,7 +107,7 @@ public String saveEdizioneClassifica(@RequestParam("edizioneId") Long edizioneId
 }
 
 
-
+/*
 @PostMapping("/saveNumContrade")
 public String setNumContrade(
 		@RequestParam("edizioneId") Long edizioneId,@ModelAttribute("classifica") Classifica classifica,
@@ -127,7 +128,7 @@ public String setNumContrade(
     model.addAttribute("num", num);
     return "classifica/insClassifica.html";
 }
-
+*/
 
 
 
@@ -135,7 +136,7 @@ public String setNumContrade(
 @Autowired
 private EntityManager entityManager;
 
-
+@PreAuthorize("hasRole('ADMIN')")
 @PostMapping("/saveClassifica")
 public String saveClassifica(@ModelAttribute("classifica") Classifica classifica,
                              @RequestParam("edizioneId") Long edizioneId,
@@ -161,13 +162,14 @@ public String saveClassifica(@ModelAttribute("classifica") Classifica classifica
     return "redirect:/classifica/" + edizionePersistita.getId();
 }
 
+@PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/classifiche/delete/{id}")
 public String eliminaClassifica(@PathVariable Long id, Model model) {
     classificaService.deleteById(id);
     model.addAttribute("classifiche", classificaService.getAll());
     return "classifica/classifiche.html"; // oppure redirect a cercatutti
 }
-
+/*
 @GetMapping("/modificaClassifica/{id}")
 public String modificaClassifica(@PathVariable Long id, Model model) {
     Classifica classifica=classificaService.getById(id);
@@ -181,8 +183,8 @@ public String modificaClassifica(@PathVariable Long id, Model model) {
     }
     model.addAttribute("partecipazioni", partecipazioni2);
     return "classifica/modificaClassifica.html"; // oppure redirect a cercatutti
-}
-
+}*/
+@PreAuthorize("hasRole('ADMIN')")
 @PostMapping("/eliminaElementoClassifica/{id}/{idc}")
 public String eliminaElemento(@PathVariable Long id,
                               @PathVariable Long idc,
@@ -195,12 +197,13 @@ public String eliminaElemento(@PathVariable Long id,
     model.addAttribute("classifica", classificaService.getById(idc));
     model.addAttribute("elementiClassifica",
             elementoClassificaRepository.findAllByClassificaOrderByPosizione(classificaService.getById(idc)));
+    model.addAttribute("partecipazioni",classificaService.getById(idc).getEdizione().getPartecipazioni());
 
-    return "classifica/classifica.html";
+    return "redirect/classifica/"+idc;
 }
 
 
-
+@PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/insElemento/{id}")
 public String insElemento(@RequestParam(name = "posizione", defaultValue = "0") int pos,
                           @PathVariable Long id,
@@ -216,12 +219,12 @@ public String insElemento(@RequestParam(name = "posizione", defaultValue = "0") 
     return "classifica/insElemento.html";
 }
 
-
+@PreAuthorize("hasRole('ADMIN')")
 @PostMapping("/salvaElemento/{id}")
 @Transactional
 public String salvaElemento(@RequestParam("partecipazioneId") Long partecipazioneId,
                             @RequestParam("posizione") int posizione,
-                            @PathVariable Long id) {
+                            @PathVariable Long id,Model model) {
     Classifica classifica = classificaService.getById(id);
     Partecipazione partecipazione = partecipazioneRepository.findById(partecipazioneId).orElseThrow();
 
@@ -230,8 +233,8 @@ public String salvaElemento(@RequestParam("partecipazioneId") Long partecipazion
     elemento.setPartecipazione(partecipazione);
     elemento.setPosizione(posizione );
     elementoClassificaRepository.incrementaPosizioniDa(posizione);
-
     elementoClassificaRepository.save(elemento);
+    model.addAttribute("partecipazioni",classifica.getEdizione().getPartecipazioni());
     return "redirect:/classifica/" + id;
 }
 

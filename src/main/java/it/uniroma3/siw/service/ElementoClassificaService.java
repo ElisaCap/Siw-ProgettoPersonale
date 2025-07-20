@@ -73,12 +73,15 @@ public class ElementoClassificaService {
 	public void deleteById(Long id) {
 	    Optional<ElementoClassifica> elemento = elementoClassificaRepository.findById(id);
 	    if (elemento.isPresent()) {
+	    	
 	        ElementoClassifica e = elemento.get();
+	        elementoClassificaRepository.derementaPosizioniDa(e.getPosizione());
 	        // Disassocia da classifica e partecipazione
 	        e.setClassifica(null);
 	        e.setPartecipazione(null);
 	        elementoClassificaRepository.save(e); // salva la disassociazione
-	        elementoClassificaRepository.delete(e); // ora elimina
+	        elementoClassificaRepository.delete(e);// ora elimina
+	       
 	    }
 	}
 

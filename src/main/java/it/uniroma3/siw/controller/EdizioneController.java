@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -70,7 +71,7 @@ public String edizione(@PathVariable Long id, Model model) {
 
 
 
-
+@PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/insEdizione")
 public String insEdizione(Model model) {
 	Edizione edizione=new Edizione();
@@ -81,7 +82,7 @@ public String insEdizione(Model model) {
 	return "edizione/nuovaEdizione.html";
 }
 
-
+@PreAuthorize("hasRole('ADMIN')")
 @PostMapping("/insEdizione")
 public String saveEdizione(@ModelAttribute("edizione") Edizione edizione
 		
@@ -129,7 +130,7 @@ public String edizioneCavallo(@PathVariable Long id, Model model) {
     model.addAttribute("edizioni", edizioni);
     return "edizione/edizioni";
 }
-
+@PreAuthorize("hasRole('ADMIN')")
 @PostMapping("/edizioni/delete/{id}")
 public String eliminaFantino(@PathVariable Long id, Model model) {
     edizioneService.deleteById(id);
@@ -151,7 +152,7 @@ public ResponseEntity<byte[]> getImmagine(@PathVariable Long id) {
 
     return new ResponseEntity<>(edizione.getUrlImmagine(), headers, HttpStatus.OK);
 }
-
+@PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/modificaEdizione/{id}")
 public String modifica(Model model, @PathVariable Long id) {
 	Edizione edizione=edizioneSerivice.getById(id);
@@ -161,7 +162,7 @@ public String modifica(Model model, @PathVariable Long id) {
 	return "edizione/modificaEdizione.html";
 }
 
-
+@PreAuthorize("hasRole('ADMIN')")
 @PostMapping("/salvaEdizione")
 @Transactional
 public String salvaEdizione(@ModelAttribute("edizione") Edizione edizione) {

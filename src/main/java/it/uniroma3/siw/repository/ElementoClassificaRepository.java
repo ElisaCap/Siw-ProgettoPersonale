@@ -15,6 +15,10 @@ public Iterable<ElementoClassifica>findAllByClassificaOrderByPosizione(Classific
     @Transactional
     @Query("UPDATE ElementoClassifica e SET e.posizione = e.posizione + 1 WHERE e.posizione >= :posizione")
   public  void incrementaPosizioniDa(int posizione);
+    @Modifying
+    @Transactional
+    @Query("UPDATE ElementoClassifica e SET e.posizione = e.posizione - 1 WHERE e.posizione >= :posizione")
+    public  void derementaPosizioniDa(int posizione);
 }
 	
 	

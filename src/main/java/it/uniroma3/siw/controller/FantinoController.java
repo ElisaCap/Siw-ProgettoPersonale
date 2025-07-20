@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,7 @@ public class FantinoController {
 	@Autowired
 private FantinoService fantinoService;
 	
-
+    @PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/insFantino")
 	public String insfantino(Model model) {
 		model.addAttribute("fantino", new  Fantino());
@@ -36,7 +37,7 @@ private FantinoService fantinoService;
 		return "fantino/insFantino.html";
 	}
 	
-
+    @PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/insFantino")
 	public String salvafantino(@ModelAttribute("fantino") Fantino fantino, Model model) {
 	    model.addAttribute(fantino);
@@ -76,7 +77,7 @@ private FantinoService fantinoService;
 	  
 	  
 	  
-	  
+	    @PreAuthorize("hasRole('ADMIN')")
 	  @GetMapping("/fantini/delete/{id}")
 	  public String eliminaFantino(@PathVariable Long id, Model model) {
 	      fantinoService.deleteById(id);
@@ -99,6 +100,8 @@ private FantinoService fantinoService;
 	      headers.setContentType(MediaType.IMAGE_JPEG); // oppure rileva il tipo dinamicamente
 	      return new ResponseEntity<>(fantino.getUrlImmagine(), headers, HttpStatus.OK);
 	  }
+	  
+	    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/fantini/modifica/{id}")
     public String modifica(@PathVariable Long id,Model model) {
     	model.addAttribute("fantino",this.fantinoService.getByid(id));
@@ -107,6 +110,7 @@ private FantinoService fantinoService;
 		model.addAttribute("maxDate", LocalDate.now().minusYears(16));
     	return "fantino/modificaFantino.html";
     }
+	@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/salvaFantino")
     public String salvaFantino(@ModelAttribute("fantino")Fantino fantino,Model model) {
     	  MultipartFile file = fantino.getFileImmagine();

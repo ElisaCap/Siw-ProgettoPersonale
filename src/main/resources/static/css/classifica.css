@@ -115,7 +115,7 @@ body {
   box-shadow: 0 0 12px var(--color-secondary-hover);
 }
 
-/* Add element button */
+/* Add element (piccolo, rotondo) */
 .btn-add-element {
   font-size: 1.6rem;
   width: 38px;
@@ -136,6 +136,29 @@ body {
 
 .btn-add-element:hover,
 .btn-add-element:focus {
+  background-color: var(--color-primary-hover);
+  box-shadow: 0 4px 14px rgba(210,105,30,0.6);
+  outline: none;
+}
+
+/* Add wide element (in cima/in fondo) */
+.btn-add-wide {
+  background-color: var(--color-primary-light);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  margin: 12px auto;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.btn-add-wide:hover,
+.btn-add-wide:focus {
   background-color: var(--color-primary-hover);
   box-shadow: 0 4px 14px rgba(210,105,30,0.6);
   outline: none;
@@ -251,25 +274,29 @@ body {
     height: 34px;
   }
 
+  .btn-add-wide {
+    font-size: 1rem;
+    padding: 8px 18px;
+  }
+
   .user-controls {
     gap: 10px;
   }
 }
 
-/* Immagini generiche - limita dimensioni e mantiene proporzioni */
+/* Immagini generiche */
 img {
-  max-width: 100%;       /* Non più larghe del contenitore */
-  height: auto;          /* Proporzioni mantenute */
-  display: block;        /* Rimuove gap sotto l’immagine */
-  max-height: 150px;     /* Altezza massima per uniformità */
-  object-fit: contain;   /* Mantiene contenuto senza taglio */
+  max-width: 100%;
+  height: auto;
+  display: block;
+  max-height: 150px;
+  object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   margin: 0 auto;
   transition: transform 0.3s ease;
 }
 
-/* Immagini cavallo - dimensioni più contenute */
 .foto-cavallo {
   max-width: 100px;
   max-height: 120px;

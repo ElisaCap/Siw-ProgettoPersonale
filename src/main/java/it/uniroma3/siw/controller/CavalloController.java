@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,13 +29,13 @@ public class CavalloController {
     private CavalloService cavalloService;
 
    
-
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/insCavallo")
     public String insCavallo1(Model model) {
         model.addAttribute("cavallo", new Cavallo());
         return "cavallo/insCavallo.html";
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/insCavallo")
     public String salvaCavallo(@ModelAttribute("cavallo") Cavallo cavallo, Model model) {
       
@@ -81,14 +82,14 @@ public class CavalloController {
 
         return new ResponseEntity<>(cavallo.getImmagine(), headers, HttpStatus.OK);
     }
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/cavalli/delete/{id}")
 	  public String eliminaCavallo(@PathVariable Long id, Model model) {
 	      cavalloService.deleteById(id);
 	      model.addAttribute("cavalli", cavalloService.getAll());
 	      return "cavallo/cavalli.html"; 
 	  }
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/cavalli/modifica/{id}")
     public String modifica(@PathVariable Long id,Model model) {
     	Cavallo cavallo=this.cavalloService.getCavalloById(id);
@@ -96,7 +97,7 @@ public class CavalloController {
     	model.addAttribute("id",id);
     	return "cavallo/modificaCavallo.html";
     }
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/saveCavallo")
     public String modificaCavallo(@ModelAttribute("cavallo")Cavallo cavallo,Model model) {
     	 MultipartFile file = cavallo.getFileImmagine();

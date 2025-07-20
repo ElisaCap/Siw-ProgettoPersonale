@@ -46,11 +46,25 @@
         </div>
 
         <!-- Descrizione -->
-        <div class="card-dato">
-            <p class="definizione">Descrizione</p>
-            <p class="nome" th:text="${contrada.descrizioneLunga}">Descrizione lunga della contrada</p>
-        </div>
+		<div class="card-dato">
+		    <p class="definizione">Descrizione</p>
+		    <p class="nome" th:text="${contrada.descrizioneLunga}">Descrizione lunga della contrada</p>
+			
 
+		</div>
+		<div class="card-dato">
+		<p class="definizione">Contrade rivali</p>
+					<div th:each="rivale : ${contrada.contradeRivali}">
+					    <a th:href="@{/contrade/{id}(id=${rivale.id})}" th:text="${rivale.nome}"></a>
+						<div sec:authorize="hasRole('ADMIN')">
+						<form th:action="@{/eliminaRivali/{id}/{idc}(id=${contrada.id}, idc=${rivale.id})}" method="post"
+					>
+							<button type="submit">elimina</button>
+							
+						</form>
+						</div>
+					</div>
+		</div>
         <!-- Bottoni -->
         <div class="azionibtn">
             <form th:action="@{/contrade}" method="get">
@@ -70,6 +84,9 @@
                 <form th:action="@{/modificaContrada/{id}(id=${contrada.id})}" method="get">
                     <button type="submit" class="btn-card danger">Modifica</button>
                 </form>
+				<form th:action="@{/aggiungiRivale/{id}(id=${contrada.id})}" method="get">
+				                    <button type="submit" class="btn-card danger">Aggiungi Rivale</button>
+				 </form>
             </div>
         </div>
     </div>

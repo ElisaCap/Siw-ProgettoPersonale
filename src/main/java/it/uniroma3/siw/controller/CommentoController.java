@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -51,20 +52,59 @@ public class CommentoController {
     
     @GetMapping("/commentiEdizione/{id}")
     public String mostraCommenti(@PathVariable Long id, Model model) {
-    	Edizione edizione=edizioneService.getById(id);
-    	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-  	    if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getName())) {
-  	        String username = auth.getName();
-  	        User user = userService.getUserByUsername(username);
-  	        model.addAttribute("userLoggato", user);
-  	    } else {
-  	        model.addAttribute("userLoggato", null);
-  	    }
-        model.addAttribute("commenti",commentoService.getByEdizione(edizione) );
-        model.addAttribute("id",id);
+        Edizione edizione = edizioneService.getById(id);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        List<Commento> tuttiCommenti = (List)commentoService.getByEdizione(edizione);
+        List<Commento> commentiUtente = null;
+        User userLoggato = null;
+
+        if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getName())) {
+            String username = auth.getName();
+            userLoggato = userService.getUserByUsername(username);
+            commentiUtente = (List)commentoService.getByUserAndEdizione(userLoggato, edizione); // <-- crea questo metodo
+            model.addAttribute("userLoggato", userLoggato);
+        }
+
+        // Rimuovi i commenti dell'utente da quelli generali per evitare duplicati
+        if (commentiUtente != null) {
+            tuttiCommenti.removeAll(commentiUtente);
+            model.addAttribute("tuoiCommenti", commentiUtente);
+        }
+
+        model.addAttribute("commenti", tuttiCommenti);
+        model.addAttribute("id", id);
+
         return "commento/commenti.html";
     }
-	
-	
+    
+    @PostMapping("/eliminaCommento/{id}")
+    public String eliminaCommento(@PathVariable Long id, Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getName())) {
+            return "redirect:/login"; // Non autenticato
+        }
+
+        Commento commento = commentoService.getById(id);
+
+        if (commento == null) {
+            return "redirect:/"; // Commento non trovato
+        }
+
+        User userLoggato = userService.getUserByUsername(auth.getName());
+
+        // Sicurezza: controllo che il commento sia dell'utente loggato
+        if (!commento.getUser().getId().equals(userLoggato.getId())) {
+            return "redirect:/accesso-negato"; // o pagina di errore personalizzata
+        }
+
+        Edizione edizione = commento.getEdizione();
+        commentoService.deleteById(id);
+
+        return "redirect:/commentiEdizione/" + edizione.getId();
+    }
+
 	
 }

@@ -9,52 +9,74 @@
 </head>
 
 <body>
-	<!-- HEADER -->
-	<header class="top-bar">
-	  <div class="header-content">
-	    <div class="logo-text">Palio di Siena</div>
-	    <div class="user-controls">
-	      <form th:action="@{/home}" method="get" style="display: inline;">
-	        <button class="btn" type="submit">Home</button>
-	      </form>
+  <!-- HEADER -->
+  <header class="top-bar">
+    <div class="header-content">
+      <div class="logo-text">Palio di Siena</div>
+      <div class="user-controls">
+        <form th:action="@{/home}" method="get" style="display: inline;">
+          <button class="btn" type="submit">Home</button>
+        </form>
 
-	      <div sec:authorize="isAuthenticated()" style="display: inline;">
-	        <span class="user-name" th:text="${#authentication.name}"></span>
-	        <form th:action="@{/logout}" method="post" style="display: inline;">
-	          <button class="btn" type="submit">Logout</button>
-	        </form>
-	      </div>
+        <div sec:authorize="isAuthenticated()" style="display: inline;">
+          <span class="user-name" th:text="${#authentication.name}"></span>
+          <form th:action="@{/logout}" method="post" style="display: inline;">
+            <button class="btn" type="submit">Logout</button>
+          </form>
+        </div>
 
-	      <div sec:authorize="!isAuthenticated()" style="display: inline;">
-	        <form th:action="@{/login}" method="get" style="display: inline;">
-	          <button class="btn" type="submit">Login</button>
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	</header>
+        <div sec:authorize="!isAuthenticated()" style="display: inline;">
+          <form th:action="@{/login}" method="get" style="display: inline;">
+            <button class="btn" type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <!-- TITOLO -->
-  <!-- TITOLO E CONTENUTO -->
+  <!-- CONTENUTO -->
   <div class="commenti-container">
 
     <h1 class="titolo">Ecco tutti i commenti</h1>
 
-    <div class="commenti-lista">
-      <div class="card-cavallo" th:each="commento : ${commenti}">
-          <h2 th:text="${commento.utente}"></h2>
-          <p><span th:text="${commento.contenuto}"></span></p>
+    <!-- Commenti dell'utente loggato -->
+	<div th:if="${tuoiCommenti != null and !#lists.isEmpty(tuoiCommenti)}">
+      <h2 class="titolo">I tuoi commenti</h2>
+      <div class="commenti-lista">
+        <div class="card-cavallo" th:each="commento : ${tuoiCommenti}">
+          <h2 th:text="${commento.utente}">Nome Utente</h2>
+          <p><span th:text="${commento.contenuto}">Contenuto commento</span></p>
+          <form th:action="@{/eliminaCommento/{id}(id=${commento.id})}" method="post">
+            <button type="submit" class="btn-card btn-elimina">Elimina il tuo commento</button>
+          </form>
+        </div>
       </div>
     </div>
 
-    <div class="form-aggiungi" sec:authorize="isAuthenticated()">
+    <!-- Altri commenti -->
+    <h2 class="titolo">Commenti degli altri utenti</h2>
+    <div class="commenti-lista">
+      <div class="card-cavallo" th:each="commento : ${commenti}">
+        <h2 th:text="${commento.utente}">Nome Utente</h2>
+        <p><span th:text="${commento.contenuto}">Contenuto commento</span></p>
+
+        <!-- Pulsante elimina visibile solo se ADMIN -->
+        <div sec:authorize="hasRole('ADMIN')">
+          <form th:action="@{/eliminaCommento/{id}(id=${commento.id})}" method="post" style="margin-top:10px;">
+            <button type="submit" class="btn-card btn-elimina">Elimina commento (Admin)</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form per inserire commento visibile solo a utenti con ruolo USER -->
+    <div class="form-aggiungi" sec:authorize="hasRole('USER')">
       <form th:action="@{/insCommento/{id}/{idUser}(id=${id}, idUser=${userLoggato.id})}" method="get">
-          <button type="submit" class="btn-card">Inserisci un commento</button>
+        <button type="submit" class="btn-card">Inserisci un commento</button>
       </form>
     </div>
 
   </div>
 
- 
 </body>
 </html>

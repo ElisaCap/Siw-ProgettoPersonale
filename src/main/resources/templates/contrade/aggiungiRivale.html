@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Aggiungi Rivale</title>
+</head>
+<form th:action="@{/salvaRivali}" method="post">
+    <input type="hidden" name="id1" th:value="${contrada.id}" />
+    <select name="id2" required>
+        <option value="" disabled selected>-- Seleziona una contrada --</option>
+        <option th:each="c : ${contrade}"
+                th:value="${c.id}"
+                th:text="${c.nome}">
+        </option>
+    </select>
+
+    <button type="submit">Aggiungi Rivale</button>
+</form>
+
+</html>
