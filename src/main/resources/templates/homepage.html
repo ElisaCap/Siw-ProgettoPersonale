@@ -1,44 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      lang="it">
-
+<html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Homepage Palio di Siena</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/home.css" />
 </head>
-
-<bodyhd>
-  <!-- Top bar INVARIATA -->
-  <header class="top-bar">
-    <div class="header-content">
-      <div class="logo-text">Palio di Siena</div>
-
-      <div class="user-controls">
-        <form th:action="@{/home}" method="get" style="display: inline;">
-          <button class="btn" type="submit">Home</button>
-        </form>
-
-        <div sec:authorize="isAuthenticated()" style="display: inline;">
-          <span class="user-name" th:text="${#authentication.name}"></span>
-          <form th:action="@{/logout}" method="post" style="display: inline;">
-            <button class="btn" type="submit">Logout</button>
-          </form>
-        </div>
-
-        <div sec:authorize="!isAuthenticated()" style="display: inline;">
-          <form th:action="@{/login}" method="get" style="display: inline;">
-            <button class="btn" type="submit">Login</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </header>
-</bodyhd>
-
 <body>
+	<!-- Top bar -->
+	<header class="top-bar">
+	  <div class="header-content">
+	    <div class="logo-text">Palio di Siena</div>
+
+	    <div class="user-controls">
+	      <form action="/home" method="get">
+	        <button class="btn" type="submit">Home</button>
+	      </form>
+
+	      <!-- Se l'utente è autenticato -->
+	      <div sec:authorize="isAuthenticated()">
+	        <span class="user-name" th:text="${#authentication.name}">Utente</span>
+	        <form th:action="@{/logout}" method="post">
+	          <button class="btn" type="submit">Logout</button>
+	        </form>
+	      </div>
+
+	      <!-- Se l'utente NON è autenticato -->
+	      <div sec:authorize="!isAuthenticated()">
+	        <form th:action="@{/login}" method="get">
+	          <button class="btn" type="submit">Login</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</header>
+
+  <!-- Main -->
   <main>
     <h1 class="main-title">Benvenuto al Palio di Siena</h1>
 
@@ -57,6 +55,9 @@
       </a>
     </div>
   </main>
-</body>
 
+  <footer>
+    © 2025 Palio di Siena. Tutti i diritti riservati.
+  </footer>
+</body>
 </html>

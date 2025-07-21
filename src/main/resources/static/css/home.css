@@ -6,27 +6,28 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #fffaf3 url('/sfondo.jpg') no-repeat center center fixed;
+  font-family: 'Inter', sans-serif;
+  background: #fdfaf6 url('/sfondo.jpg') no-repeat center center fixed;
   background-size: cover;
-  color: #333;
+  color: #2c2c2c;
   padding-top: 80px;
   min-height: 100vh;
 }
 
-/* --- Top Bar (invariata) --- */
+/* --- Top Bar --- */
 .top-bar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 70px;
-  background: linear-gradient(to right, #b45100, #6a0e00);
-  color: white;
+  background: #fff3e0;
+  color: #5a2600;
   display: flex;
   align-items: center;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .header-content {
@@ -40,9 +41,9 @@ body {
 }
 
 .logo-text {
-  font-size: 1.8rem;
-  font-family: Georgia, serif;
-  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #8b3a00;
 }
 
 .user-controls {
@@ -52,25 +53,26 @@ body {
 }
 
 .user-name {
-  font-weight: bold;
+  font-weight: 600;
+  color: #5a2600;
 }
 
 .btn {
-  background-color: white;
-  color: #5D2600;
+  background-color: #ffe0b2;
+  color: #5a2600;
   border: none;
-  padding: 8px 16px;
+  padding: 8px 14px;
   border-radius: 6px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease;
+  font-weight: 600;
+  transition: background 0.2s ease;
 }
 
 .btn:hover {
-  background-color: #ffe0b2;
+  background-color: #ffcc80;
 }
 
-/* --- Main Layout --- */
+/* Main content */
 main {
   display: flex;
   flex-direction: column;
@@ -78,21 +80,20 @@ main {
   padding: 40px 20px;
 }
 
-/* Titolo */
 .main-title {
-  font-family: Georgia, serif;
-  font-size: 2.8rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
   text-align: center;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(8px);
-  padding: 24px 40px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 24px 48px;
   border-radius: 16px;
-  color: #5D2600;
+  color: #6b2e00;
   margin-bottom: 40px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Griglia moderna */
+/* Grid layout */
 .content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -101,10 +102,10 @@ main {
   max-width: 1200px;
 }
 
-/* Card */
+/* Cards */
 .action-card {
   position: relative;
-  border-radius: 18px;
+  border-radius: 20px;
   height: 320px;
   text-decoration: none;
   color: white;
@@ -112,9 +113,9 @@ main {
   background-position: center;
   display: flex;
   align-items: flex-end;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .action-card:hover {
@@ -123,13 +124,15 @@ main {
 }
 
 .card-text {
-  background-color: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
   font-size: 1.8rem;
-  font-family: Georgia, serif;
+  font-family: 'Playfair Display', serif;
   font-weight: bold;
-  padding: 16px;
+  padding: 20px;
   width: 100%;
   text-align: left;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .action-card.large {
@@ -137,7 +140,7 @@ main {
   height: 500px;
 }
 
-/* Immagini delle card */
+/* Background images */
 .card-edizioni {
   background-image: url("/css/9644b07661934c0db6a7845c4d846ce8.jpg");
 }
@@ -154,10 +157,19 @@ main {
   background-image: url("/css/palio_mossa_3-1751544635347.png");
 }
 
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #7a4b1f;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .main-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
+    padding: 20px;
   }
 
   .action-card {

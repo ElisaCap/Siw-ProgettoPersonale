@@ -1,64 +1,72 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="it">
 <head>
-    <link rel="stylesheet" href="/css/cavallo.css">
-    <title>Fantini</title>
+  <meta charset="UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/cavallo.css" />
+  <title>Fantini - Palio di Siena</title>
 </head>
+
 <body>
-	ody>
-			<!-- HEADER -->
-				<header class="top-bar">
-				  <div class="header-content">
-				    <div class="logo-text">Palio di Siena</div>
-				    <div class="user-controls">
 
-				      <!-- Home -->
-				      <form th:action="@{/home}" method="get" style="display: inline;">
-				        <button class="btn" type="submit">Home</button>
-				      </form>
+  <!-- HEADER -->
+  <header class="top-bar">
+    <div class="header-content">
+      <div class="logo-text">Palio di Siena</div>
+      <div class="user-controls">
 
-				      <!-- Autenticato -->
-				      <div sec:authorize="isAuthenticated()" style="display: inline;">
-				        <span class="user-name" th:text="${#authentication.name}"></span>
-				        <form th:action="@{/logout}" method="post" style="display: inline;">
-				          <button class="btn" type="submit">Logout</button>
-				        </form>
-				      </div>
+        <!-- Home -->
+        <form th:action="@{/home}" method="get">
+          <button class="btn" type="submit">Home</button>
+        </form>
 
-				      <!-- Non autenticato -->
-				      <div sec:authorize="!isAuthenticated()" style="display: inline;">
-				        <form th:action="@{/login}" method="get" style="display: inline;">
-				          <button class="btn" type="submit">Login</button>
-				        </form>
-				      </div>
-				    </div>
-				  </div>
-				</header>
+        <!-- Autenticato -->
+        <div sec:authorize="isAuthenticated()">
+          <span class="user-name" th:text="${#authentication.name}"></span>
+          <form th:action="@{/logout}" method="post">
+            <button class="btn" type="submit">Logout</button>
+          </form>
+        </div>
 
- 
+        <!-- Non autenticato -->
+        <div sec:authorize="!isAuthenticated()">
+          <form th:action="@{/login}" method="get">
+            <button class="btn" type="submit">Login</button>
+          </form>
+        </div>
 
-  <!-- TITOLO -->
-  <h1 class="main-title">Ecco tutti i fantini registrati</h1>
-
-  <!-- CARD CONTAINER -->
-  <div class="card-container">
-	<!-- CARD PER AGGIUNTA -->
-		<div class="card-cavallo add-card" sec:authorize="hasRole('ADMIN')">
-		  <form th:action="@{/insFantino}" method="get" class="add-card-form">
-		    <button type="submit" class="plus-sign">+</button>
-		  </form>
-		</div>
-    <a class="card-cavallo" th:each="fantino : ${fantini}"
-       th:href="@{/fantini/{id}(id=${fantino.id})}"
-       th:style="'background-image: url(/fantini/' + ${fantino.id} + '/immagine)'">
-      <div class="card-overlay">
-        <h2 th:text="${fantino.nome} + ' ' + ${fantino.cognome}">Nome Fantino</h2>
-        <p><strong>ID:</strong> <span th:text="${fantino.id}">1</span></p>
-        <p><strong>Data di nascita:</strong> <span th:text="${fantino.dataNascita}">01/01/1970</span></p>
       </div>
-    </a>
-  </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <h1 class="main-title">Ecco tutti i fantini registrati</h1>
+
+    <div class="card-container">
+
+      <!-- Card per aggiunta (solo admin) -->
+      <div class="card-edizione add-card" sec:authorize="hasRole('ADMIN')">
+        <form th:action="@{/insFantino}" method="get" class="add-card-form">
+          <button type="submit" class="plus-sign">+</button>
+        </form>
+      </div>
+
+      <!-- Cards Fantini -->
+      <a class="card-edizione" th:each="fantino : ${fantini}"
+         th:href="@{/fantini/{id}(id=${fantino.id})}"
+         th:style="'background-image: url(/fantini/' + ${fantino.id} + '/immagine)'">
+        <div class="card-overlay">
+          <h2 th:text="${fantino.nome} + ' ' + ${fantino.cognome}">Nome Fantino</h2>
+          <p><strong>ID:</strong> <span th:text="${fantino.id}">1</span></p>
+          <p><strong>Data di nascita:</strong> <span th:text="${fantino.dataNascita}">01/01/1970</span></p>
+        </div>
+      </a>
+
+    </div>
+  </main>
 
 </body>
 </html>

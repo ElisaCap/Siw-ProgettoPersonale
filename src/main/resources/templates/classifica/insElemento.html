@@ -1,24 +1,62 @@
 <!DOCTYPE html>
-<html lang="it" xmlns:th="http://www.thymeleaf.org">
-	<link rel="stylesheet" href="/css/classifica.css">
-
+<html lang="it" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8" />
     <title>Inserisci nella Classifica</title>
+    <link rel="stylesheet" href="/css/classifica.css">
 </head>
+
 <body>
-<h1>Inserisci nella Classifica</h1>
-<form action="#" th:action="@{/salvaElemento/{id}(id=${id})}" method="post">
-    <input type="number" name="posizione" th:value="${posizione}" readonly />
-    <select name="partecipazioneId">
+
+<!-- HEADER -->
+<header class="top-bar">
+  <div class="header-content">
+    <div class="logo-text">Palio di Siena</div>
+    <div class="user-controls">
+      <form th:action="@{/home}" method="get" style="display: inline;">
+        <button class="btn" type="submit">Home</button>
+      </form>
+      <div sec:authorize="isAuthenticated()" style="display: inline;">
+        <span class="user-name" th:text="${#authentication.name}">Utente</span>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+          <button class="btn" type="submit">Logout</button>
+        </form>
+      </div>
+      <div sec:authorize="!isAuthenticated()" style="display: inline;">
+        <form th:action="@{/login}" method="get" style="display: inline;">
+          <button class="btn" type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- CONTENUTO PRINCIPALE -->
+<main class="container">
+
+  <h1 class="uno">Inserisci un Partecipante nella Classifica</h1>
+
+  <form action="#" th:action="@{/salvaElemento/{id}(id=${id})}" method="post" class="form-classifica">
+    <div class="form-group">
+      <label for="posizione">Posizione:</label>
+      <input type="number" id="posizione" name="posizione" th:value="${posizione}" readonly />
+    </div>
+
+    <div class="form-group">
+      <label for="partecipazioneId">Partecipazione:</label>
+      <select id="partecipazioneId" name="partecipazioneId" required>
+        <option value="" disabled selected>Scegli un partecipante</option>
         <option th:each="ca : ${partecipazioni}" 
                 th:value="${ca.id}" 
                 th:text="${ca.fantino.nome + ' - ' + ca.contrada.nome + ' - ' + (ca.edizione != null ? ca.edizione.data : 'N.D.')}">
         </option>
-    </select>
+      </select>
+    </div>
 
-    <button type="submit">Salva</button>
-</form>
+    <button type="submit" class="btn btn-add-wide">Salva</button>
+  </form>
 
+</main>
 </body>
 </html>

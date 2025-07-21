@@ -7,33 +7,35 @@
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="top-bar">
-    <div class="header-content">
-      <div class="logo-text">Palio di Siena</div>
-      <div class="user-controls">
-        <!-- Home -->
-        <form th:action="@{/home}" method="get" style="display: inline;">
-          <button class="btn" type="submit">Home</button>
-        </form>
 
-        <!-- Autenticato -->
-        <div sec:authorize="isAuthenticated()" style="display: inline;">
-          <span class="user-name" th:text="${#authentication.name}"></span>
-          <form th:action="@{/logout}" method="post" style="display: inline;">
-            <button class="btn" type="submit">Logout</button>
-          </form>
-        </div>
+	<!-- HEADER -->
+	<header class="top-bar">
+	  <div class="header-content">
+	    <div class="logo-text">Palio di Siena</div>
+	    <div class="user-controls">
 
-        <!-- Non autenticato -->
-        <div sec:authorize="!isAuthenticated()" style="display: inline;">
-          <form th:action="@{/login}" method="get" style="display: inline;">
-            <button class="btn" type="submit">Login</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </header>
+	      <!-- Home -->
+	      <form th:action="@{/home}" method="get">
+	        <button class="btn" type="submit">Home</button>
+	      </form>
+
+	      <!-- Autenticato -->
+	      <div sec:authorize="isAuthenticated()">
+	        <span class="user-name" th:text="${#authentication.name}"></span>
+	        <form th:action="@{/logout}" method="post">
+	          <button class="btn" type="submit">Logout</button>
+	        </form>
+	      </div>
+
+	      <!-- Non autenticato -->
+	      <div sec:authorize="!isAuthenticated()">
+	        <form th:action="@{/login}" method="get">
+	          <button class="btn" type="submit">Login</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</header>
 
   <!-- TITOLO -->
   <h1 class="uno">Dati Cavallo</h1>
@@ -59,7 +61,7 @@
       </form>
 
       <div sec:authorize="hasRole('ADMIN')">
-        <form th:action="@{/cavalli/delete/{id}(id=${cavallo.id})}" method="get"
+        <form th:action="@{/cavalli/delete/{id}(id=${cavallo.id})}" method="post"
               onsubmit="return confirm('Sei sicuro di voler eliminare questo cavallo?');">
           <button class="btn-card danger" type="submit">Elimina</button>
         </form>

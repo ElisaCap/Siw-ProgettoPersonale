@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="it">
 <head>
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="/css/cavallo.css" />
@@ -9,49 +10,51 @@
 
 <body>
 
-	<!-- HEADER -->
-	<header class="top-bar">
-	  <div class="header-content">
-	    <div class="logo-text">Palio di Siena</div>
-	    <div class="user-controls">
+  <!-- HEADER -->
+  <header class="top-bar">
+    <div class="header-content">
+      <div class="logo-text">Palio di Siena</div>
+      <div class="user-controls">
 
-	      <!-- Home -->
-	      <form th:action="@{/home}" method="get" style="display: inline;">
-	        <button class="btn" type="submit">Home</button>
-	      </form>
+        <!-- Home -->
+        <form th:action="@{/home}" method="get">
+          <button class="btn" type="submit">Home</button>
+        </form>
 
-	      <!-- Autenticato -->
-	      <div sec:authorize="isAuthenticated()" style="display: inline;">
-	        <span class="user-name" th:text="${#authentication.name}"></span>
-	        <form th:action="@{/logout}" method="post" style="display: inline;">
-	          <button class="btn" type="submit">Logout</button>
-	        </form>
-	      </div>
+        <!-- Autenticato -->
+        <div sec:authorize="isAuthenticated()">
+          <span class="user-name" th:text="${#authentication.name}"></span>
+          <form th:action="@{/logout}" method="post">
+            <button class="btn" type="submit">Logout</button>
+          </form>
+        </div>
 
-	      <!-- Non autenticato -->
-	      <div sec:authorize="!isAuthenticated()" style="display: inline;">
-	        <form th:action="@{/login}" method="get" style="display: inline;">
-	          <button class="btn" type="submit">Login</button>
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	</header>
+        <!-- Non autenticato -->
+        <div sec:authorize="!isAuthenticated()">
+          <form th:action="@{/login}" method="get">
+            <button class="btn" type="submit">Login</button>
+          </form>
+        </div>
 
-  <!-- TITOLO -->
-  <h1 class="main-title">Ecco tutte le contrade registrate</h1>
-
-  <!-- CARD CONTAINER -->
-  <div class="card-container" id="contrada">
-    <a id="contrada" class="card-cavallo" th:each="contrada : ${contrade}"
-       th:href="@{/contrade/{id}(id=${contrada.id})}"
-       th:style="'background-image: url(/urlImmagine/' + ${contrada.id} + ')'">
-      <div class="card-overlay">
-        <h2 th:text="${contrada.nome}">Nome Contrada</h2>
-        <p><strong>Descrizione:</strong> <span th:text="${contrada.descrizione}">Descrizione contrada</span></p>
       </div>
-    </a>
-  </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <h1 class="main-title">Ecco tutte le contrade registrate</h1>
+
+    <div class="card-container">
+      <a class="card-edizione" th:each="contrada : ${contrade}"
+         th:href="@{/contrade/{id}(id=${contrada.id})}"
+         th:style="'background-image: url(/urlImmagine/' + ${contrada.id} + ')'">
+        <div class="card-overlay">
+          <h2 th:text="${contrada.nome}">Nome Contrada</h2>
+          <p><strong>Descrizione:</strong> <span th:text="${contrada.descrizione}">Descrizione contrada</span></p>
+        </div>
+      </a>
+    </div>
+  </main>
 
 </body>
 </html>

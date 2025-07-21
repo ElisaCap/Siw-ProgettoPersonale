@@ -1,63 +1,64 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="it">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="it">
 <head>
   <meta charset="UTF-8">
   <title>Edizioni</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/cavallo.css">
 </head>
 
 <body>
-			<!-- HEADER -->
-				<header class="top-bar">
-				  <div class="header-content">
-				    <div class="logo-text">Palio di Siena</div>
-				    <div class="user-controls">
+  <!-- HEADER -->
+  <header class="top-bar">
+    <div class="header-content">
+      <div class="logo-text">Palio di Siena</div>
+      <div class="user-controls">
+        <form th:action="@{/home}" method="get">
+          <button class="btn" type="submit">Home</button>
+        </form>
 
-				      <!-- Home -->
-				      <form th:action="@{/home}" method="get" style="display: inline;">
-				        <button class="btn" type="submit">Home</button>
-				      </form>
+        <div sec:authorize="isAuthenticated()">
+          <span class="user-name" th:text="${#authentication.name}"></span>
+          <form th:action="@{/logout}" method="post">
+            <button class="btn" type="submit">Logout</button>
+          </form>
+        </div>
 
-				      <!-- Autenticato -->
-				      <div sec:authorize="isAuthenticated()" style="display: inline;">
-				        <span class="user-name" th:text="${#authentication.name}"></span>
-				        <form th:action="@{/logout}" method="post" style="display: inline;">
-				          <button class="btn" type="submit">Logout</button>
-				        </form>
-				      </div>
-
-				      <!-- Non autenticato -->
-				      <div sec:authorize="!isAuthenticated()" style="display: inline;">
-				        <form th:action="@{/login}" method="get" style="display: inline;">
-				          <button class="btn" type="submit">Login</button>
-				        </form>
-				      </div>
-				    </div>
-				  </div>
-				</header>
+        <div sec:authorize="!isAuthenticated()">
+          <form th:action="@{/login}" method="get">
+            <button class="btn" type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
 
   <!-- TITOLO -->
-  <h1 class="main-title">Ecco tutte le edizioni registrate</h1>
+  <main>
+    <h1 class="main-title">Ecco tutte le edizioni registrate</h1>
 
-  <!-- CONTENUTO EDIZIONI -->
-  <div class="card-container">
-	<div class="card-cavallo add-card" sec:authorize="hasRole('ADMIN')">
-		  <form th:action="@{/insEdizione}" method="get" class="add-card-form">
-		    <button type="submit" class="plus-sign">+</button>
-		  </form>
-		</div>
-    <a th:each="edizione : ${edizioni}" 
-       th:href="@{/edizione/{id}(id=${edizione.id})}" 
-       class="card-cavallo"
-       th:style="'background-image: url(' + @{/edizione/{id}/immagine(id=${edizione.id})} + ')'">
-       
-      <div class="card-overlay">
-        <h2 th:text="|Edizione del ${edizione.data}|">Edizione</h2>
-        <p><strong>Data:</strong> <span th:text="${edizione.data}"></span></p>
+    <!-- CONTENUTO -->
+    <div class="card-container">
+      <!-- Aggiungi nuova edizione (solo admin) -->
+      <div class="card-edizione add-card" sec:authorize="hasRole('ADMIN')">
+        <form th:action="@{/insEdizione}" method="get" class="add-card-form">
+          <button type="submit" class="plus-sign">+</button>
+        </form>
       </div>
-    </a>
-  </div>
 
- 
+      <!-- Lista edizioni -->
+      <a th:each="edizione : ${edizioni}"
+         th:href="@{/edizione/{id}(id=${edizione.id})}"
+         class="card-edizione"
+         th:style="'background-image: url(' + @{/edizione/{id}/immagine(id=${edizione.id})} + ')'">
+        <div class="card-overlay">
+          <h2 th:text="|Edizione del ${edizione.data}|">Edizione</h2>
+          <p><strong>Data:</strong> <span th:text="${edizione.data}">2025</span></p>
+        </div>
+      </a>
+    </div>
+  </main>
 </body>
 </html>
