@@ -199,7 +199,7 @@ public String eliminaElemento(@PathVariable Long id,
             elementoClassificaRepository.findAllByClassificaOrderByPosizione(classificaService.getById(idc)));
     model.addAttribute("partecipazioni",classificaService.getById(idc).getEdizione().getPartecipazioni());
 
-    return "redirect/classifica/"+idc;
+    return "redirect:/classifica/"+idc;
 }
 
 

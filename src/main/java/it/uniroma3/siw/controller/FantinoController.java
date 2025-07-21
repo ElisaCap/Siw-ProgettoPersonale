@@ -113,16 +113,23 @@ private FantinoService fantinoService;
 	@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/salvaFantino")
     public String salvaFantino(@ModelAttribute("fantino")Fantino fantino,Model model) {
+		Fantino fantinoc=fantinoService.getByid(fantino.getId());
+		fantinoc.setCognome(fantino.getCognome());
+		fantinoc.setDataNascita(fantino.getDataNascita());
+		fantinoc.setNome(fantino.getNome());
     	  MultipartFile file = fantino.getFileImmagine();
+    	  fantinoc.setFileImmagine(file);
           if (file != null && !file.isEmpty()) {
               try {
   				fantino.setUrlImmagine(file.getBytes());
+  	          fantinoc.setUrlImmagine(file.getBytes());
+
   			} catch (IOException e) {
   				// TODO Auto-generated catch block
   				e.printStackTrace();
   			}
           }
-    	this.fantinoService.save(fantino);
+    	this.fantinoService.save(fantinoc);
     	model.addAttribute("fantini",this.fantinoService.getAll());
     	return "fantino/fantini.html";
     	

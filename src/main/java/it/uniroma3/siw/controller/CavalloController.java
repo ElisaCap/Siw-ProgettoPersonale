@@ -97,24 +97,31 @@ public class CavalloController {
     	model.addAttribute("id",id);
     	return "cavallo/modificaCavallo.html";
     }
+    
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/saveCavallo")
-    public String modificaCavallo(@ModelAttribute("cavallo")Cavallo cavallo,Model model) {
-    	 MultipartFile file = cavallo.getFileImmagine();
-         if (file != null && !file.isEmpty()) {
-             try {
- 				cavallo.setImmagine(file.getBytes());
- 			} catch (IOException e) {
- 				// TODO Auto-generated catch block
- 				e.printStackTrace();
- 			}
-         }
-    	this.cavalloService.save(cavallo);
-    	List<Cavallo>cavalli=(List)this.cavalloService.getAll();
-    	model.addAttribute("cavalli",cavalli);
-    	return "redirect:/cavalli/cercatutti";
+    public String modificaCavallo(@ModelAttribute("cavallo") Cavallo cavalloModificato, Model model) {
+        Cavallo cavalloEsistente = cavalloService.getCavalloById(cavalloModificato.getId());
+
+        // Aggiorna solo i campi modificabili
+        cavalloEsistente.setNome(cavalloModificato.getNome());
+        cavalloEsistente.setRazza(cavalloModificato.getRazza());
+
+        MultipartFile file = cavalloModificato.getFileImmagine();
+        if (file != null && !file.isEmpty()) {
+            try {
+                cavalloEsistente.setImmagine(file.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // ⚠️ NON toccare cavalloEsistente.getPartecipazioni()!
+
+        cavalloService.save(cavalloEsistente);
+        return "redirect:/cavalli/cercatutti";
     }
-    
+
     
     
     

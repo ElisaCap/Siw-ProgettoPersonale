@@ -70,19 +70,28 @@ public class ContradaController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/salvaContrada")
     public String salva(@ModelAttribute("contrada")Contrada contrada,Model model) {
-    	 MultipartFile file = contrada.getFileImmagine();
+    	Contrada contrada2=contradaService.getByid(contrada.getId());
+    	contrada2.setDescrizione(contrada.getDescrizione());
+    	contrada2.setNome(contrada.getNome());
+    	contrada2.setDescrizioneLunga(contrada.getDescrizioneLunga());
+    	MultipartFile file = contrada.getFileImmagine();
+    	contrada2.setFileImmagine(file);
          if (file != null && !file.isEmpty()) {
              try {
  				contrada.setUrlImmagine(file.getBytes());
+ 				contrada2.setUrlImmagine(file.getBytes());
  			} catch (IOException e) {
  				// TODO Auto-generated catch block
  				e.printStackTrace();
  			}
          }
-         contradaService.save(contrada);
+         contradaService.save(contrada2);
          model.addAttribute("contrade",contradaService.getAll() );
          return "redirect:/contrade";
     }
+    
+    
+    
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/aggiungiRivale/{id}")
     public String aggiungiRivale(@PathVariable Long id,Model model) {
