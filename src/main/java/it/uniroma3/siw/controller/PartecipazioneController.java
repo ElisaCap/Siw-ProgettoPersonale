@@ -95,7 +95,7 @@ public String insPartecipazione(@PathVariable Long id, Model model) {
 public String partCavallo(@PathVariable Long id,Model model) {
 	Cavallo cavallo=cavalloService.getCavalloById(id);
 	//List<Partecipazione> partecipazioni=(List)this.partecipazioneService.getByCavallo(cavallo);;
-	List<Partecipazione> partecipazioni=(List)partecipazioneService.findWhereCavalloPrimo(cavallo);
+	List<Partecipazione> partecipazioni=(List)partecipazioneService.getByCavallo(cavallo);
 	model.addAttribute("partecipazioni",partecipazioni);
 	return "partecipazione/partecipazioni.html";
 }

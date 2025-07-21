@@ -39,7 +39,7 @@ public class CommentoController {
         Commento commento=new Commento();
         commento.setEdizione(edizione);
         commento.setUser(user);
-        model.addAttribute("commento", commento);
+        model.addAttribute("commento1", commento);
         model.addAttribute("id",id);
         return "commento/insCommento.html";
     }
@@ -72,7 +72,12 @@ public class CommentoController {
             tuttiCommenti.removeAll(commentiUtente);
             model.addAttribute("tuoiCommenti", commentiUtente);
         }
-
+        
+        Commento commento=new Commento();
+        commento.setEdizione(edizione);
+        commento.setUser(userLoggato);
+        model.addAttribute("commento", commento);
+        model.addAttribute("edizione",edizione);
         model.addAttribute("commenti", tuttiCommenti);
         model.addAttribute("id", id);
 
@@ -96,7 +101,7 @@ public class CommentoController {
         User userLoggato = userService.getUserByUsername(auth.getName());
 
         // Sicurezza: controllo che il commento sia dell'utente loggato
-        if (!commento.getUser().getId().equals(userLoggato.getId())) {
+        if (userLoggato!=null&&!commento.getUser().getId().equals(userLoggato.getId())) {
             return "redirect:/accesso-negato"; // o pagina di errore personalizzata
         }
 

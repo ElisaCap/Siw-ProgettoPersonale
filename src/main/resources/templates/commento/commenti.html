@@ -37,11 +37,12 @@
   <!-- CONTENUTO -->
   <div class="commenti-container">
 
-    <h1 class="titolo">Ecco tutti i commenti</h1>
-
     <!-- Commenti dell'utente loggato -->
 	<div th:if="${tuoiCommenti != null and !#lists.isEmpty(tuoiCommenti)}">
+		<div sec:authorize="!hasRole('ADMIN')">
       <h2 class="titolo">I tuoi commenti</h2>
+	  </div>
+
       <div class="commenti-lista">
         <div class="card-cavallo" th:each="commento : ${tuoiCommenti}">
           <h2 th:text="${commento.utente}">Nome Utente</h2>
@@ -52,22 +53,28 @@
         </div>
       </div>
     </div>
-
     <!-- Altri commenti -->
+	<div sec:authorize="isAuthenticated()">
     <h2 class="titolo">Commenti degli altri utenti</h2>
+	</div>
+	<div sec:authorize="!isAuthenticated()">
+		<h2 class="titolo">Commenti:</h2>
+	</div>
     <div class="commenti-lista">
       <div class="card-cavallo" th:each="commento : ${commenti}">
         <h2 th:text="${commento.utente}">Nome Utente</h2>
         <p><span th:text="${commento.contenuto}">Contenuto commento</span></p>
-
         <!-- Pulsante elimina visibile solo se ADMIN -->
         <div sec:authorize="hasRole('ADMIN')">
           <form th:action="@{/eliminaCommento/{id}(id=${commento.id})}" method="post" style="margin-top:10px;">
             <button type="submit" class="btn-card btn-elimina">Elimina commento (Admin)</button>
           </form>
         </div>
+		</div>
+
       </div>
-    </div>
+	
+    
 
     <!-- Form per inserire commento visibile solo a utenti con ruolo USER -->
     <div class="form-aggiungi" sec:authorize="hasRole('USER')">
@@ -77,6 +84,23 @@
     </div>
 
   </div>
-
+  <div sec:authorize="!hasRole('ADMIN')">
+  <h1>Aggiungi un commento</h1>
+      	<form th:action="@{/salvaCommento}" method="post"
+      	      th:object="${commento}" enctype="multipart/form-data"
+      	      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      	    <div>
+      	      <!-- Campo nascosto per username -->
+      		  <input type="hidden" th:field="*{user.id}" />
+      		  <input type="hidden" name="utente" th:value="${#authentication.name}" />
+      				 <input type="hidden" th:field="*{edizione}"
+      				              th:value="${commento.edizione}" />
+      	      contenuto:
+      	      <span><input required type="text" th:field="*{contenuto}" /></span>
+      	      <span th:text="${msgErrTitle}">Campo Obbligatorio</span>
+      	    </div>
+      	    <span><button type="submit">Conferma</button></span>
+      	</form>
+		</div>
 </body>
 </html>
