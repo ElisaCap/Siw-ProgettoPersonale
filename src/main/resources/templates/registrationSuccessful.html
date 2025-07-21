@@ -11,9 +11,7 @@
 
     <div class="login-container">
         <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <div>
-                <a href="/"><img src="/images/logo-siw.png" style="max-height: 60px;" alt="Logo SIW"/></a>
-            </div>
+           
             <div>
                 <div sec:authorize="isAuthenticated()">
                     <span th:text="${#authentication.name}">Utente</span> |

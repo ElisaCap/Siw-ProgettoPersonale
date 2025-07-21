@@ -11,47 +11,43 @@
 </head>
 
 <bodyhd>
-	<header class="top-bar">
-	  <div class="header-content">
-	    <div class="logo-text">Palio di Siena</div>
+  <!-- Top bar INVARIATA -->
+  <header class="top-bar">
+    <div class="header-content">
+      <div class="logo-text">Palio di Siena</div>
 
-	    <div class="user-controls">
-	      <!-- Bottone Home -->
-	      <form th:action="@{/home}" method="get" style="display: inline;">
-	        <button class="btn" type="submit">Home</button>
-	      </form>
+      <div class="user-controls">
+        <form th:action="@{/home}" method="get" style="display: inline;">
+          <button class="btn" type="submit">Home</button>
+        </form>
 
-	      <div sec:authorize="isAuthenticated()" style="display: inline;">
-	        <span class="user-name" th:text="${#authentication.name}"></span>
-	        <form th:action="@{/logout}" method="post" style="display: inline;">
-	          <button class="btn" type="submit">Logout</button>
-	        </form>
-	      </div>
+        <div sec:authorize="isAuthenticated()" style="display: inline;">
+          <span class="user-name" th:text="${#authentication.name}"></span>
+          <form th:action="@{/logout}" method="post" style="display: inline;">
+            <button class="btn" type="submit">Logout</button>
+          </form>
+        </div>
 
-	      <div sec:authorize="!isAuthenticated()" style="display: inline;">
-	        <form th:action="@{/login}" method="get" style="display: inline;">
-	          <button class="btn" type="submit">Login</button>
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	</header>
+        <div sec:authorize="!isAuthenticated()" style="display: inline;">
+          <form th:action="@{/login}" method="get" style="display: inline;">
+            <button class="btn" type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
 </bodyhd>
+
 <body>
   <main>
     <h1 class="main-title">Benvenuto al Palio di Siena</h1>
-	<div class="content">
-	<a href="/edizioni" class="action-card card-edizioni large">
-	     <span class="card-text">Edizioni</span>
-	</a>
-	</div>
+
     <div class="content">
-		
-	  
-	
+      <a href="/edizioni" class="action-card card-edizioni large">
+        <span class="card-text">Edizioni</span>
+      </a>
       <a href="/cavalli/cercatutti" class="action-card card-cavalli">
-        <span class="card-text" >Cavalli
-			</span>
+        <span class="card-text">Cavalli</span>
       </a>
       <a href="/contrade" class="action-card card-contrade">
         <span class="card-text">Contrade</span>
@@ -59,8 +55,8 @@
       <a href="/fantini/cercatutti" class="action-card card-fantini">
         <span class="card-text">Fantini</span>
       </a>
-      
     </div>
   </main>
 </body>
+
 </html>

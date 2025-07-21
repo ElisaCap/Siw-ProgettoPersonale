@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.model.Cavallo;
+import it.uniroma3.siw.model.Classifica;
 import it.uniroma3.siw.model.Contrada;
 import it.uniroma3.siw.model.Edizione;
 import it.uniroma3.siw.model.Fantino;
@@ -64,10 +65,14 @@ public String savePartecipazione(@ModelAttribute("partecipazione") Partecipazion
 }
     @PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/partecipazione/delete/{id}")
-public String eliminaFantino(@PathVariable Long id, Model model) {
+public String eliminaPartecipazione(@PathVariable Long id, Model model) {
+   Partecipazione p=partecipazioneService.getById(id);
+   Classifica classifica=p.getEdizione().getClassifica();
     partecipazioneService.deleteById(id);
-    model.addAttribute("classifiche", partecipazioneService.getAll());
-    return "partecipazione/partecipazioni.html"; // oppure redirect a cercatutti
+    model.addAttribute("classifica", classifica);
+    model.addAttribute("elementiClassifica", classifica.getElementiClassifica());
+    model.addAttribute("partecipazioni", classifica.getEdizione().getPartecipazioni());
+    return "redirect:/classifica/"+classifica.getEdizioneId(); // oppure redirect a cercatutti
 }
 
     @PreAuthorize("hasRole('ADMIN')")

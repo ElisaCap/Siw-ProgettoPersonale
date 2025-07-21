@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,9 +34,10 @@ public class AuthenticationController {
 
 	    @GetMapping("/register")
 	    public String showRegistrationForm(Model model) {
-	    	
-	        model.addAttribute("user", new User());
-	        return "formRegisterUser.html"; // The name of your template file (registration.html)
+	    	model.addAttribute("user", new User());
+	    	model.addAttribute("credentials", new Credentials());
+
+	 	    return "formRegisterUser.html";
 	    }
 
 	 
@@ -92,26 +94,40 @@ public class AuthenticationController {
 	}
 
 
-
 	@PostMapping(value = { "/register" })
-    public String registerUser(@Valid @ModelAttribute("user") User user,
-                 BindingResult userBindingResult, @Valid
-                 @ModelAttribute("credentials") Credentials credentials,
-                 BindingResult credentialsBindingResult,
-                 Model model) {
+	public String registerUser(@Valid @ModelAttribute("user") User user,
+	                           BindingResult userBindingResult,
+	                           @Valid @ModelAttribute("credentials") Credentials credentials,
+	                           BindingResult credentialsBindingResult,
+	                           Model model) {
 
-        // se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
-        if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
-            credentials.setUser(user);
-            credentials.setUsername(user.getName());
-            credentialsService.saveCredentials(credentials);
-            model.addAttribute("user", user);
-            return "registrationSuccessful";
-        }
-        return "formRegisterUser.html";
-    }
+	    // Verifica username già esistente
+	    if (credentialsService.existsByUsername(credentials.getUsername())) {
+	        credentialsBindingResult.rejectValue("username", "error.credentials", "Username già in uso. Scegli un altro nome.");
+	    }
+
+	    if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+
+	        // Sincronizzo il name di user con username scelto
+	        user.setName(credentials.getUsername());
+
+	        credentials.setUser(user);
+	        credentials.setRole("ROLE_USER");
+
+	        try {
+	            credentialsService.saveCredentials(credentials);
+	        } catch (DataIntegrityViolationException e) {
+	            credentialsBindingResult.rejectValue("username", "error.credentials", "Errore di salvataggio: username già registrato.");
+	            return "formRegisterUser.html";
+	        }
+	        
+	        model.addAttribute("user", user);
+	        return "registrationSuccessful.html";
+	    }
+
+	    return "formRegisterUser.html";
 	}
-	
+
 	@PostMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 	    var auth = SecurityContextHolder.getContext().getAuthentication();
@@ -121,6 +137,6 @@ public class AuthenticationController {
 	}
 	
 	
+	}}
 	
-	
-}
+

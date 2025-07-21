@@ -114,7 +114,7 @@ public Iterable<Partecipazione>getByCavallo(Cavallo cavallo){
 
 
 public void deleteById(Long id) {
-    this.edizioneRepository.deleteById(id);
+    this.partecipazioneRepository.deleteById(id);
 }
 
 

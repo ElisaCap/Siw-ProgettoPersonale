@@ -11,9 +11,10 @@ body {
   background-size: cover;
   color: #333;
   padding-top: 80px;
+  min-height: 100vh;
 }
 
-/* Top Bar */
+/* --- Top Bar (invariata) --- */
 .top-bar {
   position: fixed;
   top: 0;
@@ -54,7 +55,6 @@ body {
   font-weight: bold;
 }
 
-/* Buttons */
 .btn {
   background-color: white;
   color: #5D2600;
@@ -70,130 +70,106 @@ body {
   background-color: #ffe0b2;
 }
 
-/* Title */
+/* --- Main Layout --- */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* Titolo */
 .main-title {
   font-family: Georgia, serif;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   text-align: center;
-  background-color: #fff8e1cc;
-  border: 2px dashed #a0522d;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 24px 40px;
+  border-radius: 16px;
   color: #5D2600;
-  padding: 20px;
-  border-radius: 12px;
-  margin: 40px auto 30px;
-  max-width: 900px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Grid Layout */
+/* Griglia moderna */
 .content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
-  padding: 0 20px 60px;
+  width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
 }
 
-/* Cards */
+/* Card */
 .action-card {
   position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  height: 280px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 18px;
+  height: 320px;
   text-decoration: none;
   color: white;
-  display: flex;
-  align-items: flex-end;
   background-size: cover;
   background-position: center;
+  display: flex;
+  align-items: flex-end;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
 }
 
 .action-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transform: scale(1.03);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .card-text {
+  background-color: rgba(0, 0, 0, 0.5);
   font-size: 1.8rem;
-  font-weight: bold;
   font-family: Georgia, serif;
-  background-color: rgba(0, 0, 0, 0.45);
-  padding: 14px 20px;
+  font-weight: bold;
+  padding: 16px;
   width: 100%;
   text-align: left;
 }
 
-/* Larger card for 'Edizioni' */
 .action-card.large {
   grid-column: span 2;
-  height: 700px;
-  width: 1100px;
+  height: 500px;
 }
-#ccf{
-	display: inline-block;
-	width: 1400px;
+
+/* Immagini delle card */
+.card-edizioni {
+  background-image: url("/css/9644b07661934c0db6a7845c4d846ce8.jpg");
 }
-#ed{
-	display: inline-block;
-}
-/* Specific Card Backgrounds */
+
 .card-cavalli {
-  background-image: url("/css/R.jpg");
+  background-image: url("/css/II-PROVA-14-Agosto-2022-488-1536x1024-1.jpg");
 }
+
 .card-contrade {
   background-image: url("/css/R (1).jpg");
 }
+
 .card-fantini {
   background-image: url("/css/palio_mossa_3-1751544635347.png");
-}
-.card-edizioni {
-  background-image: url("/css/9644b07661934c0db6a7845c4d846ce8.jpg");
 }
 
 /* Responsive */
 @media (max-width: 768px) {
   .main-title {
     font-size: 2rem;
-    padding: 16px;
-  }
-
-  .card-text {
-    font-size: 1.4rem;
-    padding: 10px 16px;
   }
 
   .action-card {
-    height: 240px;
+    height: 260px;
   }
 
   .action-card.large {
     grid-column: span 1;
     height: 300px;
   }
-}
 
-@media (max-width: 480px) {
-  .top-bar {
-    height: 60px;
-  }
-
-  .logo-text {
-    font-size: 1.5rem;
-  }
-
-  .btn {
-    font-size: 0.9rem;
-    padding: 6px 10px;
-  }
-
-  .content {
-    grid-template-columns: 1fr;
-    padding: 0 12px 40px;
-  }
-
-  .main-title {
-    margin-top: 20px;
+  .card-text {
+    font-size: 1.4rem;
   }
 }

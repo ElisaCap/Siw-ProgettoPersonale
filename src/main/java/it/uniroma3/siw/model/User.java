@@ -23,18 +23,11 @@ public class User {
 	private String surname;
     @NotBlank(message = "campo obbligatorio")
 	private String email;
-    @NotBlank(message = "campo obbligatorio")
-	private String password;
+  
 	
 
 	
-    public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+ 
 
 	public Long getId() {
 		return id;

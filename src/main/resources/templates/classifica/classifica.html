@@ -170,6 +170,11 @@
 					              
                 </td>
                 <td th:text="${partecipazione.contrada.nome}">Contrada</td>
+				<td>
+					<form th:action="@{/partecipazione/delete/{id}(id=${partecipazione.id})}">
+						<button type="submit">elimina</button>
+					</form>
+				</td>
                 <td><span class="no-placement">non ha tagliato il traguardo</span></td>
                 <td sec:authorize="hasRole('ADMIN')">
                     <!-- Azioni admin -->
