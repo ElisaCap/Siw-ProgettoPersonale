@@ -46,6 +46,7 @@
 													       th:attr="min=${minDate}, max=${maxDate}"
 													       required /></div>
 							    <div></span>
+									<a th:text="|data attuale: ${fantino.dataNascita}|"></a>
 			        <span th:text="${msgErrYear}">Campo Obbligatorio</span>
 			    </div>
 			    <div>
@@ -54,7 +55,7 @@
 			        </span>
 			    </div>
 			    <div>
-			        <span><button type="submit">Conferma</button></span>
+			        <span><button type="submit" class="btn">Conferma</button></span>
 			    </div>
 			</form>
 		</body>	
