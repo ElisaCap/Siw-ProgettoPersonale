@@ -13,12 +13,12 @@ public interface ElementoClassificaRepository extends CrudRepository<ElementoCla
 public Iterable<ElementoClassifica>findAllByClassificaOrderByPosizione(Classifica classifica);
     @Modifying
     @Transactional
-    @Query("UPDATE ElementoClassifica e SET e.posizione = e.posizione + 1 WHERE e.posizione >= :posizione")
-  public  void incrementaPosizioniDa(int posizione);
+    @Query("UPDATE ElementoClassifica e SET e.posizione = e.posizione + 1 WHERE e.posizione >= :posizione AND e.classifica.edizione.id=:id")
+  public  void incrementaPosizioniDa(int posizione,Long id);
     @Modifying
     @Transactional
-    @Query("UPDATE ElementoClassifica e SET e.posizione = e.posizione - 1 WHERE e.posizione >= :posizione")
-    public  void derementaPosizioniDa(int posizione);
+    @Query("UPDATE ElementoClassifica e SET e.posizione = e.posizione - 1 WHERE e.posizione >= :posizione AND e.classifica.edizione.id=:id")
+    public  void derementaPosizioniDa(int posizione,Long id);
 }
 	
 	

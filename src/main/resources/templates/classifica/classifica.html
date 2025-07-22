@@ -141,18 +141,16 @@
         <tbody>
             <tr th:each="partecipazione : ${partecipazioni}" th:if="${partecipazione.elementoClassifica == null}">
                 <td>
-                    <!-- Immagine Cavallo (commenta se vuoi) -->
-                    <!-- <img th:src="@{/cavalli/{id}/immagine(id=${partecipazione.cavallo.id})}" alt="Foto Cavallo" class="foto-cavallo" /> -->
+                     
+                     <img th:src="@{/cavalli/{id}/immagine(id=${partecipazione.cavallo.id})}" alt="Foto Cavallo" class="foto-cavallo" /> 
                 </td>
                 <td th:text="${partecipazione.cavallo.nome}">Cavallo</td>
                 <td>
-                    <!-- Immagine Fantino (commenta se vuoi) -->
-                    <!-- <img th:src="@{/fantini/{id}/immagine(id=${partecipazione.fantino.id})}" alt="Foto Fantino" class="foto-fantino" /> -->
+                     <img th:src="@{/fantini/{id}/immagine(id=${partecipazione.fantino.id})}" alt="Foto Fantino" class="foto-fantino" /> 
                 </td>
                 <td th:text="|${partecipazione.fantino.nome} ${partecipazione.fantino.cognome}|">Fantino</td>
                 <td>
-                    <!-- Immagine Contrada (commenta se vuoi) -->
-                    <!-- <img th:src="@{/urlImmagine/{id}(id=${partecipazione.contrada.id})}" alt="Foto Contrada" class="foto-contrada" /> -->
+                     <img th:src="@{/urlImmagine/{id}(id=${partecipazione.contrada.id})}" alt="Foto Contrada" class="foto-contrada" />
                 </td>
                 <td th:text="${partecipazione.contrada.nome}">Contrada</td>
                 <td><span class="no-placement">non ha tagliato il traguardo</span></td>

@@ -75,7 +75,7 @@ public class ElementoClassificaService {
 	    if (elemento.isPresent()) {
 	    	
 	        ElementoClassifica e = elemento.get();
-	        elementoClassificaRepository.derementaPosizioniDa(e.getPosizione());
+	        elementoClassificaRepository.derementaPosizioniDa(e.getPosizione(),e.getClassifica().getEdizioneId());
 	        // Disassocia da classifica e partecipazione
 	        e.setClassifica(null);
 	        e.setPartecipazione(null);

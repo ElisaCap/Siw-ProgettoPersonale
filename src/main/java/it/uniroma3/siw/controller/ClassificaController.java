@@ -232,7 +232,7 @@ public String salvaElemento(@RequestParam("partecipazioneId") Long partecipazion
     elemento.setClassifica(classifica);
     elemento.setPartecipazione(partecipazione);
     elemento.setPosizione(posizione );
-    elementoClassificaRepository.incrementaPosizioniDa(posizione);
+    elementoClassificaRepository.incrementaPosizioniDa(posizione,elemento.getClassifica().getEdizioneId());
     elementoClassificaRepository.save(elemento);
     model.addAttribute("partecipazioni",classifica.getEdizione().getPartecipazioni());
     return "redirect:/classifica/" + id;
