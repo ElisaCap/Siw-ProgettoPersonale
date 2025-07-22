@@ -71,18 +71,15 @@
             <tr th:each="elementoClassifica : ${elementiClassifica}">
                 <td th:text="${elementoClassifica.posizione}">1</td>
                 <td>
-                    <!-- Immagine Cavallo (commenta se vuoi) -->
-                    <!-- <img th:src="@{/cavalli/{id}/immagine(id=${elementoClassifica.partecipazione.cavallo.id})}" alt="Foto Cavallo" class="foto-cavallo" /> -->
+                   <img th:src="@{/cavalli/{id}/immagine(id=${elementoClassifica.partecipazione.cavallo.id})}" alt="Foto Cavallo" class="foto-cavallo" /> 
                 </td>
                 <td th:text="${elementoClassifica.partecipazione.cavallo.nome}">Nome Cavallo</td>
                 <td>
-                    <!-- Immagine Fantino (commenta se vuoi) -->
-                    <!-- <img th:src="@{/fantini/{id}/immagine(id=${elementoClassifica.partecipazione.fantino.id})}" alt="Foto Fantino" class="foto-fantino" /> -->
+                     <img th:src="@{/fantini/{id}/immagine(id=${elementoClassifica.partecipazione.fantino.id})}" alt="Foto Fantino" class="foto-fantino" /> 
                 </td>
                 <td th:text="|${elementoClassifica.partecipazione.fantino.nome} ${elementoClassifica.partecipazione.fantino.cognome}|">Nome Fantino</td>
                 <td>
-                    <!-- Immagine Contrada (commenta se vuoi) -->
-                    <!-- <img th:src="@{/urlImmagine/{id}(id=${elementoClassifica.partecipazione.contrada.id})}" alt="Foto Contrada" class="foto-contrada" /> -->
+                    <img th:src="@{/urlImmagine/{id}(id=${elementoClassifica.partecipazione.contrada.id})}" alt="Foto Contrada" class="foto-contrada" /> 
                 </td>
                 <td th:text="${elementoClassifica.partecipazione.contrada.nome}">Contrada</td>
 
