@@ -8,40 +8,34 @@
 </head>
 
 <body>
-	
-	
-	<!-- HEADER -->
-				<header class="top-bar">
-				  <div class="header-content">
-				    <div class="logo-text">Palio di Siena</div>
-				    <div class="user-controls">
+    <!-- HEADER -->
+    <header class="top-bar">
+      <div class="header-content">
+        <div class="logo-text">Palio di Siena</div>
+        <div class="user-controls">
 
-				      <!-- Home -->
-				      <form th:action="@{/home}" method="get" style="display: inline;">
-				        <button class="btn" type="submit">Home</button>
-				      </form>
+          <!-- Home -->
+          <form th:action="@{/home}" method="get" style="display: inline;">
+            <button class="btn" type="submit">Home</button>
+          </form>
 
-				      <!-- Autenticato -->
-				      <div sec:authorize="isAuthenticated()" style="display: inline;">
-				        <span class="user-name" th:text="${#authentication.name}"></span>
-				        <form th:action="@{/logout}" method="post" style="display: inline;">
-				          <button class="btn" type="submit">Logout</button>
-				        </form>
-				      </div>
+          <!-- Autenticato -->
+          <div sec:authorize="isAuthenticated()" style="display: inline;">
+            <span class="user-name" th:text="${#authentication.name}"></span>
+            <form th:action="@{/logout}" method="post" style="display: inline;">
+              <button class="btn" type="submit">Logout</button>
+            </form>
+          </div>
 
-				      <!-- Non autenticato -->
-				      <div sec:authorize="!isAuthenticated()" style="display: inline;">
-				        <form th:action="@{/login}" method="get" style="display: inline;">
-				          <button class="btn" type="submit">Login</button>
-				        </form>
-				      </div>
-				    </div>
-				  </div>
-				</header>
-
-
-
-	
+          <!-- Non autenticato -->
+          <div sec:authorize="!isAuthenticated()" style="display: inline;">
+            <form th:action="@{/login}" method="get" style="display: inline;">
+              <button class="btn" type="submit">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
 
     <h1 class="uno" th:text="|Ecco la classifica dell'edizione del ${classifica.edizione.data}|"></h1>
 
@@ -55,16 +49,13 @@
                 <th>Nome Fantino</th>
                 <th>Foto Contrada</th>
                 <th>Contrada</th>
-				<div sec:authorize="hasRole('ADMIN')">
-                <th>Elimina</th>
-                <th>Aggiungi</th>
-				</div>
+                <th sec:authorize="hasRole('ADMIN')">Elimina</th>
+                <th sec:authorize="hasRole('ADMIN')">Aggiungi</th>
             </tr>
         </thead>
         <tbody>
             <!-- Bottone "+" in cima alla classifica -->
-			<div sec:authorize="hasRole('ADMIN')">
-            <tr class="add-button-row">
+            <tr class="add-button-row" sec:authorize="hasRole('ADMIN')">
                 <td colspan="10">
                     <form th:action="@{/insElemento/{id}(id=${classifica.edizioneId})}" method="get">
                         <input type="hidden" name="posizione" value="0" />
@@ -72,7 +63,7 @@
                     </form>
                 </td>
             </tr>
-			</div>
+
             <!-- Elementi della classifica -->
             <tr th:if="${#lists.isEmpty(elementiClassifica)}">
                 <td colspan="10" class="empty-message">Nessun dato trovato</td>
@@ -80,41 +71,36 @@
             <tr th:each="elementoClassifica : ${elementiClassifica}">
                 <td th:text="${elementoClassifica.posizione}">1</td>
                 <td>
-                    <img th:src="@{/cavalli/{id}/immagine(id=${elementoClassifica.partecipazione.cavallo.id})}"
-                         alt="Foto Cavallo" class="foto-cavallo" />
+                    <!-- Immagine Cavallo (commenta se vuoi) -->
+                    <!-- <img th:src="@{/cavalli/{id}/immagine(id=${elementoClassifica.partecipazione.cavallo.id})}" alt="Foto Cavallo" class="foto-cavallo" /> -->
                 </td>
                 <td th:text="${elementoClassifica.partecipazione.cavallo.nome}">Nome Cavallo</td>
                 <td>
-                    <img th:src="@{/fantini/{id}/immagine(id=${elementoClassifica.partecipazione.fantino.id})}"
-                         alt="Foto Fantino" class="foto-fantino" />
+                    <!-- Immagine Fantino (commenta se vuoi) -->
+                    <!-- <img th:src="@{/fantini/{id}/immagine(id=${elementoClassifica.partecipazione.fantino.id})}" alt="Foto Fantino" class="foto-fantino" /> -->
                 </td>
                 <td th:text="|${elementoClassifica.partecipazione.fantino.nome} ${elementoClassifica.partecipazione.fantino.cognome}|">Nome Fantino</td>
                 <td>
-                    <img th:src="@{/urlImmagine/{id}(id=${elementoClassifica.partecipazione.contrada.id})}"
-                         alt="Foto Contrada" class="foto-contrada" />
+                    <!-- Immagine Contrada (commenta se vuoi) -->
+                    <!-- <img th:src="@{/urlImmagine/{id}(id=${elementoClassifica.partecipazione.contrada.id})}" alt="Foto Contrada" class="foto-contrada" /> -->
                 </td>
                 <td th:text="${elementoClassifica.partecipazione.contrada.nome}">Contrada</td>
-				<div sec:authorize="hasRole('ADMIN')">
-				<td>
+
+                <td sec:authorize="hasRole('ADMIN')">
                     <form th:action="@{/eliminaElementoClassifica/{id}/{idc}(id=${elementoClassifica.id}, idc=${classifica.edizioneId})}" method="post">
                         <button type="submit" class="btn btn-danger">Elimina</button>
                     </form>
                 </td>
-				</div>
-                <td>
-					<div sec:authorize="hasRole('ADMIN')">
-
+                <td sec:authorize="hasRole('ADMIN')">
                     <form th:action="@{/insElemento/{id}(id=${classifica.edizioneId})}" method="get">
                         <input type="hidden" name="posizione" th:value="${elementoClassifica.posizione}" />
                         <button type="submit" class="btn btn-add-element">+</button>
                     </form>
-					</div>
                 </td>
             </tr>
 
             <!-- Bottone "+" alla fine della classifica -->
-			<div sec:authorize="hasRole('ADMIN')">
-            <tr th:if="${#lists.isEmpty(elementiClassifica)}">
+            <tr th:if="${#lists.isEmpty(elementiClassifica)}" sec:authorize="hasRole('ADMIN')">
                 <td colspan="10" style="text-align: center;">
                     <form th:action="@{/insElemento/{id}(id=${classifica.edizioneId})}" method="get">
                         <input type="hidden" name="posizione" value="1" />
@@ -125,15 +111,15 @@
 
             <tr th:if="${!#lists.isEmpty(elementiClassifica)}"
                 th:with="lastPos=${elementiClassifica[elementiClassifica.size() - 1].posizione}"
-                class="add-button-row">
+                class="add-button-row"
+                sec:authorize="hasRole('ADMIN')">
                 <td colspan="10">
                     <form th:action="@{/insElemento/{id}(id=${classifica.edizioneId})}" method="get">
-                        <input type="hidden" name="posizione" th:value="${lastPos }" />
+                        <input type="hidden" name="posizione" th:value="${lastPos}" />
                         <button type="submit" class="btn btn-add-wide">+ Aggiungi in fondo</button>
                     </form>
                 </td>
             </tr>
-			</div>
         </tbody>
     </table>
 
@@ -155,32 +141,32 @@
         <tbody>
             <tr th:each="partecipazione : ${partecipazioni}" th:if="${partecipazione.elementoClassifica == null}">
                 <td>
-                    <img th:src="@{/cavalli/{id}/immagine(id=${partecipazione.cavallo.id})}"
-                         alt="Foto Cavallo" class="foto-cavallo" />
+                    <!-- Immagine Cavallo (commenta se vuoi) -->
+                    <!-- <img th:src="@{/cavalli/{id}/immagine(id=${partecipazione.cavallo.id})}" alt="Foto Cavallo" class="foto-cavallo" /> -->
                 </td>
                 <td th:text="${partecipazione.cavallo.nome}">Cavallo</td>
                 <td>
-                    <img th:src="@{/fantini/{id}/immagine(id=${partecipazione.fantino.id})}"
-                         alt="Foto Fantino" class="foto-fantino" />
+                    <!-- Immagine Fantino (commenta se vuoi) -->
+                    <!-- <img th:src="@{/fantini/{id}/immagine(id=${partecipazione.fantino.id})}" alt="Foto Fantino" class="foto-fantino" /> -->
                 </td>
                 <td th:text="|${partecipazione.fantino.nome} ${partecipazione.fantino.cognome}|">Fantino</td>
                 <td>
-					<img th:src="@{/urlImmagine/{id}(id=${partecipazione.contrada.id})}"
-					                        alt="Foto Contrada" class="foto-contrada" />
-					              
+                    <!-- Immagine Contrada (commenta se vuoi) -->
+                    <!-- <img th:src="@{/urlImmagine/{id}(id=${partecipazione.contrada.id})}" alt="Foto Contrada" class="foto-contrada" /> -->
                 </td>
                 <td th:text="${partecipazione.contrada.nome}">Contrada</td>
-				
                 <td><span class="no-placement">non ha tagliato il traguardo</span></td>
                 <td sec:authorize="hasRole('ADMIN')">
-					<form th:action="@{/partecipazione/delete/{id}(id=${partecipazione.id})}">
-											<button type="submit">elimina</button>
-										</form>                </td>
+                    <form th:action="@{/partecipazione/delete/{id}(id=${partecipazione.id})}">
+                        <button type="submit">elimina</button>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>
-	<form th:action="@{/insPartecipazione/{id}(id=${classifica.edizione.id})}" method="get">
-	            <button type="submit" class="btn btn-add-wide" >Inserisci Partecipazione</button>
-	          </form>
+
+    <form th:action="@{/insPartecipazione/{id}(id=${classifica.edizione.id})}" method="get">
+        <button type="submit" class="btn btn-add-wide">Inserisci Partecipazione</button>
+    </form>
 </body>
 </html>
