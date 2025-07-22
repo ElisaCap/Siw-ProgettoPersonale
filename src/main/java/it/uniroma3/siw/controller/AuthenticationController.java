@@ -77,7 +77,7 @@ public class AuthenticationController {
 				return "admin/indexAdmin.html";
 			}
 		}*/
-        return "paginaIntroduttiva.html";
+        return "homepage.html";
 	}
 		
 	@GetMapping("/success")
@@ -86,11 +86,11 @@ public class AuthenticationController {
 
 	    if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)) {
 	        if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-	            return "successAdmin.html";
+	            return "homepage.html";
 	        }
 	    }
 
-	    return "successUser.html";
+	    return "homepage.html";
 	}
 
 

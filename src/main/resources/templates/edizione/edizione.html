@@ -63,9 +63,7 @@
             <button type="submit" class="btn-card danger">Elimina</button>
           </form>
 
-          <form th:action="@{/insPartecipazione/{id}(id=${edizione.id})}" method="get">
-            <button type="submit" class="btn-card secondary">Inserisci Partecipazione</button>
-          </form>
+          
 
           <form th:action="@{/modificaEdizione/{id}(id=${edizione.id})}" method="get">
             <button type="submit" class="btn-card secondary">Modifica</button>

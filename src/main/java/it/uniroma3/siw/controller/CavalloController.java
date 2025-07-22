@@ -83,7 +83,7 @@ public class CavalloController {
         return new ResponseEntity<>(cavallo.getImmagine(), headers, HttpStatus.OK);
     }
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/cavalli/delete/{id}")
+    @PostMapping("/cavalli/delete/{id}")
 	  public String eliminaCavallo(@PathVariable Long id, Model model) {
 	      cavalloService.deleteById(id);
 	      model.addAttribute("cavalli", cavalloService.getAll());

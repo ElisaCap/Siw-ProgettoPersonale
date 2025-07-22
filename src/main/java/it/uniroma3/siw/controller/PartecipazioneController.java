@@ -61,7 +61,7 @@ public class PartecipazioneController {
 @PostMapping("/insPartecipazione")
 public String savePartecipazione(@ModelAttribute("partecipazione") Partecipazione partecipazione, Model model ) {
 	this.partecipazioneService.save(partecipazione);
-	return "redirect:/edizione/"+partecipazione.getEdizione().getId();
+	return "redirect:/classifica/"+partecipazione.getEdizione().getClassifica().getEdizioneId();
 }
     @PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/partecipazione/delete/{id}")

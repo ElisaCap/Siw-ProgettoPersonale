@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <title>Elemento Classifica</title>
+    <title>Classifica</title>
     <link rel="stylesheet" href="/css/classifica.css">
 </head>
 
@@ -179,5 +179,8 @@
             </tr>
         </tbody>
     </table>
+	<form th:action="@{/insPartecipazione/{id}(id=${classifica.edizione.id})}" method="get">
+	            <button type="submit" class="btn btn-add-wide" >Inserisci Partecipazione</button>
+	          </form>
 </body>
 </html>
