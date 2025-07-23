@@ -40,7 +40,6 @@ private FantinoService fantinoService;
     @PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/insFantino")
 	public String salvafantino(@ModelAttribute("fantino") Fantino fantino, Model model) {
-	    model.addAttribute(fantino);
 	    MultipartFile file = fantino.getFileImmagine();
         if (file != null && !file.isEmpty()) {
             try {
@@ -52,6 +51,8 @@ private FantinoService fantinoService;
         }
 	    
 	    this.fantinoService.save(fantino);
+	    model.addAttribute(fantino);
+
 	    return "redirect:/fantini/cercatutti";
 	}
 

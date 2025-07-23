@@ -31,6 +31,8 @@
 			<h1 class="main-title">Aggiungi un fantino</h1>
 			<form th:action="@{/insFantino}" method="post" th:object="${fantino}"  enctype="multipart/form-data"
 			class="form-cavallo">
+			<input type="hidden" th:field="*{id}" />
+
 			    <div>
 			        Nome: <span><input required type="text" th:field="${fantino.nome}"/></span>
 			        <span th:text="${msgErrTitle}">Campo Obbligatorio</span>

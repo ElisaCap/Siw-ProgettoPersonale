@@ -69,7 +69,7 @@ private EdizioneService edizioneSerivice;
     }
 
 
-
+/*
     @PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/insEdizioneClassifica")
 public String insEdizione(Model model) {
@@ -77,21 +77,21 @@ public String insEdizione(Model model) {
 	//model.addAttribute("classifica", classifica);
 	  model.addAttribute("edizioni", edizioneRepository.findAll());
       return "classifica/insEdizione.html";
-}
+}*/
 
+    
+    /*
     @PreAuthorize("hasRole('ADMIN')")
 @PostMapping("/saveEdizioneClassifica")
 public String saveEdizioneClassifica(@RequestParam("edizioneId") Long edizioneId, Model model) {
     Optional<Edizione> edizioneOpt = edizioneRepository.findById(edizioneId);
     
     if (edizioneOpt.isEmpty()) {
-        // se qualcuno "barato" prova a inviare un ID inesistente
         return "redirect:/insEdizioneClassifica?errore=edizione_non_valida";
     }
 
     Edizione edizione = edizioneOpt.get();
 
-    // cerca la classifica legata a questa edizione, oppure la crea
     Classifica classifica = classificaRepository.findByEdizione(edizione)
                                 .orElseGet(() -> {
                                     Classifica c = new Classifica();
@@ -105,7 +105,7 @@ public String saveEdizioneClassifica(@RequestParam("edizioneId") Long edizioneId
 
     return "classifica/insNumContrade.html";
 }
-
+*/
 
 /*
 @PostMapping("/saveNumContrade")
@@ -135,7 +135,7 @@ public String setNumContrade(
 
 @Autowired
 private EntityManager entityManager;
-
+/*
 @PreAuthorize("hasRole('ADMIN')")
 @PostMapping("/saveClassifica")
 public String saveClassifica(@ModelAttribute("classifica") Classifica classifica,
@@ -160,7 +160,7 @@ public String saveClassifica(@ModelAttribute("classifica") Classifica classifica
     classificaService.save(classifica);
     
     return "redirect:/classifica/" + edizionePersistita.getId();
-}
+}*/
 
 @PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/classifiche/delete/{id}")
