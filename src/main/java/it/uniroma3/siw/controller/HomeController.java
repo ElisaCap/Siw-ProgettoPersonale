@@ -41,7 +41,7 @@ public class HomeController {
 		   cavalloService.inizializza(); 
 		   this.edizioneService.inizializza();
 		   this.classificaService.inizializza();
-		   //this.edizioneService.aggiungiClassifica();
+		   this.edizioneService.aggiungiClassifica();
 		  this.partecipazioneService.inizializza();
 		  this.elementoClassificaService.inizializza();
 		   //this.classificaService.aggiungiElementi();

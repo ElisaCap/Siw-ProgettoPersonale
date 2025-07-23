@@ -77,7 +77,7 @@ public class AuthenticationController {
 				return "admin/indexAdmin.html";
 			}
 		}*/
-        return "homepage.html";
+        return "redirect:/home";
 	}
 		
 	@GetMapping("/success")
