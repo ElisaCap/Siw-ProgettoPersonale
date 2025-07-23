@@ -41,6 +41,7 @@ public class HomeController {
 	//@PreAuthorize("isAuthenticated()")
 	@GetMapping("/home")
 	public String home(Model model) {
+		/*
 		 if(this.generati==false) {
 			 this.contradaService.inizializza();
 		this.fantinoService.inizializza();
@@ -63,7 +64,7 @@ this.generati=true;
 	   
 	  
 	    
-	}
+	}*/
 		 return "homepage.html";	 
 	
 	
