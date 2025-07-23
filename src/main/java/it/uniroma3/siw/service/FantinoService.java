@@ -54,21 +54,17 @@ public void aggiungiFantino(String nome,String cognome,String urlImmagine,LocalD
 
 
 	public void inizializza() {
-	    aggiungiFantino("Giovanni", "Atzeni", "url_img_atzeni", LocalDate.of(1985, 9, 15)); // Tittia
-	    aggiungiFantino("Carlo", "Sanna", "url_img_sanna", LocalDate.of(1989, 4, 4)); // Brigante
-	    aggiungiFantino("Federico", "Arri", "url_img_arri", LocalDate.of(1994, 8, 4)); // Ares
-	    aggiungiFantino("Gabriele", "Piras", "url_img_piras", LocalDate.of(1997, 12, 10)); // Tempesta
-	    aggiungiFantino("Sebastiano", "Murtas", "url_img_murtas", LocalDate.of(1995, 2, 8)); // Grandine
-	    aggiungiFantino("Andrea", "Coghe", "url_img_coghe", LocalDate.of(1993, 6, 22)); // Tempesta (Padre)
-	    aggiungiFantino("Silvano", "Mulas", "url_img_mulas", LocalDate.of(1976, 1, 7)); // Voglia
-	    aggiungiFantino("Jonathan", "Bartoletti", "url_img_bartoletti", LocalDate.of(1981, 9, 16)); // Scompiglio
-	    aggiungiFantino("Antonio", "Siri", "url_img_siri", LocalDate.of(1985, 12, 18)); // Amsicora
-	    aggiungiFantino("Francesco", "Caria", "url_img_caria", LocalDate.of(1987, 3, 5)); // Tremendo
-	    aggiungiFantino("Dario", "Colombati", "url_img_colombati", LocalDate.of(1991, 10, 11)); // Pirichittu
-	    aggiungiFantino("Adriano", "Cozzoli", "url_img_cozzoli", LocalDate.of(1996, 11, 14)); // Nappa II
-	    aggiungiFantino("Valter", "Pusceddu", "url_img_pusceddu", LocalDate.of(1974, 8, 1)); // Bighino
-	    aggiungiFantino("Gavino", "Sanna", "url_img_gavino", LocalDate.of(1999, 9, 12)); // Nulese
-	
+		aggiungiFantino("Giovanni", "Atzeni", "/immaginisiw/fantini/Giovanni Atzeni.webp", LocalDate.of(1986, 4, 22)); // Tittia
+		aggiungiFantino("Giuseppe", "Zedde", "/immaginisiw/fantini/gius zedde.webp", LocalDate.of(1992, 10, 13)); // Gingillo
+		aggiungiFantino("Andrea", "Sanna", "/immaginisiw/fantini/and sanna.webp", LocalDate.of(1997, 12, 2)); // Virgola
+		aggiungiFantino("Jonatan", "Bartoletti", "/immaginisiw/fantini/john bart.webp", LocalDate.of(1990, 11, 30)); // Scompiglio
+		aggiungiFantino("Giosuè", "Carboni", "/immaginisiw/fantini/gios carb.webp", LocalDate.of(1980, 5, 6)); // Carburo
+		aggiungiFantino("Enrico", "Bruschelli", "/immaginisiw/fantini/En brus.webp", LocalDate.of(1984, 5, 17)); // Bellocchio
+		aggiungiFantino("Antonio", "Mula", "/immaginisiw/fantini/ant mula.webp", LocalDate.of(1988, 7, 17)); // Shardana
+		aggiungiFantino("Francesco", "Caria", "/immaginisiw/fantini/fran caria.webp", LocalDate.of(1990, 1, 22)); // Tremendo
+		aggiungiFantino("Michel", "Putzu", "/immaginisiw/fantini/mic putzu.webp", LocalDate.of(1990, 2, 17)); // Spago
+		aggiungiFantino("Carlo", "Sanna", "/immaginisiw/fantini/car sanna.webp", LocalDate.of(1989, 4, 4)); // Brigante
+
 
 }
 

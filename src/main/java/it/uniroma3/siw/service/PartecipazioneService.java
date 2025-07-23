@@ -52,7 +52,7 @@ private PartecipazioneRepository partecipazioneRepository;
 	private Edizione edizione;
 
 
-	public void aggiungiPartecizpazione(Contrada contrada,Fantino fantino,Cavallo cavallo,Edizione edizione) {
+	public void aggiungiPartecizpazione(Cavallo cavallo,Fantino fantino,Contrada contrada,Edizione edizione) {
 	Partecipazione partecipazione=new Partecipazione();
 		partecipazione.setContrada(contrada);
 		partecipazione.setCavallo(cavallo);
@@ -64,25 +64,14 @@ private PartecipazioneRepository partecipazioneRepository;
 	public void inizializza() {
 	    int[][] partecipazioni = {
 	        // Edizione 1 (luglio 2022)
-	        {1, 1, 1, 1}, {2, 2, 2, 1}, {3, 3, 3, 1}, {4, 4, 4, 1}, {5, 5, 5, 1}, {6, 6, 6, 1},
-	        {7, 7, 7, 1}, {8, 8, 8, 1}, {9, 9, 9, 1}, {10, 10, 10, 1}, {11, 11, 11, 1}, {12, 12, 12, 1},
-	        {13, 13, 13, 1}, {14, 14, 14, 1}, {15, 1, 1, 1}, {16, 2, 2, 1}, {17, 3, 3, 1},
-
-	        // Edizione 2 (agosto 2022)
-	        {1, 2, 2, 2}, {2, 3, 3, 2}, {3, 4, 4, 2}, {4, 5, 5, 2}, {5, 6, 6, 2}, {6, 7, 7, 2},
-	        {7, 8, 8, 2}, {8, 9, 9, 2}, {9, 10, 10, 2}, {10, 11, 11, 2}, {11, 12, 12, 2}, {12, 13, 13, 2},
-	        {13, 14, 14, 2}, {14, 1, 1, 2}, {15, 2, 2, 2}, {16, 3, 3, 2}, {17, 4, 4, 2},
-
-	        // Edizione 3 (luglio 2023)
-	        {1, 3, 3, 3}, {2, 4, 4, 3}, {3, 5, 5, 3}, {4, 6, 6, 3}, {5, 7, 7, 3}, {6, 8, 8, 3},
-	        {7, 9, 9, 3}, {8, 10, 10, 3}, {9, 11, 11, 3}, {10, 12, 12, 3}, {11, 13, 13, 3}, {12, 14, 14, 3},
-	        {13, 1, 1, 3}, {14, 2, 2, 3}, {15, 3, 3, 3}, {16, 4, 4, 3}, {17, 5, 5, 3}
+	        {1, 8, 13, 1}, {2, 1, 11, 1}, {3, 4, 2, 1}, {4, 3, 14, 1}, {5, 2, 17, 1}, {6, 5, 3, 1},
+	        {7, 6, 7, 1}, {8, 9, 5, 1}, {9, 10, 15, 1},{10,7,9,1}
 	    };
 
 	    for (int[] p : partecipazioni) {
-	        Contrada c = contradaRepository.findById((long) p[0]).orElse(null);
+	        Contrada c = contradaRepository.findById((long) p[2]).orElse(null);
 	        Fantino f = fantinoRepository.findById((long) p[1]).orElse(null);
-	        Cavallo cav = cavalloRepository.findById((long) p[2]).orElse(null);
+	        Cavallo cav = cavalloRepository.findById((long) p[0]).orElse(null);
 	        Edizione e = edizioneRepository.findById((long) p[3]).orElse(null);
 
 	        if (c != null && f != null && cav != null && e != null) {

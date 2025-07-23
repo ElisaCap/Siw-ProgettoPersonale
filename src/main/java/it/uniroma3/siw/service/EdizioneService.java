@@ -61,9 +61,8 @@ private EdizioneRepository edizioneRepository;
 	}
 	
 public void inizializza() {
-	this.aggiungiEdizione(LocalDate.of(2022, 7, 2), urlImmagine);
-	this.aggiungiEdizione(LocalDate.of(2022, 8, 17), urlImmagine);
-	this.aggiungiEdizione(LocalDate.of(2023, 7, 2), urlImmagine);
+	this.aggiungiEdizione(LocalDate.of(2025, 7, 3), "/immaginisiw/edizioni/202507.jpg");
+
 }
 	
 public Iterable<Edizione>getAll(){

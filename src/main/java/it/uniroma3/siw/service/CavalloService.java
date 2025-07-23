@@ -56,26 +56,17 @@ public class CavalloService {
     }
 
     public void inizializza() {
-        nuovoCavallo("Una Per Tutti", "Mezzosangue", "/immaginiCavalli/una_per_tutti.jpg");
-        nuovoCavallo("Vitzichesu", "Mezzosangue", "/immaginiCavalli/vitzichesu.jpg");
-        nuovoCavallo("Volpino", "Mezzosangue", "/immaginiCavalli/volpino.jpg");
-        nuovoCavallo("Schietta", "Mezzosangue", "/immaginiCavalli/schietta.jpg");
-        nuovoCavallo("Vankook", "Mezzosangue", "/immaginiCavalli/vankook.jpg");
-        nuovoCavallo("Zentile", "Mezzosangue", "/immaginiCavalli/zentile.jpg");
-        nuovoCavallo("Uragano Rosso", "Mezzosangue", "/immaginiCavalli/uragano_rosso.jpg");
-        nuovoCavallo("Viso d’Angelo", "Mezzosangue", "/immaginiCavalli/viso_d_angelo.jpg");
-        nuovoCavallo("Zio Frac", "Mezzosangue", "/immaginiCavalli/zio_frac.jpg");
-        nuovoCavallo("Reo Confesso", "Mezzosangue", "/immaginiCavalli/reo_confesso.jpg");
-        nuovoCavallo("Remorex", "Mezzosangue", "/immaginiCavalli/remorex.jpg");
-        nuovoCavallo("Astoriux", "Mezzosangue", "/immaginiCavalli/astoriux.jpg");
-        nuovoCavallo("Arestetulesu", "Mezzosangue", "/immaginiCavalli/arestetulesu.jpg");
-        nuovoCavallo("Ungaros", "Mezzosangue", "/immaginiCavalli/ungaros.jpg");
-        nuovoCavallo("Violenta da Clodia", "Mezzosangue", "/immaginiCavalli/violenta_da_clodia.jpg");
-        nuovoCavallo("Solo Tue Due", "Mezzosangue", "/immaginiCavalli/solo_tue_due.jpg");
-        nuovoCavallo("Tabacco", "Mezzosangue", "/immaginiCavalli/tabacco.jpg");
-        nuovoCavallo("Veranu", "Mezzosangue", "/immaginiCavalli/veranu.jpg");
-        nuovoCavallo("Abbasantesa", "Mezzosangue", "/immaginiCavalli/abbasantesa.jpg");
-        nuovoCavallo("Anda e Bola", "Mezzosangue", "/immaginiCavalli/anda_e_bola.jpg");
+        nuovoCavallo("Arestetulesu", "Mezzosangue", "/immaginisiw/cavalli/Arestetulesu.jpg");
+        nuovoCavallo("Diodoro", "Mezzosangue", "/immaginisiw/cavalli/Diodoro.jpg");
+        nuovoCavallo("Viso d’Angelo", "Mezzosangue", "/immaginisiw/cavalli/Viso d’Angelo.jpg");
+        nuovoCavallo("Zenis", "Mezzosangue", "/immaginisiw/cavalli/Zenis.jpg");
+        nuovoCavallo("Comancio", "Mezzosangue", "/immaginisiw/cavalli/Comancio.jpg");
+        nuovoCavallo("Tale e Quale", "Mezzosangue", "/immaginisiw/cavalli/Tale e Quale.jpg");
+        nuovoCavallo("Dorotea Dimmonia", "Mezzosangue", "/immaginisiw/cavalli/Dorotea Dimmonia.jpg");
+        nuovoCavallo("Diosu de Campeda", "Mezzosangue", "/immaginisiw/cavalli/Diosu de Campeda.jpg");
+        nuovoCavallo("Zio Frac", "Mezzosangue", "/immaginisiw/cavalli/Zio Frac.jpg");
+        nuovoCavallo("Ares Elce", "Mezzosangue", "/immaginisiw/cavalli/Ares Elce.jpg");
+
     }
     
     

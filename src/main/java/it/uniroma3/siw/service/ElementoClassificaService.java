@@ -40,31 +40,22 @@ public class ElementoClassificaService {
 	
 	
 	public void inizializza() {
-	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 1, partecipazioneRepository.findById(5L).get());   // Drago
-	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 2, partecipazioneRepository.findById(16L).get()); // Torre
-	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 3, partecipazioneRepository.findById(13L).get()); // Pantera
+	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 6, partecipazioneRepository.findById(1L).get());   
+	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 1, partecipazioneRepository.findById(2L).get());
+	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 3, partecipazioneRepository.findById(5L).get()); 
+	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 2, partecipazioneRepository.findById(4L).get()); 
+	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 4, partecipazioneRepository.findById(3L).get()); 
+	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 5, partecipazioneRepository.findById(10L).get()); 
+	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 7, partecipazioneRepository.findById(8L).get()); 
+	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 8, partecipazioneRepository.findById(6L).get());
+	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 9, partecipazioneRepository.findById(9L).get()); 
+	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 10, partecipazioneRepository.findById(7L).get()); 
 
-	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 1, partecipazioneRepository.findById(9L).get());   // Leocorno
 
-	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 3, partecipazioneRepository.findById(1L).get());   // Valdimontone
-	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 4, partecipazioneRepository.findById(3L).get());   // Giraffa
-	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 5, partecipazioneRepository.findById(2L).get());   // Chiocciola
-	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 6, partecipazioneRepository.findById(6L).get());   // Tartuca
-	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 7, partecipazioneRepository.findById(10L).get());  // Nicchio
-	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 8, partecipazioneRepository.findById(4L).get());   // Lupa
-	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 9, partecipazioneRepository.findById(8L).get());   // Onda
-	    aggiungiElementoClassifica(classificaRepository.findById(2L).get(), 10, partecipazioneRepository.findById(7L).get());  // Civetta
 
-	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 1, partecipazioneRepository.findById(34L).get());  // Selva
-	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 2, partecipazioneRepository.findById(40L).get());  // Torre
-	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 3, partecipazioneRepository.findById(36L).get());  // Giraffa
-	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 4, partecipazioneRepository.findById(39L).get());  // Drago
-	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 5, partecipazioneRepository.findById(38L).get());  // Onda
-	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 6, partecipazioneRepository.findById(41L).get());  // Nicchio
-	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 7, partecipazioneRepository.findById(42L).get());  // Aquila
-	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 8, partecipazioneRepository.findById(33L).get());  // Tartuca
-	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 9, partecipazioneRepository.findById(35L).get());  // Chiocciola
-	    aggiungiElementoClassifica(classificaRepository.findById(3L).get(), 10, partecipazioneRepository.findById(37L).get()); // Istrice
+
+
+
 	}
 
 	
