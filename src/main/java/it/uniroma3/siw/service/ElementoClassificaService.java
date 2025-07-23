@@ -38,7 +38,7 @@ public class ElementoClassificaService {
 		this.elementoClassificaRepository.save(elementoClassifica);
 	}
 	
-	
+	/*
 	public void inizializza() {
 	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 6, partecipazioneRepository.findById(1L).get());   
 	    aggiungiElementoClassifica(classificaRepository.findById(1L).get(), 1, partecipazioneRepository.findById(2L).get());
@@ -56,7 +56,7 @@ public class ElementoClassificaService {
 
 
 
-	}
+	}*/
 
 	
 

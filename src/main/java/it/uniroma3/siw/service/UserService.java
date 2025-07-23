@@ -80,7 +80,7 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+/*
     @Transactional
     public void inizializza() {
         List<String[]> utenti = List.of(
@@ -124,7 +124,7 @@ public class UserService {
 
             credentialsRepository.save(credentials);
         }
-    }
+    }*/
 
 	
 	

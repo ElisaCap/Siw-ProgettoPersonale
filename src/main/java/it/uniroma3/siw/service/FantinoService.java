@@ -52,7 +52,7 @@ public void aggiungiFantino(String nome,String cognome,String urlImmagine,LocalD
 }
 
 
-
+/*
 	public void inizializza() {
 		aggiungiFantino("Giovanni", "Atzeni", "/immaginisiw/fantini/Giovanni Atzeni.webp", LocalDate.of(1986, 4, 22)); // Tittia
 		aggiungiFantino("Giuseppe", "Zedde", "/immaginisiw/fantini/gius zedde.webp", LocalDate.of(1992, 10, 13)); // Gingillo
@@ -66,7 +66,7 @@ public void aggiungiFantino(String nome,String cognome,String urlImmagine,LocalD
 		aggiungiFantino("Carlo", "Sanna", "/immaginisiw/fantini/car sanna.webp", LocalDate.of(1989, 4, 4)); // Brigante
 
 
-}
+}*/
 
 @Transactional
 	public Fantino getByid(Long id) {

@@ -51,7 +51,7 @@ private PartecipazioneRepository partecipazioneRepository;
 	@ManyToOne
 	private Edizione edizione;
 
-
+	
 	public void aggiungiPartecizpazione(Cavallo cavallo,Fantino fantino,Contrada contrada,Edizione edizione) {
 	Partecipazione partecipazione=new Partecipazione();
 		partecipazione.setContrada(contrada);
@@ -60,7 +60,7 @@ private PartecipazioneRepository partecipazioneRepository;
 		partecipazione.setEdizione(edizione);
 		this.partecipazioneRepository.save(partecipazione);
 	}
-	
+	/*
 	public void inizializza() {
 	    int[][] partecipazioni = {
 	        // Edizione 1 (luglio 2022)
@@ -83,7 +83,7 @@ private PartecipazioneRepository partecipazioneRepository;
 	            partecipazioneRepository.save(partecipazione);
 	        }
 	    }
-	}
+	}*/
 
 public void save(Partecipazione partecipazione) {
 	this.partecipazioneRepository.save(partecipazione);

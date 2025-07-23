@@ -54,7 +54,7 @@ public class CavalloService {
         }
         this.cavalloRepository.save(cavallo);
     }
-
+/*
     public void inizializza() {
         nuovoCavallo("Arestetulesu", "Mezzosangue", "/immaginisiw/cavalli/Arestetulesu.jpg");
         nuovoCavallo("Diodoro", "Mezzosangue", "/immaginisiw/cavalli/Diodoro.jpg");
@@ -67,7 +67,7 @@ public class CavalloService {
         nuovoCavallo("Zio Frac", "Mezzosangue", "/immaginisiw/cavalli/Zio Frac.jpg");
         nuovoCavallo("Ares Elce", "Mezzosangue", "/immaginisiw/cavalli/Ares Elce.jpg");
 
-    }
+    }*/
     
     
     

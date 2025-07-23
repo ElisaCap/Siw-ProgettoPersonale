@@ -74,10 +74,6 @@ public void inserisciCommento(Long userId, Long edizioneId, String utente, Strin
 
 
 
-public void inizializza() {
-	this.inserisciCommento(1L, 1L, userRepository.findById(1L).get().getName(), "bello");
-}
-
 
 
 

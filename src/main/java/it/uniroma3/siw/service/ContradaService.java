@@ -45,7 +45,7 @@ public class ContradaService {
         }
 		this.save(contrada);
 	}
-
+/*
 	public void inizializza() {
 		this.aggiungiContrada("Aquila", "Simbolo di potere e vittoria.",
 				"L'Aquila è una delle contrade più antiche di Siena, situata nel Terzo di Camollia. Il suo simbolo, l'aquila imperiale nera, riflette l'influenza dell'Impero su Siena nel Medioevo. Tradizionalmente associata alla nobiltà e all'autorità, l'Aquila si distingue per il suo passato glorioso, legato anche alla costruzione del Duomo di Siena. Le sue vittorie al Palio sono numerose e i suoi colori — nero, giallo e blu — riflettono regalità e potenza.",
@@ -116,7 +116,7 @@ public class ContradaService {
 
 		
 
-	}
+	}*/
 	@Transactional
 
 	public Contrada getByid(Long id) {

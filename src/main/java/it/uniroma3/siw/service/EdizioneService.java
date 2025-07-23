@@ -59,11 +59,11 @@ private EdizioneRepository edizioneRepository;
 			ed.setClassifica(classificaRepository.findById(ed.getId()).get());
 		}
 	}
-	
+	/*
 public void inizializza() {
 	this.aggiungiEdizione(LocalDate.of(2025, 7, 3), "/immaginisiw/edizioni/202507.jpg");
 
-}
+}*/
 	
 public Iterable<Edizione>getAll(){
 	return this.edizioneRepository.findAll();
