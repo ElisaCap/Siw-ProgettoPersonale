@@ -74,6 +74,7 @@ public class ContradaController {
     	contrada2.setDescrizione(contrada.getDescrizione());
     	contrada2.setNome(contrada.getNome());
     	contrada2.setDescrizioneLunga(contrada.getDescrizioneLunga());
+    	contrada2.setZona(contrada.getZona());
     	MultipartFile file = contrada.getFileImmagine();
     	contrada2.setFileImmagine(file);
          if (file != null && !file.isEmpty()) {

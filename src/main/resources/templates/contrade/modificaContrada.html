@@ -39,6 +39,13 @@
             <input type="text" th:field="*{nome}" required />
             <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Errore</span>
         </div>
+		
+		<div>
+		            <label>Zona:</label>
+		            <input type="text" th:field="*{zona}" required />
+		            <span th:if="${#fields.hasErrors('zona')}" th:errors="*{zona}">Errore</span>
+		        </div>
+
 
         <!-- Descrizione breve -->
         <div>

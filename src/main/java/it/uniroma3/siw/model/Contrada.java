@@ -31,6 +31,7 @@ private String descrizione;
 private String descrizioneLunga; 
 @OneToMany(mappedBy = "contrada")
 private List<Partecipazione>partecipazioni;
+private String zona;
 @ManyToMany(cascade = {CascadeType.ALL})
 private List<Contrada>contradeRivali;
 
@@ -120,6 +121,14 @@ public List<Contrada> getContradeRivali() {
 
 public void setContradeRivali(List<Contrada> contrade) {
 	this.contradeRivali = contrade;
+}
+
+public String getZona() {
+	return zona;
+}
+
+public void setZona(String zona) {
+	this.zona = zona;
 }
 
 
