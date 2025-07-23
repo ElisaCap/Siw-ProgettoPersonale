@@ -21,4 +21,5 @@ public void deleteById(Long id);
 public Iterable<Commento> findAllByUser(User user);
 @Transactional
 public List<Commento> findByUserAndEdizione(User user, Edizione edizione);
+
 }

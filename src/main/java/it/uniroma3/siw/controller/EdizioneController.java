@@ -65,6 +65,8 @@ public String edizione(@PathVariable Long id, Model model) {
 	    } else {
 	        model.addAttribute("userLoggato", null);
 	    }
+
+
 	return "edizione/edizione.html";
 }
 

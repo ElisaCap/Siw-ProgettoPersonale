@@ -30,6 +30,12 @@ public class HomeController {
 	private ClassificaService classificaService;
 	@Autowired
 	private ElementoClassificaService elementoClassificaService;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private CommentoService commentoService;
+	
+	
 	private boolean generati=false;
 
 	//@PreAuthorize("isAuthenticated()")
@@ -44,6 +50,10 @@ public class HomeController {
 		   this.edizioneService.aggiungiClassifica();
 		  this.partecipazioneService.inizializza();
 		  this.elementoClassificaService.inizializza();
+
+		  //this.userService.inizializza();
+		  //this.commentoService.inizializza();
+
 		   //this.classificaService.aggiungiElementi();
 this.generati=true;
 	

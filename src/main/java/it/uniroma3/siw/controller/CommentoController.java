@@ -38,17 +38,26 @@ public class CommentoController {
         model.addAttribute("edizione",edizione);
         Commento commento=new Commento();
         commento.setEdizione(edizione);
+        
         commento.setUser(user);
+        
         model.addAttribute("commento1", commento);
         model.addAttribute("id",id);
         return "commento/insCommento.html";
     }
+	@PostMapping("/salvaCommento")
+	public String salvaCommento(@ModelAttribute("commento") Commento commento, Model model) {
+	    // Recupera User e Edizione dal DB per avere entità gestite da Hibernate
+	    User user = userService.findById(commento.getUser().getId()); // metodo da implementare se non c'è
+	    Edizione edizione = edizioneService.getById(commento.getEdizione().getId());
 
-    @PostMapping("/salvaCommento")
-    public String salvaCommento( @ModelAttribute("commento") Commento commento, Model model) {
-    	this.commentoService.save(commento);
-        return "redirect:/commentiEdizione/"+commento.getEdizione().getId();
-    }
+	    commento.setUser(user);
+	    commento.setEdizione(edizione);
+
+	    this.commentoService.save(commento);
+	    return "redirect:/commentiEdizione/" + edizione.getId();
+	}
+
     
     @GetMapping("/commentiEdizione/{id}")
     public String mostraCommenti(@PathVariable Long id, Model model) {

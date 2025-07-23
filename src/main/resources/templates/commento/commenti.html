@@ -38,10 +38,10 @@
   <div class="commenti-container">
 
     <!-- Commenti dell'utente loggato -->
-	<div th:if="${tuoiCommenti != null and !#lists.isEmpty(tuoiCommenti)}">
-		<div sec:authorize="!hasRole('ADMIN')">
-      <h2 class="titolo">I tuoi commenti</h2>
-	  </div>
+    <div th:if="${tuoiCommenti != null and !#lists.isEmpty(tuoiCommenti)}">
+      <div sec:authorize="!hasRole('ADMIN')">
+        <h2 class="titolo">I tuoi commenti</h2>
+      </div>
 
       <div class="commenti-lista">
         <div class="card-cavallo" th:each="commento : ${tuoiCommenti}">
@@ -53,13 +53,15 @@
         </div>
       </div>
     </div>
+
     <!-- Altri commenti -->
-	<div sec:authorize="isAuthenticated()">
-    <h2 class="titolo">Commenti degli altri utenti</h2>
-	</div>
-	<div sec:authorize="!isAuthenticated()">
-		<h2 class="titolo">Commenti:</h2>
-	</div>
+    <div sec:authorize="isAuthenticated()">
+      <h2 class="titolo">Commenti degli altri utenti</h2>
+    </div>
+    <div sec:authorize="!isAuthenticated()">
+      <h2 class="titolo">Commenti:</h2>
+    </div>
+
     <div class="commenti-lista">
       <div class="card-cavallo" th:each="commento : ${commenti}">
         <h2 th:text="${commento.utente}">Nome Utente</h2>
@@ -70,42 +72,39 @@
             <button type="submit" class="btn-card btn-elimina">Elimina commento (Admin)</button>
           </form>
         </div>
-		</div>
-
       </div>
-	
-    
-
- 
+    </div>
 
   </div>
-  <div sec:authorize="isAuthenticated()">
-  <div sec:authorize="!hasRole('ADMIN')">
-	<div class="form-aggiungi">
-	  <div class="card-cavallo">
-	    <h2 class="titolo">Aggiungi un commento</h2>
-	    <form th:action="@{/salvaCommento}" method="post"
-	          th:object="${commento}" enctype="multipart/form-data"
-	          xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-	      
-	      <input type="hidden" th:field="*{user.id}" />
-	      <input type="hidden" name="utente" th:value="${#authentication.name}" />
-	      <input type="hidden" th:field="*{edizione}" th:value="${commento.edizione}" />
-	      
-	      <div class="form-group">
-	        <label for="contenuto">Il tuo commento:</label>
-	        <input required type="text" th:field="*{contenuto}" id="contenuto" class="input-commento" placeholder="Scrivi qualcosa..."/>
-	        <div class="errore" th:text="${msgErrTitle}"></div>
-	      </div>
-	      
-	      <div style="text-align: center; margin-top: 16px;">
-	        <button type="submit" class="btn-card">Conferma</button>
-	      </div>
-	    </form>
-	  </div>
-	</div>
 
-		</div>
+  <div sec:authorize="isAuthenticated()">
+    <div sec:authorize="!hasRole('ADMIN')">
+      <div class="form-aggiungi">
+        <div class="card-cavallo">
+          <h2 class="titolo">Aggiungi un commento</h2>
+          <form th:action="@{/salvaCommento}" method="post"
+                th:object="${commento}" enctype="multipart/form-data"
+                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+            <!-- Invia l'id dell'utente loggato -->
+            <input type="hidden" th:field="*{user.id}" th:value="${userLoggato.id}" />
+
+            <!-- Invia l'id dell'edizione -->
+            <input type="hidden" th:field="*{edizione.id}" th:value="${edizione.id}" />
+
+            <div class="form-group">
+              <label for="contenuto">Il tuo commento:</label>
+              <input required type="text" th:field="*{contenuto}" id="contenuto" class="input-commento" placeholder="Scrivi qualcosa..." />
+              <div class="errore" th:text="${msgErrTitle}"></div>
+            </div>
+
+            <div style="text-align: center; margin-top: 16px;">
+              <button type="submit" class="btn-card">Conferma</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
