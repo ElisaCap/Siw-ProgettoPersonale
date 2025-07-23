@@ -70,7 +70,7 @@ public void aggiungiFantino(String nome,String cognome,String urlImmagine,LocalD
 
 @Transactional
 	public Fantino getByid(Long id) {
-		return this.fantinoRepository.findById(id).get();
+		return this.fantinoRepository.findById(id).orElse(null);
 	}
 @Transactional
 	public Iterable<Fantino>getAll(){

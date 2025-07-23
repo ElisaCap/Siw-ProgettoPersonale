@@ -34,6 +34,7 @@
     </header>
 
     <!-- CLASSIFICA -->
+	<div th:if="${classifica}">
     <div class="section-wrapper">
         <h1 class="section-title" th:text="|Ecco la classifica dell'edizione del ${classifica.edizione.data}|"></h1>
 
@@ -123,5 +124,6 @@
             </form>
         </div>
     </div>
+	</div>
 </body>
 </html>

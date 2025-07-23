@@ -69,7 +69,7 @@ public Iterable<Edizione>getAll(){
 	return this.edizioneRepository.findAll();
 }
 public Edizione getById(Long id) {
-	return this.edizioneRepository.findById(id).get();
+	return this.edizioneRepository.findById(id).orElse(null);
 }
 
 public Iterable<Edizione>getAllById(Long id){

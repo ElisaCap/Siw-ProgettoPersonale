@@ -49,7 +49,7 @@ public void inserisciClassifica(Edizione ed)	{
 
 	@Transactional
 	public Classifica getById(Long id) {
-		return this.classificaRepository.findById(id).get();
+		return this.classificaRepository.findById(id).orElse(null);
 	}
 	
 	@Transactional
