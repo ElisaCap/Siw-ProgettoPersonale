@@ -244,3 +244,219 @@ table.elenco {
   background-color: #f9f9f9;
 }
 
+
+
+
+
+
+
+
+
+/* CLASSIFICA SECTION */
+.section-wrapper {
+  width: 95%;
+  margin: 0 auto 60px auto;
+  background: rgba(255, 255, 255, 0.93);
+  padding: 30px 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.section-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #4e2600;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Migliora visuale righe */
+.elenco tbody tr {
+  transition: background-color 0.3s;
+}
+
+.elenco tbody tr:hover {
+  background-color: #fff5e6;
+}
+
+/* Azione per admin colonna */
+.elenco th:last-child,
+.elenco td:last-child {
+  white-space: nowrap;
+}
+
+/* Colori e spaziature per bottoni azione */
+.btn.btn-danger,
+.btn.btn-add-element,
+.btn-add-wide {
+  margin: 4px auto;
+}
+
+/* Partecipanti non classificati */
+.no-placement-table {
+  background-color: #fff8f0;
+  margin-top: 20px;
+}
+
+.no-placement {
+  background-color: #fff3e0;
+  padding: 8px 14px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.elenco .col-id,
+.elenco .col-cavallo,
+.elenco .col-fantino,
+.elenco .col-contrada {
+  min-width: 100px;
+}
+
+/* Sezione pulsante finale */
+.section-actions {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Responsive migliorato */
+@media (max-width: 768px) {
+  .section-wrapper {
+    padding: 20px 10px;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .elenco th, .elenco td {
+    font-size: 0.85rem;
+    padding: 10px 6px;
+  }
+
+  .btn {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+
+  .btn.btn-add-wide {
+    width: 100%;
+    font-size: 1rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-position {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #5a2600;
+  margin-bottom: 10px;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card-images img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card-details {
+  flex-grow: 1;
+}
+
+.card-details p {
+  margin: 4px 0;
+}
+
+.card-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  text-align: center;
+  margin: 40px 0 20px;
+  color: #6b2e00;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.section-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+.card-controls,
+.section-actions {
+  margin: 20px 0;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .card-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-images {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+
+.gold-card {
+  background: linear-gradient(135deg, #fff8dc, #ffd700);
+  border: 2px solid #d4af37;
+}
+
+.silver-card {
+  background: linear-gradient(135deg, #f5f5f5, #c0c0c0);
+  border: 2px solid #b0b0b0;
+}
+
+.bronze-card {
+  background: linear-gradient(135deg, #fdf1e0, #cd7f32);
+  border: 2px solid #a97142;
+}
+
+
+
