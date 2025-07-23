@@ -42,22 +42,11 @@
 
   <!-- MAIN CONTENT -->
   <main>
-    <h1 class="main-title">Ecco tutte le contrade registrate</h1>
 
-	<form th:action="@{/cercaContradaPerNome}" method="get" style="text-align: center; margin-top: 20px;">
-			<input type="text" name="nome" placeholder="nome contrada" style="padding: 10px; font-size: 1rem; border-radius: 6px; border: 1px solid #a9743f; max-width: 300px;"/>
-			<button type="submit" class="btn">Cerca per nome</button>
-		</form>
 	
     <div class="card-container">
 		
 		
-		<!-- Card per aggiunta (solo admin) -->
-		      <div class="card-edizione add-card" sec:authorize="hasRole('ADMIN')">
-		        <form th:action="@{/insNuovaContrada}" method="get" class="add-card-form">
-		          <button type="submit" class="plus-sign">+</button>
-		        </form>
-		      </div>
 		
 		
       <a class="card-edizione" th:each="contrada : ${contrade}"

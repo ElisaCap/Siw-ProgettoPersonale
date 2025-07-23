@@ -149,4 +149,8 @@ public class ContradaService {
 public void deleterivali(Long id,Long idc) {
 	this.contradaRepository.deleteRivali(id, idc);
 }
+public Iterable<Contrada> getAllByNome(String nome) {
+	// TODO Auto-generated method stub
+	return contradaRepository.findAllByNome(nome);
+}
 }

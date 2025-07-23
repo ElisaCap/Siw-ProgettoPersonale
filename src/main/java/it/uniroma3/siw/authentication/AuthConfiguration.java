@@ -89,8 +89,8 @@ private CredentialsRepository credentialsRepository;
             			    "/home","/homepage.html","/edizioni","/edizione/{id}","edizioni.html","edizione.html",   "/visualizza",
             			    "/cavallo/trovacavallo.html","/cavalli/cercatutti",
             			    "/css/**", "/js/**", "/images/**", "/sfondo.jpg","/cavn.jpg", "/webjars/**","/immagginicontrade/**","/commentiEdizione/{id}",
-            			    "/static/**","/urlImmagine/{id}","/fantini/{id}","/edizioniCavallo/{id}","/partCavallo/{id}","/partContrada/{id}","/partFantino/"
-            			).permitAll()
+            			    "/static/**","/urlImmagine/{id}","/fantini/{id}","/edizioniCavallo/{id}","/partCavallo/{id}","/partContrada/{id}","/partFantino/",
+            			"/cercaContradaPerNome").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form

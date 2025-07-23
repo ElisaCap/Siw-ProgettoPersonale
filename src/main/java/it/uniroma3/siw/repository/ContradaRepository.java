@@ -16,5 +16,7 @@ public Contrada findByNome(String nome);
 @Transactional
 @Query(value = "DELETE FROM contrada_contrade_rivali WHERE (contrada_id = :id AND contrade_rivali_id = :idc) OR (contrada_id = :idc AND contrade_rivali_id = :id)", nativeQuery = true)
 void deleteRivali(@Param("id") Long id, @Param("idc") Long idc);
+@Transactional
+public Iterable<Contrada> findAllByNome(String nome);
 
 }

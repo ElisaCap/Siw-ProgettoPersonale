@@ -117,6 +117,26 @@ public class ContradaController {
     	return "redirect:/contrade/"+id;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/insNuovaContrada")
+    public String nuovaContrada(Model model) {
+    	model.addAttribute("contrada",new Contrada());
+    	return "contrade/formNewContrada.html";
+    }
+    
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/salvaNuovaContrada")
+    public String salvanuovaContrada(@ModelAttribute("contrada")Contrada contrada,Model model) {
+    	this.contradaService.save(contrada);
+    	return "redirect:/contrade";
+    }
+    
+    @GetMapping("/cercaContradaPerNome")
+    public String cercaPerNome(@RequestParam("nome")String nome,Model model) {
+    	model.addAttribute("contrade",contradaService.getAllByNome(nome));
+    	return "contrade/contradeTrovate.html";
+    }
+    
     
     
     

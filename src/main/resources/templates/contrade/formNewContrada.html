@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifica Contrada</title>
+    <link rel="stylesheet" href="/css/insCavallo.css" />
+</head>
+<body>
+	<!-- BARRA SUPERIORE -->
+		<div class="top-bar">
+		  <div class="header-content">
+		    <div class="logo-text">Palio di Siena</div>
+		    <div class="user-controls">
+				<form th:action="@{/home}" method="get" style="display: inline;">
+				         <button class="btn" type="submit">Home</button>
+				       </form>
+		      <div sec:authorize="isAuthenticated()">
+		        <span class="user-name" th:text="${#authentication.name}">Utente</span>
+		        <form th:action="@{/logout}" method="post" style="display: inline;">
+		          <button type="submit" class="btn">Logout</button>
+		        </form>
+		      </div>
+		      <div sec:authorize="!isAuthenticated()">
+		        <form th:action="@{/login}" method="get" style="display: inline;">
+		          <button type="submit" class="btn">Login</button>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+    <h1 class="main-title">Nuova Contrada</h1>
+
+    <form th:action="@{/salvaNuovaContrada}" method="post" th:object="${contrada}" enctype="multipart/form-data"  class="form-cavallo">
+		<input type="hidden" th:field="*{id}" />
+
+        <!-- Nome -->
+        <div>
+            <label>Nome:</label>
+            <input type="text" th:field="*{nome}" required />
+            <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Errore</span>
+        </div>
+
+        <!-- Descrizione breve -->
+        <div>
+            <label>Descrizione breve:</label>
+            <input type="text" th:field="*{descrizione}" required />
+            <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}">Errore</span>
+        </div>
+
+        <!-- Descrizione lunga -->
+        <div>
+            <label>Descrizione lunga:</label>
+            <textarea th:field="*{descrizioneLunga}" rows="6" cols="60"></textarea>
+            <span th:if="${#fields.hasErrors('descrizioneLunga')}" th:errors="*{descrizioneLunga}">Errore</span>
+        </div>
+
+        <!-- Immagine -->
+        <div>
+            <label>Immagine:</label>
+            <input type="file" name="fileImmagine" accept="image/*" />
+           
+        </div>
+
+        <!-- Submit -->
+        <div>
+            <button type="submit">Salva </button>
+        </div>
+    </form>
+
+</body>
+</html>

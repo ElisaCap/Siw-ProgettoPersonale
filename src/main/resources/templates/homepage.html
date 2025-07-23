@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,56 +8,53 @@
   <link rel="stylesheet" href="/css/home.css" />
 </head>
 <body>
-	<!-- Top bar -->
-	<header class="top-bar">
-	  <div class="header-content">
-	    <div class="logo-text">Palio di Siena</div>
 
-	    <div class="user-controls">
-	      <form action="/home" method="get">
-	        <button class="btn" type="submit">Home</button>
-	      </form>
+  <!-- Top bar: invariata -->
+  <header class="top-bar">
+    <div class="header-content">
+      <div class="logo-text">Palio di Siena</div>
+      <div class="user-controls">
+        <form action="/home" method="get">
+          <button class="btn" type="submit">Home</button>
+        </form>
+        <div sec:authorize="isAuthenticated()">
+          <span class="user-name" th:text="${#authentication.name}">Utente</span>
+          <form th:action="@{/logout}" method="post">
+            <button class="btn" type="submit">Logout</button>
+          </form>
+        </div>
+        <div sec:authorize="!isAuthenticated()">
+          <form th:action="@{/login}" method="get">
+            <button class="btn" type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
 
-	      <!-- Se l'utente è autenticato -->
-	      <div sec:authorize="isAuthenticated()">
-	        <span class="user-name" th:text="${#authentication.name}">Utente</span>
-	        <form th:action="@{/logout}" method="post">
-	          <button class="btn" type="submit">Logout</button>
-	        </form>
-	      </div>
+  <!-- Nuovo layout -->
+  <main class="homepage-container">
+    <h1 class="homepage-title">Benvenuto al Palio di Siena</h1>
 
-	      <!-- Se l'utente NON è autenticato -->
-	      <div sec:authorize="!isAuthenticated()">
-	        <form th:action="@{/login}" method="get">
-	          <button class="btn" type="submit">Login</button>
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	</header>
-
-  <!-- Main -->
-  <main>
-    <h1 class="main-title">Benvenuto al Palio di Siena</h1>
-
-    <div class="content">
-      <a href="/edizioni" class="action-card card-edizioni large">
-        <span class="card-text">Edizioni</span>
+    <div class="card-grid">
+      <a href="/edizioni" class="home-card home-edizioni">
+        <span class="card-label">Edizioni</span>
       </a>
-      <a href="/cavalli/cercatutti" class="action-card card-cavalli">
-        <span class="card-text">Cavalli</span>
+      <a href="/cavalli/cercatutti" class="home-card home-cavalli">
+        <span class="card-label">Cavalli</span>
       </a>
-      <a href="/contrade" class="action-card card-contrade">
-        <span class="card-text">Contrade</span>
+      <a href="/contrade" class="home-card home-contrade">
+        <span class="card-label">Contrade</span>
       </a>
-      <a href="/fantini/cercatutti" class="action-card card-fantini">
-        <span class="card-text">Fantini</span>
+      <a href="/fantini/cercatutti" class="home-card home-fantini">
+        <span class="card-label">Fantini</span>
       </a>
     </div>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     © 2025 Palio di Siena. Tutti i diritti riservati.
   </footer>
+
 </body>
 </html>
