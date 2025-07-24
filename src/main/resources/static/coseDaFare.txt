@@ -1,8 +1,0 @@
-1)Sistema grafica
-2)imposta logout e tasti login
-3)fai in modo che in una classifica possano essere inserite solo partecipazioni di quell'edizione e sistema ilo form
-4)aggiungi collegamenti
-5)AGGIUNGI LE IMMAGINI
-6)fai la vista differenziata per l'user
-7)IMPLEMENTA MODIFICA E CANCELLAZIONE
-8)inserisci l'utente non autenticato e metti delle limitazioni rispetto a quello autenticato

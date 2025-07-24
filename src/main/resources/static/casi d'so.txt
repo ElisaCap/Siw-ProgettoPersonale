@@ -1,7 +1,7 @@
-1)l'amministartore inserisce dati di un cavallo,un fantino,un'edizione
+1)l'amministartore inserisce dati di un cavallo,un fantino,una contrada o un'edizione
 2)l'amministratore inserise la classifica di un'edizione
-3)l'amministatore modifica i dati di un cavallo,un fantino,un'edizione
-4)l'amministatore cancella i dati di un cavallo,un fantino,un'edizione
-(tenendo conto di come variano le entità collegate)
+3)l'amministatore modifica i dati di un cavallo,un fantino,di una contrada o un'edizione
+4)l'amministatore cancella i dati di un cavallo,un fantino, una contrada o un'edizione
 5)un utente registrato lascia un commento a un'edizione
 6)un utente consulta un'edizione guardando classifica e commenti
+7)un'untente da un cavallo guarda le edizini a cui ha partecipato
