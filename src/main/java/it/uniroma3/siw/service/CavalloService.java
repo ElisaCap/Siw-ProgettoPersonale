@@ -75,6 +75,10 @@ public class CavalloService {
     public void deleteById(Long id) {
         this.cavalloRepository.deleteById(id);
     }
+	public Iterable<Cavallo> getByNome(String nome) {
+		// TODO Auto-generated method stub
+		return cavalloRepository.findAllByNome(nome);
+	}
 	
  
     

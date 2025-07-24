@@ -118,6 +118,7 @@ private FantinoService fantinoService;
 		fantinoc.setCognome(fantino.getCognome());
 		fantinoc.setDataNascita(fantino.getDataNascita());
 		fantinoc.setNome(fantino.getNome());
+		fantinoc.setSoprannome(fantino.getSoprannome());
     	  MultipartFile file = fantino.getFileImmagine();
     	  fantinoc.setFileImmagine(file);
           if (file != null && !file.isEmpty()) {
@@ -137,6 +138,12 @@ private FantinoService fantinoService;
     }
 	  
 	  
-	  
+	@GetMapping("/cercaFantinoPerCognome")  
+	public String cercaPerCognome(Model model,@RequestParam("cognome")String cognome) {
+		model.addAttribute("fantini",fantinoService.getAllByCognome(cognome));
+		return "fantino/fantiniTrovati.html";
+	}
+	
+	
 	  
 }

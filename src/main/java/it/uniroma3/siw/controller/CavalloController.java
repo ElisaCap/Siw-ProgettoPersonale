@@ -124,6 +124,13 @@ public class CavalloController {
 
     
     
+    @GetMapping("/cercaCavalloPerNome")
+    public String cercaPerNome(Model model,@RequestParam("nome")String nome) {
+    	model.addAttribute("cavalli",cavalloService.getByNome(nome));
+    	return "cavallo/cavalliTrovati.html";
+    }
+    
+    
     
     
     

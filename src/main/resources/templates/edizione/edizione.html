@@ -68,9 +68,7 @@
 
         <div sec:authorize="isAuthenticated()">
           <div sec:authorize="!hasRole('ADMIN')">
-            <form th:action="@{/insCommento/{id}/{idUser}(id=${edizione.id}, idUser=${userLoggato.id})}" method="get">
-              <button type="submit" class="btn-card">Inserisci un commento</button>
-            </form>
+            
           </div>
         </div>
 

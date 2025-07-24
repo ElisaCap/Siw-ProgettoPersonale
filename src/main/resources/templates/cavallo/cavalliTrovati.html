@@ -42,21 +42,13 @@
 
   <!-- MAIN CONTENT -->
   <main>
-    <h1 class="main-title">Ecco tutti i cavalli registrati</h1>
+    <h1 class="main-title">Ecco tutti i cavalli trovati</h1>
 
-	<form th:action="@{/cercaCavalloPerNome}" method="get" style="text-align: center; margin-top: 20px;">
-			<input type="text" name="nome" placeholder="nome cavallo" style="padding: 10px; font-size: 1rem; border-radius: 6px; border: 1px solid #a9743f; max-width: 300px;"/>
-			<button type="submit" class="btn">Cerca per nome</button>
-		</form>
+	
 
     <div class="card-container">
 
-      <!-- Card per aggiunta (solo admin) -->
-      <div class="card-edizione add-card" sec:authorize="hasRole('ADMIN')">
-        <form th:action="@{/insCavallo}" method="get" class="add-card-form">
-          <button type="submit" class="plus-sign">+</button>
-        </form>
-      </div>
+    
 
       <!-- Cards Cavalli -->
       <a class="card-edizione" th:each="cavallo : ${cavalli}"

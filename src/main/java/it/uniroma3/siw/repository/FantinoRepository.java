@@ -11,5 +11,7 @@ public interface FantinoRepository extends CrudRepository<Fantino,Long> {
 	public Fantino findByNome(String nome);
 	@Transactional
 	Iterable<Fantino> findAllByOrderByCognomeAsc();
+	@Transactional
+	public Iterable<Fantino> findAllByCognome(String cognome);
 
 }

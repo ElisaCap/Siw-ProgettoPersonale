@@ -31,7 +31,7 @@ private String cognome;
 private LocalDate dataNascita;
 @OneToMany(mappedBy = "fantino" ,cascade = CascadeType.REMOVE, orphanRemoval = true)
 private List<Partecipazione>partecipazioni;
-
+private String soprannome;
 @Transient
 private MultipartFile fileImmagine;
 
@@ -108,6 +108,14 @@ public boolean equals(Object obj) {
 	return Objects.equals(cognome, other.cognome) && Objects.equals(dataNascita, other.dataNascita)
 			&& Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
 			&& Objects.equals(urlImmagine, other.urlImmagine);
+}
+
+public String getSoprannome() {
+	return soprannome;
+}
+
+public void setSoprannome(String soprannome) {
+	this.soprannome = soprannome;
 }
 
 

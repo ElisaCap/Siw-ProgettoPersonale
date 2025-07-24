@@ -11,4 +11,6 @@ import jakarta.transaction.Transactional;
 public interface CavalloRepository extends CrudRepository<Cavallo, Long> {
 	@Transactional
 public Cavallo findByNome(String nome);
+@Transactional
+	public Iterable<Cavallo> findAllByNome(String nome);
 }

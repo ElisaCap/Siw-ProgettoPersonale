@@ -41,6 +41,10 @@
 			        <span th:text="${msgErrYear}">Campo Obbligatorio</span>
 			    </div>
 				<div>
+					
+					Soprannome: <span><input required type="text" th:field="${fantino.soprannome}"/></span>
+							    </div>
+								<div>
 							        Data di nascita: 					<span>			<input type="date"
 													       th:field="${fantino.dataNascita}"
 													       th:attr="min=${minDate}, max=${maxDate}"

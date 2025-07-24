@@ -76,5 +76,11 @@ public void aggiungiFantino(String nome,String cognome,String urlImmagine,LocalD
 	public Iterable<Fantino>getAll(){
 		return this.fantinoRepository.findAllByOrderByCognomeAsc();
 	}
+
+
+public Iterable<Fantino> getAllByCognome(String cognome) {
+	// TODO Auto-generated method stub
+	return fantinoRepository.findAllByCognome(cognome);
+}
 	
 }
