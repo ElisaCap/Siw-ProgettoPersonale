@@ -125,5 +125,10 @@
         </div>
     </div>
 	</div>
+	<div class="center-container">
+	    <form th:action="@{/edizione/{id}(id=${classifica.edizione.id})}" method="get">
+	      <button type="submit" class="btn">Torna all edizione</button>
+	    </form>
+	  </div>
 </body>
 </html>

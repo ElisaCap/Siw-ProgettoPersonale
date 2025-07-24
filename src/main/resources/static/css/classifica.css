@@ -458,5 +458,12 @@ table.elenco {
   border: 2px solid #a97142;
 }
 
+.center-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* opzionale, per separazione visiva */
+}
+
+
 
 
