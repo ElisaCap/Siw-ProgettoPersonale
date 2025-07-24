@@ -83,7 +83,7 @@ private FantinoService fantinoService;
 	  public String eliminaFantino(@PathVariable Long id, Model model) {
 	      fantinoService.deleteById(id);
 	      model.addAttribute("fantini", fantinoService.getAll());
-	      return "fantino/fantini.html"; // oppure redirect a cercatutti
+	      return "redirect:/fantini/cercatutti"; // oppure redirect a cercatutti
 	  }
 	  
 	  

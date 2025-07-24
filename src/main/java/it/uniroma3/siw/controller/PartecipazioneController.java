@@ -46,9 +46,12 @@ public class PartecipazioneController {
     }
     @PreAuthorize("hasRole('ADMIN')")
  @GetMapping("/insPartecipazione")
- public String insPartecipazione(Model model) {
+ public String insPartecipazioneid(@PathVariable Long id,  Model model) {
 	 model.addAttribute("partecipazione",new Partecipazione());
-	 model.addAttribute("cavalli",cavalloService.getAll());
+	 List<Cavallo> cavalli=(List)cavalloService.getAll();
+	 List<Cavallo> cavalli2=(List)partecipazioneService.getCavalliBEdizioneId(id);
+	 cavalli.removeAll(cavalli2);
+	 model.addAttribute("cavalli",cavalli);
 	 model.addAttribute("edizioni",edizioneService.getAll());
 	 model.addAttribute("fantini", fantinoService.getAll());
 	 model.addAttribute("contrade", contradaService.getAll());
@@ -84,9 +87,23 @@ public String insPartecipazione(@PathVariable Long id, Model model) {
     partecipazione.setEdizione(edizione); // o setta direttamente l'oggetto Edizione, dipende dal modello
 
     model.addAttribute("partecipazione", partecipazione);
-    model.addAttribute("cavalli", cavalloService.getAll());
-    model.addAttribute("fantini", fantinoService.getAll());
-    model.addAttribute("contrade", contradaService.getAll());
+    List<Cavallo> cavalli=(List)cavalloService.getAll();
+	 List<Cavallo> cavalli2=(List)partecipazioneService.getCavalliBEdizioneId(id);
+	 cavalli.removeAll(cavalli2);
+	 model.addAttribute("cavalli",cavalli);
+	 
+	 List<Fantino> fantini=(List)fantinoService.getAll();
+	 List<Fantino> fantini2=(List)partecipazioneService.getFantiniByEdizioneId(id);
+	 fantini.removeAll(fantini2);
+	 model.addAttribute("fantini",fantini);
+	 
+	 List<Contrada> contrade=(List)contradaService.getAll();
+	 List<Contrada> contrade2=(List)partecipazioneService.getContradeByEdizioneId(id);
+	 contrade.removeAll(contrade2);
+	 model.addAttribute("contrade",contrade);
+    //model.addAttribute("cavalli", cavalloService.getAll());
+   // model.addAttribute("fantini", fantinoService.getAll());
+    //model.addAttribute("contrade", contradaService.getAll());
 
     return "partecipazione/NuovaPartecipazione.html";
 }

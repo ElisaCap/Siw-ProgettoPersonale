@@ -3,6 +3,7 @@ package it.uniroma3.siw.service;
 import java.awt.print.Pageable;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,7 @@ public class CavalloService {
     public void deleteById(Long id) {
         this.cavalloRepository.deleteById(id);
     }
+	
  
     
     

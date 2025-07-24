@@ -118,8 +118,17 @@ public Iterable<Partecipazione> getByContrada(Contrada contrada) {
 	// TODO Auto-generated method stub
 	return partecipazioneRepository.findByContrada(contrada);
 }
-public Iterable<Partecipazione> findWhereCavalloPrimo(Cavallo cavallo){
-	return this.partecipazioneRepository.findWhereCavalloPrimo(cavallo);
+public Iterable<Cavallo> getCavalliBEdizioneId(Long id){
+	return this.partecipazioneRepository.findAllCavalli(id);
+}
+
+public Iterable<Fantino> getFantiniByEdizioneId(Long id){
+	return this.partecipazioneRepository.findAllFantini(id);
+}
+
+
+public Iterable<Contrada> getContradeByEdizioneId(Long id){
+	return this.partecipazioneRepository.findAllContrade(id);
 }
 
 

@@ -80,5 +80,11 @@
   <div th:unless="${fantino}">
     <h2 class="uno">Errore</h2>
   </div>
+  
+  <form th:action="@{/fantini/cercatutti}" method="get" style="text-align: center; margin-top: 20px;">
+   	    <button type="submit" class="btn">Torna alla lista</button>
+   	</form>
+
+  
 </body>
 </html>

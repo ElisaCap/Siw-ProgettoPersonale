@@ -76,6 +76,10 @@
   <div th:unless="${cavallo}">
     <p class="uno">Cavallo non trovato</p>
   </div>
+  
+  <form th:action="@{/cavalli/cercatutti}" method="get" style="text-align: center; margin-top: 20px;">
+  	    <button type="submit" class="btn">Torna alla lista</button>
+  	</form>
 
 </body>
 </html>

@@ -90,7 +90,7 @@ private CredentialsRepository credentialsRepository;
             			    "/cavallo/trovacavallo.html","/cavalli/cercatutti",
             			    "/css/**", "/js/**", "/images/**", "/sfondo.jpg","/cavn.jpg", "/webjars/**","/immagginicontrade/**","/commentiEdizione/{id}",
             			    "/static/**","/urlImmagine/{id}","/fantini/{id}","/edizioniCavallo/{id}","/partCavallo/{id}","/partContrada/{id}","/partFantino/",
-            			"/cercaContradaPerNome").permitAll()
+            			"/partFantino/{id}","/cercaContradaPerNome").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form

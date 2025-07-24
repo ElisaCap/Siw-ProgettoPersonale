@@ -28,6 +28,22 @@ public Iterable<Partecipazione> findByContrada(Contrada contrada);
 @Query("SELECT e.partecipazione FROM ElementoClassifica e " +
        "WHERE e.partecipazione.cavallo = :cav AND e.posizione = 1")
 Iterable<Partecipazione> findWhereCavalloPrimo(@Param("cav") Cavallo cavallo);
+@Transactional
+@Query("SELECT p.cavallo FROM Partecipazione p " +
+	       "WHERE p.edizione.id= :id ")
+	Iterable<Cavallo> findAllCavalli(@Param("id") Long id);
+
+@Transactional
+@Query("SELECT p.fantino FROM Partecipazione p " +
+	       "WHERE p.edizione.id= :id ")
+	Iterable<Fantino> findAllFantini(@Param("id") Long id);
+
+
+@Transactional
+@Query("SELECT p.contrada FROM Partecipazione p " +
+	       "WHERE p.edizione.id= :id ")
+	Iterable<Contrada> findAllContrade(@Param("id") Long id);
+
 
 
 }

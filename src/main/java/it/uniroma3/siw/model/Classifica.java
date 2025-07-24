@@ -26,7 +26,7 @@ public class Classifica {
 private Edizione edizione;
 
 
-@OneToMany(mappedBy = "classifica", orphanRemoval = true)
+@OneToMany(mappedBy = "classifica",cascade = CascadeType.ALL ,orphanRemoval = true)
 private List<ElementoClassifica> elementiClassifica;
 
 

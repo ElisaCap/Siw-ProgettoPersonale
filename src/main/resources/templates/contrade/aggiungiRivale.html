@@ -1,19 +1,65 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="it">
 <head>
-    <title>Aggiungi Rivale</title>
+    <meta charset="UTF-8">
+    <title>aggiungi rivale</title>
+    <link rel="stylesheet" href="/css/insCavallo.css" />
 </head>
-<form th:action="@{/salvaRivali}" method="post">
-    <input type="hidden" name="id1" th:value="${contrada.id}" />
-    <select name="id2" required>
-        <option value="" disabled selected>-- Seleziona una contrada --</option>
-        <option th:each="c : ${contrade}"
-                th:value="${c.id}"
-                th:text="${c.nome}">
-        </option>
-    </select>
+<body>
+    <!-- HEADER -->
+    <header class="top-bar">
+        <div class="header-content">
+            <div class="logo-text">Palio di Siena</div>
+            <div class="user-controls">
+                <form th:action="@{/home}" method="get" style="display: inline;">
+                    <button class="btn" type="submit">Home</button>
+                </form>
 
-    <button type="submit">Aggiungi Rivale</button>
-</form>
+                <div sec:authorize="isAuthenticated()" style="display: inline;">
+                    <span class="user-name" th:text="${#authentication.name}">Utente</span>
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <button class="btn" type="submit">Logout</button>
+                    </form>
+                </div>
+
+                <div sec:authorize="!isAuthenticated()" style="display: inline;">
+                    <form th:action="@{/login}" method="get" style="display: inline;">
+                        <button class="btn" type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+	<!-- TITOLO PAGINA -->
+	<h1 class="main-title">Aggiungi Contrada Rivale</h1>
+
+	<!-- FORM -->
+	<div class="form-cavallo">
+	    <form th:action="@{/salvaRivali}" method="post">
+	        <!-- ID contrada corrente (nascosto) -->
+	        <input type="hidden" name="id1" th:value="${contrada.id}" />
+
+	        <!-- Selezione contrada rivale -->
+	        <div>
+	            <label for="id2">Seleziona la contrada rivale:</label>
+	            <select id="id2" name="id2" required>
+	                <option value="" disabled selected>-- Seleziona una contrada --</option>
+	                <option th:each="c : ${contrade}"
+	                        th:value="${c.id}"
+	                        th:text="${c.nome}">
+	                </option>
+	            </select>
+	        </div>
+
+	        <!-- Pulsante invio -->
+	        <button type="submit" class="btn">Aggiungi Rivale</button>
+	    </form>
+	</div>
+	
+	<form th:action="@{/contrade/{id}(id=${id})}" method="get" style="text-align: center; margin-top: 20px;">
+	    <button type="submit" class="btn">Torna indietro</button>
+	</form>
+
 
 </html>

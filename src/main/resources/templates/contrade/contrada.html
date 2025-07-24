@@ -58,18 +58,20 @@
 
 		</div>
 		<div class="card-dato">
-		<p class="definizione">Contrade rivali</p>
-					<div th:each="rivale : ${contrada.contradeRivali}">
-					    <a th:href="@{/contrade/{id}(id=${rivale.id})}" th:text="${rivale.nome}"></a>
-						<div sec:authorize="hasRole('ADMIN')">
-						<form th:action="@{/eliminaRivali/{id}/{idc}(id=${contrada.id}, idc=${rivale.id})}" method="post"
-					>
-							<button type="submit">elimina</button>
-							
-						</form>
-						</div>
-					</div>
+		    <p class="definizione">Contrade rivali</p>
+		    <div th:if="${#lists.isEmpty(contrada.contradeRivali)}">
+		        <p class="nome">Nessuna rivale</p>
+		    </div>
+		    <div th:each="rivale : ${contrada.contradeRivali}">
+		        <a th:href="@{/contrade/{id}(id=${rivale.id})}" th:text="${rivale.nome}"></a>
+		        <div sec:authorize="hasRole('ADMIN')" style="display: inline;">
+		            <form th:action="@{/eliminaRivali/{id}/{idc}(id=${contrada.id}, idc=${rivale.id})}" method="post">
+		                <button type="submit">✖</button>
+		            </form>
+		        </div>
+		    </div>
 		</div>
+
         <!-- Bottoni -->
         <div class="azionibtn">
             <form th:action="@{/contrade}" method="get">

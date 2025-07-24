@@ -87,7 +87,7 @@ public class CavalloController {
 	  public String eliminaCavallo(@PathVariable Long id, Model model) {
 	      cavalloService.deleteById(id);
 	      model.addAttribute("cavalli", cavalloService.getAll());
-	      return "cavallo/cavalli.html"; 
+	      return "redirect:/cavalli/cercatutti"; 
 	  }
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/cavalli/modifica/{id}")

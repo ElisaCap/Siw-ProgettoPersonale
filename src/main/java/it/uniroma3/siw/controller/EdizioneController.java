@@ -134,10 +134,10 @@ public String edizioneCavallo(@PathVariable Long id, Model model) {
 }
 @PreAuthorize("hasRole('ADMIN')")
 @PostMapping("/edizioni/delete/{id}")
-public String eliminaFantino(@PathVariable Long id, Model model) {
+public String eliminaEdizione(@PathVariable Long id, Model model) {
     edizioneService.deleteById(id);
     model.addAttribute("edizioni", edizioneService.getAll());
-    return "edizione/edizioni.html"; // oppure redirect a cercatutti
+    return "redirect:/edizioni"; // oppure redirect a cercatutti
 }
 
 
